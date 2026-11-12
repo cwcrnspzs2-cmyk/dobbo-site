@@ -625,6 +625,11 @@ footer{padding:56px 0;font-size:15px;color:var(--ink-soft)}
     cv.querySelectorAll('[data-d]').forEach(function(b){b.addEventListener('click',function(){
       cv.querySelectorAll('[data-d]').forEach(function(x){x.setAttribute('aria-pressed',x===b)});
       f.classList.toggle('gsm',b.dataset.d==='gsm');
+      var im=od.querySelector('img'),g=b.dataset.d==='gsm';
+      im.dataset.src=g?'https://image.thum.io/get/width/390/viewportWidth/390/fullpage/http://praktijkes.be/index-nl.html':'https://image.thum.io/get/width/1200/fullpage/http://praktijkes.be/index-nl.html';
+      im.width=g?390:1200;im.height=g?7254:7556;
+      if(im.src){im.src=im.dataset.src}else if(!od.hidden){load(im)}
+      od.scrollTop=0;
     })});
   }
   var answers = {};
