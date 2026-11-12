@@ -86,7 +86,7 @@ header{position:sticky;top:0;z-index:30;background:rgba(255,255,255,.96);border-
 .bld .ico svg{width:60%;height:60%;fill:none;stroke:var(--c);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .who{position:absolute;left:-30%;bottom:-6%;width:62%;z-index:2;pointer-events:none}
 .who{aspect-ratio:1/1}.who img,.who canvas{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 8px 10px rgba(20,26,51,.16))}
-.toon canvas{opacity:0}.toon.live canvas{opacity:1}.toon.live img{opacity:0}
+.toon canvas{opacity:0;transition:opacity var(--t-pop) var(--ease-out)}.toon.live canvas{opacity:1}.toon.live img{opacity:0}
 .sign{margin-top:12px;display:flex;flex-direction:column;align-items:center;gap:1px;background:#fff;border-radius:12px;padding:6px 12px;box-shadow:0 1px 0 #E3E9FA,0 8px 18px -12px rgba(27,63,196,.4);transition:transform .35s var(--ease)}
 .sign b{font-family:var(--display);text-transform:uppercase;font-size:13px;letter-spacing:-0.01em}
 .sign small{font-size:12px;color:var(--ink-soft);white-space:nowrap}
@@ -282,8 +282,9 @@ footer{padding:40px 0 56px;font-size:15px;color:var(--ink-soft);border-top:1px s
     function draw(){if(!v.videoWidth)return;var s=Math.min(480,Math.round(box.clientWidth*(window.devicePixelRatio||1)));if(s&&c.width!==s){c.width=c.height=s}
       ctx.clearRect(0,0,c.width,c.height);ctx.drawImage(v,0,0,c.width,c.height);try{keyFrame(ctx,c.width,c.height)}catch(e){return}box.classList.add('live')}
     function loop(){draw();if(!v.paused&&!v.ended){v.requestVideoFrameCallback?v.requestVideoFrameCallback(loop):requestAnimationFrame(loop)}}
-    v.addEventListener('play',loop);v.addEventListener('seeked',draw);v.addEventListener('ended',function(){v.currentTime=0});
-    api.play=function(){if(!loaded){loaded=true;v.src=url;v.preload='auto';v.load()}if(v.paused){var p=v.play();if(p&&p.catch)p.catch(function(){})}};
+    v.addEventListener('play',loop);v.addEventListener('seeked',draw);v.addEventListener('loadeddata',draw);v.addEventListener('ended',function(){v.currentTime=0});
+    api.load=function(){if(!loaded){loaded=true;v.src=url;v.preload='auto';v.load()}};
+    api.play=function(){api.load();if(v.paused){var p=v.play();if(p&&p.catch)p.catch(function(){})}};
     api.video=v;return api}
   var T=[
     {id:'alec',vid:'hf_20261112_215800_6aec818c-1736-4d6e-b811-cdb5ae35da49',name:'Alec',tag:'Mens',human:1,role:'Bouwt je website',place:'De studio',ico:'house',x:15,y:21,c:'#DA2C25',t:'#FFE3E1',tint:'#FFF1F0',f:['bouwen','beheren'],
@@ -315,13 +316,13 @@ footer{padding:40px 0 56px;font-size:15px;color:var(--ink-soft);border-top:1px s
      no:'Een Franstalige klant in Brussel begrijpt je site niet en haakt af.',
      yes:'Elke klant leest je site in zijn eigen taal.',
      inn:['Groei: 3 talen','Systeem: alle talen'],extra:['+€40 per taal']},
-    {id:'egel',vid:'hf_20261112_214559_af1c8dd9-18fd-4af7-afaf-cb335027a3c4',name:'De egel',tag:'AI-assistent',role:'Beveiliging',place:'De stadspoort',ico:'shield',x:89,y:52,c:'#1B3FC4',t:'#E4ECFF',f:['beheren'],
+    {id:'egel',vid:'hf_20261112_224435_3dbc112c-5a9f-45c1-ad78-ab9f890b6d93',name:'De egel',tag:'AI-assistent',role:'Beveiliging',place:'De stadspoort',ico:'shield',x:89,y:52,c:'#1B3FC4',t:'#E4ECFF',f:['beheren'],
      img:'hf_20261112_161105_0944018d-100d-4a88-acfd-7f31610b445e',head:'hf_20261112_164840_d3d147b2-dd2a-4933-920a-64355605a0e4',
      does:['Houdt je site up-to-date','Maakt back-ups','Bewaakt je site en je beveiligde verbinding (https)'],
      no:'Je browser toont "niet veilig" naast je naam, of je site ligt plat en niemand merkt het.',
      yes:'Je site is veilig, en gaat er toch iets mis, dan staat ze snel terug.',
      inn:['Beheer','Beheer Plus']},
-    {id:'bever',vid:'hf_20261112_214558_f2cb2344-8acd-48ec-9a83-d7b0ee2e51f3',name:'De bever',tag:'AI-assistent',role:'Onderhoud',place:'De werkplaats',ico:'tool',x:15,y:83,c:'#9A5B2E',t:'#F5E6DA',f:['beheren','bouwsteen'],
+    {id:'bever',vid:'hf_20261112_225027_bbc01777-e038-485b-8f98-36832703ec8b',name:'De bever',tag:'AI-assistent',role:'Onderhoud',place:'De werkplaats',ico:'tool',x:15,y:83,c:'#9A5B2E',t:'#F5E6DA',f:['beheren','bouwsteen'],
      img:'hf_20261112_161104_99ba2a50-69f9-4b9e-a27f-35bed0ab693d',head:'hf_20261112_164838_b0be1a50-a450-4253-b21b-beffa1777a94',
      does:['Past teksten, foto\'s, uren en prijzen aan','Lost fouten op','Zet online afspraken boeken op je site, als je dat wil'],
      no:'Je openingsuren kloppen al maanden niet, want aanpassen is "voor later".',
@@ -376,6 +377,7 @@ footer{padding:40px 0 56px;font-size:15px;color:var(--ink-soft);border-top:1px s
   var chain=T.filter(function(m){return m._t}),ci=0,running=false,inView=false;
   function step(){if(!inView||ci>=chain.length){running=false;return}running=true;var t=chain[ci++]._t;t.play();
     var v=t.video;if(!v){step();return}var fin=function(){v.removeEventListener('ended',fin);setTimeout(step,150)};v.addEventListener('ended',fin)}
+  new IntersectionObserver(function(es,o){if(es[0].isIntersecting){o.disconnect();chain.forEach(function(m){if(m._t.load)m._t.load()})}},{rootMargin:'900px 0px'}).observe(town);
   new IntersectionObserver(function(es){inView=es[0].isIntersecting;if(inView&&!running)setTimeout(step,400)},{threshold:.35}).observe(town);
   /* filters */
   document.querySelectorAll('.chip').forEach(function(c){c.addEventListener('click',function(){
@@ -392,14 +394,14 @@ footer{padding:40px 0 56px;font-size:15px;color:var(--ink-soft);border-top:1px s
   /* drawer */
   var dr=document.getElementById('drawer'),sc=document.getElementById('scrim'),body=document.getElementById('dBody'),cur=0,opener=null;
   function fill(i){var m=T[i];cur=i;
-    body.innerHTML='<div class="d-hero" style="--tint:'+(m.tint||m.t)+'">'+(m.img?'<span class="toon" role="img" aria-label="'+m.name+'"><img src="'+C+m.img+'.png" alt="" width="1024" height="1024"></span>':'<span class="faces" style="position:static;margin:0 0 24px 12px">'+'<span>'+person+'</span>'.repeat(4)+'</span>')+
+    body.innerHTML='<div class="d-hero" style="--tint:'+(m.tint||m.t)+'">'+(m.img?'<span class="toon" role="img" aria-label="'+m.name+'">'+(RM||!m.vid?'<img src="'+C+m.img+'.png" alt="" width="1024" height="1024">':'')+'</span>':'<span class="faces" style="position:static;margin:0 0 24px 12px">'+'<span>'+person+'</span>'.repeat(4)+'</span>')+
       '<div class="meta"><span class="d-tag'+(m.human?' h':'')+'">'+m.tag+'</span><h2 id="dName">'+m.name+'</h2><div class="d-role">'+m.role+'</div><div class="d-place">'+m.place+'</div></div></div>'+
       '<div class="d-sec"><h3>WAT DOET '+(m.id==='test'?'HET':m.id==='alec'?'HIJ':'HIJ')+'?</h3><ul>'+m.does.map(function(x){return '<li>'+x+'</li>'}).join('')+'</ul></div>'+
       '<div class="d-sec"><h3>WAAROM JE DIT WIL</h3><div class="vs"><div class="no"><b>Zonder</b>'+m.no+'</div><div class="yes"><b>Met</b>'+m.yes+'</div></div></div>'+
       '<div class="d-sec"><h3>ZIT IN</h3><div class="pills">'+m.inn.map(function(x){return '<span>'+x+'</span>'}).join('')+(m.extra||[]).map(function(x){return '<span class="p">'+x+'</span>'}).join('')+'</div></div>'+
       '<div class="d-cta"><a class="btn btn-red" href="index.html#boek">Plan mijn gratis gesprek</a><small>Ik zeg eerlijk wie je nodig hebt, en wie niet.</small></div>';
     body.scrollTop=0;
-    var hb=body.querySelector('.d-hero .toon');if(hb&&m.vid){var t=makeToon(hb,C+m.vid+'.mp4');setTimeout(t.play,300)}
+    var hb=body.querySelector('.d-hero .toon');if(hb&&m.vid&&!RM){var t=makeToon(hb,C+m.vid+'.mp4');t.load();setTimeout(t.play,300)}
     document.querySelectorAll('.plot').forEach(function(p){p.setAttribute('aria-expanded',p.dataset.id===m.id)});}
   function open(i,from){opener=from;fill(i);dr.hidden=false;requestAnimationFrame(function(){dr.classList.add('on');sc.classList.add('on')});dr.focus();hint.classList.add('off');document.body.style.overflow='hidden'}
   function close(){dr.classList.remove('on');sc.classList.remove('on');document.body.style.overflow='';
