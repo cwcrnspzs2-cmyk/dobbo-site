@@ -93,7 +93,35 @@ section{padding:72px 0}
 .center{text-align:center}
 .center h2{max-width:20ch;margin:0 auto}
 .center .lead{margin:20px auto 0;max-width:44ch}
-.eco-img{width:100%;max-width:980px;margin:24px auto 0}
+.hub{position:relative;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.25fr) minmax(0,1fr);grid-template-areas:"n1 core n2" "n3 core n4";gap:28px 56px;margin-top:40px;text-align:left;align-items:center}
+.hub-lines{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible}
+.hub-lines path{fill:none;stroke:#C9D6FF;stroke-width:2;stroke-dasharray:4 6}
+.hub-lines circle{fill:var(--blue)}
+.hub-node{position:relative;background:#fff;border:1px solid #E3E9FA;border-radius:20px;padding:18px;box-shadow:0 1px 0 #E3E9FA,0 12px 32px -18px rgba(27,63,196,.25);display:flex;flex-direction:column;gap:6px}
+.n1{grid-area:n1}.n2{grid-area:n2}.n3{grid-area:n3}.n4{grid-area:n4}
+.hub-ui{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:6px}
+.pill{font-size:13px;padding:6px 10px;border-radius:10px;background:var(--blue-tint);color:var(--ink)}
+.pill b{color:var(--blue-deep)}.pill.soft{background:#F5F7FC;color:var(--ink-soft)}
+.hub-node h3{font-size:15px}.hub-node p{font-size:15px;color:var(--ink-soft)}
+.hub-who{display:flex;align-items:center;gap:8px;margin-top:8px;font-size:13px;font-weight:700;color:var(--ink-soft)}
+.hub-who img{width:32px;height:32px;border-radius:50%;background:var(--blue-tint);object-fit:cover}
+.hub-core{grid-area:core;position:relative;z-index:1;background:#fff;border-radius:22px;border:1px solid #E3E9FA;box-shadow:0 30px 60px -30px rgba(27,63,196,.45);overflow:visible}
+.core-bar{display:flex;align-items:center;gap:6px;padding:12px 14px;border-bottom:1px solid #EEF1F8}
+.core-bar i{width:9px;height:9px;border-radius:50%;background:#E1E6F2}
+.core-bar span{margin-left:8px;flex:1;font-size:12px;color:var(--ink-soft);background:#F5F7FC;border-radius:999px;padding:4px 10px}
+.core-body{padding:22px;display:flex;flex-direction:column;gap:10px}
+.core-h{height:22px;width:70%;border-radius:6px;background:var(--ink)}
+.core-l{height:10px;width:90%;border-radius:5px;background:#E6EBF5}.core-l.s{width:60%}
+.core-cta{align-self:flex-start;margin-top:6px;background:var(--red);color:#fff;font-size:13px;font-weight:700;padding:9px 16px;border-radius:999px;box-shadow:0 3px 0 var(--red-deep)}
+.core-stat{margin-top:10px;display:grid;grid-template-columns:1fr auto;align-items:end;gap:2px 12px;background:#F5F7FC;border-radius:14px;padding:12px 14px}
+.core-stat span{font-size:12px;color:var(--ink-soft)}.core-stat b{grid-row:2;font-family:var(--display);font-size:24px}
+.core-stat svg{grid-row:1/3;grid-column:2;width:90px;height:32px}
+.core-stat polyline{fill:none;stroke:var(--blue);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+.core-badge{position:absolute;left:50%;bottom:-18px;transform:translateX(-50%);display:flex;align-items:center;gap:8px;white-space:nowrap;background:var(--ink);color:#fff;font-size:12px;font-weight:700;padding:5px 14px 5px 5px;border-radius:999px}
+.core-badge img{width:26px;height:26px;border-radius:50%;background:#fff;object-fit:cover}
+@media (max-width:900px){.hub{grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-areas:"core core" "n1 n2" "n3 n4";gap:16px}.hub-core{margin-bottom:26px}.hub-lines{display:none}}
+@media (max-width:560px){.hub{grid-template-columns:minmax(0,1fr);grid-template-areas:"core" "n1" "n2" "n3" "n4"}}
+@media (prefers-reduced-motion:reduce){.hub-lines circle{display:none}}
 .eco-list{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:16px;margin-top:16px}
 .eco-item{border-top:3px solid var(--blue);padding-top:14px}
 .eco-item h3{font-size:14px}
@@ -185,12 +213,29 @@ details.more summary{cursor:pointer;font-weight:700;color:var(--blue-deep)}
 @media (max-width:900px){.faq{grid-template-columns:minmax(0,1fr);gap:24px}}
 
 /* slot */
+.call{position:relative;width:min(340px,100%);margin:48px auto -40px;background:#fff;color:var(--ink);border-radius:32px 32px 0 0;padding:22px 24px 64px;display:flex;flex-direction:column;align-items:center;gap:6px;box-shadow:0 -20px 50px -20px rgba(0,0,0,.35)}
+.call-top{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:700;color:var(--ink-soft);margin-bottom:14px}
+.call-dot{width:8px;height:8px;border-radius:50%;background:#22C55E;box-shadow:0 0 0 4px #DCFCE7}
+.call-me{position:relative;width:96px;height:96px;margin-bottom:8px}
+.call-me img{position:relative;width:96px;height:96px;border-radius:50%;background:var(--blue-tint);object-fit:cover}
+.ring{position:absolute;inset:0;border-radius:50%;border:2px solid var(--blue);animation:ring 2s cubic-bezier(.16,1,.3,1) infinite}
+@keyframes ring{from{transform:scale(1);opacity:.7}to{transform:scale(1.6);opacity:0}}
+.call strong{font-family:var(--display);font-size:20px;text-transform:uppercase}
+.call-sub{font-size:14px;color:var(--ink-soft)}
+.call-team{display:flex;align-items:center;margin-top:14px;font-size:12px;font-weight:600;color:var(--ink-soft)}
+.call-team img{width:30px;height:30px;border-radius:50%;border:2px solid #fff;background:var(--blue-tint);object-fit:cover;margin-left:-8px}
+.call-team img:first-child{margin-left:0}.call-team span{margin-left:8px}
+.call-btns{display:flex;gap:28px;margin-top:20px}
+.cb{width:56px;height:56px;border-radius:50%;display:grid;place-items:center}
+.cb svg{width:24px;height:24px;fill:none;stroke:#fff;stroke-width:2;stroke-linejoin:round}
+.cb.video{background:var(--blue)}.cb.phone{background:#22C55E}
+@media (prefers-reduced-motion:reduce){.ring{animation:none}}
 .final{background:var(--blue);color:#fff;border-radius:var(--r-panel);padding:64px 56px 0;text-align:center;overflow:hidden}
 .final h2{font-size:clamp(32px,4.6vw,60px);max-width:18ch;margin:0 auto}
 .final p{margin:20px auto 0;max-width:46ch;font-size:19px;color:#E4EAFF}
 .final .cta-row{justify-content:center;margin-top:32px}
 .final .todo{background:#fff;display:inline-block;margin-top:16px}
-.final img{width:100%;max-width:860px;margin:32px auto 0}
+
 .book{margin-top:28px;display:grid;gap:12px;max-width:640px;margin-left:auto;margin-right:auto}
 
 footer{padding:56px 0;font-size:15px;color:var(--ink-soft)}
@@ -217,15 +262,16 @@ footer{padding:56px 0;font-size:15px;color:var(--ink-soft)}
 .seg button{font:inherit;font-weight:700;font-size:15px;border:0;background:transparent;color:var(--blue-deep);padding:10px 18px;border-radius:var(--r-pill);cursor:pointer}
 .seg button[aria-selected=true],.seg button[aria-pressed=true]{background:#fff;box-shadow:0 3px 0 #d5def7;color:var(--ink)}
 .cv-stage{background:var(--blue-tint);border-radius:var(--r-card);padding:24px;display:flex;justify-content:center}
-.cv-frame{width:100%;max-width:1100px;background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 6px 0 #d5def7;transition:max-width .35s cubic-bezier(.16,1,.3,1)}
-.cv-frame.gsm{max-width:390px;border-radius:32px;border:10px solid #1d2233}
+.cv-frame{width:100%;max-width:1040px;background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 6px 0 #d5def7;transition:max-width .35s cubic-bezier(.16,1,.3,1)}
+.cv-frame.gsm{max-width:360px;border-radius:36px;border:10px solid #1d2233}
+.cv-size{font-size:13px;color:var(--ink-soft);text-align:center;margin-top:10px}
 .cv-chrome{display:flex;align-items:center;gap:6px;padding:10px 14px;border-bottom:1px solid #e6ebf7;font-size:13px}
 .cv-chrome i{width:10px;height:10px;border-radius:50%;background:#dfe5f3}
 .cv-chrome span{flex:1;min-width:0;margin:0 8px;padding:4px 12px;border-radius:var(--r-pill);background:var(--blue-tint);color:var(--ink-soft);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .cv-chrome a{font-weight:700;color:var(--blue);text-decoration:none;white-space:nowrap}
 .cv-frame.gsm .cv-chrome i{display:none}
-.cv-screen{position:relative;height:min(640px,70vh)}
-.cv-screen iframe{width:100%;height:100%;border:0;display:block}
+.cv-screen{position:relative;overflow:hidden;height:calc(var(--vh,900px)*var(--k,.75))}
+.cv-screen iframe{position:absolute;top:0;left:0;border:0;display:block;transform-origin:0 0;transform:scale(var(--k,.75));width:var(--vw,1440px);height:var(--vh,900px)}
 .cv-screen iframe[hidden]{display:none}
 .cv-toast{position:absolute;left:50%;top:16px;transform:translate(-50%,-8px);background:var(--red);color:#fff;font-size:13px;font-weight:700;padding:8px 14px;border-radius:var(--r-pill);opacity:0;pointer-events:none;transition:opacity .25s,transform .25s;white-space:nowrap}
 .cv-toast.on{opacity:1;transform:translate(-50%,0)}
@@ -351,13 +397,37 @@ footer{padding:56px 0;font-size:15px;color:var(--ink-soft)}
   <div class="wrap center reveal">
     <h2 id="hub">Je website wordt de plek waar alles samenkomt</h2>
     <p class="lead">Google, sociale media, advertenties en afspraken: alles leidt naar één plek. En elk stuk heeft een vaste beheerder.</p>
-    <img class="eco-img" src="https://d8j0ntlcm91z4.cloudfront.net/user_3H2FAjydQqLsAIRD9wpl2Hgvsnz/hf_20261112_161104_048175d8-a0d7-4aaa-8aee-f6b28d3dfaa9.png" alt="Een laptop met een website in het midden, verbonden met Google, sociale media, advertenties, een agenda en een dashboard, elk met een dier van het team" loading="lazy" width="1344" height="752">
-    <div class="eco-list" style="text-align:left">
-      <div class="eco-item"><h3>Google</h3><p>Je profiel volledig en in lijn met je site.</p></div>
-      <div class="eco-item"><h3>Sociale media</h3><p>Elke post stuurt naar dezelfde, juiste plek.</p></div>
-      <div class="eco-item"><h3>Advertenties</h3><p>Je ziet wat elke advertentie opleverde.</p></div>
-      <div class="eco-item"><h3>Afspraken</h3><p>Boeken of bellen met één tik.</p></div>
-      <div class="eco-item"><h3>Dashboard</h3><p>Je bezoekers en klikken, live.</p></div>
+    <div class="hub" id="hubmap">
+      <svg class="hub-lines" aria-hidden="true"></svg>
+      <div class="hub-node n1">
+        <div class="hub-ui" aria-hidden="true"><span class="pill"><b>★ 4,9</b> · 38 reviews</span><span class="pill soft">Open tot 19u · Route</span></div>
+        <h3>Google</h3><p>Je profiel volledig en in lijn met je site.</p>
+        <div class="hub-who"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3H2FAjydQqLsAIRD9wpl2Hgvsnz/hf_20261112_164839_d6db8316-9e51-44f8-a094-bd001710c6f1.png" alt="" width="64" height="64" loading="lazy"><span>De vos</span></div>
+      </div>
+      <div class="hub-node n2">
+        <div class="hub-ui" aria-hidden="true"><span class="pill">Link in bio <b>→ jouw site</b></span><span class="pill soft">Nieuwe post · 12 reacties</span></div>
+        <h3>Sociale media</h3><p>Elke post stuurt naar dezelfde, juiste plek.</p>
+        <div class="hub-who"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3H2FAjydQqLsAIRD9wpl2Hgvsnz/hf_20261112_164839_4413505a-9a69-44e8-835a-a7b57f4b3f22.png" alt="" width="64" height="64" loading="lazy"><span>Alec</span></div>
+      </div>
+      <div class="hub-core">
+        <div class="core-bar"><i></i><i></i><i></i><span>jouwzaak.be</span></div>
+        <div class="core-body">
+          <div class="core-h"></div><div class="core-l"></div><div class="core-l s"></div>
+          <div class="core-cta">Maak een afspraak</div>
+          <div class="core-stat"><span>Bezoekers deze week</span><b>128</b><svg viewBox="0 0 80 24"><polyline points="0,20 13,16 26,18 40,10 53,12 66,5 80,3"/></svg></div>
+        </div>
+        <div class="core-badge"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3H2FAjydQqLsAIRD9wpl2Hgvsnz/hf_20261112_164840_d3d147b2-dd2a-4933-920a-64355605a0e4.png" alt="" width="40" height="40" loading="lazy">Beveiligd door de egel</div>
+      </div>
+      <div class="hub-node n3">
+        <div class="hub-ui" aria-hidden="true"><span class="pill">Advertentie · <b>214 klikken</b></span><span class="pill soft">17 aanvragen · €3,10 per stuk</span></div>
+        <h3>Advertenties</h3><p>Je ziet wat elke advertentie opleverde.</p>
+        <div class="hub-who"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3H2FAjydQqLsAIRD9wpl2Hgvsnz/hf_20261112_164840_c42116e9-1ce1-4ba5-9470-69e869200250.png" alt="" width="64" height="64" loading="lazy"><span>De uil</span></div>
+      </div>
+      <div class="hub-node n4">
+        <div class="hub-ui" aria-hidden="true"><span class="pill"><b>Do 14:00</b> · geboekt ✓</span><span class="pill soft">Bellen met één tik</span></div>
+        <h3>Afspraken</h3><p>Boeken of bellen met één tik.</p>
+        <div class="hub-who"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3H2FAjydQqLsAIRD9wpl2Hgvsnz/hf_20261112_164838_b0be1a50-a450-4253-b21b-beffa1777a94.png" alt="" width="64" height="64" loading="lazy"><span>De bever</span></div>
+      </div>
     </div>
   </div>
 </section>
@@ -400,6 +470,7 @@ footer{padding:56px 0;font-size:15px;color:var(--ink-soft)}
           </div>
         </div>
       </div>
+      <p class="cv-size" id="cvsize">Zoals op een laptop van 1440 pixels breed, verkleind weergegeven</p>
       <p class="small" id="cvnote" style="margin-top:10px">De nieuwe site draait hier live: scroll, klik en wissel van taal. Bellen en mailen staat uit in deze demo.</p>
     </div>
     <div class="facts reveal">
@@ -552,7 +623,14 @@ footer{padding:56px 0;font-size:15px;color:var(--ink-soft)}
         <div class="todo" style="text-align:left">Agenda om te boeken (bv. Cal.com) met de 3 vragen vooraf: heb je al een site, wat is je zaak, wanneer wil je online zijn. Keuze "bel me" of "videogesprek".</div>
         <div class="todo" style="text-align:left">Je WhatsApp-link en gsm-nummer voor "liever eerst een vraag?".</div>
       </div>
-      <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3H2FAjydQqLsAIRD9wpl2Hgvsnz/hf_20261112_161106_e2c4e725-0c43-49bd-ab62-f7559848d910.png" alt="Het team zwaait, Alec houdt een rinkelende telefoon omhoog" loading="lazy" width="1344" height="752">
+      <div class="call" aria-hidden="true">
+        <div class="call-top"><span class="call-dot"></span>Gratis Websitecheck · 20 min</div>
+        <div class="call-me"><span class="ring"></span><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3H2FAjydQqLsAIRD9wpl2Hgvsnz/hf_20261112_164839_4413505a-9a69-44e8-835a-a7b57f4b3f22.png" alt="" width="96" height="96" loading="lazy"></div>
+        <strong>Alec van Dobbo</strong>
+        <span class="call-sub">Telefoon of video, jij kiest</span>
+        <div class="call-team"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3H2FAjydQqLsAIRD9wpl2Hgvsnz/hf_20261112_164840_c42116e9-1ce1-4ba5-9470-69e869200250.png" alt="" loading="lazy"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3H2FAjydQqLsAIRD9wpl2Hgvsnz/hf_20261112_164839_d6db8316-9e51-44f8-a094-bd001710c6f1.png" alt="" loading="lazy"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3H2FAjydQqLsAIRD9wpl2Hgvsnz/hf_20261112_164840_d3d147b2-dd2a-4933-920a-64355605a0e4.png" alt="" loading="lazy"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3H2FAjydQqLsAIRD9wpl2Hgvsnz/hf_20261112_164838_b0be1a50-a450-4253-b21b-beffa1777a94.png" alt="" loading="lazy"><span>Het team bekijkt je site vooraf</span></div>
+        <div class="call-btns"><span class="cb video"><svg viewBox="0 0 24 24"><path d="M3 7h12v10H3zM15 10l6-3v10l-6-3"/></svg></span><span class="cb phone"><svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a1 1 0 01-1 1A16 16 0 014 5a1 1 0 011-1"/></svg></span></div>
+      </div>
     </div>
   </div>
 </section>
@@ -606,6 +684,20 @@ footer{padding:56px 0;font-size:15px;color:var(--ink-soft)}
   });
 
 
+
+  var hub=document.getElementById('hubmap');
+  if(hub){var svg=hub.querySelector('.hub-lines'),core=hub.querySelector('.hub-core'),NS='http://www.w3.org/2000/svg',
+    rm=matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var draw=function(){svg.innerHTML='';if(getComputedStyle(svg).display==='none')return;
+      var hb=hub.getBoundingClientRect(),cb=core.getBoundingClientRect();
+      hub.querySelectorAll('.hub-node').forEach(function(n,i){var r=n.getBoundingClientRect(),left=r.left<cb.left;
+        var x1=(left?r.right:r.left)-hb.left,y1=r.top+r.height/2-hb.top,x2=(left?cb.left:cb.right)-hb.left,y2=cb.top+cb.height*(i<2?.38:.62)-hb.top,mx=(x1+x2)/2;
+        var d='M'+x1+','+y1+' C'+mx+','+y1+' '+mx+','+y2+' '+x2+','+y2;
+        var p=document.createElementNS(NS,'path');p.setAttribute('d',d);svg.appendChild(p);
+        if(!rm){var c=document.createElementNS(NS,'circle');c.setAttribute('r','4');
+          var m=document.createElementNS(NS,'animateMotion');m.setAttribute('dur','2.6s');m.setAttribute('begin',(i*.6)+'s');m.setAttribute('repeatCount','indefinite');m.setAttribute('path',d);
+          c.appendChild(m);svg.appendChild(c)}});};
+    new ResizeObserver(draw).observe(hub);addEventListener('load',draw);}
   var cv=document.getElementById('cv');
   if(cv){
     var f=document.getElementById('cvframe'),nw=document.getElementById('cvnew'),od=document.getElementById('cvold'),
@@ -636,10 +728,17 @@ footer{padding:56px 0;font-size:15px;color:var(--ink-soft)}
       hint.textContent=old?'Scroll gerust, zo zag de site er voordien uit':'Scroll en klik gerust, dit is de echte site';hint.classList.remove('off');
       note.textContent=old?'De oude site zoals ze echt online stond: zelfde teksten, foto\u2019s en opmaak. Bellen en mailen staat uit in deze demo.':'De nieuwe site draait hier live: scroll, klik en wissel van taal. Bellen en mailen staat uit in deze demo.';
     })});
-    cv.querySelectorAll('[data-d]').forEach(function(b){b.addEventListener('click',function(){
-      cv.querySelectorAll('[data-d]').forEach(function(x){x.setAttribute('aria-pressed',x===b)});
-      f.classList.toggle('gsm',b.dataset.d==='gsm');
-    })});
+
+    /* toon de site op echte schermgrootte en schaal ze, zodat gsm en computer exact kloppen */
+    var dev={desk:[1440,900],gsm:[390,844]},cur=innerWidth<700?'gsm':'desk',scr=cv.querySelector('.cv-screen'),size=document.getElementById('cvsize');
+    var fit=function(){var d=dev[cur];scr.style.setProperty('--vw',d[0]+'px');scr.style.setProperty('--vh',d[1]+'px');scr.style.setProperty('--k',(scr.clientWidth/d[0]).toFixed(4))};
+    var setDev=function(d,reload){cur=d;f.classList.toggle('gsm',d==='gsm');
+      cv.querySelectorAll('[data-d]').forEach(function(x){x.setAttribute('aria-pressed',x.dataset.d===d)});
+      size.textContent=d==='gsm'?'Zoals op een gsm (390 pixels breed)':'Zoals op een laptop van 1440 pixels breed, verkleind weergegeven';
+      requestAnimationFrame(fit);setTimeout(fit,400);
+      if(reload){[nw,od].forEach(function(fr){var u=fr.getAttribute('src');if(u){fr.removeAttribute('src');fr.src=u}})}};
+    new ResizeObserver(fit).observe(scr);setDev(cur,false);
+    cv.querySelectorAll('[data-d]').forEach(function(b){b.addEventListener('click',function(){if(b.dataset.d!==cur)setDev(b.dataset.d,true)})});
   }
   var answers = {};
   var out = document.getElementById('helper-out');
