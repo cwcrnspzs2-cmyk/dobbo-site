@@ -119,12 +119,12 @@ section{padding:72px 0}
 .member.human .role,.member.human .tag{color:var(--red-deep)}
 .member.human ul{list-style:none;padding:0;margin:8px 0 0;display:grid;gap:6px;font-size:15px}
 .member.human li::before{content:"✓";color:var(--red);font-weight:800;margin-right:8px}
-.crew{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
-.crew .member{flex-direction:row;align-items:center;gap:16px}
-.crew .member img{width:96px;height:96px;flex:none;border-radius:50%;background:#fff;object-fit:cover}
-.crew .member div{display:flex;flex-direction:column;gap:4px;min-width:0}
-.crew .member .does{font-size:13px;color:var(--blue-deep);font-weight:600;margin-top:2px}
-@media (max-width:1000px){.team{grid-template-columns:minmax(0,1fr)}.member.human{flex-direction:row;align-items:center;gap:16px}.member.human img{width:140px;flex:none;margin:0}}@media (max-width:640px){.crew{grid-template-columns:minmax(0,1fr)}.member.human{flex-direction:column;align-items:flex-start}.crew .member img{width:76px;height:76px}}@media (max-width:1000px){.team-intro{grid-template-columns:minmax(0,1fr);gap:16px}}
+.squad{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.squad .member{flex-direction:row;align-items:center;gap:16px}
+.squad .member img{width:96px;height:96px;flex:none;border-radius:50%;background:#fff;object-fit:cover}
+.squad .member div{display:flex;flex-direction:column;gap:4px;min-width:0}
+.squad .member .does{font-size:13px;color:var(--blue-deep);font-weight:600;margin-top:2px}
+@media (max-width:1000px){.team{grid-template-columns:minmax(0,1fr)}.member.human{flex-direction:row;align-items:center;gap:16px}.member.human img{width:140px;flex:none;margin:0}}@media (max-width:640px){.squad{grid-template-columns:minmax(0,1fr)}.member.human{flex-direction:column;align-items:flex-start}.squad .member img{width:76px;height:76px}}@media (max-width:1000px){.team-intro{grid-template-columns:minmax(0,1fr);gap:16px}}
 
 /* bewijs */
 .proof{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px;margin-top:32px}
@@ -324,7 +324,7 @@ footer{padding:56px 0;font-size:15px;color:var(--ink-soft)}
         <span class="role">Bouwt je website, jouw enige aanspreekpunt</span>
         <ul><li>Ontwerp en teksten op maat</li><li>Controleert alles wat het team doet</li><li>Bereikbaar via telefoon en WhatsApp</li></ul></div>
       </article>
-      <div class="crew">
+      <div class="squad">
         <article class="member reveal">
           <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3H2FAjydQqLsAIRD9wpl2Hgvsnz/hf_20261112_164840_c42116e9-1ce1-4ba5-9470-69e869200250.png" alt="De uil" loading="lazy" width="512" height="512">
           <div><span class="tag">AI-assistent</span><h3>De uil</h3><span class="role">Data-analist</span><p>Houdt je cijfers bij.</p><span class="does">Jij krijgt: een maandrapport in gewone taal</span></div>
