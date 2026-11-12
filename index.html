@@ -205,6 +205,57 @@ section{padding:72px 0}
 .plan .btn{width:100%}
 details.more{font-size:15px;color:var(--ink-soft)}
 details.more summary{cursor:pointer;font-weight:700;color:var(--blue-deep)}
+.two-things{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin:28px 0 8px}
+.tt{display:flex;align-items:center;gap:16px;padding:20px 22px;border-radius:var(--r-card);background:var(--blue-tint);text-decoration:none;color:var(--ink);transition:transform .2s}
+.tt:hover{transform:translateY(-3px)}
+.tt b{display:block;font-family:var(--display);text-transform:uppercase;font-size:20px}.tt small{font-size:15px;color:var(--ink-soft)}
+.tt-n{flex:none;width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:var(--blue);color:#fff;font-weight:800;font-size:20px}.tt-n.red{background:var(--red)}
+.sub-h{font-size:clamp(24px,2.6vw,32px);margin-top:56px;scroll-margin-top:90px}
+#beheer{scroll-margin-top:90px}
+.plan .price small{font-size:16px;font-family:var(--body);font-weight:700;color:var(--ink-soft);margin-right:4px}
+.av-new{display:inline-grid;place-items:center;width:40px;height:40px;border-radius:50%;background:#FFF1C9;color:var(--ink);font-weight:800;border:2px solid #fff;margin-left:-10px;font-size:15px}
+.avatars .av-new:first-child{margin-left:0}
+.always{list-style:none;padding:0;margin:20px 0 0;display:flex;flex-wrap:wrap;gap:10px 28px;justify-content:center;font-weight:700;font-size:15px}
+.always li{display:flex;align-items:center;gap:8px}
+.calc{margin-top:48px;display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:24px;align-items:start}
+.calc-l{border:2px solid var(--line);border-radius:var(--r-card);padding:28px}
+.calc-seg{margin:18px 0 8px}
+.calc-seg button[aria-checked=true]{background:#fff;box-shadow:0 3px 0 #d5def7;color:var(--ink)}
+.addons{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:12px}
+.addon{position:relative;display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:16px;background:#F5F7FC;cursor:pointer;transition:background .2s,box-shadow .2s}
+.addon input{position:absolute;opacity:0;pointer-events:none}
+.addon.on{background:var(--blue-tint);box-shadow:inset 0 0 0 2px var(--blue)}
+.addon.inc{opacity:.55;cursor:default}
+.addon-av img,.addon-av .av-new{width:36px;height:36px;border-radius:50%;object-fit:cover;background:#fff;margin:0;border:0;display:grid}
+.addon-t{flex:1;min-width:0;display:flex;flex-direction:column;font-size:14px;line-height:1.3}
+.addon-t small{color:var(--ink-soft);font-size:13px;margin-top:2px}
+.inc-note{display:none;font-style:normal;color:var(--blue-deep);font-weight:700}.addon.inc .inc-note{display:inline}
+.tog{flex:none;width:38px;height:22px;border-radius:999px;background:#D7DEEE;position:relative;transition:background .2s}
+.tog::after{content:"";position:absolute;top:3px;left:3px;width:16px;height:16px;border-radius:50%;background:#fff;transition:transform .2s cubic-bezier(.16,1,.3,1)}
+.addon.on .tog{background:var(--blue)}.addon.on .tog::after{transform:translateX(16px)}
+.addon input:focus-visible~.tog{outline:2px solid var(--blue);outline-offset:2px}
+.step-n{flex:none;display:flex;align-items:center;gap:6px}
+.step-n button{width:28px;height:28px;border-radius:50%;border:0;background:#fff;font:inherit;font-weight:800;color:var(--blue-deep);cursor:pointer;box-shadow:0 2px 0 #d5def7}
+.step-n output{min-width:16px;text-align:center;font-weight:800}
+.calc-r{position:sticky;top:96px;background:var(--ink);color:#fff;border-radius:var(--r-card);padding:26px;display:flex;flex-direction:column;gap:10px}
+.calc-lab{font-size:13px;font-weight:700;color:#AEB7D0;text-transform:uppercase;letter-spacing:.06em}
+.calc-total{font-family:var(--display);font-size:48px;line-height:1}
+.calc-lines{list-style:none;margin:4px 0;padding:0;display:flex;flex-direction:column;gap:6px;font-size:14px;color:#D6DCEC}
+.calc-lines li{display:flex;justify-content:space-between;gap:12px}
+.calc-pay{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;padding:14px 0;border-top:1px solid #2C3350;border-bottom:1px solid #2C3350}
+.calc-pay>span{grid-column:1/-1;font-size:13px;color:#AEB7D0}
+.calc-pay div{display:flex;flex-direction:column}.calc-pay b{font-size:18px}.calc-pay small{font-size:12px;color:#AEB7D0}
+.calc-hint{font-size:14px;background:#2C3350;border-radius:12px;padding:10px 12px}
+.calc-r .btn{width:100%;margin-top:6px}
+.calc-foot{font-size:12px;color:#AEB7D0}
+.flow{margin-top:48px;border-radius:var(--r-card);background:var(--blue-tint);padding:32px}
+.flow ol{list-style:none;padding:0;margin:20px 0 0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.flow li{display:flex;flex-direction:column;gap:10px;background:#fff;border-radius:18px;padding:18px}
+.flow li>b{width:32px;height:32px;border-radius:50%;display:grid;place-items:center;background:var(--blue);color:#fff}
+.flow li strong{font-size:16px;line-height:1.3}.flow li p{font-size:14px;color:var(--ink-soft);margin-top:6px}
+.flow-g{margin-top:16px;font-size:16px}
+@media (max-width:1000px){.calc{grid-template-columns:minmax(0,1fr)}.calc-r{position:static}.flow ol{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:640px){.two-things,.addons,.flow ol{grid-template-columns:minmax(0,1fr)}.calc-l,.flow{padding:20px}.calc-total{font-size:40px}}
 .after-plans{display:flex;flex-wrap:wrap;gap:20px;margin-top:28px}
 .after-plans p{flex:1 1 300px;padding:20px 24px;border-radius:var(--r-card);background:var(--blue-tint);font-size:17px}
 @media (max-width:900px){.plans{grid-template-columns:minmax(0,1fr)}.plan.reco{order:-1}}
@@ -518,7 +569,7 @@ footer{padding:56px 0;font-size:15px;color:var(--ink-soft)}
     <div class="steps">
       <div class="step reveal"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3H2FAjydQqLsAIRD9wpl2Hgvsnz/hf_20261112_161106_0d0ec564-ffd0-4bfb-ae72-b5d13400b7f6.png" alt="De uil" loading="lazy"><h3>Gratis Websitecheck</h3><p>20 minuten aan de telefoon of via video. De uil bekijkt je site vooraf, ik zeg eerlijk wat er beter kan.</p></div>
       <div class="step reveal"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3H2FAjydQqLsAIRD9wpl2Hgvsnz/hf_20261112_161107_0021a0dd-293c-4356-97e7-19e411884c6c.png" alt="Alec" loading="lazy"><h3>Ik ontwerp en bouw</h3><p>Jij kijkt twee keer mee. Ik schrijf de teksten als je wil.</p></div>
-      <div class="step reveal"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3H2FAjydQqLsAIRD9wpl2Hgvsnz/hf_20261112_161105_42b132e7-652d-4506-8d6d-2405a74f3f5b.png" alt="De vos" loading="lazy"><h3>Online in 3 weken</h3><p>Op jouw naam. De vos zorgt dat Google je meteen vindt.</p></div>
+      <div class="step reveal"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3H2FAjydQqLsAIRD9wpl2Hgvsnz/hf_20261112_161105_42b132e7-652d-4506-8d6d-2405a74f3f5b.png" alt="De vos" loading="lazy"><h3>Online in 1 tot 3 weken</h3><p>Op jouw naam. De vos zorgt dat Google je meteen vindt.</p></div>
       <div class="step reveal"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3H2FAjydQqLsAIRD9wpl2Hgvsnz/hf_20261112_161104_99ba2a50-69f9-4b9e-a27f-35bed0ab693d.png" alt="De bever" loading="lazy"><h3>Het team blijft werken</h3><p>Als je wil. Jij stuurt een WhatsApp, de bever past het aan en de egel bewaakt alles.</p></div>
     </div>
   </div>
@@ -527,81 +578,153 @@ footer{padding:56px 0;font-size:15px;color:var(--ink-soft)}
 <section id="pakketten" aria-labelledby="paktitel">
   <div class="wrap">
     <div class="reveal">
-      <h2 id="paktitel">Kies wat bij je zaak past</h2>
-      <p class="lead" style="margin-top:16px;max-width:48ch">Vaste prijs, geen verrassingen. Twijfel je? In het gesprek zeg ik eerlijk welk pakket je nodig hebt, ook als dat het goedkoopste is.</p>
+      <h2 id="paktitel">Wat we voor je doen</h2>
+      <p class="lead" style="margin-top:16px;max-width:52ch">Twee dingen: we bouwen je site, en als je wil houden we ze daarna up-to-date.</p>
+    </div>
+    <div class="two-things reveal">
+      <a href="#bouwen" class="tt"><span class="tt-n">1</span><span><b>Bouwen</b><small>Eenmalig · 3 pakketten, aan te vullen met bouwstenen</small></span></a>
+      <a href="#beheer" class="tt"><span class="tt-n red">2</span><span><b>Beheren</b><small>Maandelijks en opzegbaar · 2 plannen</small></span></a>
     </div>
 
+    <h3 id="bouwen" class="sub-h reveal">1. Bouwen</h3>
     <div class="helper reveal" id="helper">
       <div class="helper-q"><span>Heb je al een site?</span>
         <button type="button" class="choice" data-q="site" data-v="ja" aria-pressed="false">Ja</button>
         <button type="button" class="choice" data-q="site" data-v="nee" aria-pressed="false">Nee</button>
       </div>
       <div class="helper-q"><span>Wat wil je vooral?</span>
-        <button type="button" class="choice" data-q="doel" data-v="online" aria-pressed="false">Goed online staan</button>
+        <button type="button" class="choice" data-q="doel" data-v="online" aria-pressed="false">Snel een propere site</button>
         <button type="button" class="choice" data-q="doel" data-v="gevonden" aria-pressed="false">Gevonden worden</button>
-        <button type="button" class="choice" data-q="doel" data-v="opvallen" aria-pressed="false">Opvallen of boeken</button>
+        <button type="button" class="choice" data-q="doel" data-v="systeem" aria-pressed="false">Betalingen of automatisering</button>
       </div>
       <p class="small" id="helper-out" aria-live="polite">Kies hierboven, dan licht het pakket op dat past.</p>
     </div>
-
     <div class="plans">
-      <article class="plan reveal" data-plan="premium">
-        <h3>Premium</h3>
-        <p class="price">€1.500</p>
-        <p class="per">≈ €42 per maand over 3 jaar</p>
-        <p class="who">Je wil opvallen, of je werkt met boekingen, leden of meerdere talen.</p>
-        <ul>
-          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2B5CFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>Tot 8 pagina's, met 3D en animatie zoals deze site</li>
-          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2B5CFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>Online boeken of inschrijven</li>
-          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2B5CFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>Meertalig en klaar voor advertenties</li>
-        </ul>
-        <div class="crew"><div class="avatars"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3H2FAjydQqLsAIRD9wpl2Hgvsnz/hf_20261112_164839_4413505a-9a69-44e8-835a-a7b57f4b3f22.png" alt="Alec" loading="lazy"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3H2FAjydQqLsAIRD9wpl2Hgvsnz/hf_20261112_164839_d6db8316-9e51-44f8-a094-bd001710c6f1.png" alt="vos" loading="lazy"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3H2FAjydQqLsAIRD9wpl2Hgvsnz/hf_20261112_164840_c42116e9-1ce1-4ba5-9470-69e869200250.png" alt="uil" loading="lazy"></div><span>Alec, vos, uil</span></div>
-        <details class="more"><summary>Wat zit er nog in?</summary><p>Alles van Zaak, 2 ontwerpen om uit te kiezen en 3 feedbackrondes.</p></details>
+      <article class="plan reveal" data-plan="systeem">
+        <h3>Systeem</h3>
+        <p class="price"><small>vanaf</small> €2.000</p>
+        <p class="per">Vaste prijs na het eerste gesprek · 4 tot 6 weken</p>
+        <p class="who">Je wil dat je site werk voor je doet.</p>
+        <ul><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2B5CFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>Tot 8 pagina's of meer, alle talen inbegrepen</li><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2B5CFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>Betalingen, automatiseringen, e-maillijst: op maat</li><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2B5CFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>Live dashboard van de uil</li></ul>
+        <div class="crew"><div class="avatars"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3H2FAjydQqLsAIRD9wpl2Hgvsnz/hf_20261112_164840_c42116e9-1ce1-4ba5-9470-69e869200250.png" alt="" width="64" height="64" loading="lazy"><span class="av-new" title="De mier (beeld volgt)">M</span><span class="av-new" title="De eekhoorn (beeld volgt)">E</span><span class="av-new" title="De postduif (beeld volgt)">P</span></div><span>Alec en het hele team</span></div>
+        <details class="more"><summary>Wat zit er nog in?</summary><p>Alles van Groei, de bouwstenen die je nodig hebt, op maat afgewerkt, en tussentijdse updates tot je site af is.</p></details>
         <a href="#boek" class="btn btn-ghost">Plan mijn gratis gesprek</a>
       </article>
-      <article class="plan reco reveal" data-plan="zaak">
+      <article class="plan reco reveal" data-plan="groei">
         <span class="badge">Aanbevolen</span>
-        <h3>Zaak</h3>
+        <h3>Groei</h3>
         <p class="price" style="color:var(--blue)">€900</p>
-        <p class="per">≈ €25 per maand over 3 jaar</p>
+        <p class="per">≈ €25 per maand over 3 jaar · 3 weken</p>
         <p class="who">Je wil gevonden worden en meer aanvragen krijgen.</p>
-        <ul>
-          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2B5CFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>Tot 5 pagina's, ik schrijf de teksten</li>
-          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2B5CFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>Google-profiel en lokale SEO door de vos</li>
-          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2B5CFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>Dashboard van de uil vanaf dag één</li>
-        </ul>
-        <div class="crew"><div class="avatars"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3H2FAjydQqLsAIRD9wpl2Hgvsnz/hf_20261112_164839_4413505a-9a69-44e8-835a-a7b57f4b3f22.png" alt="Alec" loading="lazy"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3H2FAjydQqLsAIRD9wpl2Hgvsnz/hf_20261112_164839_d6db8316-9e51-44f8-a094-bd001710c6f1.png" alt="vos" loading="lazy"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3H2FAjydQqLsAIRD9wpl2Hgvsnz/hf_20261112_164840_c42116e9-1ce1-4ba5-9470-69e869200250.png" alt="uil" loading="lazy"></div><span>Alec, vos, uil</span></div>
-        <details class="more"><summary>Wat zit er nog in?</summary><p>Alles van Basis, een intakegesprek voor de teksten en 2 feedbackrondes.</p></details>
+        <ul><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2B5CFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>Tot 5 pagina's, ik schrijf de teksten</li><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2B5CFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>3 talen inbegrepen</li><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2B5CFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>Boekklaar ontwerp: gebouwd om van bezoekers klanten te maken</li><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2B5CFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>Google-profiel en lokale SEO door de vos</li></ul>
+        <div class="crew"><div class="avatars"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3H2FAjydQqLsAIRD9wpl2Hgvsnz/hf_20261112_164839_4413505a-9a69-44e8-835a-a7b57f4b3f22.png" alt="" width="64" height="64" loading="lazy"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3H2FAjydQqLsAIRD9wpl2Hgvsnz/hf_20261112_164839_d6db8316-9e51-44f8-a094-bd001710c6f1.png" alt="" width="64" height="64" loading="lazy"><span class="av-new" title="De papegaai (beeld volgt)">P</span></div><span>Alec, vos, papegaai</span></div>
+        <details class="more"><summary>Wat zit er nog in?</summary><p>Alles van Start, en een tussentijdse update: je ziet je site bijna af en stuurt nog bij.</p></details>
         <a href="#boek" class="btn btn-red">Plan mijn gratis gesprek</a>
       </article>
-      <article class="plan reveal" data-plan="basis">
-        <h3>Basis</h3>
+      <article class="plan reveal" data-plan="start">
+        <h3>Start</h3>
         <p class="price">€500</p>
-        <p class="per">≈ €14 per maand over 3 jaar</p>
-        <p class="who">Je wil gewoon goed en professioneel online staan.</p>
-        <ul>
-          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2B5CFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>1 duidelijke pagina met alle info</li>
-          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2B5CFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>Snel en gemaakt voor de gsm</li>
-          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2B5CFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>Domein en site op jouw naam</li>
-        </ul>
-        <div class="crew"><div class="avatars"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3H2FAjydQqLsAIRD9wpl2Hgvsnz/hf_20261112_164839_4413505a-9a69-44e8-835a-a7b57f4b3f22.png" alt="Alec" loading="lazy"></div><span>Alec</span></div>
-        <details class="more"><summary>Wat zit er nog in?</summary><p>Jij levert de teksten, ik verbeter ze. 2 feedbackrondes.</p></details>
+        <p class="per">≈ €14 per maand over 3 jaar · ongeveer 1 week</p>
+        <p class="who">Je wil snel een propere, moderne site.</p>
+        <ul><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2B5CFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>Tot 3 pagina's</li><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2B5CFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>Bellen, WhatsApp en route met één tik</li><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2B5CFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>Een korte video: zo pas je zelf je site aan</li></ul>
+        <div class="crew"><div class="avatars"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3H2FAjydQqLsAIRD9wpl2Hgvsnz/hf_20261112_164839_4413505a-9a69-44e8-835a-a7b57f4b3f22.png" alt="" width="64" height="64" loading="lazy"></div><span>Alec</span></div>
+        <details class="more"><summary>Wat zit er nog in?</summary><p>Jij levert de teksten, ik verbeter ze. Wil je meer? Voeg hieronder bouwstenen toe.</p></details>
         <a href="#boek" class="btn btn-ghost">Plan mijn gratis gesprek</a>
       </article>
     </div>
-    <div class="after-plans reveal">
-      <p><strong>Vind je het eerste ontwerp niets?</strong> Dan stop je. Je betaalt alleen €100.</p>
-      <p><strong>Je site staat op jouw naam.</strong> Je zit aan niemand vast.</p>
+    <ul class="always reveal" aria-label="Bij elk pakket inbegrepen">
+      <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2B5CFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>Gsm-versie</li><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2B5CFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>Zelf aan te passen</li><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2B5CFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>Op jouw naam</li><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2B5CFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>Getest door het testpanel</li>
+    </ul>
+
+    <div class="calc reveal" id="calc">
+      <div class="calc-l">
+        <h3>Stel je site samen</h3>
+        <p class="muted" style="margin-top:6px">Kies een pakket en voeg toe wat je nodig hebt. Je betaalt alleen voor wat je gebruikt.</p>
+        <div class="seg calc-seg" role="radiogroup" aria-label="Pakket">
+          <button type="button" role="radio" aria-checked="true" data-base="start" data-price="500">Start · €500</button>
+          <button type="button" role="radio" aria-checked="false" data-base="groei" data-price="900">Groei · €900</button>
+        </div>
+        <div class="addons">
+          <div class="addon" data-k="pagina" data-price="100" data-type="n">
+            <span class="addon-av"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3H2FAjydQqLsAIRD9wpl2Hgvsnz/hf_20261112_164839_4413505a-9a69-44e8-835a-a7b57f4b3f22.png" alt="" width="64" height="64" loading="lazy"></span>
+            <span class="addon-t"><b>Extra pagina</b><small>€100 per stuk<em class="inc-note"> · inbegrepen in Groei</em></small></span>
+            <div class="step-n"><button type="button" data-dec aria-label="Minder">−</button><output>0</output><button type="button" data-inc aria-label="Meer">+</button></div>
+          </div>
+          <div class="addon" data-k="taal" data-price="40" data-type="n">
+            <span class="addon-av"><span class="av-new" title="De papegaai (beeld volgt)">P</span></span>
+            <span class="addon-t"><b>Extra taal</b><small>€40 per stuk<em class="inc-note"> · inbegrepen in Groei</em></small></span>
+            <div class="step-n"><button type="button" data-dec aria-label="Minder">−</button><output>0</output><button type="button" data-inc aria-label="Meer">+</button></div>
+          </div>
+          <label class="addon" data-k="boek" data-price="150" data-type="1" data-incl="groei">
+            <input type="checkbox"><span class="addon-av"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3H2FAjydQqLsAIRD9wpl2Hgvsnz/hf_20261112_164839_4413505a-9a69-44e8-835a-a7b57f4b3f22.png" alt="" width="64" height="64" loading="lazy"></span>
+            <span class="addon-t"><b>Boekklaar ontwerp</b><small>€150<em class="inc-note"> · inbegrepen in Groei</em></small></span>
+            <span class="tog" aria-hidden="true"></span>
+          </label>
+          <label class="addon" data-k="seo" data-price="150" data-type="1" data-incl="groei">
+            <input type="checkbox"><span class="addon-av"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3H2FAjydQqLsAIRD9wpl2Hgvsnz/hf_20261112_164839_d6db8316-9e51-44f8-a094-bd001710c6f1.png" alt="" width="64" height="64" loading="lazy"></span>
+            <span class="addon-t"><b>Google-profiel en lokale SEO</b><small>€150<em class="inc-note"> · inbegrepen in Groei</em></small></span>
+            <span class="tog" aria-hidden="true"></span>
+          </label>
+          <label class="addon" data-k="mail" data-price="150" data-type="1">
+            <input type="checkbox"><span class="addon-av"><span class="av-new" title="De postduif (beeld volgt)">P</span></span>
+            <span class="addon-t"><b>E-maillijst en inschrijfformulier</b><small>€150<em class="inc-note"> · inbegrepen in Groei</em></small></span>
+            <span class="tog" aria-hidden="true"></span>
+          </label>
+          <label class="addon" data-k="afspraak" data-price="150" data-type="1">
+            <input type="checkbox"><span class="addon-av"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3H2FAjydQqLsAIRD9wpl2Hgvsnz/hf_20261112_164838_b0be1a50-a450-4253-b21b-beffa1777a94.png" alt="" width="64" height="64" loading="lazy"></span>
+            <span class="addon-t"><b>Online afspraken boeken</b><small>€150<em class="inc-note"> · inbegrepen in Groei</em></small></span>
+            <span class="tog" aria-hidden="true"></span>
+          </label>
+          <div class="addon" data-k="auto" data-price="150" data-type="n">
+            <span class="addon-av"><span class="av-new" title="De mier (beeld volgt)">M</span></span>
+            <span class="addon-t"><b>Automatisering, bv. opvolgmail na een aanvraag</b><small>€150 per stuk<em class="inc-note"> · inbegrepen in Groei</em></small></span>
+            <div class="step-n"><button type="button" data-dec aria-label="Minder">−</button><output>0</output><button type="button" data-inc aria-label="Meer">+</button></div>
+          </div>
+          <label class="addon" data-k="dash" data-price="200" data-type="1">
+            <input type="checkbox"><span class="addon-av"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3H2FAjydQqLsAIRD9wpl2Hgvsnz/hf_20261112_164840_c42116e9-1ce1-4ba5-9470-69e869200250.png" alt="" width="64" height="64" loading="lazy"></span>
+            <span class="addon-t"><b>Live dashboard met je cijfers</b><small>€200<em class="inc-note"> · inbegrepen in Groei</em></small></span>
+            <span class="tog" aria-hidden="true"></span>
+          </label>
+          <label class="addon" data-k="shop" data-price="350" data-type="1">
+            <input type="checkbox"><span class="addon-av"><span class="av-new" title="De eekhoorn (beeld volgt)">E</span></span>
+            <span class="addon-t"><b>Betalingen of kleine webshop (tot 10 producten)</b><small>€350<em class="inc-note"> · inbegrepen in Groei</em></small></span>
+            <span class="tog" aria-hidden="true"></span>
+          </label>
+        </div>
+      </div>
+      <aside class="calc-r" aria-live="polite">
+        <span class="calc-lab">Jouw site</span>
+        <strong class="calc-total" id="calcTotal">€500</strong>
+        <ul class="calc-lines" id="calcLines"></ul>
+        <div class="calc-pay"><span>Zo betaal je</span>
+          <div><b id="p1">€150</b><small>bij de start</small></div>
+          <div><b id="p2">€200</b><small>na de check-in</small></div>
+          <div><b id="p3">€150</b><small>bij oplevering</small></div>
+        </div>
+        <p class="calc-hint" id="calcHint" hidden>Boven €2.000 is Systeem vaak voordeliger: alles op maat afgewerkt.</p>
+        <a href="#boek" class="btn btn-red">Bespreek dit in je gratis gesprek</a>
+        <small class="calc-foot">Richtprijs, excl. btw. In het gesprek bevestig ik de vaste prijs.</small>
+      </aside>
     </div>
-    <p class="small reveal" style="margin-top:16px">Extra taal +€250 · extra pagina +€100</p>
+
+    <div class="flow reveal">
+      <h3>Zo werken we</h3>
+      <ol>
+        <li><b>1</b><div><strong>Voorschot van 30%, en ik begin</strong><p>Geen lange offertes. Je betaalt een deel en ik ga van start.</p></div></li>
+        <li><b>2</b><div><strong>Check-in: we leggen alles vast</strong><p>Op een call overlopen we de pagina's, wat erop komt, de stijl met een eerste schets en de opleverdatum. Wat we afspreken, staat vast. Daarna betaal je 40%.</p></div></li>
+        <li><b>3</b><div><strong>Bij Groei en Systeem: een tussentijdse update</strong><p>Je ziet je site bijna af en stuurt nog bij.</p></div></li>
+        <li><b>4</b><div><strong>Oplevering: de laatste 30% en de site is van jou</strong><p>Ik zet ze online bij jouw hosting, of we doen het samen op een call. Wil je dat ik host en onderhoud? Dan regel ik alles, samen met je eerste maand Beheer.</p></div></li>
+      </ol>
+      <p class="flow-g"><strong>Niet tevreden?</strong> Dan zoeken we een oplossing, bijvoorbeeld een nieuw ontwerp. Lukt dat niet, dan krijg je je geld terug, op het voorschot na.</p>
+    </div>
   </div>
 </section>
 
 <section aria-labelledby="beheer">
   <div class="wrap">
     <div class="panel reveal" style="display:block">
-      <div class="care-head"><h2 id="beheer">Daarna blijft het team voor je werken</h2><div class="care-chars"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3H2FAjydQqLsAIRD9wpl2Hgvsnz/hf_20261112_161105_0944018d-100d-4a88-acfd-7f31610b445e.png" alt="De egel met zijn schild" loading="lazy"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3H2FAjydQqLsAIRD9wpl2Hgvsnz/hf_20261112_161104_99ba2a50-69f9-4b9e-a27f-35bed0ab693d.png" alt="De bever met zijn moersleutel" loading="lazy"></div></div>
-      <p class="lead" style="margin-top:16px;max-width:52ch">Je site blijft snel, veilig en vindbaar. Wil je iets aanpassen? Stuur een WhatsApp, wij regelen het. Maandelijks opzegbaar.</p>
+      <div class="care-head"><h2 id="beheer">2. Beheren: je site blijft up-to-date</h2><div class="care-chars"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3H2FAjydQqLsAIRD9wpl2Hgvsnz/hf_20261112_161105_0944018d-100d-4a88-acfd-7f31610b445e.png" alt="De egel met zijn schild" loading="lazy"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3H2FAjydQqLsAIRD9wpl2Hgvsnz/hf_20261112_161104_99ba2a50-69f9-4b9e-a27f-35bed0ab693d.png" alt="De bever met zijn moersleutel" loading="lazy"></div></div>
+      <p class="lead" style="margin-top:16px;max-width:52ch">Je site blijft snel, veilig en vindbaar. Wil je iets aanpassen? Stuur een WhatsApp, wij regelen het. Maandelijks opzegbaar. Host ik je site, dan zit dat in je Beheer.</p>
       <div class="care">
         <div class="care-col">
           <h3>Beheer <span>€50 per maand</span></h3>
@@ -770,6 +893,26 @@ footer{padding:56px 0;font-size:15px;color:var(--ink-soft)}
     new ResizeObserver(fit).observe(scr);setDev(cur,false);
     cv.querySelectorAll('[data-d]').forEach(function(b){b.addEventListener('click',function(){if(b.dataset.d!==cur)setDev(b.dataset.d,true)})});
   }
+
+  var calc=document.getElementById('calc');
+  if(calc){var base='start',bp=500,eur=function(n){return '€'+n.toLocaleString('nl-BE')};
+    var items=calc.querySelectorAll('.addon');
+    var upd=function(){var tot=bp,lines='<li><span>'+(base==='start'?'Start':'Groei')+'</span><span>'+eur(bp)+'</span></li>';
+      items.forEach(function(a){var inc=a.dataset.incl===base;a.classList.toggle('inc',inc);
+        var cb=a.querySelector('input');if(cb){cb.disabled=inc;if(inc){cb.checked=false}}
+        var n=a.dataset.type==='n'?+a.querySelector('output').value:(cb&&cb.checked?1:0);
+        a.classList.toggle('on',n>0);
+        if(n>0){var c=n*a.dataset.price;tot+=c;lines+='<li><span>'+a.querySelector('b').textContent+(n>1?' ×'+n:'')+'</span><span>'+eur(c)+'</span></li>'}});
+      document.getElementById('calcTotal').textContent=eur(tot);document.getElementById('calcLines').innerHTML=lines;
+      var a1=Math.round(tot*.3),a2=Math.round(tot*.4);
+      document.getElementById('p1').textContent=eur(a1);document.getElementById('p2').textContent=eur(a2);document.getElementById('p3').textContent=eur(tot-a1-a2);
+      document.getElementById('calcHint').hidden=tot<2000;};
+    calc.querySelectorAll('[data-base]').forEach(function(b){b.addEventListener('click',function(){base=b.dataset.base;bp=+b.dataset.price;
+      calc.querySelectorAll('[data-base]').forEach(function(x){x.setAttribute('aria-checked',x===b)});upd()})});
+    items.forEach(function(a){var cb=a.querySelector('input');if(cb)cb.addEventListener('change',upd);
+      a.querySelectorAll('[data-inc],[data-dec]').forEach(function(btn){btn.addEventListener('click',function(){var o=a.querySelector('output');
+        o.value=Math.max(0,Math.min(9,+o.value+(btn.hasAttribute('data-inc')?1:-1)));upd()})})});
+    upd();}
   var answers = {};
   var out = document.getElementById('helper-out');
   document.querySelectorAll('.choice').forEach(function(b){
@@ -779,9 +922,9 @@ footer{padding:56px 0;font-size:15px;color:var(--ink-soft)}
       b.setAttribute('aria-pressed','true');
       answers[q] = b.dataset.v;
       if (!answers.doel) return;
-      var pick = answers.doel === 'online' ? 'basis' : answers.doel === 'gevonden' ? 'zaak' : 'premium';
+      var pick = answers.doel === 'online' ? 'start' : answers.doel === 'gevonden' ? 'groei' : 'systeem';
       document.querySelectorAll('.plan').forEach(function(p){ p.classList.toggle('match', p.dataset.plan === pick); });
-      var names = {basis:'Basis', zaak:'Zaak', premium:'Premium'};
+      var names = {start:'Start', groei:'Groei', systeem:'Systeem'};
       out.textContent = 'Voor jou past ' + names[pick] + ' het best' + (answers.site === 'ja' ? ', en we vertrekken van je huidige site.' : '.');
     });
   });
