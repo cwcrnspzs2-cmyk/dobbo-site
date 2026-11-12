@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Het team · Dobbo-stad</title>
+<script>if(/github\.io$/.test(location.hostname)){var m=document.createElement("meta");m.name="robots";m.content="noindex";document.head.appendChild(m);}</script>
+<meta name="description" content="Ontmoet Alec, het testpanel en het AI-team van Dobbo. Klik op iemand om te zien wat die voor je website doet.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;800&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --blue:#2B5CFF;--blue-deep:#1B3FC4;--blue-tint:#EEF3FF;--blue-line:#D6E1FF;
+  --red:#DA2C25;--red-deep:#A91F1A;--red-tint:#FFF1F0;
+  --ink:#141A33;--ink-soft:#4A5170;--line:#E6E8F0;
+  --display:'Unbounded',system-ui,sans-serif;--body:'Figtree',system-ui,sans-serif;
+  --r-panel:32px;--r-card:20px;--r-pill:999px;--ease:cubic-bezier(.16,1,.3,1);
+}
+*{box-sizing:border-box}
+html{overflow-x:clip}
+body{margin:0;overflow-x:clip;font-family:var(--body);color:var(--ink);background:#fff;font-size:18px;line-height:1.55;-webkit-font-smoothing:antialiased}
+img{max-width:100%;height:auto;display:block}
+.wrap{max-width:1240px;margin:0 auto;padding:0 24px}
+h1,h2,h3,h4{font-family:var(--display);text-transform:uppercase;letter-spacing:-0.01em;margin:0}
+h1{font-size:clamp(32px,4.4vw,58px);line-height:1.02;font-weight:800}
+h2{font-size:clamp(26px,3vw,38px);line-height:1.05;font-weight:800}
+p{margin:0}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:0 26px;border-radius:var(--r-pill);font-weight:700;font-size:16px;text-decoration:none;border:0;cursor:pointer;white-space:nowrap;font-family:var(--body);transition:transform .15s var(--ease),box-shadow .15s var(--ease)}
+.btn-red{background:var(--red);color:#fff;box-shadow:0 5px 0 var(--red-deep)}
+.btn-red:hover{transform:translateY(-2px);box-shadow:0 7px 0 var(--red-deep)}
+.btn-red:active{transform:translateY(5px);box-shadow:0 0 0 var(--red-deep)}
+:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
+header{position:sticky;top:0;z-index:30;background:rgba(255,255,255,.96);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:24px;height:72px}
+.logo{font-family:var(--display);font-weight:800;font-size:28px;color:var(--blue);text-decoration:none;letter-spacing:-0.02em}
+.nav-links{display:flex;gap:28px;align-items:center;font-weight:600;font-size:16px}
+.nav-links a{color:var(--ink);text-decoration:none}.nav-links a:hover,.nav-links a[aria-current]{color:var(--blue)}
+.nav .btn{min-height:46px;padding:0 20px;font-size:15px}
+@media (max-width:900px){.nav-links{display:none}}
+@media (max-width:480px){.nav .btn{display:none}}
+
+/* intro */
+.intro{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:40px;align-items:end;padding:56px 0 28px}
+.intro .lead{font-size:19px;color:var(--ink-soft)}
+.intro .lead b{color:var(--ink)}
+.kicker{display:inline-block;font-size:13px;font-weight:700;padding:6px 12px;border-radius:var(--r-pill);background:var(--blue-tint);color:var(--blue-deep);margin-bottom:16px}
+@media (max-width:900px){.intro{grid-template-columns:minmax(0,1fr);gap:16px;padding-top:36px}}
+
+/* filters */
+.filters{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:16px}
+.filters span{font-size:14px;font-weight:700;color:var(--ink-soft);margin-right:6px}
+.chip{font:inherit;font-size:15px;font-weight:700;border:0;cursor:pointer;padding:9px 16px;border-radius:var(--r-pill);background:#F2F4FA;color:var(--ink-soft);transition:background .2s,color .2s}
+.chip[aria-pressed=true]{background:var(--ink);color:#fff}
+
+/* town */
+.town{position:relative;aspect-ratio:16/10;border-radius:var(--r-panel);overflow:hidden;
+  background:
+    radial-gradient(circle at 50% 50%,#fff 0 16%,transparent 16.2%),
+    radial-gradient(ellipse at 50% 120%,#DCE6FF 0,transparent 60%),
+    linear-gradient(#F4F7FF,#E9EFFF)}
+.town::before{content:"";position:absolute;inset:0;background-image:radial-gradient(#D3DDF8 1.2px,transparent 1.2px);background-size:22px 22px;opacity:.7;pointer-events:none}
+.roads{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.roads path{fill:none;stroke:#fff;stroke-width:14;stroke-linecap:round}
+.roads path.dash{stroke:#C9D6FF;stroke-width:2;stroke-dasharray:6 10}
+.roads circle{fill:var(--blue)}
+.plaza{position:absolute;left:50%;top:48%;transform:translate(-50%,-50%);width:23%;min-width:200px;z-index:2;background:#fff;border-radius:20px;border:1px solid #E3E9FA;box-shadow:0 24px 50px -24px rgba(27,63,196,.45)}
+.plaza .bar{display:flex;gap:5px;align-items:center;padding:9px 12px;border-bottom:1px solid #EEF1F8}
+.plaza .bar i{width:8px;height:8px;border-radius:50%;background:#E1E6F2}
+.plaza .bar span{margin-left:6px;flex:1;font-size:11px;color:var(--ink-soft);background:#F5F7FC;border-radius:999px;padding:3px 8px}
+.plaza .body{padding:14px;display:flex;flex-direction:column;gap:7px}
+.plaza .l1{height:14px;width:70%;border-radius:4px;background:var(--ink)}
+.plaza .l2{height:7px;width:90%;border-radius:4px;background:#E6EBF5}.plaza .l2.s{width:60%}
+.plaza .cta{align-self:flex-start;margin-top:4px;background:var(--red);color:#fff;font-size:11px;font-weight:700;padding:6px 12px;border-radius:999px}
+.plaza-lab{position:absolute;left:50%;bottom:-14px;transform:translateX(-50%);white-space:nowrap;background:var(--ink);color:#fff;font-size:12px;font-weight:700;padding:5px 12px;border-radius:999px}
+
+.plot{position:absolute;left:var(--x);top:var(--y);transform:translate(-50%,-50%);z-index:3;width:13.5%;min-width:120px;border:0;background:none;padding:0;cursor:pointer;font:inherit;color:inherit;display:flex;flex-direction:column;align-items:center;transition:opacity .3s,filter .3s}
+.plot.dim{opacity:.28;filter:grayscale(.7)}
+.bld{position:relative;width:100%;aspect-ratio:5/3;border-radius:16px 16px 12px 12px;background:#fff;box-shadow:0 1px 0 #E3E9FA,0 16px 28px -18px rgba(27,63,196,.45);transition:transform .35s var(--ease),box-shadow .35s var(--ease)}
+.bld::before{content:"";position:absolute;left:-6%;right:-6%;top:-18%;height:34%;border-radius:12px 12px 6px 6px;background:var(--c)}
+.bld::after{content:"";position:absolute;left:14%;right:46%;top:34%;bottom:18%;border-radius:6px;background:
+  linear-gradient(90deg,var(--t) 0 44%,transparent 44% 56%,var(--t) 56%) top/100% 40% no-repeat,
+  linear-gradient(90deg,var(--t) 0 44%,transparent 44% 56%,var(--t) 56%) bottom/100% 40% no-repeat}
+.bld .ico{position:absolute;right:10%;top:30%;width:30%;aspect-ratio:1;border-radius:10px;background:var(--t);display:grid;place-items:center}
+.bld .ico svg{width:60%;height:60%;fill:none;stroke:var(--c);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.who{position:absolute;left:-30%;bottom:-6%;width:62%;z-index:2;pointer-events:none}
+.who img{width:100%;filter:drop-shadow(0 8px 10px rgba(20,26,51,.18));animation:idle 3.6s ease-in-out infinite;animation-delay:var(--d,0s);transform-origin:50% 100%}
+.sign{margin-top:12px;display:flex;flex-direction:column;align-items:center;gap:1px;background:#fff;border-radius:12px;padding:6px 12px;box-shadow:0 1px 0 #E3E9FA,0 8px 18px -12px rgba(27,63,196,.4);transition:transform .35s var(--ease)}
+.sign b{font-family:var(--display);text-transform:uppercase;font-size:13px;letter-spacing:-0.01em}
+.sign small{font-size:12px;color:var(--ink-soft);white-space:nowrap}
+.plot:hover .bld,.plot:focus-visible .bld,.plot[aria-expanded=true] .bld{transform:translateY(-6px);box-shadow:0 1px 0 #E3E9FA,0 26px 34px -18px rgba(27,63,196,.55)}
+.plot:hover .who img,.plot:focus-visible .who img{animation:hi .9s var(--ease) both}
+.plot:hover .sign,.plot:focus-visible .sign{transform:translateY(-3px)}
+.plot:focus-visible{outline:none}.plot:focus-visible .sign{outline:3px solid var(--blue);outline-offset:2px}
+.plot .new{position:absolute;right:-6%;top:-26%;z-index:3;font-size:11px;font-weight:800;padding:3px 8px;border-radius:999px;background:#FFF1C9;color:var(--ink)}
+.plot .human{position:absolute;right:-6%;top:-26%;z-index:3;font-size:11px;font-weight:800;padding:3px 8px;border-radius:999px;background:var(--red);color:#fff}
+.faces{position:absolute;left:-18%;bottom:2%;z-index:2;display:flex}
+.faces span{width:34px;height:34px;border-radius:50%;border:3px solid #fff;margin-left:-10px;display:grid;place-items:center;animation:idle 3.2s ease-in-out infinite}
+.faces span:first-child{margin-left:0}
+.faces span:nth-child(1){background:#FFE4D6}.faces span:nth-child(2){background:#E2F5EA;animation-delay:.4s}.faces span:nth-child(3){background:#FFF1C9;animation-delay:.8s}.faces span:nth-child(4){background:var(--red-tint);animation-delay:1.2s}
+.faces svg{width:18px;height:18px;fill:none;stroke:var(--ink);stroke-width:1.8;stroke-linecap:round}
+.hint{position:absolute;left:50%;bottom:16px;transform:translateX(-50%);z-index:4;background:#fff;border-radius:999px;padding:8px 14px;font-size:14px;font-weight:700;color:var(--ink-soft);box-shadow:0 8px 20px -12px rgba(27,63,196,.5);transition:opacity .4s}
+.hint.off{opacity:0}
+
+@keyframes idle{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+@keyframes hi{0%{transform:translateY(0) rotate(0)}20%{transform:translateY(-14px) rotate(-7deg)}40%{transform:translateY(-14px) rotate(7deg)}60%{transform:translateY(-8px) rotate(-5deg)}80%{transform:translateY(-2px) rotate(3deg)}100%{transform:translateY(0) rotate(0)}}
+@keyframes wave{0%{transform:scale(.85) rotate(0);opacity:0}40%{transform:scale(1.04) rotate(-6deg);opacity:1}60%{transform:rotate(6deg)}80%{transform:rotate(-3deg)}100%{transform:scale(1) rotate(0)}}
+
+/* town on small screens: a tidy grid */
+@media (max-width:860px){
+  .town{aspect-ratio:auto;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:52px 14px;padding:120px 14px 70px 34px;background:linear-gradient(#F4F7FF,#E9EFFF)}
+  .roads,.hint{display:none}
+  .plaza{position:absolute;top:24px;left:50%;width:calc(100% - 28px);min-width:0;transform:translateX(-50%)}
+  .plaza .body{display:none}
+  .plot{position:relative;left:auto;top:auto;transform:none;width:100%;min-width:0}
+}
+
+/* drawer */
+.scrim{position:fixed;inset:0;z-index:40;background:rgba(20,26,51,.35);opacity:0;pointer-events:none;transition:opacity .3s}
+.scrim.on{opacity:1;pointer-events:auto}
+.drawer{position:fixed;z-index:41;top:0;right:0;height:100%;width:min(460px,100%);background:#fff;box-shadow:-30px 0 60px -30px rgba(20,26,51,.4);transform:translateX(104%);transition:transform .45s var(--ease);display:flex;flex-direction:column;outline:none}
+.drawer.on{transform:none}
+.d-top{display:flex;justify-content:space-between;align-items:center;padding:14px 16px;border-bottom:1px solid var(--line)}
+.d-nav{display:flex;gap:6px}
+.iconbtn{width:40px;height:40px;border-radius:50%;border:0;background:#F2F4FA;cursor:pointer;display:grid;place-items:center;font-size:18px;font-weight:800;color:var(--ink)}
+.iconbtn:hover{background:var(--blue-tint)}
+.d-body{overflow-y:auto;padding:0 24px 28px}
+.d-hero{position:relative;margin:0 -24px;padding:24px 24px 0;background:var(--tint,var(--blue-tint));display:flex;align-items:flex-end;gap:16px;min-height:220px}
+.d-hero img{width:46%;margin-bottom:-6px;animation:wave .8s var(--ease) both;transform-origin:50% 90%}
+.d-hero .meta{flex:1;padding-bottom:20px}
+.d-tag{display:inline-block;font-size:12px;font-weight:800;padding:4px 10px;border-radius:999px;background:#fff;color:var(--blue-deep)}
+.d-tag.h{color:var(--red-deep)}
+.d-hero h2{font-size:28px;margin:8px 0 4px}
+.d-role{font-weight:700;color:var(--blue-deep);font-size:16px}
+.d-place{font-size:14px;color:var(--ink-soft);margin-top:2px}
+.d-sec{margin-top:22px}
+.d-sec h3{font-size:13px;letter-spacing:.04em;color:var(--ink-soft);margin-bottom:8px;font-family:var(--body);font-weight:800}
+.d-sec ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:8px}
+.d-sec li{display:flex;gap:10px;font-size:16px}
+.d-sec li::before{content:"";flex:none;width:8px;height:8px;margin-top:9px;border-radius:50%;background:var(--blue)}
+.vs{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.vs div{border-radius:16px;padding:14px;font-size:15px;line-height:1.45}
+.vs .no{background:#F5F6FA;color:var(--ink-soft)}
+.vs .yes{background:var(--blue-tint)}
+.vs b{display:block;font-size:12px;letter-spacing:.04em;text-transform:uppercase;margin-bottom:4px}
+.vs .no b{color:#8A90A8}.vs .yes b{color:var(--blue-deep)}
+.pills{display:flex;flex-wrap:wrap;gap:6px}
+.pills span{font-size:14px;font-weight:700;padding:6px 12px;border-radius:999px;background:#F2F4FA}
+.pills span.p{background:#FFF1C9}
+.d-cta{margin-top:26px;display:flex;flex-direction:column;gap:8px}
+.d-cta .btn{width:100%}
+.d-cta small{font-size:13px;color:var(--ink-soft);text-align:center}
+@media (max-width:640px){.drawer{top:auto;bottom:0;height:88vh;width:100%;border-radius:24px 24px 0 0;transform:translateY(104%)}.drawer.on{transform:none}}
+
+/* overview */
+.overview{margin:72px 0}
+.ov{margin-top:20px;border-top:1px solid var(--line)}
+.ov-row{display:grid;grid-template-columns:56px minmax(0,1.1fr) minmax(0,2fr) minmax(0,1.3fr);gap:18px;align-items:center;padding:14px 4px;border-bottom:1px solid var(--line);cursor:pointer;transition:background .2s}
+.ov-row:hover{background:#F8FAFF}
+.ov-row img,.ov-row .fc{width:52px;height:52px;border-radius:50%;object-fit:cover;background:var(--blue-tint)}
+.ov-row .fc{display:grid;place-items:center;background:var(--red-tint)}
+.ov-row .fc svg{width:24px;height:24px;fill:none;stroke:var(--red-deep);stroke-width:1.8}
+.ov-row h4{font-size:15px}.ov-row .r{font-size:14px;font-weight:700;color:var(--blue-deep)}
+.ov-row p{font-size:15px;color:var(--ink-soft)}
+.ov-row .in{font-size:14px;font-weight:600}
+@media (max-width:800px){.ov-row{grid-template-columns:52px minmax(0,1fr)}.ov-row p,.ov-row .in{grid-column:2}}
+.end{margin:0 0 72px;background:var(--blue);color:#fff;border-radius:var(--r-panel);padding:48px 40px;display:flex;flex-wrap:wrap;gap:24px;align-items:center;justify-content:space-between}
+.end h2{max-width:20ch}.end p{color:#DCE4FF;margin-top:10px;max-width:44ch}
+footer{padding:40px 0 56px;font-size:15px;color:var(--ink-soft);border-top:1px solid var(--line)}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap nav">
+    <a href="index.html" class="logo" aria-label="Dobbo, naar de startpagina">dobbo</a>
+    <nav class="nav-links" aria-label="Hoofdmenu">
+      <a href="index.html#hoe">Hoe het werkt</a>
+      <a href="team.html" aria-current="page">Het team</a>
+      <a href="index.html#pakketten">Pakketten</a>
+      <a href="index.html#vragen">Vragen</a>
+    </nav>
+    <a href="index.html#boek" class="btn btn-red">Plan mijn gratis gesprek</a>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="intro">
+    <div>
+      <span class="kicker">Het team</span>
+      <h1>Welkom in Dobbo-stad</h1>
+    </div>
+    <p class="lead">In het midden staat <b>jouw website</b>. Rondom werkt een team waarin iedereen één taak heeft. <b>Ik ben Alec, de enige die je spreekt.</b> Het AI-team heb ik zelf gebouwd en getraind, en een groep echte mensen test elke site. Klik op iemand om te zien wat die voor je doet.</p>
+  </section>
+
+  <div class="filters" role="group" aria-label="Toon">
+    <span>Toon:</span>
+    <button class="chip" type="button" data-f="alle" aria-pressed="true">Iedereen</button>
+    <button class="chip" type="button" data-f="bouwen" aria-pressed="false">Bouwen</button>
+    <button class="chip" type="button" data-f="beheren" aria-pressed="false">Beheren</button>
+    <button class="chip" type="button" data-f="bouwsteen" aria-pressed="false">Bouwstenen</button>
+  </div>
+
+  <div class="town" id="town">
+    <svg class="roads" id="roads" aria-hidden="true"></svg>
+    <div class="plaza" aria-hidden="true">
+      <div class="bar"><i></i><i></i><i></i><span>jouwzaak.be</span></div>
+      <div class="body"><div class="l1"></div><div class="l2"></div><div class="l2 s"></div><div class="cta">Maak een afspraak</div></div>
+      <span class="plaza-lab">Jouw website</span>
+    </div>
+    <!-- plots worden hieronder door het script toegevoegd -->
+    <div class="hint" id="hint">Klik op een gebouw</div>
+  </div>
+
+  <section class="overview" aria-labelledby="ovt">
+    <h2 id="ovt">Iedereen op een rij</h2>
+    <div class="ov" id="ov"></div>
+  </section>
+
+  <section class="end">
+    <div>
+      <h2>Wie heeft jouw zaak nodig?</h2>
+      <p>In een gratis gesprek van 20 minuten zeg ik eerlijk welke teamleden je nodig hebt, en welke niet.</p>
+    </div>
+    <a href="index.html#boek" class="btn btn-red">Plan mijn gratis gesprek</a>
+  </section>
+</main>
+
+<footer><div class="wrap"><a href="index.html" class="logo" style="font-size:22px">dobbo</a><p style="margin-top:6px">Websites voor zaken in Brussel en de rand.</p></div></footer>
+
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="dName" tabindex="-1" hidden>
+  <div class="d-top">
+    <div class="d-nav"><button class="iconbtn" type="button" id="dPrev" aria-label="Vorige">‹</button><button class="iconbtn" type="button" id="dNext" aria-label="Volgende">›</button></div>
+    <button class="iconbtn" type="button" id="dClose" aria-label="Sluiten">✕</button>
+  </div>
+  <div class="d-body" id="dBody"></div>
+</aside>
+
+<script>
+(function(){
+  var C='https://d8j0ntlcm91z4.cloudfront.net/user_3H2FAjydQqLsAIRD9wpl2Hgvsnz/';
+  var I={
+    house:'<path d="M4 11l8-7 8 7v9H4z"/><path d="M10 20v-5h4v5"/>',
+    scope:'<circle cx="11" cy="11" r="6"/><path d="M20 20l-4.5-4.5"/>',
+    chart:'<path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/>',
+    shield:'<path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/>',
+    tool:'<path d="M14 6a4 4 0 0 0 5 5l-9 9a2 2 0 0 1-3-3l9-9a4 4 0 0 0-2-2z"/>',
+    chat:'<path d="M4 5h16v11H9l-5 4z"/><path d="M8 10h8"/>',
+    gear:'<circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M5 19l2-2M17 7l2-2"/>',
+    card:'<rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18M7 15h4"/>',
+    mail:'<rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/>',
+    lab:'<path d="M9 3h6M10 3v6l-5 9a2 2 0 0 0 2 3h10a2 2 0 0 0 2-3l-5-9V3"/>'
+  };
+  var person='<svg viewBox="0 0 24 24"><circle cx="12" cy="9" r="4"/><path d="M4 21c1-4.5 4.5-6.5 8-6.5s7 2 8 6.5"/></svg>';
+  var T=[
+    {id:'alec',name:'Alec',tag:'Mens',human:1,role:'Bouwt je website',place:'De studio',ico:'house',x:13,y:17,c:'#DA2C25',t:'#FFE3E1',tint:'#FFF1F0',f:['bouwen','beheren'],
+     img:'hf_20261112_161107_0021a0dd-293c-4356-97e7-19e411884c6c',head:'hf_20261112_164839_4413505a-9a69-44e8-835a-a7b57f4b3f22',
+     does:['Ontwerpt je site en schrijft de teksten','Bouwde en trainde het AI-team zelf','Controleert alles wat het team doet','Is je enige aanspreekpunt, via telefoon en WhatsApp'],
+     no:'Je belandt bij een bureau waar je telkens iemand anders spreekt, of je zoekt alles zelf uit.',
+     yes:'Eén persoon die je zaak kent, en die je gewoon een berichtje stuurt.',
+     inn:['Start','Groei','Systeem','Beheer']},
+    {id:'test',name:'Het testpanel',tag:'Mensen',human:1,role:'Test elke site',place:'Het testlab',ico:'lab',x:6,y:52,c:'#DA2C25',t:'#FFE3E1',tint:'#FFF1F0',f:['bouwen'],
+     does:['Een vaste groep echte mensen van verschillende leeftijden','Test je site op hun eigen gsm en computer','Meldt wat ze niet vinden of wat vastloopt'],
+     no:'Je ontdekt pas na de lancering dat een knop op gsm niet werkt, via een klant die afhaakt.',
+     yes:'Fouten worden gevonden voor je site live gaat, door mensen zoals je klanten.',
+     inn:['Start','Groei','Systeem']},
+    {id:'uil',name:'De uil',tag:'AI-assistent',role:'Data-analist',place:'Het observatorium',ico:'chart',x:35,y:12,c:'#2B5CFF',t:'#E4ECFF',f:['beheren','bouwsteen'],
+     img:'hf_20261112_161106_0d0ec564-ffd0-4bfb-ae72-b5d13400b7f6',head:'hf_20261112_164840_c42116e9-1ce1-4ba5-9470-69e869200250',
+     does:['Meet hoeveel mensen je site bezoeken en van waar ze komen','Telt hoe vaak iemand op bellen, WhatsApp of route klikt','Vertaalt de cijfers naar gewone taal, met wat je kan verbeteren'],
+     no:'Je hebt een site, maar je weet niet of ze iets oplevert.',
+     yes:'Je ziet zwart op wit hoeveel klanten via je site kwamen, en wat de volgende stap is.',
+     inn:['Beheer: maandrapport','Beheer Plus: weekrapport'],extra:['Dashboard +€200']},
+    {id:'vos',name:'De vos',tag:'AI-assistent',role:'SEO: gevonden worden',place:'De uitkijktoren',ico:'scope',x:65,y:12,c:'#F07A1A',t:'#FFEBD9',f:['bouwen','beheren'],
+     img:'hf_20261112_161105_42b132e7-652d-4506-8d6d-2405a74f3f5b',head:'hf_20261112_164839_d6db8316-9e51-44f8-a094-bd001710c6f1',
+     does:['Zet je Google-profiel volledig en in lijn met je site','Zorgt dat je gevonden wordt op "jouw dienst + jouw gemeente"','Houdt je vindbaarheid bij en verbetert ze'],
+     no:'Je staat op pagina 2. Een klant in je gemeente vindt je concurrent.',
+     yes:'Wie zoekt naar wat jij doet in jouw buurt, komt bij jou uit.',
+     inn:['Groei','Systeem','Beheer'],extra:['Bij Start +€150']},
+    {id:'papegaai',name:'De papegaai',tag:'AI-assistent',role:'Talen',place:'Het tolkenbureau',ico:'chat',x:87,y:17,c:'#1FA35B',t:'#DDF5E7',f:['bouwsteen'],nw:1,
+     img:'hf_20261112_205403_c86bec10-f718-4aab-b199-02eb8792c1df',head:'hf_20261112_205513_6334aedd-f516-48f3-873c-66448e2dc3cb',
+     does:['Zet je site in het Nederlands, Frans en Engels, of andere talen','Houdt alle talen gelijk als je iets aanpast','Ik controleer elke vertaling'],
+     no:'Een Franstalige klant in Brussel begrijpt je site niet en haakt af.',
+     yes:'Elke klant leest je site in zijn eigen taal.',
+     inn:['Groei: 3 talen','Systeem: alle talen'],extra:['+€40 per taal']},
+    {id:'egel',name:'De egel',tag:'AI-assistent',role:'Beveiliging',place:'De stadspoort',ico:'shield',x:94,y:52,c:'#1B3FC4',t:'#E4ECFF',f:['beheren'],
+     img:'hf_20261112_161105_0944018d-100d-4a88-acfd-7f31610b445e',head:'hf_20261112_164840_d3d147b2-dd2a-4933-920a-64355605a0e4',
+     does:['Houdt je site up-to-date','Maakt back-ups','Bewaakt je site en je beveiligde verbinding (https)'],
+     no:'Je browser toont "niet veilig" naast je naam, of je site ligt plat en niemand merkt het.',
+     yes:'Je site is veilig, en gaat er toch iets mis, dan staat ze snel terug.',
+     inn:['Beheer','Beheer Plus']},
+    {id:'bever',name:'De bever',tag:'AI-assistent',role:'Onderhoud',place:'De werkplaats',ico:'tool',x:13,y:84,c:'#9A5B2E',t:'#F5E6DA',f:['beheren','bouwsteen'],
+     img:'hf_20261112_161104_99ba2a50-69f9-4b9e-a27f-35bed0ab693d',head:'hf_20261112_164838_b0be1a50-a450-4253-b21b-beffa1777a94',
+     does:['Past teksten, foto\'s, uren en prijzen aan','Lost fouten op','Zet online afspraken boeken op je site, als je dat wil'],
+     no:'Je openingsuren kloppen al maanden niet, want aanpassen is "voor later".',
+     yes:'Je stuurt een WhatsApp, en het is aangepast.',
+     inn:['Beheer: 30 min per maand','Beheer Plus: 2 uur per maand'],extra:['Online afspraken +€150']},
+    {id:'mier',name:'De mier',tag:'AI-assistent',role:'Automatiseringen',place:'De fabriek',ico:'gear',x:36,y:86,c:'#C2410C',t:'#FFE7D6',f:['bouwsteen'],nw:1,
+     img:'hf_20261112_205404_d0449a84-524c-4682-9164-28101e216450',head:'hf_20261112_205514_6403f457-e86c-48ab-a30e-5ac272af3722',
+     does:['Stuurt automatisch een bevestiging als iemand een aanvraag doet','Stuurt herinneringen voor afspraken','Volgt klanten op die nog niet antwoordden'],
+     no:'Je beantwoordt elke aanvraag zelf, \'s avonds, en vergeet er soms een.',
+     yes:'Elke klant krijgt meteen antwoord, ook als jij aan het werk bent.',
+     inn:['Systeem'],extra:['+€150 per automatisering']},
+    {id:'eekhoorn',name:'De eekhoorn',tag:'AI-assistent',role:'Betalingen en webshop',place:'De bank',ico:'card',x:64,y:86,c:'#6B7280',t:'#EEF0F3',f:['bouwsteen'],nw:1,
+     img:'hf_20261112_205609_bb0cf45c-5f3f-47b9-97a3-e24173197039',head:'hf_20261112_205721_a11aca2b-550d-4c02-ada7-24f8d065e8b9',
+     does:['Laat klanten meteen online betalen','Zet een kleine webshop op je site','Houdt betalingen veilig'],
+     no:'Een klant moet overschrijven, stelt het uit en vergeet het.',
+     yes:'Je klant betaalt meteen, op zijn gsm, in een paar tikken.',
+     inn:['Systeem'],extra:['+€350']},
+    {id:'postduif',name:'De postduif',tag:'AI-assistent',role:'E-maillijst',place:'Het postkantoor',ico:'mail',x:87,y:84,c:'#5B6FD6',t:'#E6E9FB',f:['bouwsteen'],nw:1,
+     img:'hf_20261112_205404_92031d2d-5642-4b74-8fe0-492b7bb95d13',head:'hf_20261112_205514_eafdb035-294e-4bc3-a13b-eac6e97c7082',
+     does:['Zet een inschrijfformulier op je site','Bouwt een lijst klanten die je kan mailen','Helpt je een nieuwsbrief of actie te sturen'],
+     no:'Een klant komt één keer langs en je hoort nooit meer iets van hem.',
+     yes:'Je bereikt je klanten opnieuw, wanneer jij iets te vertellen hebt.',
+     inn:['Systeem'],extra:['+€150']}
+  ];
+  var town=document.getElementById('town'),hint=document.getElementById('hint');
+  T.forEach(function(m,i){
+    var b=document.createElement('button');b.type='button';b.className='plot';b.dataset.id=m.id;b.dataset.f=m.f.join(' ');
+    b.style.cssText='--x:'+m.x+'%;--y:'+m.y+'%;--c:'+m.c+';--t:'+m.t+';--d:'+(i*.35).toFixed(2)+'s';
+    b.setAttribute('aria-haspopup','dialog');b.setAttribute('aria-expanded','false');
+    b.setAttribute('aria-label',m.name+', '+m.role+'. Meer info');
+    var fig=m.img?'<span class="who"><img src="'+C+m.img+'.png" alt="" width="1024" height="1024" loading="lazy"></span>'
+      :'<span class="faces" aria-hidden="true">'+person.repeat(0)+'<span>'+person+'</span><span>'+person+'</span><span>'+person+'</span><span>'+person+'</span></span>';
+    b.innerHTML='<span class="bld">'+fig+'<span class="ico"><svg viewBox="0 0 24 24">'+I[m.ico]+'</svg></span>'+(m.nw?'<span class="new">Bouwsteen</span>':'')+(m.human?'<span class="human">Mens</span>':'')+'</span>'+
+      '<span class="sign"><b>'+m.name+'</b><small>'+m.place+' · '+m.role+'</small></span>';
+    b.addEventListener('click',function(){open(i,b)});
+    town.insertBefore(b,hint);
+  });
+  /* wegen naar het plein */
+  var roads=document.getElementById('roads'),NS='http://www.w3.org/2000/svg',rm=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function draw(){roads.innerHTML='';if(getComputedStyle(roads).display==='none')return;
+    var W=town.clientWidth,H=town.clientHeight,cx=W*.5,cy=H*.48;
+    roads.setAttribute('viewBox','0 0 '+W+' '+H);
+    T.forEach(function(m,i){var x=W*m.x/100,y=H*m.y/100,mx=(x+cx)/2;
+      var d='M'+x+','+y+' C'+mx+','+y+' '+mx+','+cy+' '+cx+','+cy;
+      var p=document.createElementNS(NS,'path');p.setAttribute('d',d);roads.appendChild(p);
+      var q=document.createElementNS(NS,'path');q.setAttribute('d',d);q.setAttribute('class','dash');roads.appendChild(q);
+      if(!rm){var c=document.createElementNS(NS,'circle');c.setAttribute('r','4');var a=document.createElementNS(NS,'animateMotion');
+        a.setAttribute('dur','3.2s');a.setAttribute('begin',(i*.45)+'s');a.setAttribute('repeatCount','indefinite');a.setAttribute('path',d);c.appendChild(a);roads.appendChild(c)}});}
+  new ResizeObserver(draw).observe(town);
+  /* filters */
+  document.querySelectorAll('.chip').forEach(function(c){c.addEventListener('click',function(){
+    document.querySelectorAll('.chip').forEach(function(x){x.setAttribute('aria-pressed',x===c)});
+    var f=c.dataset.f;document.querySelectorAll('.plot').forEach(function(p){p.classList.toggle('dim',f!=='alle'&&p.dataset.f.split(' ').indexOf(f)<0)});
+  })});
+  /* overzicht */
+  var ov=document.getElementById('ov');
+  T.forEach(function(m,i){var r=document.createElement('div');r.className='ov-row';r.tabIndex=0;r.setAttribute('role','button');r.setAttribute('aria-label',m.name+': meer info');
+    r.innerHTML=(m.head?'<img src="'+C+m.head+'.png" alt="" width="64" height="64" loading="lazy">':'<span class="fc">'+person+'</span>')+
+      '<div><h4>'+m.name+'</h4><span class="r">'+m.role+'</span></div><p>'+m.yes+'</p><span class="in">'+m.inn.concat(m.extra||[]).join(' · ')+'</span>';
+    r.addEventListener('click',function(){open(i,r)});r.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();open(i,r)}});
+    ov.appendChild(r)});
+  /* drawer */
+  var dr=document.getElementById('drawer'),sc=document.getElementById('scrim'),body=document.getElementById('dBody'),cur=0,opener=null;
+  function fill(i){var m=T[i];cur=i;
+    body.innerHTML='<div class="d-hero" style="--tint:'+(m.tint||m.t)+'">'+(m.img?'<img src="'+C+m.img+'.png" alt="'+m.name+'" width="1024" height="1024">':'<span class="faces" style="position:static;margin:0 0 24px 12px">'+'<span>'+person+'</span>'.repeat(4)+'</span>')+
+      '<div class="meta"><span class="d-tag'+(m.human?' h':'')+'">'+m.tag+'</span><h2 id="dName">'+m.name+'</h2><div class="d-role">'+m.role+'</div><div class="d-place">'+m.place+'</div></div></div>'+
+      '<div class="d-sec"><h3>WAT DOET '+(m.id==='test'?'HET':m.id==='alec'?'HIJ':'HIJ')+'?</h3><ul>'+m.does.map(function(x){return '<li>'+x+'</li>'}).join('')+'</ul></div>'+
+      '<div class="d-sec"><h3>WAAROM JE DIT WIL</h3><div class="vs"><div class="no"><b>Zonder</b>'+m.no+'</div><div class="yes"><b>Met</b>'+m.yes+'</div></div></div>'+
+      '<div class="d-sec"><h3>ZIT IN</h3><div class="pills">'+m.inn.map(function(x){return '<span>'+x+'</span>'}).join('')+(m.extra||[]).map(function(x){return '<span class="p">'+x+'</span>'}).join('')+'</div></div>'+
+      '<div class="d-cta"><a class="btn btn-red" href="index.html#boek">Plan mijn gratis gesprek</a><small>Ik zeg eerlijk wie je nodig hebt, en wie niet.</small></div>';
+    body.scrollTop=0;
+    document.querySelectorAll('.plot').forEach(function(p){p.setAttribute('aria-expanded',p.dataset.id===m.id)});}
+  function open(i,from){opener=from;fill(i);dr.hidden=false;requestAnimationFrame(function(){dr.classList.add('on');sc.classList.add('on')});dr.focus();hint.classList.add('off');document.body.style.overflow='hidden'}
+  function close(){dr.classList.remove('on');sc.classList.remove('on');document.body.style.overflow='';
+    document.querySelectorAll('.plot').forEach(function(p){p.setAttribute('aria-expanded','false')});
+    setTimeout(function(){dr.hidden=true},450);if(opener)opener.focus()}
+  document.getElementById('dClose').addEventListener('click',close);sc.addEventListener('click',close);
+  document.getElementById('dPrev').addEventListener('click',function(){fill((cur-1+T.length)%T.length)});
+  document.getElementById('dNext').addEventListener('click',function(){fill((cur+1)%T.length)});
+  document.addEventListener('keydown',function(e){if(dr.hidden)return;if(e.key==='Escape')close();if(e.key==='ArrowRight')fill((cur+1)%T.length);if(e.key==='ArrowLeft')fill((cur-1+T.length)%T.length)});
+  if(location.hash){var k=T.findIndex(function(m){return '#'+m.id===location.hash});if(k>=0)setTimeout(function(){open(k,null)},400)}
+})();
+</script>
+</body>
+</html>
