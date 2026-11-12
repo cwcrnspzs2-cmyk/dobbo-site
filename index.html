@@ -20,7 +20,7 @@
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;overflow-x:clip}
 body{margin:0;overflow-x:clip;font-family:var(--body);color:var(--ink);background:var(--white);font-size:18px;line-height:1.55;-webkit-font-smoothing:antialiased}
-img{max-width:100%;display:block}
+img{max-width:100%;height:auto;display:block}
 a{color:var(--blue-deep)}
 .wrap{max-width:1200px;margin:0 auto;padding:0 24px}
 h1,h2,h3{font-family:var(--display);text-transform:uppercase;letter-spacing:-0.01em;margin:0}
@@ -108,16 +108,23 @@ section{padding:72px 0}
 
 /* team */
 .team-intro{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:48px;align-items:end;margin-bottom:40px}
-.team{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:16px}
-.member{border-radius:var(--r-card);background:var(--blue-tint);padding:16px 16px 22px;display:flex;flex-direction:column;gap:8px;transition:transform .25s cubic-bezier(.16,1,.3,1)}
-.member:hover{transform:translateY(-6px)}
-.member img{aspect-ratio:1/1;object-fit:contain;width:100%;margin-bottom:4px}
+.team{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,8fr);gap:16px}
+.member{border-radius:var(--r-card);background:var(--blue-tint);padding:18px 20px;display:flex;flex-direction:column;gap:6px;transition:transform .25s cubic-bezier(.16,1,.3,1)}
+.member:hover{transform:translateY(-4px)}
 .member .role{font-size:14px;font-weight:700;color:var(--blue-deep)}
 .member p{font-size:15px;color:var(--ink-soft)}
 .tag{align-self:flex-start;font-size:12px;font-weight:700;padding:4px 10px;border-radius:var(--r-pill);background:#fff;color:var(--blue-deep)}
-.member.human{background:var(--red-tint)}
+.member.human{background:var(--red-tint);justify-content:flex-end;padding:20px 24px 26px}
+.member.human img{width:100%;max-height:300px;object-fit:contain;margin:0 auto 6px}
 .member.human .role,.member.human .tag{color:var(--red-deep)}
-@media (max-width:1000px){.team{grid-template-columns:repeat(2,minmax(0,1fr))}.team-intro{grid-template-columns:minmax(0,1fr);gap:16px}}
+.member.human ul{list-style:none;padding:0;margin:8px 0 0;display:grid;gap:6px;font-size:15px}
+.member.human li::before{content:"✓";color:var(--red);font-weight:800;margin-right:8px}
+.crew{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.crew .member{flex-direction:row;align-items:center;gap:16px}
+.crew .member img{width:96px;height:96px;flex:none;border-radius:50%;background:#fff;object-fit:cover}
+.crew .member div{display:flex;flex-direction:column;gap:4px;min-width:0}
+.crew .member .does{font-size:13px;color:var(--blue-deep);font-weight:600;margin-top:2px}
+@media (max-width:1000px){.team{grid-template-columns:minmax(0,1fr)}.member.human{flex-direction:row;align-items:center;gap:16px}.member.human img{width:140px;flex:none;margin:0}}@media (max-width:640px){.crew{grid-template-columns:minmax(0,1fr)}.member.human{flex-direction:column;align-items:flex-start}.crew .member img{width:76px;height:76px}}@media (max-width:1000px){.team-intro{grid-template-columns:minmax(0,1fr);gap:16px}}
 
 /* bewijs */
 .proof{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px;margin-top:32px}
@@ -204,14 +211,26 @@ footer{padding:56px 0;font-size:15px;color:var(--ink-soft)}
 .care-chars img{width:130px;height:130px;object-fit:contain}
 @media (max-width:900px){.side-char{width:180px}.care-chars img{width:96px;height:96px}}
 
-.ba{position:relative;margin-top:32px;border-radius:var(--r-card);overflow:hidden;aspect-ratio:16/10;background:var(--blue-tint);--p:50%}
-.ba img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top}
-.ba-old{position:absolute;inset:0;clip-path:inset(0 calc(100% - var(--p)) 0 0)}
-.ba-line{position:absolute;top:0;bottom:0;left:var(--p);width:4px;margin-left:-2px;background:#fff;pointer-events:none}
-.ba-line span{position:absolute;top:50%;left:50%;width:48px;height:48px;margin:-24px 0 0 -24px;border-radius:50%;background:var(--red);box-shadow:0 4px 0 var(--red-deep)}
-.ba input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:ew-resize;margin:0}
-.ba-lab{position:absolute;top:16px;font-weight:700;font-size:14px;padding:6px 14px;border-radius:var(--r-pill);background:#fff;color:var(--ink)}
-.ba-lab.l{left:16px}.ba-lab.r{right:16px}
+.cv{margin-top:32px}
+.cv-bar{display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;margin-bottom:16px}
+.seg{display:inline-flex;background:var(--blue-tint);border-radius:var(--r-pill);padding:4px;gap:4px}
+.seg button{font:inherit;font-weight:700;font-size:15px;border:0;background:transparent;color:var(--blue-deep);padding:10px 18px;border-radius:var(--r-pill);cursor:pointer}
+.seg button[aria-selected=true],.seg button[aria-pressed=true]{background:#fff;box-shadow:0 3px 0 #d5def7;color:var(--ink)}
+.cv-stage{background:var(--blue-tint);border-radius:var(--r-card);padding:24px;display:flex;justify-content:center}
+.cv-frame{width:100%;max-width:1100px;background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 6px 0 #d5def7;transition:max-width .35s cubic-bezier(.16,1,.3,1)}
+.cv-frame.gsm{max-width:390px;border-radius:32px;border:10px solid #1d2233}
+.cv-chrome{display:flex;align-items:center;gap:6px;padding:10px 14px;border-bottom:1px solid #e6ebf7;font-size:13px}
+.cv-chrome i{width:10px;height:10px;border-radius:50%;background:#dfe5f3}
+.cv-chrome span{flex:1;min-width:0;margin:0 8px;padding:4px 12px;border-radius:var(--r-pill);background:var(--blue-tint);color:var(--ink-soft);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.cv-chrome a{font-weight:700;color:var(--blue);text-decoration:none;white-space:nowrap}
+.cv-frame.gsm .cv-chrome i{display:none}
+.cv-screen{position:relative;height:min(640px,70vh)}
+.cv-screen iframe{width:100%;height:100%;border:0;display:block}
+.cv-old{position:absolute;inset:0;overflow-y:auto;background:#fff;overscroll-behavior:contain}
+.cv-old img{width:100%}
+.cv-hint{position:absolute;left:50%;bottom:16px;transform:translateX(-50%);background:var(--ink);color:#fff;font-size:13px;font-weight:700;padding:8px 14px;border-radius:var(--r-pill);pointer-events:none;transition:opacity .4s;white-space:nowrap}
+.cv-hint.off{opacity:0}
+@media (max-width:640px){.cv-stage{padding:10px}.seg button{padding:8px 12px;font-size:14px}.cv-frame.gsm{border-width:6px}}
 /* reveal */
 .reveal{opacity:0;transform:translateY(24px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1)}
 .reveal.in{opacity:1;transform:none}
@@ -300,39 +319,29 @@ footer{padding:56px 0;font-size:15px;color:var(--ink-soft)}
     <div class="team">
       <article class="member human reveal">
         <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3H2FAjydQqLsAIRD9wpl2Hgvsnz/hf_20261112_161107_0021a0dd-293c-4356-97e7-19e411884c6c.png" alt="Alec met zijn laptop" loading="lazy" width="1024" height="1024">
-        <span class="tag">Mens</span>
+        <div><span class="tag">Mens</span>
         <h3>Alec</h3>
-        <span class="role">Bouwt je website</span>
-        <p>Ontwerp, teksten en jouw aanspreekpunt.</p>
+        <span class="role">Bouwt je website, jouw enige aanspreekpunt</span>
+        <ul><li>Ontwerp en teksten op maat</li><li>Controleert alles wat het team doet</li><li>Bereikbaar via telefoon en WhatsApp</li></ul></div>
       </article>
-      <article class="member reveal">
-        <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3H2FAjydQqLsAIRD9wpl2Hgvsnz/hf_20261112_161106_0d0ec564-ffd0-4bfb-ae72-b5d13400b7f6.png" alt="De uil met een tablet vol grafieken" loading="lazy" width="1024" height="1024">
-        <span class="tag">AI-assistent</span>
-        <h3>De uil</h3>
-        <span class="role">Data-analist</span>
-        <p>Houdt je cijfers bij en stuurt je rapport.</p>
-      </article>
-      <article class="member reveal">
-        <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3H2FAjydQqLsAIRD9wpl2Hgvsnz/hf_20261112_161105_42b132e7-652d-4506-8d6d-2405a74f3f5b.png" alt="De vos met een vergrootglas" loading="lazy" width="1024" height="1024">
-        <span class="tag">AI-assistent</span>
-        <h3>De vos</h3>
-        <span class="role">SEO</span>
-        <p>Zorgt dat je gevonden wordt in Google.</p>
-      </article>
-      <article class="member reveal">
-        <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3H2FAjydQqLsAIRD9wpl2Hgvsnz/hf_20261112_161105_0944018d-100d-4a88-acfd-7f31610b445e.png" alt="De egel met een schild met hangslot" loading="lazy" width="1024" height="1024">
-        <span class="tag">AI-assistent</span>
-        <h3>De egel</h3>
-        <span class="role">Beveiliging</span>
-        <p>Updates, back-ups en bewaking.</p>
-      </article>
-      <article class="member reveal">
-        <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3H2FAjydQqLsAIRD9wpl2Hgvsnz/hf_20261112_161104_99ba2a50-69f9-4b9e-a27f-35bed0ab693d.png" alt="De bever met een moersleutel" loading="lazy" width="1024" height="1024">
-        <span class="tag">AI-assistent</span>
-        <h3>De bever</h3>
-        <span class="role">Onderhoud</span>
-        <p>Past je site aan en lost fouten op.</p>
-      </article>
+      <div class="crew">
+        <article class="member reveal">
+          <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3H2FAjydQqLsAIRD9wpl2Hgvsnz/hf_20261112_164840_c42116e9-1ce1-4ba5-9470-69e869200250.png" alt="De uil" loading="lazy" width="512" height="512">
+          <div><span class="tag">AI-assistent</span><h3>De uil</h3><span class="role">Data-analist</span><p>Houdt je cijfers bij.</p><span class="does">Jij krijgt: een maandrapport in gewone taal</span></div>
+        </article>
+        <article class="member reveal">
+          <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3H2FAjydQqLsAIRD9wpl2Hgvsnz/hf_20261112_164839_d6db8316-9e51-44f8-a094-bd001710c6f1.png" alt="De vos" loading="lazy" width="512" height="512">
+          <div><span class="tag">AI-assistent</span><h3>De vos</h3><span class="role">SEO</span><p>Zorgt dat Google je vindt.</p><span class="does">Jij krijgt: meer bezoekers uit je regio</span></div>
+        </article>
+        <article class="member reveal">
+          <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3H2FAjydQqLsAIRD9wpl2Hgvsnz/hf_20261112_164840_d3d147b2-dd2a-4933-920a-64355605a0e4.png" alt="De egel" loading="lazy" width="512" height="512">
+          <div><span class="tag">AI-assistent</span><h3>De egel</h3><span class="role">Beveiliging</span><p>Updates, back-ups en bewaking.</p><span class="does">Jij krijgt: een site die niet plat gaat</span></div>
+        </article>
+        <article class="member reveal">
+          <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3H2FAjydQqLsAIRD9wpl2Hgvsnz/hf_20261112_164838_b0be1a50-a450-4253-b21b-beffa1777a94.png" alt="De bever" loading="lazy" width="512" height="512">
+          <div><span class="tag">AI-assistent</span><h3>De bever</h3><span class="role">Onderhoud</span><p>Past aan en lost fouten op.</p><span class="does">Jij krijgt: wijzigingen binnen de week</span></div>
+        </article>
+      </div>
     </div>
   </div>
 </section>
@@ -368,14 +377,29 @@ footer{padding:56px 0;font-size:15px;color:var(--ink-soft)}
       <h2 id="bewijs">Praktijk E.S., kine in Hoeilaart</h2>
       <p class="lead" style="margin-top:16px;max-width:52ch">Van een site waar de prijzen een derde van de pagina innamen, naar een site waar patiënten in één oogopslag zien wat ze moeten weten.</p>
     </div>
-    <div class="ba reveal" id="ba">
-      <img src="https://s.wordpress.com/mshots/v1/https%3A%2F%2Fcwcrnspzs2-cmyk.github.io%2Fpraktijk-es%2F?w=1280&amp;h=800" alt="De nieuwe site van Praktijk E.S." loading="lazy" width="1280" height="800">
-      <div class="ba-old"><img src="https://s.wordpress.com/mshots/v1/http%3A%2F%2Fpraktijkes.be%2Findex-nl.html?w=1280&amp;h=800" alt="De oude site van Praktijk E.S." loading="lazy" width="1280" height="800"></div>
-      <span class="ba-lab l">Voor</span><span class="ba-lab r">Na</span>
-      <div class="ba-line" aria-hidden="true"><span></span></div>
-      <input type="range" min="0" max="100" value="50" aria-label="Schuif tussen de oude en de nieuwe site">
+    <div class="cv reveal" id="cv">
+      <div class="cv-bar">
+        <div class="seg" role="tablist" aria-label="Kies een versie">
+          <button role="tab" aria-selected="true" data-v="na">Nieuwe site</button>
+          <button role="tab" aria-selected="false" data-v="voor">Oude site</button>
+        </div>
+        <div class="seg" aria-label="Kies een scherm">
+          <button aria-pressed="true" data-d="desk">Computer</button>
+          <button aria-pressed="false" data-d="gsm">Gsm</button>
+        </div>
+      </div>
+      <div class="cv-stage">
+        <div class="cv-frame" id="cvframe">
+          <div class="cv-chrome"><i></i><i></i><i></i><span id="cvurl">praktijkes.be</span><a id="cvopen" href="https://cwcrnspzs2-cmyk.github.io/praktijk-es/" target="_blank" rel="noopener">Open ↗</a></div>
+          <div class="cv-screen">
+            <iframe id="cvnew" title="De nieuwe site van Praktijk E.S., live" data-src="https://cwcrnspzs2-cmyk.github.io/praktijk-es/" loading="lazy"></iframe>
+            <div class="cv-old" id="cvold" hidden tabindex="0" aria-label="Schermafbeelding van de oude site, scrollbaar"><img data-src="https://image.thum.io/get/width/1200/fullpage/http://praktijkes.be/index-nl.html" alt="De volledige oude site van Praktijk E.S." width="1200" height="7556"></div>
+            <div class="cv-hint" id="cvhint">Scroll en klik gerust, dit is de echte site</div>
+          </div>
+        </div>
+      </div>
+      <p class="small" id="cvnote" style="margin-top:10px">De nieuwe site draait hier live: scroll, klik en wissel van taal.</p>
     </div>
-    <p class="small reveal" style="margin-top:10px">Live schermafbeeldingen van beide sites. Sleep om te vergelijken.</p>
     <div class="facts reveal">
       <div class="fact"><strong>99/100</strong><span>snelheid op gsm, gemeten door Google</span></div>
       <div class="fact"><strong>100/100</strong><span>vindbaarheid, gemeten door Google</span></div>
@@ -580,8 +604,29 @@ footer{padding:56px 0;font-size:15px;color:var(--ink-soft)}
   });
 
 
-  var ba=document.getElementById('ba');
-  if(ba){var r=ba.querySelector('input');r.addEventListener('input',function(){ba.style.setProperty('--p',r.value+'%')});}
+  var cv=document.getElementById('cv');
+  if(cv){
+    var f=document.getElementById('cvframe'),nw=document.getElementById('cvnew'),od=document.getElementById('cvold'),
+        url=document.getElementById('cvurl'),op=document.getElementById('cvopen'),hint=document.getElementById('cvhint'),note=document.getElementById('cvnote');
+    var load=function(el){if(el&&el.dataset.src&&!el.src){el.src=el.dataset.src}};
+    new IntersectionObserver(function(e,o){if(e[0].isIntersecting){load(nw);o.disconnect()}},{rootMargin:'400px'}).observe(cv);
+    var hideHint=function(){hint.classList.add('off')};
+    cv.querySelector('.cv-screen').addEventListener('pointerenter',function(){setTimeout(hideHint,1800)});
+    od.addEventListener('scroll',hideHint,{passive:true});
+    cv.querySelectorAll('[data-v]').forEach(function(b){b.addEventListener('click',function(){
+      var v=b.dataset.v;cv.querySelectorAll('[data-v]').forEach(function(x){x.setAttribute('aria-selected',x===b)});
+      var old=v==='voor';od.hidden=!old;nw.hidden=old;
+      if(old){load(od.querySelector('img'))}
+      url.textContent=old?'praktijkes.be (oud, zonder https)':'praktijkes.be';
+      op.href=old?'http://praktijkes.be/index-nl.html':'https://cwcrnspzs2-cmyk.github.io/praktijk-es/';
+      hint.textContent=old?'Scroll door de oude site':'Scroll en klik gerust, dit is de echte site';hint.classList.remove('off');
+      note.textContent=old?'De oude site heeft geen beveiligde verbinding (https). Browsers laten die niet live inladen, dus je scrolt hier door een volledige schermafbeelding.':'De nieuwe site draait hier live: scroll, klik en wissel van taal.';
+    })});
+    cv.querySelectorAll('[data-d]').forEach(function(b){b.addEventListener('click',function(){
+      cv.querySelectorAll('[data-d]').forEach(function(x){x.setAttribute('aria-pressed',x===b)});
+      f.classList.toggle('gsm',b.dataset.d==='gsm');
+    })});
+  }
   var answers = {};
   var out = document.getElementById('helper-out');
   document.querySelectorAll('.choice').forEach(function(b){
