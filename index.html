@@ -463,7 +463,7 @@ footer{padding:56px 0;font-size:15px;color:var(--ink-soft)}
         <div class="cv-frame" id="cvframe">
           <div class="cv-chrome"><i></i><i></i><i></i><span id="cvurl">praktijkes.be (nieuwe versie)</span><a id="cvopen" href="https://cwcrnspzs2-cmyk.github.io/praktijk-es/" target="_blank" rel="noopener">Open ↗</a></div>
           <div class="cv-screen">
-            <iframe id="cvnew" title="De nieuwe site van Praktijk E.S., live" data-src="https://cwcrnspzs2-cmyk.github.io/praktijk-es/" loading="lazy"></iframe>
+            <iframe id="cvnew" title="De nieuwe site van Praktijk E.S., live" data-src="https://cwcrnspzs2-cmyk.github.io/praktijk-es/"></iframe>
             <iframe id="cvold" hidden title="De oude site van Praktijk E.S." data-src="cases/praktijk-es-oud/"></iframe>
             <div class="cv-toast" id="cvtoast" role="status">Demo: bellen en mailen staat uit</div>
             <div class="cv-hint" id="cvhint">Scroll en klik gerust, dit is de echte site</div>
@@ -736,7 +736,7 @@ footer{padding:56px 0;font-size:15px;color:var(--ink-soft)}
       cv.querySelectorAll('[data-d]').forEach(function(x){x.setAttribute('aria-pressed',x.dataset.d===d)});
       size.textContent=d==='gsm'?'Zoals op een gsm (390 pixels breed)':'Zoals op een laptop van 1440 pixels breed, verkleind weergegeven';
       requestAnimationFrame(fit);setTimeout(fit,400);
-      if(reload){[nw,od].forEach(function(fr){var u=fr.getAttribute('src');if(u){fr.removeAttribute('src');fr.src=u}})}};
+      if(reload){[nw,od].forEach(function(fr){if(fr.getAttribute('src')){try{fr.contentWindow.location.reload()}catch(e){fr.src=fr.getAttribute('src')}}})}};
     new ResizeObserver(fit).observe(scr);setDev(cur,false);
     cv.querySelectorAll('[data-d]').forEach(function(b){b.addEventListener('click',function(){if(b.dataset.d!==cur)setDev(b.dataset.d,true)})});
   }
