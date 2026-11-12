@@ -57,14 +57,15 @@ header{position:sticky;top:0;z-index:30;background:rgba(255,255,255,.96);border-
 /* town */
 .town{position:relative;aspect-ratio:16/10.6;border-radius:var(--r-panel);overflow:hidden;
   background:
-    radial-gradient(circle at 50% 50%,#fff 0 16%,transparent 16.2%),
-    radial-gradient(ellipse at 50% 120%,#DCE6FF 0,transparent 60%),
-    linear-gradient(#F4F7FF,#E9EFFF)}
-.town::before{content:"";position:absolute;inset:0;background-image:radial-gradient(#D3DDF8 1.2px,transparent 1.2px);background-size:22px 22px;opacity:.7;pointer-events:none}
+    radial-gradient(circle at 50% 48%,#F7EFDF 0 17%,#EADFC8 17.2% 17.8%,transparent 18%),
+    radial-gradient(ellipse at 20% 10%,rgba(255,255,255,.7) 0,transparent 40%),
+    linear-gradient(170deg,#EAF6E3 0%,#E1F1DA 55%,#D6EBCF 100%)}
+.town::before{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(94,150,84,.22) 1.4px,transparent 1.6px),radial-gradient(rgba(94,150,84,.14) 1.2px,transparent 1.4px);background-size:26px 26px,19px 19px;background-position:0 0,9px 11px;pointer-events:none}
 .roads{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
-.roads path{fill:none;stroke:#fff;stroke-width:14;stroke-linecap:round}
-.roads path.dash{stroke:#C9D6FF;stroke-width:2;stroke-dasharray:6 10}
-.roads circle{fill:var(--blue)}
+.roads path{fill:none;stroke:#F3E7CF;stroke-width:18;stroke-linecap:round}
+.roads path.edge{stroke:#E4D3B2;stroke-width:22}
+.roads path.dash{stroke:#fff;stroke-width:2;stroke-dasharray:6 10;opacity:.9}
+.roads circle{stroke:#fff;stroke-width:2}
 .plaza{position:absolute;left:50%;top:48%;transform:translate(-50%,-50%);width:23%;min-width:200px;z-index:2;background:#fff;border-radius:20px;border:1px solid #E3E9FA;box-shadow:0 24px 50px -24px rgba(27,63,196,.45)}
 .plaza .bar{display:flex;gap:5px;align-items:center;padding:9px 12px;border-bottom:1px solid #EEF1F8}
 .plaza .bar i{width:8px;height:8px;border-radius:50%;background:#E1E6F2}
@@ -77,11 +78,19 @@ header{position:sticky;top:0;z-index:30;background:rgba(255,255,255,.96);border-
 
 .plot{position:absolute;left:var(--x);top:var(--y);transform:translate(-50%,-50%);z-index:3;width:13.5%;min-width:120px;border:0;background:none;padding:0;cursor:pointer;font:inherit;color:inherit;display:flex;flex-direction:column;align-items:center;transition:opacity .3s,filter .3s}
 .plot.dim{opacity:.28;filter:grayscale(.7)}
-.bld{position:relative;width:100%;aspect-ratio:5/3;border-radius:16px 16px 12px 12px;background:#fff;box-shadow:0 1px 0 #E3E9FA,0 16px 28px -18px rgba(27,63,196,.45);transition:transform .35s var(--ease),box-shadow .35s var(--ease)}
-.bld::before{content:"";position:absolute;left:-6%;right:-6%;top:-18%;height:34%;border-radius:12px 12px 6px 6px;background:var(--c)}
+.bld{position:relative;width:100%;aspect-ratio:5/3;border-radius:6px 6px 12px 12px;background:#FFFCF6;box-shadow:0 1px 0 #E3E9FA,0 16px 28px -18px rgba(27,63,196,.45);transition:transform .35s var(--ease),box-shadow .35s var(--ease)}
+.bld::before{content:"";position:absolute;left:-8%;right:-8%;top:-44%;height:48%;background:var(--c);clip-path:polygon(50% 0,100% 100%,0 100%);border-radius:4px}
 .bld::after{content:"";position:absolute;left:14%;right:46%;top:34%;bottom:18%;border-radius:6px;background:
-  linear-gradient(90deg,var(--t) 0 44%,transparent 44% 56%,var(--t) 56%) top/100% 40% no-repeat,
-  linear-gradient(90deg,var(--t) 0 44%,transparent 44% 56%,var(--t) 56%) bottom/100% 40% no-repeat}
+  linear-gradient(90deg,#FFE3A3 0 44%,transparent 44% 56%,#FFE3A3 56%) top/100% 40% no-repeat,
+  linear-gradient(90deg,#FFE3A3 0 44%,transparent 44% 56%,#FFE3A3 56%) bottom/100% 40% no-repeat;box-shadow:0 0 14px rgba(255,200,90,.35)}
+.door{position:absolute;left:44%;bottom:0;width:12%;height:42%;border-radius:999px 999px 0 0;background:var(--c);opacity:.85}
+.chim{position:absolute;right:16%;top:-34%;width:8%;height:22%;background:var(--c);filter:brightness(.8);border-radius:2px 2px 0 0}
+.deco{position:absolute;pointer-events:none;z-index:1}
+.tree{width:2.6%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 35% 30%,#8ED07A,#4E9A45);box-shadow:0 6px 0 -2px rgba(60,110,50,.25)}
+.tree.s{width:1.8%}
+.flower{width:.7%;aspect-ratio:1;border-radius:50%;background:#FFB3C1;box-shadow:6px 3px 0 #FFE08A,-5px 5px 0 #fff}
+.fountain{left:50%;top:48%;width:31%;aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;border:2px dashed rgba(200,180,140,.5)}
+.together{position:absolute;left:50%;top:calc(48% + 17.5%);transform:translateX(-50%);z-index:2;white-space:nowrap;font-size:13px;font-weight:700;color:#7A6A4E;background:#FFF8EA;border-radius:999px;padding:5px 12px;box-shadow:0 1px 0 #E4D3B2}
 .bld .ico{position:absolute;right:10%;top:30%;width:30%;aspect-ratio:1;border-radius:10px;background:var(--t);display:grid;place-items:center}
 .bld .ico svg{width:60%;height:60%;fill:none;stroke:var(--c);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .who{position:absolute;left:-30%;bottom:-6%;width:62%;z-index:2;pointer-events:none}
@@ -110,7 +119,7 @@ header{position:sticky;top:0;z-index:30;background:rgba(255,255,255,.96);border-
 .faces span:first-child{margin-left:0}
 .faces span:nth-child(1){background:#FFE4D6}.faces span:nth-child(2){background:#E2F5EA}.faces span:nth-child(3){background:#FFF1C9}.faces span:nth-child(4){background:var(--red-tint)}
 .faces svg{width:18px;height:18px;fill:none;stroke:var(--ink);stroke-width:1.8;stroke-linecap:round}
-.hint{position:absolute;left:50%;bottom:16px;transform:translateX(-50%);z-index:4;background:#fff;border-radius:999px;padding:8px 14px;font-size:14px;font-weight:700;color:var(--ink-soft);box-shadow:0 8px 20px -12px rgba(27,63,196,.5);transition:opacity .4s}
+.hint{position:absolute;left:50%;bottom:10px;transform:translateX(-50%);z-index:4;background:#fff;border-radius:999px;padding:8px 14px;font-size:14px;font-weight:700;color:var(--ink-soft);box-shadow:0 8px 20px -12px rgba(27,63,196,.5);transition:opacity .4s}
 .hint.off{opacity:0}
 
 @keyframes idle{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
@@ -119,8 +128,8 @@ header{position:sticky;top:0;z-index:30;background:rgba(255,255,255,.96);border-
 
 /* town on small screens: a tidy grid */
 @media (max-width:860px){
-  .town{aspect-ratio:auto;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:52px 14px;padding:120px 14px 70px 34px;background:linear-gradient(#F4F7FF,#E9EFFF)}
-  .roads,.hint{display:none}
+  .town{aspect-ratio:auto;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:52px 14px;padding:120px 14px 70px 34px;background:linear-gradient(170deg,#EAF6E3,#D6EBCF)}
+  .roads,.hint,.deco,.together{display:none}
   .plaza{position:absolute;top:24px;left:50%;width:calc(100% - 28px);min-width:0;transform:translateX(-50%)}
   .plaza .body{display:none}
   .plot{position:relative;left:auto;top:auto;transform:none;width:100%;min-width:0}
@@ -221,6 +230,7 @@ footer{padding:40px 0 56px;font-size:15px;color:var(--ink-soft);border-top:1px s
       <div class="body"><div class="l1"></div><div class="l2"></div><div class="l2 s"></div><div class="cta">Maak een afspraak</div></div>
       <span class="plaza-lab">Jouw website</span>
     </div>
+    <span class="together">Iedereen werkt samen aan jouw site</span>
     <!-- plots worden hieronder door het script toegevoegd -->
     <div class="hint" id="hint">Klik op een gebouw</div>
   </div>
@@ -355,7 +365,7 @@ footer{padding:40px 0 56px;font-size:15px;color:var(--ink-soft);border-top:1px s
     b.setAttribute('aria-label',m.name+', '+m.role+'. Meer info');
     var fig=m.img?'<span class="who toon"><img src="'+C+m.img+'.png" alt="" width="1024" height="1024" loading="lazy"></span>'
       :'<span class="faces" aria-hidden="true">'+person.repeat(0)+'<span>'+person+'</span><span>'+person+'</span><span>'+person+'</span><span>'+person+'</span></span>';
-    b.innerHTML='<span class="bld">'+fig+'<span class="ico"><svg viewBox="0 0 24 24">'+I[m.ico]+'</svg></span>'+(m.nw?'<span class="new">Bouwsteen</span>':'')+(m.human?'<span class="human">Mens</span>':'')+'</span>'+
+    b.innerHTML='<span class="bld"><span class="chim"></span><span class="door"></span>'+fig+'<span class="ico"><svg viewBox="0 0 24 24">'+I[m.ico]+'</svg></span>'+(m.nw?'<span class="new">Bouwsteen</span>':'')+(m.human?'<span class="human">Mens</span>':'')+'</span>'+
       '<span class="sign"><b>'+m.name+'</b><small>'+m.place+' · '+m.role+'</small></span>';
     b.addEventListener('click',function(){open(i,b)});
     if(m.vid){var tb=b.querySelector('.toon');m._t=makeToon(tb,C+m.vid+'.mp4');b.addEventListener('mouseenter',function(){m._t.play()});b.addEventListener('focus',function(){m._t.play()})}
@@ -368,10 +378,16 @@ footer{padding:40px 0 56px;font-size:15px;color:var(--ink-soft);border-top:1px s
     roads.setAttribute('viewBox','0 0 '+W+' '+H);
     T.forEach(function(m,i){var x=W*m.x/100,y=H*m.y/100,mx=(x+cx)/2;
       var d='M'+x+','+y+' C'+mx+','+y+' '+mx+','+cy+' '+cx+','+cy;
+      var e=document.createElementNS(NS,'path');e.setAttribute('d',d);e.setAttribute('class','edge');roads.insertBefore(e,roads.firstChild);
       var p=document.createElementNS(NS,'path');p.setAttribute('d',d);roads.appendChild(p);
       var q=document.createElementNS(NS,'path');q.setAttribute('d',d);q.setAttribute('class','dash');roads.appendChild(q);
-      if(!rm){var c=document.createElementNS(NS,'circle');c.setAttribute('r','4');var a=document.createElementNS(NS,'animateMotion');
+      if(!rm){var c=document.createElementNS(NS,'circle');c.setAttribute('r','5');c.setAttribute('fill',m.c);var a=document.createElementNS(NS,'animateMotion');
         a.setAttribute('dur','3.2s');a.setAttribute('begin',(i*.45)+'s');a.setAttribute('repeatCount','indefinite');a.setAttribute('path',d);c.appendChild(a);roads.appendChild(c)}});}
+  /* gezellig: bomen en bloemen langs de wegen */
+  [[27,8,''],[46,6,'s'],[55,7,''],[75,8,'s'],[96,12,''],[4,10,'s'],[26,38,'s'],[74,36,''],[30,62,''],[70,64,'s'],[4,76,''],[25,96,'s'],[50,95,''],[76,96,'s'],[97,74,''],[96,34,'s'],[3,33,''],[49,29,'s']].forEach(function(t){
+    var d=document.createElement('span');d.className='deco tree '+t[2];d.style.left=t[0]+'%';d.style.top=t[1]+'%';town.insertBefore(d,town.firstChild)});
+  [[22,30],[80,28],[38,72],[61,74],[8,92],[92,92],[42,40],[58,58]].forEach(function(t){
+    var d=document.createElement('span');d.className='deco flower';d.style.left=t[0]+'%';d.style.top=t[1]+'%';town.insertBefore(d,town.firstChild)});
   new ResizeObserver(draw).observe(town);
   /* staging: de personages groeten een voor een, nooit tegelijk; stopt als het stadje uit beeld is */
   var chain=T.filter(function(m){return m._t}),ci=0,running=false,inView=false;
