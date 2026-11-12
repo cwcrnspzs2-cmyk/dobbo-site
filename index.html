@@ -147,7 +147,17 @@ section{padding:72px 0}
 .member.human .role,.member.human .tag{color:var(--red-deep)}
 .member.human ul{list-style:none;padding:0;margin:8px 0 0;display:grid;gap:6px;font-size:15px}
 .member.human li::before{content:"✓";color:var(--red);font-weight:800;margin-right:8px}
-.extra-crew{grid-column:1/-1;display:flex;align-items:center;gap:18px;padding:16px 20px;border-radius:var(--r-card);background:#F5F7FC}.extra-crew .avatars img{width:52px;height:52px}.extra-crew p{font-size:15px;color:var(--ink-soft)}.extra-crew b{color:var(--ink)}@media (max-width:640px){.extra-crew{flex-direction:column;align-items:flex-start}}
+.extra-crew{grid-column:1/-1;padding:22px;border-radius:var(--r-card);background:#F5F7FC;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,3fr);gap:20px;align-items:center}
+.xc-head h3{font-size:18px;margin:8px 0 4px}.xc-head p{font-size:14px;color:var(--ink-soft)}
+.xc-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.xc{display:flex;flex-direction:column;gap:10px;background:#fff;border-radius:18px;padding:14px;border:1px solid #E6EBF5}
+.xc img{width:56px;height:56px;border-radius:50%;background:var(--blue-tint);object-fit:cover}
+.xc h4{font-family:var(--display);text-transform:uppercase;font-size:15px;margin:0}
+.xc .role{font-size:13px;font-weight:700;color:var(--blue-deep)}
+.xc p{font-size:13px;color:var(--ink-soft);margin-top:4px;line-height:1.4}
+.xc-price{display:inline-block;margin-top:8px;font-size:12px;font-weight:700;padding:3px 9px;border-radius:999px;background:#FFF1C9;color:var(--ink)}
+@media (max-width:1100px){.extra-crew{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:700px){.xc-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 .panel-test{grid-column:1/-1;background:#fff;border:2px solid var(--red-tint);border-radius:var(--r-card);padding:24px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:12px 40px;align-items:center}
 .pt-head{display:flex;align-items:center;gap:18px}
 .pt-head .tag{background:var(--red-tint);color:var(--red-deep)}
@@ -458,8 +468,13 @@ footer{padding:56px 0;font-size:15px;color:var(--ink-soft)}
         </article>
       </div>
       <div class="extra-crew reveal">
-        <div class="avatars"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3H2FAjydQqLsAIRD9wpl2Hgvsnz/hf_20261112_205513_6334aedd-f516-48f3-873c-66448e2dc3cb.png" alt="De papegaai" width="64" height="64" loading="lazy"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3H2FAjydQqLsAIRD9wpl2Hgvsnz/hf_20261112_205514_6403f457-e86c-48ab-a30e-5ac272af3722.png" alt="De mier" width="64" height="64" loading="lazy"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3H2FAjydQqLsAIRD9wpl2Hgvsnz/hf_20261112_205721_a11aca2b-550d-4c02-ada7-24f8d065e8b9.png" alt="De eekhoorn" width="64" height="64" loading="lazy"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3H2FAjydQqLsAIRD9wpl2Hgvsnz/hf_20261112_205514_eafdb035-294e-4bc3-a13b-eac6e97c7082.png" alt="De postduif" width="64" height="64" loading="lazy"></div>
-        <p><b>Voor wie meer nodig heeft:</b> de papegaai (talen), de mier (automatiseringen), de eekhoorn (betalingen en webshop) en de postduif (e-maillijst). Ze komen erbij als bouwsteen of in Systeem.</p>
+        <div class="xc-head"><span class="tag">Bouwstenen</span><h3>Voor wie meer nodig heeft</h3><p>Deze vier komen erbij wanneer jij ze nodig hebt, los of in Systeem.</p></div>
+        <div class="xc-grid">
+          <div class="xc"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3H2FAjydQqLsAIRD9wpl2Hgvsnz/hf_20261112_205513_6334aedd-f516-48f3-873c-66448e2dc3cb.png" alt="De papegaai" width="64" height="64" loading="lazy"><div><h4>De papegaai</h4><span class="role">Talen</span><p>Je site in elke taal van je klanten</p><span class="xc-price">+€40 per taal</span></div></div>
+          <div class="xc"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3H2FAjydQqLsAIRD9wpl2Hgvsnz/hf_20261112_205514_6403f457-e86c-48ab-a30e-5ac272af3722.png" alt="De mier" width="64" height="64" loading="lazy"><div><h4>De mier</h4><span class="role">Automatiseringen</span><p>Herinneringen en opvolgmails, vanzelf</p><span class="xc-price">+€150 per flow</span></div></div>
+          <div class="xc"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3H2FAjydQqLsAIRD9wpl2Hgvsnz/hf_20261112_205721_a11aca2b-550d-4c02-ada7-24f8d065e8b9.png" alt="De eekhoorn" width="64" height="64" loading="lazy"><div><h4>De eekhoorn</h4><span class="role">Betalingen en webshop</span><p>Klanten betalen meteen online</p><span class="xc-price">+€350</span></div></div>
+          <div class="xc"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3H2FAjydQqLsAIRD9wpl2Hgvsnz/hf_20261112_205514_eafdb035-294e-4bc3-a13b-eac6e97c7082.png" alt="De postduif" width="64" height="64" loading="lazy"><div><h4>De postduif</h4><span class="role">E-maillijst</span><p>Bouwt een lijst klanten die je kan mailen</p><span class="xc-price">+€150</span></div></div>
+        </div>
       </div>
       <article class="panel-test reveal">
         <div class="pt-head">
