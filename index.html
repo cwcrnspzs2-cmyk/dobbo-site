@@ -978,11 +978,14 @@ footer{padding:56px 0;font-size:15px;color:var(--ink-soft)}
       box._go=go;box._v=v;});
     /* staging: nooit twee personages tegelijk, de volgende start als de vorige klaar is */
     var queue=[],busy=false;
-    function next(){if(busy||!queue.length)return;var b=queue.shift();busy=true;b._go();
-      var done=function(){b._v.removeEventListener('ended',done);busy=false;setTimeout(next,150)};
-      b._v.addEventListener('ended',done);setTimeout(function(){if(busy&&b._v.paused){done()}},7000)}
-    var io=new IntersectionObserver(function(es){es.forEach(function(e){var b=e.target;
-      if(e.isIntersecting){if(!b._played){b._played=1;queue.push(b);setTimeout(next,300)}}else if(b._v&&!b._v.paused){b._v.pause()}})},{threshold:.55});
+    var cur=null;
+    function finish(){if(!cur)return;cur._v.removeEventListener('ended',finish);cur=null;busy=false;setTimeout(next,150)}
+    function next(){if(busy)return;
+      while(queue.length&&!queue[0]._in){queue.shift()._played=0}   /* uit beeld gescrold: later opnieuw */
+      if(!queue.length)return;cur=queue.shift();busy=true;cur._go();cur._v.addEventListener('ended',finish)}
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){var b=e.target;b._in=e.isIntersecting;
+      if(e.isIntersecting){if(!b._played){b._played=1;queue.push(b);setTimeout(next,300)}}
+      else{if(b._v&&!b._v.paused){b._v.pause()}if(cur===b){b._played=0;finish()}}})},{threshold:.55});
     boxes.forEach(function(b){io.observe(b)});})();
 
   /* logo: altijd vlot terug naar boven */
