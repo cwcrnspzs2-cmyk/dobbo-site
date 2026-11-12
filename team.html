@@ -279,7 +279,7 @@ footer{padding:40px 0 56px;font-size:15px;color:var(--ink-soft);border-top:1px s
     var v=document.createElement('video');v.crossOrigin='anonymous';v.muted=true;v.playsInline=true;v.preload='none';v.setAttribute('muted','');v.setAttribute('playsinline','');
     v.style.cssText='position:absolute;width:1px;height:1px;opacity:0;pointer-events:none';
     var c=document.createElement('canvas'),ctx=c.getContext('2d',{willReadFrequently:true});box.appendChild(c);box.appendChild(v);var loaded=false;
-    function draw(){if(!v.videoWidth)return;var s=Math.min(480,Math.round(box.clientWidth*(window.devicePixelRatio||1)));if(s&&c.width!==s){c.width=c.height=s}
+    function draw(){if(!v.videoWidth)return;var s=Math.min(480,Math.round(box.clientWidth*(window.devicePixelRatio||1)));if(s&&(c.width!==s||c.height!==s)){c.width=s;c.height=s}
       ctx.clearRect(0,0,c.width,c.height);ctx.drawImage(v,0,0,c.width,c.height);try{keyFrame(ctx,c.width,c.height)}catch(e){return}box.classList.add('live')}
     function loop(){draw();if(!v.paused&&!v.ended){v.requestVideoFrameCallback?v.requestVideoFrameCallback(loop):requestAnimationFrame(loop)}}
     v.addEventListener('play',loop);v.addEventListener('seeked',draw);v.addEventListener('loadeddata',draw);v.addEventListener('ended',function(){v.currentTime=0});

@@ -970,7 +970,7 @@ footer{padding:56px 0;font-size:15px;color:var(--ink-soft)}
       v.setAttribute('muted','');v.setAttribute('playsinline','');v.style.cssText='position:absolute;width:1px;height:1px;opacity:0;pointer-events:none';
       var c=document.createElement('canvas'),ctx=c.getContext('2d',{willReadFrequently:true});box.appendChild(c);box.appendChild(v);
       var loaded=false;
-      function size(){var s=Math.min(480,Math.round(box.clientWidth*(window.devicePixelRatio||1)));if(s&&c.width!==s){c.width=c.height=s}}
+      function size(){var s=Math.min(480,Math.round(box.clientWidth*(window.devicePixelRatio||1)));if(s&&(c.width!==s||c.height!==s)){c.width=s;c.height=s}}
       function draw(){if(!v.videoWidth)return;size();ctx.clearRect(0,0,c.width,c.height);ctx.drawImage(v,0,0,c.width,c.height);try{key(ctx,c.width,c.height)}catch(e){fail();return}box.classList.add('live')}
       function fail(){if(box.querySelector('img'))return;var im=new Image();im.src=box.dataset.fallback;im.alt='';box.appendChild(im);c.remove()}
       function loop(){draw();if(!v.paused&&!v.ended){v.requestVideoFrameCallback?v.requestVideoFrameCallback(loop):requestAnimationFrame(loop)}}
