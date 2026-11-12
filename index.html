@@ -147,6 +147,22 @@ section{padding:72px 0}
 .member.human .role,.member.human .tag{color:var(--red-deep)}
 .member.human ul{list-style:none;padding:0;margin:8px 0 0;display:grid;gap:6px;font-size:15px}
 .member.human li::before{content:"✓";color:var(--red);font-weight:800;margin-right:8px}
+.panel-test{grid-column:1/-1;background:#fff;border:2px solid var(--red-tint);border-radius:var(--r-card);padding:24px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:12px 40px;align-items:center}
+.pt-head{display:flex;align-items:center;gap:18px}
+.pt-head .tag{background:var(--red-tint);color:var(--red-deep)}
+.pt-head .role{font-size:14px;font-weight:700;color:var(--red-deep)}
+.pt-head h3{margin:4px 0 2px}
+.pt-faces{display:flex;flex:none}
+.pt-faces span{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;font-size:22px;background:var(--red-tint);border:3px solid #fff;margin-left:-12px}
+.pt-faces span:nth-child(2){background:#FFE4D6}.pt-faces span:nth-child(3){background:#E2F5EA}.pt-faces span:nth-child(4){background:#FFF1C9}.pt-faces svg{width:22px;height:22px;fill:none;stroke:var(--ink);stroke-width:1.8;stroke-linecap:round}.pt-faces span:first-child{margin-left:0}.pt-faces span:last-child{background:var(--red);color:#fff;font-weight:800;font-size:18px}
+.panel-test>p{color:var(--ink-soft);font-size:15px}
+.pt-flow{grid-column:1/-1;list-style:none;margin:8px 0 0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.pt-flow li{display:flex;align-items:center;gap:10px;font-size:14px;font-weight:600;background:#F5F7FC;border-radius:14px;padding:12px}
+.pt-flow b{flex:none;width:26px;height:26px;border-radius:50%;display:grid;place-items:center;background:var(--blue);color:#fff;font-size:13px}
+.pt-flow li:nth-child(3) b,.pt-flow li:nth-child(4) b{background:var(--red)}
+.panel-test .todo{grid-column:1/-1}
+@media (max-width:900px){.panel-test{grid-template-columns:minmax(0,1fr)}.pt-flow{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:520px){.pt-flow{grid-template-columns:minmax(0,1fr)}}
 .squad{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
 .squad .member{flex-direction:row;align-items:center;gap:16px}
 .squad .member img{width:96px;height:96px;flex:none;border-radius:50%;background:#fff;object-fit:cover}
@@ -361,7 +377,7 @@ footer{padding:56px 0;font-size:15px;color:var(--ink-soft)}
   <div class="wrap">
     <div class="team-intro reveal">
       <h2 id="teamtitel">Ontmoet het team</h2>
-      <p class="muted">Ik ben Alec en ik bouw je site. Mijn AI-team doet het werk dat herhaling vraagt. Ik controleer alles en ben je enige aanspreekpunt: je praat altijd met een mens.</p>
+      <p class="muted">Ik ben Alec en ik bouw je site. Mijn AI-team heb ik zelf gebouwd en getraind voor het werk dat herhaling vraagt. Voor elke site live gaat, testen echte mensen ze. Ik controleer alles en ben je enige aanspreekpunt: je praat altijd met een mens.</p>
     </div>
     <div class="team">
       <article class="member human reveal">
@@ -369,7 +385,7 @@ footer{padding:56px 0;font-size:15px;color:var(--ink-soft)}
         <div><span class="tag">Mens</span>
         <h3>Alec</h3>
         <span class="role">Bouwt je website, jouw enige aanspreekpunt</span>
-        <ul><li>Ontwerp en teksten op maat</li><li>Controleert alles wat het team doet</li><li>Bereikbaar via telefoon en WhatsApp</li></ul></div>
+        <ul><li>Ontwerp en teksten op maat</li><li>Bouwde en trainde het AI-team zelf</li><li>Controleert alles wat het team doet</li><li>Bereikbaar via telefoon en WhatsApp</li></ul></div>
       </article>
       <div class="squad">
         <article class="member reveal">
@@ -389,6 +405,20 @@ footer{padding:56px 0;font-size:15px;color:var(--ink-soft)}
           <div><span class="tag">AI-assistent</span><h3>De bever</h3><span class="role">Onderhoud</span><p>Past aan en lost fouten op.</p><span class="does">Jij krijgt: wijzigingen binnen de week</span></div>
         </article>
       </div>
+      <article class="panel-test reveal">
+        <div class="pt-head">
+          <div class="pt-faces" aria-hidden="true"><span><svg viewBox="0 0 24 24"><circle cx="12" cy="9" r="4"/><path d="M4 21c1-4.5 4.5-6.5 8-6.5s7 2 8 6.5"/></svg></span><span><svg viewBox="0 0 24 24"><circle cx="12" cy="9" r="4"/><path d="M4 21c1-4.5 4.5-6.5 8-6.5s7 2 8 6.5"/></svg></span><span><svg viewBox="0 0 24 24"><circle cx="12" cy="9" r="4"/><path d="M4 21c1-4.5 4.5-6.5 8-6.5s7 2 8 6.5"/></svg></span><span><svg viewBox="0 0 24 24"><circle cx="12" cy="9" r="4"/><path d="M4 21c1-4.5 4.5-6.5 8-6.5s7 2 8 6.5"/></svg></span><span>+</span></div>
+          <div><span class="tag">Mensen</span><h3>Het testpanel</h3><span class="role">Echte mensen, echte toestellen</span></div>
+        </div>
+        <p>Een vaste groep mensen van verschillende leeftijden test elke site op hun eigen gsm en computer, zoals je klanten dat straks doen. Vinden ze iets niet of loopt iets vast, dan pas ik het aan voor de site live gaat.</p>
+        <ol class="pt-flow" aria-label="Zo komt je site tot stand">
+          <li><b>1</b>Het AI-team doet het herhalende werk</li>
+          <li><b>2</b>Ik controleer alles</li>
+          <li><b>3</b>Het testpanel test op gsm en computer</li>
+          <li><b>4</b>Pas dan gaat je site live</li>
+        </ol>
+        <div class="todo">Aantal testers en wie ze zijn (bv. "8 mensen tussen 18 en 70 jaar"), zodat dit concreet wordt.</div>
+      </article>
     </div>
   </div>
 </section>
@@ -604,7 +634,7 @@ footer{padding:56px 0;font-size:15px;color:var(--ink-soft)}
       <details><summary>Is een website niet te duur voor mijn zaak?</summary><p>Een site van €900 die je 3 jaar gebruikt, kost ongeveer €25 per maand. Eén extra klant of lid per maand betaalt hem terug. De prijs is vast, je weet vooraf wat je betaalt.</p></details>
       <details><summary>Ik heb Facebook en Instagram. Volstaat dat niet?</summary><p>Je sociale media zijn niet van jou: het algoritme beslist wie je posts ziet. Je website is je eigen plek. We koppelen je sociale media eraan, zodat elke post mensen naar één plek stuurt.</p></details>
       <details><summary>Mijn Google-profiel volstaat toch?</summary><p>Je profiel en je site werken samen. Mensen kiezen eerst op duidelijke en volledige info, dan op reviews en duidelijke prijzen. Dat past niet allemaal in een profiel. Wij richten ook je profiel in.</p></details>
-      <details><summary>Werken jullie met AI? Is dat niet onpersoonlijk?</summary><p>Mijn AI-team doet het herhalende werk: cijfers, updates, controles. Ik ontwerp je site, controleer alles en ben je enige aanspreekpunt.</p></details>
+      <details><summary>Werken jullie met AI? Is dat niet onpersoonlijk?</summary><p>Mijn AI-team heb ik zelf gebouwd en getraind. Het doet het herhalende werk: cijfers, updates, controles. Ik ontwerp je site en controleer alles, en een groep echte mensen test elke site voor ze live gaat. Je praat altijd met mij.</p></details>
       <details><summary>Je bent student. Wat als je stopt?</summary><p>Je site en domein staan op jouw naam en alles is gedocumenteerd. Stop ik ooit, dan blijft alles van jou en kan iemand anders verder.</p></details>
       <details><summary>Hoe weet ik of het iets oplevert?</summary><p>Je ziet het zelf: een dashboard met je bezoekers en hoe vaak mensen op bellen of route klikken, plus een rapport van de uil.</p></details>
       <details><summary>Moet ik het maandelijks beheer nemen?</summary><p>Nee. Het is maandelijks opzegbaar en je site blijft van jou, ook zonder beheer.</p></details>
