@@ -325,7 +325,7 @@ footer{padding:56px 0;font-size:15px;color:var(--ink-soft)}
 
 .toon{position:relative;display:block;aspect-ratio:1/1}
 .toon img,.toon canvas{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
-.toon canvas{opacity:0}.toon.live canvas{opacity:1}.toon.live img{opacity:0}
+.toon canvas{opacity:0;transition:opacity var(--t-pop) var(--ease-out)}.toon.live canvas{opacity:1}
 .member.human .toon{width:100%;max-width:300px;margin:0 auto 6px}
 .step .toon{width:132px;height:132px;margin:0 0 4px -10px}
 .care-chars .toon{width:150px;height:150px}
@@ -444,7 +444,7 @@ footer{padding:56px 0;font-size:15px;color:var(--ink-soft)}
     <div class="reveal">
       <h2 id="herken">Herken je dit?</h2>
       <p class="lead" style="margin-top:20px">Tik aan wat klopt. De uil telt mee.</p>
-      <span class="toon side-char" data-video="https://d8j0ntlcm91z4.cloudfront.net/user_3H2FAjydQqLsAIRD9wpl2Hgvsnz/hf_20261112_214558_210d24b1-2496-4521-9635-0314d708607a.mp4" role="img" aria-label="De uil kijkt mee met een tablet vol grafieken"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3H2FAjydQqLsAIRD9wpl2Hgvsnz/hf_20261112_161106_0d0ec564-ffd0-4bfb-ae72-b5d13400b7f6.png" alt="" width="1024" height="1024" loading="lazy"></span>
+      <span class="toon side-char" data-fallback="https://d8j0ntlcm91z4.cloudfront.net/user_3H2FAjydQqLsAIRD9wpl2Hgvsnz/hf_20261112_161106_0d0ec564-ffd0-4bfb-ae72-b5d13400b7f6.png" data-video="https://d8j0ntlcm91z4.cloudfront.net/user_3H2FAjydQqLsAIRD9wpl2Hgvsnz/hf_20261112_214558_210d24b1-2496-4521-9635-0314d708607a.mp4" role="img" aria-label="De uil kijkt mee met een tablet vol grafieken"></span>
     </div>
     <div class="reveal">
       <div class="checks" id="checks">
@@ -468,7 +468,7 @@ footer{padding:56px 0;font-size:15px;color:var(--ink-soft)}
     </div>
     <div class="team">
       <article class="member human reveal">
-        <span class="toon " data-video="https://d8j0ntlcm91z4.cloudfront.net/user_3H2FAjydQqLsAIRD9wpl2Hgvsnz/hf_20261112_215800_6aec818c-1736-4d6e-b811-cdb5ae35da49.mp4" role="img" aria-label="Alec met zijn laptop"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3H2FAjydQqLsAIRD9wpl2Hgvsnz/hf_20261112_161107_0021a0dd-293c-4356-97e7-19e411884c6c.png" alt="" width="1024" height="1024" loading="lazy"></span>
+        <span class="toon " data-fallback="https://d8j0ntlcm91z4.cloudfront.net/user_3H2FAjydQqLsAIRD9wpl2Hgvsnz/hf_20261112_161107_0021a0dd-293c-4356-97e7-19e411884c6c.png" data-video="https://d8j0ntlcm91z4.cloudfront.net/user_3H2FAjydQqLsAIRD9wpl2Hgvsnz/hf_20261112_215800_6aec818c-1736-4d6e-b811-cdb5ae35da49.mp4" role="img" aria-label="Alec met zijn laptop"></span>
         <div><span class="tag">Mens</span>
         <h3>Alec</h3>
         <span class="role">Bouwt je website, jouw enige aanspreekpunt</span>
@@ -613,10 +613,10 @@ footer{padding:56px 0;font-size:15px;color:var(--ink-soft)}
   <div class="wrap">
     <h2 id="hoetitel" class="reveal">Hoe het werkt</h2>
     <div class="steps">
-      <div class="step reveal"><span class="toon " data-video="https://d8j0ntlcm91z4.cloudfront.net/user_3H2FAjydQqLsAIRD9wpl2Hgvsnz/hf_20261112_214558_210d24b1-2496-4521-9635-0314d708607a.mp4" role="img" aria-label="De uil"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3H2FAjydQqLsAIRD9wpl2Hgvsnz/hf_20261112_161106_0d0ec564-ffd0-4bfb-ae72-b5d13400b7f6.png" alt="" width="1024" height="1024" loading="lazy"></span><h3>Gratis Websitecheck</h3><p>20 minuten aan de telefoon of via video. De uil bekijkt je site vooraf, ik zeg eerlijk wat er beter kan.</p></div>
-      <div class="step reveal"><span class="toon " data-video="https://d8j0ntlcm91z4.cloudfront.net/user_3H2FAjydQqLsAIRD9wpl2Hgvsnz/hf_20261112_215800_6aec818c-1736-4d6e-b811-cdb5ae35da49.mp4" role="img" aria-label="Alec"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3H2FAjydQqLsAIRD9wpl2Hgvsnz/hf_20261112_161107_0021a0dd-293c-4356-97e7-19e411884c6c.png" alt="" width="1024" height="1024" loading="lazy"></span><h3>Ik ontwerp en bouw</h3><p>Jij kijkt twee keer mee. Ik schrijf de teksten als je wil.</p></div>
-      <div class="step reveal"><span class="toon " data-video="https://d8j0ntlcm91z4.cloudfront.net/user_3H2FAjydQqLsAIRD9wpl2Hgvsnz/hf_20261112_214559_28185fe0-08be-4d73-a8b7-e9b6051452a3.mp4" role="img" aria-label="De vos"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3H2FAjydQqLsAIRD9wpl2Hgvsnz/hf_20261112_161105_42b132e7-652d-4506-8d6d-2405a74f3f5b.png" alt="" width="1024" height="1024" loading="lazy"></span><h3>Online in 1 tot 3 weken</h3><p>Op jouw naam. De vos zorgt dat Google je meteen vindt.</p></div>
-      <div class="step reveal"><span class="toon " data-video="https://d8j0ntlcm91z4.cloudfront.net/user_3H2FAjydQqLsAIRD9wpl2Hgvsnz/hf_20261112_214558_f2cb2344-8acd-48ec-9a83-d7b0ee2e51f3.mp4" role="img" aria-label="De bever"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3H2FAjydQqLsAIRD9wpl2Hgvsnz/hf_20261112_161104_99ba2a50-69f9-4b9e-a27f-35bed0ab693d.png" alt="" width="1024" height="1024" loading="lazy"></span><h3>Het team blijft werken</h3><p>Als je wil. Jij stuurt een WhatsApp, de bever past het aan en de egel bewaakt alles.</p></div>
+      <div class="step reveal"><span class="toon " data-fallback="https://d8j0ntlcm91z4.cloudfront.net/user_3H2FAjydQqLsAIRD9wpl2Hgvsnz/hf_20261112_161106_0d0ec564-ffd0-4bfb-ae72-b5d13400b7f6.png" data-video="https://d8j0ntlcm91z4.cloudfront.net/user_3H2FAjydQqLsAIRD9wpl2Hgvsnz/hf_20261112_214558_210d24b1-2496-4521-9635-0314d708607a.mp4" role="img" aria-label="De uil"></span><h3>Gratis Websitecheck</h3><p>20 minuten aan de telefoon of via video. De uil bekijkt je site vooraf, ik zeg eerlijk wat er beter kan.</p></div>
+      <div class="step reveal"><span class="toon " data-fallback="https://d8j0ntlcm91z4.cloudfront.net/user_3H2FAjydQqLsAIRD9wpl2Hgvsnz/hf_20261112_161107_0021a0dd-293c-4356-97e7-19e411884c6c.png" data-video="https://d8j0ntlcm91z4.cloudfront.net/user_3H2FAjydQqLsAIRD9wpl2Hgvsnz/hf_20261112_215800_6aec818c-1736-4d6e-b811-cdb5ae35da49.mp4" role="img" aria-label="Alec"></span><h3>Ik ontwerp en bouw</h3><p>Jij kijkt twee keer mee. Ik schrijf de teksten als je wil.</p></div>
+      <div class="step reveal"><span class="toon " data-fallback="https://d8j0ntlcm91z4.cloudfront.net/user_3H2FAjydQqLsAIRD9wpl2Hgvsnz/hf_20261112_161105_42b132e7-652d-4506-8d6d-2405a74f3f5b.png" data-video="https://d8j0ntlcm91z4.cloudfront.net/user_3H2FAjydQqLsAIRD9wpl2Hgvsnz/hf_20261112_214559_28185fe0-08be-4d73-a8b7-e9b6051452a3.mp4" role="img" aria-label="De vos"></span><h3>Online in 1 tot 3 weken</h3><p>Op jouw naam. De vos zorgt dat Google je meteen vindt.</p></div>
+      <div class="step reveal"><span class="toon " data-fallback="https://d8j0ntlcm91z4.cloudfront.net/user_3H2FAjydQqLsAIRD9wpl2Hgvsnz/hf_20261112_161104_99ba2a50-69f9-4b9e-a27f-35bed0ab693d.png" data-video="https://d8j0ntlcm91z4.cloudfront.net/user_3H2FAjydQqLsAIRD9wpl2Hgvsnz/hf_20261112_214558_f2cb2344-8acd-48ec-9a83-d7b0ee2e51f3.mp4" role="img" aria-label="De bever"></span><h3>Het team blijft werken</h3><p>Als je wil. Jij stuurt een WhatsApp, de bever past het aan en de egel bewaakt alles.</p></div>
     </div>
   </div>
 </section>
@@ -769,7 +769,7 @@ footer{padding:56px 0;font-size:15px;color:var(--ink-soft)}
 <section aria-labelledby="beheer">
   <div class="wrap">
     <div class="panel reveal" style="display:block">
-      <div class="care-head"><h2 id="beheer">2. Beheren: je site blijft up-to-date</h2><div class="care-chars"><span class="toon " data-video="https://d8j0ntlcm91z4.cloudfront.net/user_3H2FAjydQqLsAIRD9wpl2Hgvsnz/hf_20261112_214559_af1c8dd9-18fd-4af7-afaf-cb335027a3c4.mp4" role="img" aria-label="De egel met zijn schild"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3H2FAjydQqLsAIRD9wpl2Hgvsnz/hf_20261112_161105_0944018d-100d-4a88-acfd-7f31610b445e.png" alt="" width="1024" height="1024" loading="lazy"></span><span class="toon " data-video="https://d8j0ntlcm91z4.cloudfront.net/user_3H2FAjydQqLsAIRD9wpl2Hgvsnz/hf_20261112_214558_f2cb2344-8acd-48ec-9a83-d7b0ee2e51f3.mp4" role="img" aria-label="De bever met zijn moersleutel"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3H2FAjydQqLsAIRD9wpl2Hgvsnz/hf_20261112_161104_99ba2a50-69f9-4b9e-a27f-35bed0ab693d.png" alt="" width="1024" height="1024" loading="lazy"></span></div></div>
+      <div class="care-head"><h2 id="beheer">2. Beheren: je site blijft up-to-date</h2><div class="care-chars"><span class="toon " data-fallback="https://d8j0ntlcm91z4.cloudfront.net/user_3H2FAjydQqLsAIRD9wpl2Hgvsnz/hf_20261112_161105_0944018d-100d-4a88-acfd-7f31610b445e.png" data-video="https://d8j0ntlcm91z4.cloudfront.net/user_3H2FAjydQqLsAIRD9wpl2Hgvsnz/hf_20261112_214559_af1c8dd9-18fd-4af7-afaf-cb335027a3c4.mp4" role="img" aria-label="De egel met zijn schild"></span><span class="toon " data-fallback="https://d8j0ntlcm91z4.cloudfront.net/user_3H2FAjydQqLsAIRD9wpl2Hgvsnz/hf_20261112_161104_99ba2a50-69f9-4b9e-a27f-35bed0ab693d.png" data-video="https://d8j0ntlcm91z4.cloudfront.net/user_3H2FAjydQqLsAIRD9wpl2Hgvsnz/hf_20261112_214558_f2cb2344-8acd-48ec-9a83-d7b0ee2e51f3.mp4" role="img" aria-label="De bever met zijn moersleutel"></span></div></div>
       <p class="lead" style="margin-top:16px;max-width:52ch">Je site blijft snel, veilig en vindbaar. Wil je iets aanpassen? Stuur een WhatsApp, wij regelen het. Maandelijks opzegbaar. Host ik je site, dan zit dat in je Beheer.</p>
       <div class="care">
         <div class="care-col">
@@ -797,7 +797,7 @@ footer{padding:56px 0;font-size:15px;color:var(--ink-soft)}
     <div class="reveal">
       <h2 id="vraagtitel">Twijfel je nog?</h2>
       <p class="lead" style="margin-top:16px">Logisch. Dit zijn de vragen die we het vaakst krijgen.</p>
-      <span class="toon side-char" data-video="https://d8j0ntlcm91z4.cloudfront.net/user_3H2FAjydQqLsAIRD9wpl2Hgvsnz/hf_20261112_214559_28185fe0-08be-4d73-a8b7-e9b6051452a3.mp4" role="img" aria-label="De vos zoekt met zijn vergrootglas"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3H2FAjydQqLsAIRD9wpl2Hgvsnz/hf_20261112_161105_42b132e7-652d-4506-8d6d-2405a74f3f5b.png" alt="" width="1024" height="1024" loading="lazy"></span>
+      <span class="toon side-char" data-fallback="https://d8j0ntlcm91z4.cloudfront.net/user_3H2FAjydQqLsAIRD9wpl2Hgvsnz/hf_20261112_161105_42b132e7-652d-4506-8d6d-2405a74f3f5b.png" data-video="https://d8j0ntlcm91z4.cloudfront.net/user_3H2FAjydQqLsAIRD9wpl2Hgvsnz/hf_20261112_214559_28185fe0-08be-4d73-a8b7-e9b6051452a3.mp4" role="img" aria-label="De vos zoekt met zijn vergrootglas"></span>
     </div>
     <div class="reveal">
       <details><summary>Is een website niet te duur voor mijn zaak?</summary><p>Een site van €900 die je 3 jaar gebruikt, kost ongeveer €25 per maand. Eén extra klant of lid per maand betaalt hem terug. De prijs is vast, je weet vooraf wat je betaalt.</p></details>
@@ -952,9 +952,10 @@ footer{padding:56px 0;font-size:15px;color:var(--ink-soft)}
 
 
 
-  /* personages: echte animatie, witte achtergrond live weggefilterd naar transparant */
+  /* personages: echte animatie, witte achtergrond live weggefilterd naar transparant.
+     Geen wissel meer tussen een los beeld en de video: wat je ziet is altijd een frame uit dezelfde video. */
   (function(){var boxes=document.querySelectorAll('.toon[data-video]');if(!boxes.length)return;
-    var still=matchMedia('(prefers-reduced-motion: reduce)').matches;if(still)return;
+    var still=matchMedia('(prefers-reduced-motion: reduce)').matches;
     function key(ctx,w,h){var d=ctx.getImageData(0,0,w,h),p=d.data,n=w*h,bg=new Uint8Array(n),q=new Int32Array(n),qh=0,qt=0;
       function light(i){var o=i*4,r=p[o],g=p[o+1],b=p[o+2],mn=Math.min(r,g,b),mx=Math.max(r,g,b);return mn>=228&&mx-mn<=18}
       function push(i){if(!bg[i]&&light(i)){bg[i]=1;q[qt++]=i}}
@@ -968,16 +969,21 @@ footer{padding:56px 0;font-size:15px;color:var(--ink-soft)}
       var v=document.createElement('video');v.crossOrigin='anonymous';v.muted=true;v.playsInline=true;v.preload='none';
       v.setAttribute('muted','');v.setAttribute('playsinline','');v.style.cssText='position:absolute;width:1px;height:1px;opacity:0;pointer-events:none';
       var c=document.createElement('canvas'),ctx=c.getContext('2d',{willReadFrequently:true});box.appendChild(c);box.appendChild(v);
-      var ready=false,loaded=false;
+      var loaded=false;
       function size(){var s=Math.min(480,Math.round(box.clientWidth*(window.devicePixelRatio||1)));if(s&&c.width!==s){c.width=c.height=s}}
-      function draw(){if(!v.videoWidth)return;size();ctx.clearRect(0,0,c.width,c.height);ctx.drawImage(v,0,0,c.width,c.height);try{key(ctx,c.width,c.height)}catch(e){return}
-        if(!ready){ready=true;box.classList.add('live')}}
+      function draw(){if(!v.videoWidth)return;size();ctx.clearRect(0,0,c.width,c.height);ctx.drawImage(v,0,0,c.width,c.height);try{key(ctx,c.width,c.height)}catch(e){fail();return}box.classList.add('live')}
+      function fail(){if(box.querySelector('img'))return;var im=new Image();im.src=box.dataset.fallback;im.alt='';box.appendChild(im);c.remove()}
       function loop(){draw();if(!v.paused&&!v.ended){v.requestVideoFrameCallback?v.requestVideoFrameCallback(loop):requestAnimationFrame(loop)}}
-      v.addEventListener('play',loop);v.addEventListener('seeked',draw);v.addEventListener('ended',function(){v.currentTime=0});
+      v.addEventListener('play',loop);v.addEventListener('seeked',draw);v.addEventListener('loadeddata',draw);
+      v.addEventListener('ended',function(){v.currentTime=0});v.addEventListener('error',fail);
       function load(){if(loaded)return;loaded=true;v.src=box.dataset.video;v.preload='auto';v.load()}
-      function go(){load();var p=v.play();if(p&&p.catch)p.catch(function(){})}
-      box.addEventListener('mouseenter',function(){if(v.paused)go()});
-      box._go=go;box._v=v;});
+      function go(){if(still)return;load();var p=v.play();if(p&&p.catch)p.catch(function(){})}
+      if(!still)box.addEventListener('mouseenter',function(){if(v.paused)go()});
+      box._go=go;box._v=v;box._load=load;});
+    /* ruim op voorhand laden, zodat het eerste frame er al staat als je ernaartoe scrolt */
+    var pre=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target._load();pre.unobserve(e.target)}})},{rootMargin:'900px 0px'});
+    boxes.forEach(function(b){pre.observe(b)});
+    if(still)return;
     /* staging: nooit twee personages tegelijk, de volgende start als de vorige klaar is */
     var queue=[],busy=false;
     var cur=null;
