@@ -957,6 +957,11 @@ footer{padding:56px 0;font-size:15px;color:var(--ink-soft)}
     var io=new IntersectionObserver(function(es){es.forEach(function(e){var b=e.target;
       if(e.isIntersecting){if(!b._played){b._played=1;setTimeout(b._go,300)}}else if(b._v&&!b._v.paused){b._v.pause()}})},{threshold:.55});
     boxes.forEach(function(b){io.observe(b)});})();
+
+  /* logo: altijd vlot terug naar boven */
+  document.querySelectorAll('a.logo').forEach(function(a){a.addEventListener('click',function(e){e.preventDefault();
+    window.scrollTo({top:0,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});
+    if(history.replaceState)history.replaceState(null,'',location.pathname+location.search)})});
   var calc=document.getElementById('calc');
   if(calc){var base='start',bp=500,eur=function(n){return '€'+n.toLocaleString('nl-BE')};
     var items=calc.querySelectorAll('.addon');
