@@ -226,8 +226,9 @@ footer{padding:56px 0;font-size:15px;color:var(--ink-soft)}
 .cv-frame.gsm .cv-chrome i{display:none}
 .cv-screen{position:relative;height:min(640px,70vh)}
 .cv-screen iframe{width:100%;height:100%;border:0;display:block}
-.cv-old{position:absolute;inset:0;overflow-y:auto;background:#fff;overscroll-behavior:contain}
-.cv-old img{width:100%}
+.cv-screen iframe[hidden]{display:none}
+.cv-toast{position:absolute;left:50%;top:16px;transform:translate(-50%,-8px);background:var(--red);color:#fff;font-size:13px;font-weight:700;padding:8px 14px;border-radius:var(--r-pill);opacity:0;pointer-events:none;transition:opacity .25s,transform .25s;white-space:nowrap}
+.cv-toast.on{opacity:1;transform:translate(-50%,0)}
 .cv-hint{position:absolute;left:50%;bottom:16px;transform:translateX(-50%);background:var(--ink);color:#fff;font-size:13px;font-weight:700;padding:8px 14px;border-radius:var(--r-pill);pointer-events:none;transition:opacity .4s;white-space:nowrap}
 .cv-hint.off{opacity:0}
 @media (max-width:640px){.cv-stage{padding:10px}.seg button{padding:8px 12px;font-size:14px}.cv-frame.gsm{border-width:6px}}
@@ -390,15 +391,16 @@ footer{padding:56px 0;font-size:15px;color:var(--ink-soft)}
       </div>
       <div class="cv-stage">
         <div class="cv-frame" id="cvframe">
-          <div class="cv-chrome"><i></i><i></i><i></i><span id="cvurl">praktijkes.be</span><a id="cvopen" href="https://cwcrnspzs2-cmyk.github.io/praktijk-es/" target="_blank" rel="noopener">Open ↗</a></div>
+          <div class="cv-chrome"><i></i><i></i><i></i><span id="cvurl">praktijkes.be (nieuwe versie)</span><a id="cvopen" href="https://cwcrnspzs2-cmyk.github.io/praktijk-es/" target="_blank" rel="noopener">Open ↗</a></div>
           <div class="cv-screen">
             <iframe id="cvnew" title="De nieuwe site van Praktijk E.S., live" data-src="https://cwcrnspzs2-cmyk.github.io/praktijk-es/" loading="lazy"></iframe>
-            <div class="cv-old" id="cvold" hidden tabindex="0" aria-label="Schermafbeelding van de oude site, scrollbaar"><img data-src="https://image.thum.io/get/width/1200/fullpage/http://praktijkes.be/index-nl.html" alt="De volledige oude site van Praktijk E.S." width="1200" height="7556"></div>
+            <iframe id="cvold" hidden title="De oude site van Praktijk E.S." data-src="cases/praktijk-es-oud/"></iframe>
+            <div class="cv-toast" id="cvtoast" role="status">Demo: bellen en mailen staat uit</div>
             <div class="cv-hint" id="cvhint">Scroll en klik gerust, dit is de echte site</div>
           </div>
         </div>
       </div>
-      <p class="small" id="cvnote" style="margin-top:10px">De nieuwe site draait hier live: scroll, klik en wissel van taal.</p>
+      <p class="small" id="cvnote" style="margin-top:10px">De nieuwe site draait hier live: scroll, klik en wissel van taal. Bellen en mailen staat uit in deze demo.</p>
     </div>
     <div class="facts reveal">
       <div class="fact"><strong>99/100</strong><span>snelheid op gsm, gemeten door Google</span></div>
@@ -607,29 +609,36 @@ footer{padding:56px 0;font-size:15px;color:var(--ink-soft)}
   var cv=document.getElementById('cv');
   if(cv){
     var f=document.getElementById('cvframe'),nw=document.getElementById('cvnew'),od=document.getElementById('cvold'),
-        url=document.getElementById('cvurl'),op=document.getElementById('cvopen'),hint=document.getElementById('cvhint'),note=document.getElementById('cvnote');
-    var load=function(el){if(el&&el.dataset.src&&!el.src){el.src=el.dataset.src}};
-    new IntersectionObserver(function(e,o){if(e[0].isIntersecting){load(nw);o.disconnect()}},{rootMargin:'400px'}).observe(cv);
+        url=document.getElementById('cvurl'),op=document.getElementById('cvopen'),hint=document.getElementById('cvhint'),
+        note=document.getElementById('cvnote'),toast=document.getElementById('cvtoast'),tt;
+    var say=function(){toast.classList.add('on');clearTimeout(tt);tt=setTimeout(function(){toast.classList.remove('on')},2200)};
+    /* demo: geen echte telefoon, mail, WhatsApp of formulieren vanuit de voorbeeldsites */
+    var guard=function(fr){try{var d=fr.contentDocument;if(!d||d._g)return;d._g=1;
+      d.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href]');if(!a)return;
+        var h=a.getAttribute('href')||'';
+        if(/^(tel:|mailto:|sms:)|wa\.me|whatsapp|maps\.app|goo\.gl/i.test(h)){e.preventDefault();e.stopPropagation();say()}
+        else if(a.target==='_blank'||/^https?:/i.test(h)&&a.host!==location.host){e.preventDefault();e.stopPropagation();say()}
+      },true);
+      d.addEventListener('submit',function(e){e.preventDefault();say()},true);
+      d.addEventListener('scroll',hideHint,{passive:true});
+    }catch(err){}};
+    [nw,od].forEach(function(fr){fr.addEventListener('load',function(){guard(fr)})});
+    var load=function(el){if(el&&el.dataset.src&&!el.getAttribute('src')){el.src=el.dataset.src}};
     var hideHint=function(){hint.classList.add('off')};
+    new IntersectionObserver(function(e,o){if(e[0].isIntersecting){load(nw);o.disconnect()}},{rootMargin:'400px'}).observe(cv);
     cv.querySelector('.cv-screen').addEventListener('pointerenter',function(){setTimeout(hideHint,1800)});
-    od.addEventListener('scroll',hideHint,{passive:true});
     cv.querySelectorAll('[data-v]').forEach(function(b){b.addEventListener('click',function(){
       var v=b.dataset.v;cv.querySelectorAll('[data-v]').forEach(function(x){x.setAttribute('aria-selected',x===b)});
       var old=v==='voor';od.hidden=!old;nw.hidden=old;
-      if(old){load(od.querySelector('img'))}
-      url.textContent=old?'praktijkes.be (oud, zonder https)':'praktijkes.be';
-      op.href=old?'http://praktijkes.be/index-nl.html':'https://cwcrnspzs2-cmyk.github.io/praktijk-es/';
-      hint.textContent=old?'Scroll door de oude site':'Scroll en klik gerust, dit is de echte site';hint.classList.remove('off');
-      note.textContent=old?'De oude site heeft geen beveiligde verbinding (https). Browsers laten die niet live inladen, dus je scrolt hier door een volledige schermafbeelding.':'De nieuwe site draait hier live: scroll, klik en wissel van taal.';
+      if(old){load(od)}
+      url.textContent=old?'praktijkes.be (oude versie)':'praktijkes.be (nieuwe versie)';
+      op.href=old?'cases/praktijk-es-oud/':'https://cwcrnspzs2-cmyk.github.io/praktijk-es/';
+      hint.textContent=old?'Scroll gerust, zo zag de site er voordien uit':'Scroll en klik gerust, dit is de echte site';hint.classList.remove('off');
+      note.textContent=old?'De oude site zoals ze echt online stond: zelfde teksten, foto\u2019s en opmaak. Bellen en mailen staat uit in deze demo.':'De nieuwe site draait hier live: scroll, klik en wissel van taal. Bellen en mailen staat uit in deze demo.';
     })});
     cv.querySelectorAll('[data-d]').forEach(function(b){b.addEventListener('click',function(){
       cv.querySelectorAll('[data-d]').forEach(function(x){x.setAttribute('aria-pressed',x===b)});
       f.classList.toggle('gsm',b.dataset.d==='gsm');
-      var im=od.querySelector('img'),g=b.dataset.d==='gsm';
-      im.dataset.src=g?'https://image.thum.io/get/width/390/viewportWidth/390/fullpage/http://praktijkes.be/index-nl.html':'https://image.thum.io/get/width/1200/fullpage/http://praktijkes.be/index-nl.html';
-      im.width=g?390:1200;im.height=g?7254:7556;
-      if(im.src){im.src=im.dataset.src}else if(!od.hidden){load(im)}
-      od.scrollTop=0;
     })});
   }
   var answers = {};

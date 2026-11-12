@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="nl">
+  <head>
+    <!--
+      Archiefkopie van de oude site van Praktijk E.S. (http://praktijkes.be/index-nl.html),
+      met toestemming getoond als 'voor' in de case op dobbo.be.
+      Ongewijzigde inhoud en opmaak. Enkel aangepast: analytics verwijderd, afbeeldingen via https geladen,
+      noindex toegevoegd, links naar andere taalversies wijzen naar het origineel.
+    -->
+    <title>Praktijk E.S. (oude site, archief)</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="canonical" href="http://praktijkes.be/index-nl.html">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <!-- font awesome-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/d367c9f192.css">
+    <!-- main CSS (origineel: main.css) -->
+    <style>
+/*general*/
+    html {
+        scroll-behavior: smooth;
+    }
+    .fade-background-dark {
+        background-color: rgba(0, 0, 0, 0.35);
+        height: inherit;
+        width: inherit;
+    }
+    .link, a:hover {
+        color: #3EA8A8;
+    }
+    .container-fluid {
+        padding: 0;
+    }
+    .bold {
+        font-weight: bold;
+    }
+    h2 {
+        font-weight: 200;
+        padding-bottom: 20px;
+    }
+    h3 {
+        font-weight: 200;
+    }
+    p {
+        color: rgba(0,0,0,.9);
+    }
+    th {
+        background-color: rgba(0,0,0,.1);
+        text-align: center;
+    }
+    .table td {
+        min-width: 90px;
+        vertical-align: middle;
+        text-align: right;
+    }
+    .hcol {
+        background-color: rgba(0,0,0,.05);
+        text-align: inherit;
+    }
+    th.zonderVR {
+        min-width: 115px;
+    }
+    th.duur {
+        min-width: 125px;
+    }
+    .unfocus {
+        font-weight: lighter;
+    }
+
+/*primary color*/
+    .text-primary {
+      color: #ffcc00;
+    }
+    .bg-primary {
+      color: #fff;
+      background-color: #ffcc00;
+    }
+    .btn-primary {
+      color: rgba(0,0,0,.5);
+      background-color: #ffcc00;
+      border-color: #e6b800;
+    }
+    .btn-primary:hover {
+      color: rgba(0,0,0,.7);
+      background-color: #ffcc00;
+      border-color: #e6b800;
+    }
+
+/*jumbotron*/
+    .jumbotron{
+        background-image: url(https://images.weserv.nl/?url=praktijkes.be/images/bg-image-jumbotron.jpg&w=2000);
+        background-size: cover;
+        background-position: center;
+        padding: 0;
+        margin-bottom: 0;
+    }
+    .row {
+        margin: 0;
+    }
+    #languageAndFacebook {
+        padding-top: 20px;
+    }
+    #makeAnAppointment {
+        padding: 0px;
+    }
+    .jumbotron h1,h4{
+        color: rgba(255, 204, 0, 1);
+        font-weight: 200;
+
+    }
+    .jumbotron h4 {
+        padding-bottom: 10px;
+        padding-left: 4px;
+    }
+/*navbar*/
+    #navigation {
+        top: 0;
+    }
+    .navbar {
+        background-color: rgba(255, 204, 0, 1);
+    }
+    .navbar-brand {
+        position: absolute;
+        top: 10px;
+        right: 0;
+    }
+/*sections*/
+    section {
+        min-height: 200px;
+        margin-top: 60px;
+        padding-top: 60px;
+        padding-left: 15px;
+        padding-right: 15px;
+        padding-bottom: 60px;
+    }
+
+    .col, .row div, a img {
+        position: static;
+    }
+    .profielFoto {
+        width: 100%;
+        border-radius: 50%;
+    }
+    #physicians>.col>.row {
+        padding-bottom: 100px;
+    }
+    #physicians>.col>.row:last-child {
+        padding-bottom: 0px;
+    }
+/*parallax*/
+    .parallax {
+        height: 300px;
+        background-attachment: fixed;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+    @media only screen and (max-device-width: 1024px) {
+        .parallax {
+            background-attachment: scroll;
+        }
+    }
+/*footer*/
+footer {
+        padding-top: 60px;
+        padding-left: 30px;
+        padding-right: 30px;
+        padding-bottom: 60px;
+}
+    </style>
+  </head>
+  <body data-spy="scroll" data-target=".navbar" data-offset="100">
+      <div id="jumbotron" class="jumbotron container-fluid">
+        <div class="fade-background-dark">
+            <div class="row" id="languageAndFacebook">
+                <div class="col-4">
+                    <h4 style="color: #3EA8A8; font-size: 28px"><a class="link bold" href="#">Nl</a>&nbsp;-&nbsp;<a class="link" href="http://praktijkes.be/index-fr.html" target="_blank" rel="noopener">Fr</a>&nbsp;-&nbsp;<a class="link" href="http://praktijkes.be/index-en.html" target="_blank" rel="noopener">En</a></h4>
+                </div>
+                <div class="col-4" style="text-align: center">
+                    <a class= "float-center" style="color: #3EA8A8; font-size: 28px" href="tel:+3223089295">02/308.92.95</a>
+                </div>
+                <div class="col-4">
+                    <a class="link float-right" href="https://www.linkedin.com/company/70533868/" target="_blank" rel="noopener">
+                        <i class="fa fa-linkedin-square fa-2x" aria-hidden="true" style="color: #3EA8A8; padding-left: 10px"></i>
+                    </a>
+                    <a class="link float-right" href="http://www.facebook.com/Praktijk.ES/" target="_blank" rel="noopener">
+                        <i class="fa fa-facebook-square fa-2x" aria-hidden="true" style="color: #3EA8A8; padding-left: 10px"></i>
+                    </a>
+                    <a class="link float-right" href="https://www.instagram.com/praktijkes/" target="_blank" rel="noopener">
+                        <i class="fa fa-instagram fa-2x" aria-hidden="true" style="color: #3EA8A8"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="row justify-content-center" id="makeAnAppointment">
+                <div class="col-12 col-ms-auto">
+                    <h1 id="quote" style="text-align: center; opacity: 0; text-transform: uppercase">
+                    </h1>
+                </div>
+                <div class="col-6 col-ms-auto" style="visibility: hidden">
+                    <p class="lead ">
+                    <a class="btn btn-primary btn-lg btn-block" href="#" role="button">Maak een afspraak</a>
+                    </p>
+                </div>
+            </div>
+            <div class="row align-items-end justify-content-between" id="title">
+                <div class="col-12 col-sm-auto">
+                    <h1 class="display-3">Praktijk E.S.</h1>
+                </div>
+                <div class="col-12 col-sm-auto">
+                    <h4>Kinesitherapie | Manuele Therapie</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+
+        <div id="navigationFix">
+          <nav id="navigation" class="navbar navbar-toggleable-sm navbar-light col-12">
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation" style="border-color: rgba(0,0,0,0)">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+
+              <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav mr-auto mt-2 mt-sm-0">
+                  <li class="nav-item">
+                    <a class="nav-link" href="#physicaltherapy">Kinesitherapie</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#manualtherapy">Manuele Therapie</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#physicians">Therapeut</a>
+                  </li>
+                    <li class="nav-item">
+                    <a class="nav-link" href="#prices">Tarieven</a>
+                  </li>
+                    <li class="nav-item">
+                    <a class="nav-link" href="#contact">Contact</a>
+                  </li>
+                    <li class="nav-item">
+                    <a class="nav-link" href="#links">Links</a>
+                  </li>
+                </ul>
+              </div>
+
+              <a class="navbar-brand" href="#top">
+                <img id="logo" src="https://images.weserv.nl/?url=praktijkes.be/Icons/LogoVierkantBlack.gif" width="30" height="30" alt="">
+              </a>
+            </nav>
+        </div>
+
+        <section id="physicaltherapy" class="row">
+            <div class="col">
+                <h2>Kinesitherapie in de praktijk E.S.</h2>
+                <p>Een gezonde geest in een gezond lichaam is waar we voor iedereen naar proberen streven binnen de praktijk E.S..</p>
+                <p>Kinesitherapie vindt zijn oorsprong in twee woorden: kinesis (wat “beweging” betekent) en therapia (wat “verzorging” betekent).</p>
+                <p>De specialiteit van uw kinesitherapeut ligt erin om via coaching, doelgerichte oefeningen, uitleg, bewegings- en sportadvies, uw bewegingsmogelijkheden alsook functioneren te herstellen of te maximaliseren. Uw inzicht te verbeteren en uw zelfredzaamheid te stimuleren.</p>
+                <p>Kinesitherapie bewijst zijn nut in tal van domeinen, waaronder algemene spier- en/of gewrichtsproblemen, sportletsels, post-operatieve revalidatie, respiratoire aandoeningen, neurologische aandoeningen, pediatrische aandoeningen, cardiovasculaire aandoeningen, pelvische aandoeningen en geriatrische aandoeningen.</p>
+                <p>Binnen de praktijk E.S. richten wij ons voornamelijk op algemene spier- en/of gewrichtsproblemen, sportletsels, post-operatieve revalidatie en respiratiore aandoeningen bij kinderen.</p>
+            </div>
+        </section>
+        <div class="parallax" style="background-image: url(https://images.weserv.nl/?url=praktijkes.be/imageOriginals/fiets.jpg&w=2000)"><div class="fade-background-dark"></div></div>
+        <section id="manualtherapy" class="row">
+            <div class="col">
+                <h2>Manuele Therapie in de praktijk E.S.</h2>
+                <p>Een gezonde geest in een gezond lichaam is waar we voor iedereen naar proberen streven binnen de praktijk E.S..</p>
+                <p>Manuele Therapie is een bijzondere beroepsbekwaamheid binnen de kinesitherapie.</p>
+                <p>In enge zin omvat dit mobilisaties en/of manipulaties gericht op het herstellen van de articulaire beweeglijkheid. Het lichaam wordt daarbij altijd als &eacute;&eacute;n geheel gezien, zodat interacties met andere structuren (zoals andere gewrichten, spieren, zenuwen, …) altijd in acht worden genomen.
+                <br>
+                In brede zin omvat dit ook coaching, doelgerichte oefeningen, uitleg, bewegings- en sportadvies, uw inzicht verbeteren en uw zelfredzaamheid stimuleren.</p>
+                <p>Manuele therapie bewijst zijn nut voornamelijk bij spier- en/of gewrichtsproblemen:</p>
+                <p>- lumbago</p>
+                <p>- radiculair syndroom (bv. ischialgie)</p>
+                <p>- torticollis</p>
+                <p>- whiplash</p>
+                <p>- spanningshoofdpijn, migraine of cervicogene hoofdpijn</p>
+                <p>- kaakgewrichtsproblemen</p>
+                <p>- frozen shoulder</p>
+                <p>- ….</p>
+            </div>
+        </section>
+        <div class="parallax" style="background-image: url(https://images.weserv.nl/?url=praktijkes.be/imageOriginals/tafel.jpg&w=2000)"><div class="fade-background-dark"></div></div>
+        <section id="physicians" class="row">
+            <div class="col">
+                <h2>De therapeut in de praktijk E.S.</h2>
+                <div class="row">
+                    <div class="col-sm-3">
+                        <img src="https://images.weserv.nl/?url=praktijkes.be/images/Eli.JPG&w=800" class="profielFoto" alt="Eli">
+                    </div>
+                    <div class="col-sm-9">
+                        <h3>Eli Schaill&eacute;e</h3>
+                        <p>Drietalig: nederlands, frans en engels.</p>
+                        <p>Afgestudeerd Licentiaat/Master in de Revalitatiewetenschappen en Kinesitherapie aan de Vrije Universiteit Brussel in 2006.</p>
+                        <p>Master na Master in de Manuele Therapie behaald in 2009 aan de Vrije Universiteit Brussel.</p>
+                        <p>Praktijkassistent aan de Vrije Universiteit Brussel voor anatomie onderwijs bij de opleiding kinesitherapie en manuele therapie sinds 2009.</p>
+                        <p>Voldoet aan de kwaliteitsvereisten van het nationaal kwaliteitsregister voor kinesitherapeuten sinds 2016.</p>
+                        <p>KineCoach sinds 2017.</p>
+                        <br>
+                        <p class="small">RIZIVnr: 5/36329/81/527 - KBOnr: 0835.386.566</p>
+                        <p class="small">Verzekering: AMMA - Lid van Axxon &amp; Mathera</p>
+                        <p class="small">Niet geconventioneerd</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div class="parallax" style="background-image: url(https://images.weserv.nl/?url=praktijkes.be/imageOriginals/kabine.jpg&w=2000)"><div class="fade-background-dark"></div></div>
+        <section id="prices" class="row">
+            <div class="col">
+                <h2>Tarieven in de praktijk E.S.</h2>
+                <p>
+                    <span class="bold">Betalingsmodaliteiten:</span>
+                    <br>
+                    In de praktijk per zitting contant of via een mobilepay QR code.
+                    <br>
+                    Op huisbezoek periodiek via overschrijving.
+                </p>
+                <p class="bold">
+                    Zittingen in de praktijkkamer:
+                </p>
+                <div style="overflow: scroll; width: inherit">
+                    <table class="table table-bordered">
+                      <tbody class="bold">
+                        <tr>
+                            <th rowspan="3">Pathologische situatie</th>
+                            <th rowspan="3" class="duur">Globaal gemiddelde duur</th>
+                            <th rowspan="3">Zitting<br>Nomenclatuur code</th>
+                            <th colspan="6">Ereloon</th>
+                            <th rowspan="2" colspan="2">Tussenkomst RIZIV</th>
+                            <th rowspan="2" colspan="2">Remgeld pati&euml;nt</th>
+                            <th rowspan="2">Supplement pati&euml;nt</th>
+                        </tr>
+                        <tr>
+                            <th colspan="2">Behandeling</th>
+                            <th colspan="2">Intake/Schriftelijk verslag</th>
+                            <th colspan="2">Totaal</th>
+                        </tr>
+                        <tr>
+                            <th class="zonderVR">Zonder VR<sup>*</sup></th>
+                            <th class="unfocus">Met VR<sup>*</sup></th>
+                            <th class="zonderVR">Zonder VR<sup>*</sup></th>
+                            <th class="unfocus">Met VR<sup>*</sup></th>
+                            <th class="zonderVR">Zonder VR<sup>*</sup></th>
+                            <th class="unfocus">Met VR<sup>*</sup></th>
+                            <th class="zonderVR">Zonder VR<sup>*</sup></th>
+                            <th class="unfocus">Met VR<sup>*</sup></th>
+                            <th class="zonderVR">Zonder VR<sup>*</sup></th>
+                            <th class="unfocus">Met VR<sup>*</sup></th>
+                            <th class="zonderVR">Zonder VR<sup>*</sup></th>
+                        </tr>
+                        <tr>
+                            <td rowspan="2" class="hcol">Courante pathologie</td>
+                            <td class="hcol">45 minuten</td>
+                            <td class="hcol">1<sup>ste</sup><br>567011 + 567033</td>
+                            <td rowspan="2">€ 39,00</td>
+                            <td rowspan="2" class="unfocus">€ 30,80</td>
+                            <td>€ 18,00</td>
+                            <td class="unfocus">€ 7,19</td>
+                            <td>€ 57,00</td>
+                            <td class="unfocus">€ 37,99</td>
+                            <td>€ 23,82</td>
+                            <td class="unfocus">€ 35,49</td>
+                            <td>€ 14,17</td>
+                            <td class="unfocus">€ 2,50</td>
+                            <td>€ 19,01</td>
+                        </tr>
+                        <tr>
+                            <td class="hcol">30 minuten</td>
+                            <td class="hcol">2<sup>de</sup>-18<sup>de</sup><br>567011 of 560011</td>
+                            <td>-</td>
+                            <td class="unfocus">-</td>
+                            <td>€ 39,00</td>
+                            <td class="unfocus">€ 30,80</td>
+                            <td>€ 18,42</td>
+                            <td class="unfocus">€ 28,30</td>
+                            <td>€ 12,38</td>
+                            <td class="unfocus">€ 2,50</td>
+                            <td>€ 8,20</td>
+                        </tr>
+                        <tr>
+                            <td rowspan="2" class="hcol">Fa-pathologie</td>
+                            <td class="hcol">45 minuten</td>
+                            <td class="hcol">1<sup>ste</sup><br>567276 + 563076</td>
+                            <td rowspan="2">€ 39,00</td>
+                            <td rowspan="2" class="unfocus">€ 30,80</td>
+                            <td>€ 32,00</td>
+                            <td class="unfocus">€ 32,86</td>
+                            <td>€ 71,00</td>
+                            <td class="unfocus">€ 63,66</td>
+                            <td>€ 43,63</td>
+                            <td class="unfocus">€ 61,66</td>
+                            <td>€ 20,03</td>
+                            <td class="unfocus">€ 2,00</td>
+                            <td>€ 7,34</td>
+                        </tr>
+                        <tr>
+                            <td class="hcol">30 minuten</td>
+                            <td class="hcol">2<sup>de</sup>-60<sup>ste</sup><br>567276 of 563010</td>
+                            <td>-</td>
+                            <td class="unfocus">-</td>
+                            <td>€ 39,00</td>
+                            <td class="unfocus">€ 30,80</td>
+                            <td>€ 18,98</td>
+                            <td class="unfocus">€ 28,80</td>
+                            <td>€ 11,82</td>
+                            <td class="unfocus">€ 2,00</td>
+                            <td>€ 8,20</td>
+                        </tr>
+                        <tr>
+                            <td rowspan="2" class="hcol">Fb-pathologie</td>
+                            <td class="hcol">45 minuten</td>
+                            <td class="hcol">1<sup>ste</sup><br>563614 + 563673</td>
+                            <td rowspan="2">€ 39,00</td>
+                            <td rowspan="2" class="unfocus">€ 30,80</td>
+                            <td>€ 32,00</td>
+                            <td class="unfocus">€ 32,86</td>
+                            <td>€ 71,00</td>
+                            <td class="unfocus">€ 63,66</td>
+                            <td>€ 43,63</td>
+                            <td class="unfocus">€ 61,66</td>
+                            <td>€ 20,03</td>
+                            <td class="unfocus">€ 2,00</td>
+                            <td>€ 7,34</td>
+                        </tr>
+                        <tr>
+                            <td class="hcol">30 minuten</td>
+                            <td class="hcol">2<sup>de</sup>-60<sup>ste</sup><br>563614 of 564270</td>
+                            <td>-</td>
+                            <td class="unfocus">-</td>
+                            <td>€ 39,00</td>
+                            <td class="unfocus">€ 30,80</td>
+                            <td>€ 18,98</td>
+                            <td class="unfocus">€ 28,80</td>
+                            <td>€ 11,82</td>
+                            <td class="unfocus">€ 2,00</td>
+                            <td>€ 8,20</td>
+                        </tr>
+                        <tr>
+                            <td rowspan="2" class="hcol">E-pathologie</td>
+                            <td class="hcol">45 minuten</td>
+                            <td class="hcol">1<sup>ste</sup><br>560652 + 560711</td>
+                            <td rowspan="2">€ 39,00</td>
+                            <td rowspan="2" class="unfocus">€ 30,80</td>
+                            <td>€ 32,00</td>
+                            <td class="unfocus">€ 32,86</td>
+                            <td>€ 71,00</td>
+                            <td class="unfocus">€ 63,66</td>
+                            <td>€ 44,84</td>
+                            <td class="unfocus">€ 62,28</td>
+                            <td>€ 18,82</td>
+                            <td class="unfocus">€ 1,38</td>
+                            <td>€ 7,34</td>
+                        </tr>
+                        <tr>
+                            <td class="hcol">30 minuten</td>
+                            <td class="hcol">2<sup>de</sup>-X<sup>ste</sup><br>560652</td>
+                            <td>-</td>
+                            <td class="unfocus">-</td>
+                            <td>€ 39,00</td>
+                            <td class="unfocus">€ 30,80</td>
+                            <td>€ 20,19</td>
+                            <td class="unfocus">€ 29,42</td>
+                            <td>€ 10,61</td>
+                            <td class="unfocus">€ 1,38</td>
+                            <td>€ 8,20</td>
+                        </tr>
+                        <tr>
+                            <td class="hcol">Perinatale</td>
+                            <td class="hcol">30 mintuten</td>
+                            <td class="hcol">Max. 9 zittingen/zwangerschap<br>561595</td>
+                            <td>€ 39,00</td>
+                            <td class="unfocus">€ 30,80</td>
+                            <td>-</td>
+                            <td class="unfocus">-</td>
+                            <td>€ 39,00</td>
+                            <td class="unfocus">€ 30,80</td>
+                            <td>€ 18,42</td>
+                            <td class="unfocus">€ 28,30</td>
+                            <td>€ 12,38</td>
+                            <td class="unfocus">€ 2,50</td>
+                            <td>€ 8,20</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                </div>
+                <p>
+                    <sup>*</sup>VR = voorkeurregeling
+                    <br>
+                    Voor deze patiënten zijn wij als gedeconventioneerde kinesitherapeut verplicht de RIZIV-tarieven te volgen. De terugbetaling voor deze patiënten is ook gelijk aan de terugbetaling bij een geconventioneerde collega.
+                </p>
+                <br>
+                <p class="bold">
+                    Zittingen aan huis:
+                </p>
+                <div style="overflow: scroll; width: inherit">
+                    <table class="table table-bordered">
+                      <tbody class="bold">
+                        <tr>
+                            <th rowspan="3">Pathologische situatie</th>
+                            <th rowspan="3" class="duur">Globaal gemiddelde duur</th>
+                            <th rowspan="3">Zitting</th>
+                            <th colspan="8">Ereloon</th>
+                            <th rowspan="2" colspan="2">Tussenkomst RIZIV</th>
+                            <th rowspan="2" colspan="2">Remgeld pati&euml;nt</th>
+                            <th rowspan="2">Supplement pati&euml;nt</th>
+                        </tr>
+                        <tr>
+                            <th colspan="2">Behandeling</th>
+                            <th colspan="2">Verplaatsing</th>
+                            <th colspan="2">Intake/Schriftelijk verslag</th>
+                            <th colspan="2">Totaal</th>
+                        </tr>
+                        <tr>
+                            <th class="zonderVR">Zonder VR<sup>*</sup></th>
+                            <th class="unfocus">Met VR<sup>*</sup></th>
+                            <th class="zonderVR">Zonder VR<sup>*</sup></th>
+                            <th class="unfocus">Met VR<sup>*</sup></th>
+                            <th class="zonderVR">Zonder VR<sup>*</sup></th>
+                            <th class="unfocus">Met VR<sup>*</sup></th>
+                            <th class="zonderVR">Zonder VR<sup>*</sup></th>
+                            <th class="unfocus">Met VR<sup>*</sup></th>
+                            <th class="zonderVR">Zonder VR<sup>*</sup></th>
+                            <th class="unfocus">Met VR<sup>*</sup></th>
+                            <th class="zonderVR">Zonder VR<sup>*</sup></th>
+                            <th class="unfocus">Met VR<sup>*</sup></th>
+                            <th class="zonderVR">Zonder VR<sup>*</sup></th>
+                        </tr>
+                        <tr>
+                            <td rowspan="2" class="hcol">Courante pathologie</td>
+                            <td class="hcol">45 minuten</td>
+                            <td class="hcol">1<sup>ste</sup></td>
+                            <td rowspan="2">€ 39,00</td>
+                            <td rowspan="2" class="unfocus">€ 33,88</td>
+                            <td rowspan="2">€ 5,50</td>
+                            <td rowspan="2" class="unfocus">€ 1,16</td>
+                            <td>€ 18,00</td>
+                            <td class="unfocus">€ 7,19</td>
+                            <td>€ 62,50</td>
+                            <td class="unfocus">€ 42,23</td>
+                            <td>€ 26,13</td>
+                            <td class="unfocus">€ 38,57</td>
+                            <td>€ 16,10</td>
+                            <td class="unfocus">€ 3,66</td>
+                            <td>€ 20,27</td>
+                        </tr>
+                        <tr>
+                            <td class="hcol">30 minuten</td>
+                            <td class="hcol">2<sup>de</sup>-18<sup>de</sup></td>
+                            <td>-</td>
+                            <td class="unfocus">-</td>
+                            <td>€ 44,50</td>
+                            <td class="unfocus">€ 35,04</td>
+                            <td>€ 20,73</td>
+                            <td class="unfocus">€ 31,38</td>
+                            <td>€ 14,31</td>
+                            <td class="unfocus">€ 3,66</td>
+                            <td>€ 9,46</td>
+                        </tr>
+                        <tr>
+                            <td rowspan="2" class="hcol">Fa-pathologie</td>
+                            <td class="hcol">45 minuten</td>
+                            <td class="hcol">1<sup>ste</sup></td>
+                            <td rowspan="2">€ 39,00</td>
+                            <td rowspan="2" class="unfocus">€ 33,88</td>
+                            <td rowspan="2">€ 5,50</td>
+                            <td rowspan="2" class="unfocus">€ 1,16</td>
+                            <td>€ 32,00</td>
+                            <td class="unfocus">€ 32,86</td>
+                            <td>€ 76,50</td>
+                            <td class="unfocus">€ 67,90</td>
+                            <td>€ 46,08</td>
+                            <td class="unfocus">€ 65,44</td>
+                            <td>€ 21,82</td>
+                            <td class="unfocus">€ 2,46</td>
+                            <td>€ 8,60</td>
+                        </tr>
+                        <tr>
+                            <td class="hcol">30 minuten</td>
+                            <td class="hcol">2<sup>de</sup>-60<sup>ste</sup></td>
+                            <td>-</td>
+                            <td class="unfocus">-</td>
+                            <td>€ 44,50</td>
+                            <td class="unfocus">€ 35,04</td>
+                            <td>€ 21,43</td>
+                            <td class="unfocus">€ 32,58</td>
+                            <td>€ 13,61</td>
+                            <td class="unfocus">€ 2,46</td>
+                            <td>€ 9,46</td>
+                        </tr>
+                        <tr>
+                            <td rowspan="2" class="hcol">Fb-pathologie</td>
+                            <td class="hcol">45 minuten</td>
+                            <td class="hcol">1<sup>ste</sup></td>
+                            <td rowspan="2">€ 39,00</td>
+                            <td rowspan="2" class="unfocus">€ 33,88</td>
+                            <td rowspan="2">€ 5,50</td>
+                            <td rowspan="2" class="unfocus">€ 1,16</td>
+                            <td>€ 32,00</td>
+                            <td class="unfocus">€ 32,86</td>
+                            <td>€ 76,50</td>
+                            <td class="unfocus">€ 67,90</td>
+                            <td>€ 46,08</td>
+                            <td class="unfocus">€ 65,44</td>
+                            <td>€ 21,82</td>
+                            <td class="unfocus">€ 2,46</td>
+                            <td>€ 8,60</td>
+                        </tr>
+                        <tr>
+                            <td class="hcol">30 minuten</td>
+                            <td class="hcol">2<sup>de</sup>-60<sup>ste</sup></td>
+                            <td>-</td>
+                            <td class="unfocus">-</td>
+                            <td>€ 44,50</td>
+                            <td class="unfocus">€ 35,04</td>
+                            <td>€ 21,43</td>
+                            <td class="unfocus">€ 32,58</td>
+                            <td>€ 13,61</td>
+                            <td class="unfocus">€ 2,46</td>
+                            <td>€ 9,46</td>
+                        </tr>
+                        <tr>
+                            <td rowspan="2" class="hcol">E-pathologie</td>
+                            <td class="hcol">45 minuten</td>
+                            <td class="hcol">1<sup>ste</sup></td>
+                            <td rowspan="2">€ 39,00</td>
+                            <td rowspan="2" class="unfocus">€ 33,88</td>
+                            <td rowspan="2">€ 5,50</td>
+                            <td rowspan="2" class="unfocus">€ 1,16</td>
+                            <td>€ 32,00</td>
+                            <td class="unfocus">€ 32,86</td>
+                            <td>€ 76,50</td>
+                            <td class="unfocus">€ 67,90</td>
+                            <td>€ 47,85</td>
+                            <td class="unfocus">€ 66,06</td>
+                            <td>€ 20,05</td>
+                            <td class="unfocus">€ 1,84</td>
+                            <td>€ 8,60</td>
+                        </tr>
+                        <tr>
+                            <td class="hcol">30 minuten</td>
+                            <td class="hcol">2<sup>de</sup>-60<sup>ste</sup></td>
+                            <td>-</td>
+                            <td class="unfocus">-</td>
+                            <td>€ 44,50</td>
+                            <td class="unfocus">€ 35,04</td>
+                            <td>€ 23,20</td>
+                            <td class="unfocus">€ 33,20</td>
+                            <td>€ 11,84</td>
+                            <td class="unfocus">€ 1,84</td>
+                            <td>€ 9,46</td>
+                        </tr>
+                        <tr>
+                            <td class="hcol">Perinatale</td>
+                            <td class="hcol">30 mintuten</td>
+                            <td class="hcol">Max. 9 zittingen/zwangerschap</td>
+                            <td>€ 39,00</td>
+                            <td class="unfocus">€ 33,88</td>
+                            <td >€ 5,50</td>
+                            <td class="unfocus">€ 1,16</td>
+                            <td>-</td>
+                            <td class="unfocus">-</td>
+                            <td>€ 44,50</td>
+                            <td class="unfocus">€ 35,04</td>
+                            <td>€ 20,73</td>
+                            <td class="unfocus">€ 31,38</td>
+                            <td>€ 14,31</td>
+                            <td class="unfocus">€ 3,66</td>
+                            <td>€ 9,46</td>
+                        </tr>
+                        <tr>
+                            <td class="hcol">Palliatieve</td>
+                            <td class="hcol">30 minuten</td>
+                            <td class="hcol">1<sup>ste</sup>-X<sup>ste</sup></td>
+                            <td >€ 39,00</td>
+                            <td class="unfocus">€ 27,72</td>
+                            <td >€ 5,50</td>
+                            <td class="unfocus">€ 1,35</td>
+                            <td>-</td>
+                            <td class="unfocus">-</td>
+                            <td>€ 44,50</td>
+                            <td class="unfocus">€ 29,07</td>
+                            <td>€ 21,82</td>
+                            <td class="unfocus">€ 29,07</td>
+                            <td>€ 7,25</td>
+                            <td class="unfocus">€ 0,00</td>
+                            <td>€ 15,43</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                </div>
+                <p>
+                    <sup>*</sup>VR = voorkeurregeling
+                    <br>
+                    Voor deze patiënten zijn wij als gedeconventioneerde kinesitherapeut verplicht de RIZIV-tarieven te volgen. De terugbetaling voor deze patiënten is ook gelijk aan de terugbetaling bij een geconventioneerde collega.
+                </p>
+            </div>
+        </section>
+        <div class="parallax" style="background-image: url(https://images.weserv.nl/?url=praktijkes.be/imageOriginals/wachtzaal.jpg&w=2000)"><div class="fade-background-dark"></div></div>
+        <section id="contact" class="row">
+            <div class="col">
+                <h2>Contact gegevens van de praktijk E.S.</h2>
+                <div class="row">
+                    <div class="col-sm-2">
+                        <p style="font-weight: bold">Adres:</p>
+                    </div>
+                    <div class="col-sm-4">
+                        <p>Paardenwater 14A<br>
+                            1560 Hoeilaart
+                        </p>
+                    </div>
+                    <div class="col-sm-2">
+                        <p style="font-weight: bold">Telefoon:</p>
+                    </div>
+                    <div class="col-sm-4">
+                        <p><a href="tel:+3223089295">02/308.92.95</a><br>
+                            <span class="small">(Van maandag tot en met vrijdag tussen 8u en 21u.)</span>
+                        </p>
+                    </div>
+                </div>
+
+                <iframe width="100%" height="450" frameborder="0" style="border:0" src="https://maps.google.com/maps?q=Paardenwater%2014A%2C%201560%20Hoeilaart&amp;z=15&amp;output=embed" allowfullscreen title="Kaart"></iframe>
+            </div>
+        </section>
+        <div class="parallax" style="background-image: url(https://images.weserv.nl/?url=praktijkes.be/imageOriginals/inkom.jpg&w=2000)"><div class="fade-background-dark"></div></div>
+        <section id="links" class="row">
+            <div class="col">
+                <h2>Links</h2>
+                <div class="row align-items-center">
+                    <div class="col-sm-4">
+                        <a href="http://www.kinesitherapie.be" target="_blank" rel="noopener">
+                            <img src="https://images.weserv.nl/?url=praktijkes.be/images/logo-kinesitherapie.png" alt="Kinesitherapie" class="col">
+                        </a>
+                    </div>
+                    <div class="col-sm-4">
+                        <a href="http://www.axxon.be" target="_blank" rel="noopener">
+                            <img src="https://images.weserv.nl/?url=praktijkes.be/images/logo-axxon.png" alt="Axxon" class="col">
+                        </a>
+                    </div>
+                    <div class="col-sm-4">
+                        <a href="http://www.mathera.be" target="_blank" rel="noopener">
+                            <img src="https://images.weserv.nl/?url=praktijkes.be/images/logo-mathera.jpg" alt="Mathera" class="col">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <footer>
+        <p class="small">Designed by Eli Schaill&eacute;e</p>
+        </footer>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+    <!-- main JS (origineel) -->
+    <script type="text/javascript">
+        var viewportHeigt = $(window).innerHeight();
+            var viewportWidth = $(window).innerWidth();
+            var languageAndFacebook = $("#languageAndFacebook").outerHeight();
+            var makeAnAppointment = $("#makeAnAppointment").outerHeight();
+            var title = $("#title").outerHeight();
+            var menuHeight = $("#navigation").outerHeight();
+            var jumbotronHeight = viewportHeigt - menuHeight;
+            var jumbotronContent = languageAndFacebook + makeAnAppointment + title;
+
+        function sizeJumbotron(){
+            viewportHeigt = $(window).innerHeight();
+            title = $("#title").outerHeight();
+            jumbotronHeight = viewportHeigt - menuHeight;
+            MakeAnAppointmentPx = (viewportHeigt - menuHeight - title -languageAndFacebook ) + "px";
+
+            $("#makeAnAppointment").css({
+                paddingTop: 0,
+                paddingBottom: 0
+            });
+
+            if ( jumbotronHeight > jumbotronContent) {
+                $("#jumbotron").outerHeight(jumbotronHeight);
+            } else {
+                $("#jumbotron").outerHeight(jumbotronContent);
+            };
+
+            $("#makeAnAppointment").css({
+                height: MakeAnAppointmentPx,
+            });
+
+            $("#navigationFix").outerHeight(menuHeight + "px");
+        };
+
+        $(document).ready(sizeJumbotron);
+
+        $(window).resize(sizeJumbotron);
+
+        $(window).scroll(function(){
+            var jumbotronHeight = $("#jumbotron").outerHeight();
+            var offset = $(window).scrollTop();
+
+            if (offset > jumbotronHeight ) {
+                $("#navigation").css("position", "fixed");
+            }  else {
+                $("#navigation").css("position", "relative");
+            }
+        });
+
+        $("nav").click(function (){
+            if (".navbar-collapse.show") {
+                $(".navbar-collapse").collapse("hide");
+            }
+        })
+
+        $(".navbar-toggler").click(function(){
+            var offset = $(document).scrollTop();
+            var navigationHeigt = $(".navbar-collapse").outerHeight();
+
+            if (offset < navigationHeigt) {
+                $(document).scrollTop(navigationHeigt);
+            } else if (offset == navigationHeigt) {
+                offset = 0;
+                $(document).scrollTop(offset);
+            }
+        });
+
+        // voor quotes te laten verschijnen en afwisselen
+        var quotes = ["optimisme", "actieve levensstijl" ,"veerkracht", "zelfredzaamheid"];
+        var b = document.getElementById("quote");
+        var s = 3000;
+        var quoteNumber = 0;
+
+            b.animate({opacity:1},s/2);
+            setTimeout(function(){b.style.opacity=1}, s/3);
+            setTimeout(function(){b.animate({opacity:0},s/3)}, s*2/3);
+            setTimeout(function(){b.style.opacity=0}, s);
+            b.innerHTML=quotes[quoteNumber];
+            b.style.width="fit-content";
+            var quoteHeight = $("#quote").outerHeight();
+            var quoteWidth = $("#quote").innerWidth();
+            var vert = (Math.random()*(viewportHeigt - menuHeight - title - languageAndFacebook - quoteHeight))+"px";
+            var makeAnAppointmentW = $("#makeAnAppointment").innerWidth();
+            var horr = (Math.random()*(viewportWidth - quoteWidth))+"px";
+            b.style.marginTop=vert;
+            b.style.marginLeft=horr;
+
+        setInterval(function(){
+            if (quoteNumber == quotes.length-1) {
+                quoteNumber = 0;
+            } else {
+                quoteNumber++;
+            }
+
+            b.animate({opacity:1},s/2);
+            setTimeout(function(){b.style.opacity=1}, s/3);
+            setTimeout(function(){b.animate({opacity:0},s/3)}, s*2/3);
+            setTimeout(function(){b.style.opacity=0}, s);
+            b.innerHTML=quotes[quoteNumber];
+            b.style.width="fit-content";
+            quoteHeight = $("#quote").outerHeight();
+            quoteWidth = $("#quote").innerWidth();
+
+            vert = (Math.random()*(viewportHeigt - menuHeight - title - languageAndFacebook - quoteHeight))+"px";
+            makeAnAppointmentW = $("#makeAnAppointment").innerWidth();
+            horr = (Math.random()*(makeAnAppointmentW - quoteWidth))+"px";
+            b.style.marginTop=vert;
+            b.style.marginLeft=horr;
+        }, s);
+    </script>
+
+    </body>
+</html>
