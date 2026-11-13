@@ -1,0 +1,1043 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dobbo · sites web pour les commerces à Bruxelles et alentours</title>
+<link rel="preload" as="image" href="../assets/hf_20261112_161103_55e21a9f-a4fb-44fc-8346-ca19505193c6.webp" fetchpriority="high">
+<!-- Nog niet indexeren zolang de site niet gelanceerd is (in te vullen vakken staan er nog op). Weghalen bij lancering. -->
+<meta name="robots" content="noindex">
+<meta name="description" content="Dobbo crée votre site web et le garde visible, sûr et à jour. Prix fixe dès 500 €.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;800&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --blue:#2B5CFF;--blue-deep:#1B3FC4;--blue-tint:#EEF3FF;--blue-line:#D6E1FF;
+  --red:#DA2C25;--red-deep:#A91F1A;--red-tint:#FFF1F0;
+  --ink:#141A33;--ink-soft:#4A5170;--line:#E6E8F0;--white:#FFFFFF;
+  --display:'Unbounded',system-ui,sans-serif;--body:'Figtree',system-ui,sans-serif;
+  --r-panel:32px;--r-card:20px;--r-pill:999px;
+  /* motion tokens */
+  --ease-out:cubic-bezier(.32,.72,0,1);--ease-in:cubic-bezier(.55,0,1,.45);--ease-io:cubic-bezier(.77,0,.175,1);
+  --t-press:150ms;--t-pop:200ms;--t-panel:280ms;--t-exit:200ms;--t-move:260ms;--t-enter:500ms;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;overflow-x:clip}
+body{margin:0;overflow-x:clip;font-family:var(--body);color:var(--ink);background:var(--white);font-size:18px;line-height:1.55;-webkit-font-smoothing:antialiased}
+img{max-width:100%;height:auto;display:block}
+a{color:var(--blue-deep)}
+.wrap{max-width:1200px;margin:0 auto;padding:0 24px}
+h1,h2,h3{font-family:var(--display);text-transform:uppercase;letter-spacing:-0.01em;margin:0}
+h1{font-size:clamp(30px,3.6vw,50px);line-height:1.02;font-weight:800}
+h2{font-size:clamp(28px,3.4vw,44px);line-height:1.02;font-weight:800}
+h3{font-size:18px;line-height:1.15;font-weight:600}
+p{margin:0}
+.lead{font-size:20px;color:var(--ink-soft);max-width:40ch}
+.muted{color:var(--ink-soft)}
+.small{font-size:14px;color:var(--ink-soft)}
+
+/* buttons: pill, tactile bottom edge */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:56px;padding:0 28px;border-radius:var(--r-pill);font-family:var(--body);font-weight:700;font-size:17px;text-decoration:none;border:0;cursor:pointer;white-space:nowrap;transition:transform var(--t-press) var(--ease-out),box-shadow var(--t-press) var(--ease-out)}
+.btn-red{background:var(--red);color:#fff;box-shadow:0 5px 0 var(--red-deep)}
+.btn-red:active{transform:translateY(5px);box-shadow:0 0 0 var(--red-deep)}
+.btn-ghost{background:#fff;color:var(--blue-deep);box-shadow:inset 0 0 0 2px var(--blue-line),0 5px 0 var(--blue-line)}
+.btn-ghost:active{transform:translateY(5px);box-shadow:inset 0 0 0 2px var(--blue-line)}
+.btn:focus-visible,summary:focus-visible,.chk:focus-visible,.choice:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
+
+/* placeholders Alec moet invullen */
+.todo{border:2px dashed var(--red);background:var(--red-tint);border-radius:16px;padding:14px 16px;color:var(--red-deep);font-size:15px;font-weight:600}
+.todo::before{content:"IN TE VULLEN DOOR ALEC";display:block;font-family:var(--display);font-size:11px;letter-spacing:.06em;margin-bottom:4px}
+.todo-inline{border-bottom:2px dashed var(--red);background:var(--red-tint);color:var(--red-deep);padding:0 4px;font-weight:700}
+
+/* nav */
+header{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.96);border-bottom:1px solid transparent;transition:border-color .2s}
+header.scrolled{border-bottom-color:var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:24px;height:72px}
+.logo{font-family:var(--display);font-weight:800;font-size:28px;color:var(--blue);text-decoration:none;letter-spacing:-0.02em}
+.nav-links{display:flex;gap:28px;align-items:center;font-weight:600;font-size:16px}
+.nav-links a{color:var(--ink);text-decoration:none}
+.nav-links a:hover{color:var(--blue)}
+.lang{font-size:14px;color:var(--ink-soft);font-weight:600}
+.nav .btn{min-height:46px;padding:0 20px;font-size:15px}
+@media (max-width:900px){.nav-links a,.lang{display:none}}
+
+/* hero */
+.hero{padding:48px 0 24px}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:32px;align-items:center}
+.hero h1 span{color:var(--blue)}
+.hero .lead{margin:24px 0 32px}
+.cta-row{display:flex;flex-wrap:wrap;gap:16px;align-items:center}
+.hero-art{position:relative}
+.hero-art img{width:100%;height:auto}
+@media (max-width:900px){.hero-grid{grid-template-columns:minmax(0,1fr)}.hero{padding-top:24px}}
+
+/* sections */
+section{padding:72px 0}
+section[id]{scroll-margin-top:72px}
+.panel{background:var(--blue-tint);border-radius:var(--r-panel);padding:56px;display:grid;gap:48px;align-items:center}
+.panel.split{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+.panel p+p{margin-top:16px}
+@media (max-width:900px){.panel{padding:32px 24px}.panel.split{grid-template-columns:minmax(0,1fr)}}
+.source{margin-top:20px;font-size:13px;color:var(--ink-soft)}
+
+/* herken je dit */
+.check-grid{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,6fr);gap:56px;align-items:start}
+.checks{display:flex;flex-direction:column;gap:12px}
+.chk-h{font-size:14px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);margin:8px 0 0}
+.chk-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;align-items:start}
+.chk-list .chk{font-size:16px;padding:14px 16px;gap:12px}
+.chk-list .chk .box{width:26px;height:26px}
+.chk-list .chk{align-items:center;min-height:84px}.chk-list .chk[aria-pressed="true"]{align-items:flex-start}.chk-list .chk[aria-pressed="true"] .box{margin-top:-2px}
+.chk-t{display:flex;flex-direction:column;min-width:0}
+.tip{display:grid;grid-template-rows:0fr;transition:grid-template-rows var(--t-panel) var(--ease-out)}
+.tip>span{overflow:hidden;font-size:14.5px;font-weight:400;line-height:1.5;color:var(--ink-soft);opacity:0;transition:opacity var(--t-panel) var(--ease-out)}
+.chk[aria-pressed="true"] .tip{grid-template-rows:1fr}
+.chk[aria-pressed="true"] .tip>span{opacity:1;padding-top:8px}
+@media (prefers-reduced-motion:reduce){.tip,.tip>span{transition:none}}
+@media (max-width:700px){.chk-list{grid-template-columns:minmax(0,1fr)}}
+.chk{display:flex;align-items:center;gap:16px;padding:18px 20px;border-radius:var(--r-card);border:2px solid var(--line);background:#fff;font:inherit;font-size:19px;font-weight:600;color:var(--ink);text-align:left;cursor:pointer;transition:border-color .2s,background .2s}
+.chk .box{flex:none;width:30px;height:30px;border-radius:10px;border:2.5px solid var(--blue-line);display:grid;place-items:center;transition:background-color var(--t-press) ease,border-color var(--t-press) ease}
+.chk .box svg{opacity:0;transition:opacity .15s}
+.chk[aria-pressed="true"]{border-color:var(--blue);background:var(--blue-tint)}
+.chk[aria-pressed="true"] .box{background:var(--blue);border-color:var(--blue)}
+.chk[aria-pressed="true"] .box svg{opacity:1}
+.verdict{margin-top:20px;min-height:56px;display:flex;flex-wrap:wrap;gap:16px;align-items:center;font-weight:700;font-size:19px}
+@media (max-width:1100px){.check-grid{grid-template-columns:minmax(0,1fr);gap:32px}}
+
+/* ecosystem */
+.center{text-align:center}
+.center h2{max-width:20ch;margin:0 auto}
+.center .lead{margin:20px auto 0;max-width:44ch}
+.hub{position:relative;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.25fr) minmax(0,1fr);grid-template-areas:"n1 core n2" "n3 core n4";gap:28px 56px;margin-top:40px;text-align:left;align-items:center}
+.hub-lines{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible}
+.hub-lines path{fill:none;stroke:#C9D6FF;stroke-width:2;stroke-dasharray:4 6}
+.hub-lines circle{fill:var(--blue)}
+.hub-node{position:relative;background:#fff;border:1px solid #E3E9FA;border-radius:20px;padding:18px;box-shadow:0 1px 0 #E3E9FA,0 12px 32px -18px rgba(27,63,196,.25);display:flex;flex-direction:column;gap:6px}
+.n1{grid-area:n1}.n2{grid-area:n2}.n3{grid-area:n3}.n4{grid-area:n4}
+.hub-ui{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:6px}
+.pill{font-size:13px;padding:6px 10px;border-radius:10px;background:var(--blue-tint);color:var(--ink)}
+.pill b{color:var(--blue-deep)}.pill.soft{background:#F5F7FC;color:var(--ink-soft)}
+.hub-node h3{font-size:15px}.hub-node p{font-size:15px;color:var(--ink-soft)}
+.hub-who{display:flex;align-items:center;gap:8px;margin-top:8px;font-size:13px;font-weight:700;color:var(--ink-soft)}
+.hub-who img{width:32px;height:32px;border-radius:50%;background:var(--blue-tint);object-fit:cover}
+.hub-core{grid-area:core;position:relative;z-index:1;background:#fff;border-radius:22px;border:1px solid #E3E9FA;box-shadow:0 30px 60px -30px rgba(27,63,196,.45);overflow:visible}
+.core-bar{display:flex;align-items:center;gap:6px;padding:12px 14px;border-bottom:1px solid #EEF1F8}
+.core-bar i{width:9px;height:9px;border-radius:50%;background:#E1E6F2}
+.core-bar span{margin-left:8px;flex:1;font-size:12px;color:var(--ink-soft);background:#F5F7FC;border-radius:999px;padding:4px 10px}
+.core-body{padding:22px;display:flex;flex-direction:column;gap:10px}
+.core-h{height:22px;width:70%;border-radius:6px;background:var(--ink)}
+.core-l{height:10px;width:90%;border-radius:5px;background:#E6EBF5}.core-l.s{width:60%}
+.core-cta{align-self:flex-start;margin-top:6px;background:var(--red);color:#fff;font-size:13px;font-weight:700;padding:9px 16px;border-radius:999px;box-shadow:0 3px 0 var(--red-deep)}
+.core-stat{margin-top:10px;display:grid;grid-template-columns:1fr auto;align-items:end;gap:2px 12px;background:#F5F7FC;border-radius:14px;padding:12px 14px}
+.core-stat span{font-size:12px;color:var(--ink-soft)}.core-stat b{grid-row:2;font-family:var(--display);font-size:24px}
+.core-stat svg{grid-row:1/3;grid-column:2;width:90px;height:32px}
+.core-stat polyline{fill:none;stroke:var(--blue);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+.core-badge{position:absolute;left:50%;bottom:-18px;transform:translateX(-50%);display:flex;align-items:center;gap:8px;white-space:nowrap;background:var(--ink);color:#fff;font-size:12px;font-weight:700;padding:5px 14px 5px 5px;border-radius:999px}
+.core-badge img{width:26px;height:26px;border-radius:50%;background:#fff;object-fit:cover}
+@media (max-width:900px){.hub{grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-areas:"core core" "n1 n2" "n3 n4";gap:16px}.hub-core{margin-bottom:26px}.hub-lines{display:none}}
+@media (max-width:560px){.hub{grid-template-columns:minmax(0,1fr);grid-template-areas:"core" "n1" "n2" "n3" "n4"}}
+@media (prefers-reduced-motion:reduce){.hub-lines circle{display:none}}
+.eco-list{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:16px;margin-top:16px}
+.eco-item{border-top:3px solid var(--blue);padding-top:14px}
+.eco-item h3{font-size:14px}
+.eco-item p{font-size:15px;color:var(--ink-soft);margin-top:6px}
+@media (max-width:900px){.eco-list{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+/* marquee */
+.marquee{overflow:hidden;background:var(--blue);color:#fff;padding:22px 0;transform:rotate(-1.5deg);margin:24px -20px}
+.marquee-track{display:flex;gap:48px;width:max-content;animation:slide 28s linear infinite;font-family:var(--display);font-weight:800;font-size:32px;text-transform:uppercase}
+.marquee-track span:nth-child(even){color:#FFD3D1}
+@keyframes slide{to{transform:translateX(-50%)}}
+
+/* team */
+.team-intro{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:48px;align-items:end;margin-bottom:40px}
+.team{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,8fr);gap:16px}
+.member{border-radius:var(--r-card);background:var(--blue-tint);padding:18px 20px;display:flex;flex-direction:column;gap:6px;transition:transform var(--t-pop) var(--ease-out)}
+.member .role{font-size:14px;font-weight:700;color:var(--blue-deep)}
+.member p{font-size:15px;color:var(--ink-soft)}
+.tag{align-self:flex-start;font-size:12px;font-weight:700;padding:4px 10px;border-radius:var(--r-pill);background:#fff;color:var(--blue-deep)}
+.member.human{background:var(--red-tint);justify-content:flex-end;padding:20px 24px 26px}
+.member.human img{width:100%;max-height:300px;object-fit:contain;margin:0 auto 6px}
+.member.human .role,.member.human .tag{color:var(--red-deep)}
+.member.human ul{list-style:none;padding:0;margin:8px 0 0;display:grid;gap:6px;font-size:15px}
+.member.human li::before{content:"✓";color:var(--red);font-weight:800;margin-right:8px}
+.town-link{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;padding:18px 22px;border-radius:var(--r-card);background:var(--ink);color:#fff;text-decoration:none;font-size:16px;transition:transform .2s}
+.town-link b{color:#fff}
+.tl-go{font-weight:800;background:#fff;color:var(--ink);padding:9px 16px;border-radius:999px;font-size:15px;white-space:nowrap}
+.extra-crew{grid-column:1/-1;padding:22px;border-radius:var(--r-card);background:#F5F7FC;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,3fr);gap:20px;align-items:center}
+.xc-head h3{font-size:18px;margin:8px 0 4px}.xc-head p{font-size:14px;color:var(--ink-soft)}
+.xc-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.xc{display:flex;flex-direction:column;gap:10px;background:#fff;border-radius:18px;padding:14px;border:1px solid #E6EBF5}
+.xc img{width:56px;height:56px;border-radius:50%;background:var(--blue-tint);object-fit:cover}
+.xc h4{font-family:var(--display);text-transform:uppercase;font-size:15px;margin:0}
+.xc .role{font-size:13px;font-weight:700;color:var(--blue-deep)}
+.xc p{font-size:13px;color:var(--ink-soft);margin-top:4px;line-height:1.4}
+.xc-price{display:inline-block;margin-top:8px;font-size:12px;font-weight:700;padding:3px 9px;border-radius:999px;background:#FFF1C9;color:var(--ink)}
+@media (max-width:1100px){.extra-crew{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:700px){.xc-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.panel-test{grid-column:1/-1;background:#fff;border:2px solid var(--red-tint);border-radius:var(--r-card);padding:24px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:12px 40px;align-items:center}
+.pt-head{display:flex;align-items:center;gap:18px}
+.pt-head .tag{background:var(--red-tint);color:var(--red-deep)}
+.pt-head .role{font-size:14px;font-weight:700;color:var(--red-deep)}
+.pt-head h3{margin:4px 0 2px}
+.pt-faces{display:flex;flex:none}
+.pt-faces span{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;font-size:22px;background:var(--red-tint);border:3px solid #fff;margin-left:-12px}
+.pt-faces span:nth-child(2){background:#FFE4D6}.pt-faces span:nth-child(3){background:#E2F5EA}.pt-faces span:nth-child(4){background:#FFF1C9}.pt-faces svg{width:22px;height:22px;fill:none;stroke:var(--ink);stroke-width:1.8;stroke-linecap:round}.pt-faces span:first-child{margin-left:0}.pt-faces span:last-child{background:var(--red);color:#fff;font-weight:800;font-size:18px}
+.panel-test>p{color:var(--ink-soft);font-size:15px}
+.pt-flow{grid-column:1/-1;list-style:none;margin:8px 0 0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.pt-flow li{display:flex;align-items:center;gap:10px;font-size:14px;font-weight:600;background:#F5F7FC;border-radius:14px;padding:12px}
+.pt-flow b{flex:none;width:26px;height:26px;border-radius:50%;display:grid;place-items:center;background:var(--blue);color:#fff;font-size:13px}
+.pt-flow li:nth-child(3) b,.pt-flow li:nth-child(4) b{background:var(--red)}
+.panel-test .todo{grid-column:1/-1}
+@media (max-width:900px){.panel-test{grid-template-columns:minmax(0,1fr)}.pt-flow{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:520px){.pt-flow{grid-template-columns:minmax(0,1fr)}}
+.team-side{display:flex;flex-direction:column;gap:16px}
+.test-strip{display:flex;align-items:center;gap:16px;padding:16px 20px;border-radius:var(--r-card);border:2px solid var(--red-tint);background:#fff}
+.test-strip p{font-size:15px;color:var(--ink-soft);margin:0}.test-strip b{color:var(--ink)}
+@media (max-width:640px){.squad{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:12px}.squad .member{flex-direction:column!important;align-items:flex-start!important;gap:10px;padding:14px}.squad .member img{width:64px!important;height:64px!important}.squad .member p{font-size:14px}.test-strip{flex-direction:column;align-items:flex-start}}
+.squad{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.squad .member{flex-direction:row;align-items:center;gap:16px}
+.squad .member img{width:96px;height:96px;flex:none;border-radius:50%;background:#fff;object-fit:cover}
+.squad .member div{display:flex;flex-direction:column;gap:4px;min-width:0}
+.squad .member .does{font-size:13px;color:var(--blue-deep);font-weight:600;margin-top:2px}
+@media (max-width:1000px){.team{grid-template-columns:minmax(0,1fr)}.member.human{flex-direction:row;align-items:center;gap:16px}.member.human img{width:140px;flex:none;margin:0}}@media (max-width:640px){.squad{grid-template-columns:minmax(0,1fr)}.member.human{flex-direction:column;align-items:flex-start}.squad .member img{width:76px;height:76px}}@media (max-width:1000px){.team-intro{grid-template-columns:minmax(0,1fr);gap:16px}}
+
+/* bewijs */
+.proof{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px;margin-top:32px}
+.shot{aspect-ratio:16/10;border-radius:var(--r-card);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px}
+.facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;margin-top:32px}
+.fact strong{display:block;font-family:var(--display);font-size:40px;font-weight:800;color:var(--blue);line-height:1}
+.fact span{font-size:15px;color:var(--ink-soft)}
+@media (max-width:900px){.proof,.facts{grid-template-columns:minmax(0,1fr)}}
+
+/* stappen */
+.steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px;margin-top:40px;counter-reset:s}
+.step{position:relative;padding-top:64px}
+.step::before{counter-increment:s;content:counter(s);position:absolute;top:0;left:0;width:48px;height:48px;border-radius:50%;background:var(--blue);color:#fff;font-family:var(--display);font-weight:800;display:grid;place-items:center;font-size:20px}
+.step:last-child::before{background:var(--red)}
+.step p{margin-top:8px;color:var(--ink-soft);font-size:16px}
+@media (max-width:900px){.steps{grid-template-columns:repeat(2,minmax(0,1fr))}}@media (max-width:520px){.steps{grid-template-columns:minmax(0,1fr)}.eco-list{grid-template-columns:minmax(0,1fr)}.nav .btn{display:none}.final{padding:40px 20px 0}}
+
+/* pakketten */
+.helper{display:flex;flex-wrap:wrap;gap:24px 40px;align-items:center;margin:32px 0;padding:24px 28px;border-radius:var(--r-card);border:2px solid var(--line)}
+.helper-q{display:flex;flex-wrap:wrap;gap:10px;align-items:center;font-weight:700}
+.choice{font:inherit;font-size:15px;font-weight:700;padding:10px 18px;border-radius:var(--r-pill);border:2px solid var(--blue-line);background:#fff;color:var(--blue-deep);cursor:pointer}
+.choice[aria-pressed="true"]{background:var(--blue);border-color:var(--blue);color:#fff}
+.plans{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;align-items:stretch}
+.plan{border:2px solid var(--line);border-radius:var(--r-card);padding:32px;display:flex;flex-direction:column;gap:14px;transition:border-color var(--t-move) ease,transform var(--t-move) var(--ease-io)}
+.plan.reco{border-color:var(--blue)}
+.plan.match{border-color:var(--red);transform:translateY(-8px)}
+.plan .price{font-family:var(--display);font-weight:800;font-size:44px;line-height:1}
+.plan .per{font-size:14px;color:var(--ink-soft)}
+.plan .who{font-weight:700}
+.plan ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:10px;flex:1}
+.plan li{display:flex;gap:10px;font-size:16px}
+.plan li svg{flex:none;margin-top:4px}
+.badge{align-self:flex-start;font-size:13px;font-weight:700;padding:5px 12px;border-radius:var(--r-pill);background:var(--blue-tint);color:var(--blue-deep)}
+.plan .btn{width:100%}
+details.more{font-size:15px;color:var(--ink-soft)}
+details.more summary{cursor:pointer;font-weight:700;color:var(--blue-deep)}
+.two-things{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin:28px 0 8px}
+.tt{display:flex;align-items:center;gap:16px;padding:20px 22px;border-radius:var(--r-card);background:var(--blue-tint);text-decoration:none;color:var(--ink);transition:transform var(--t-pop) var(--ease-out)}
+.tt b{display:block;font-family:var(--display);text-transform:uppercase;font-size:20px}.tt small{font-size:15px;color:var(--ink-soft)}
+.tt-n{flex:none;width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:var(--blue);color:#fff;font-weight:800;font-size:20px}.tt-n.red{background:var(--red)}
+.sub-h{font-size:clamp(24px,2.6vw,32px);margin-top:56px;scroll-margin-top:136px}
+#beheer{scroll-margin-top:136px}
+.plan .price small{font-size:16px;font-family:var(--body);font-weight:700;color:var(--ink-soft);margin-right:4px}
+.av-new{display:inline-grid;place-items:center;width:40px;height:40px;border-radius:50%;background:#FFF1C9;color:var(--ink);font-weight:800;border:2px solid #fff;margin-left:-10px;font-size:15px}
+.avatars .av-new:first-child{margin-left:0}
+.always{list-style:none;padding:0;margin:20px 0 0;display:flex;flex-wrap:wrap;gap:10px 28px;justify-content:center;font-weight:700;font-size:15px}
+.always li{display:flex;align-items:center;gap:8px}
+.calc{margin-top:48px;display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:24px;align-items:start}
+.calc-l{border:2px solid var(--line);border-radius:var(--r-card);padding:28px}
+.calc-seg{margin:18px 0 8px}
+.calc-seg button[aria-checked=true]{background:#fff;box-shadow:0 3px 0 #d5def7;color:var(--ink)}
+.addons{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:12px}
+.addon{position:relative;display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:16px;background:#F5F7FC;cursor:pointer;transition:background .2s,box-shadow .2s}
+.addon input{position:absolute;opacity:0;pointer-events:none}
+.addon.on{background:var(--blue-tint);box-shadow:inset 0 0 0 2px var(--blue)}
+.addon.inc{opacity:.55;cursor:default}
+.addon-av img,.addon-av .av-new{width:36px;height:36px;border-radius:50%;object-fit:cover;background:#fff;margin:0;border:0;display:grid}
+.addon-t{flex:1;min-width:0;display:flex;flex-direction:column;font-size:14px;line-height:1.3}
+.addon-t small{color:var(--ink-soft);font-size:13px;margin-top:2px}
+.inc-note{display:none;font-style:normal;color:var(--blue-deep);font-weight:700}.addon.inc .inc-note{display:inline}
+.tog{flex:none;width:38px;height:22px;border-radius:999px;background:#D7DEEE;position:relative;transition:background .2s}
+.tog::after{content:"";position:absolute;top:3px;left:3px;width:16px;height:16px;border-radius:50%;background:#fff;transition:transform .2s cubic-bezier(.16,1,.3,1)}
+.addon.on .tog{background:var(--blue)}.addon.on .tog::after{transform:translateX(16px)}
+.addon input:focus-visible~.tog{outline:2px solid var(--blue);outline-offset:2px}
+.step-n{flex:none;display:flex;align-items:center;gap:6px}
+.step-n button{width:28px;height:28px;border-radius:50%;border:0;background:#fff;font:inherit;font-weight:800;color:var(--blue-deep);cursor:pointer;box-shadow:0 2px 0 #d5def7}
+.step-n output{min-width:16px;text-align:center;font-weight:800}
+.calc-r{position:sticky;top:96px;background:var(--ink);color:#fff;border-radius:var(--r-card);padding:26px;display:flex;flex-direction:column;gap:10px}
+.calc-lab{font-size:13px;font-weight:700;color:#AEB7D0;text-transform:uppercase;letter-spacing:.06em}
+.calc-total{font-family:var(--display);font-size:48px;line-height:1}
+.calc-lines{list-style:none;margin:4px 0;padding:0;display:flex;flex-direction:column;gap:6px;font-size:14px;color:#D6DCEC}
+.calc-lines li{display:flex;justify-content:space-between;gap:12px}
+.calc-pay{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;padding:14px 0;border-top:1px solid #2C3350;border-bottom:1px solid #2C3350}
+.calc-pay>span{grid-column:1/-1;font-size:13px;color:#AEB7D0}
+.calc-pay div{display:flex;flex-direction:column}.calc-pay b{font-size:18px}.calc-pay small{font-size:12px;color:#AEB7D0}
+.calc-hint{font-size:14px;background:#2C3350;border-radius:12px;padding:10px 12px}
+.calc-r .btn{width:100%;margin-top:6px}
+.calc-foot{font-size:12px;color:#AEB7D0}
+.flow{margin-top:48px;border-radius:var(--r-card);background:var(--blue-tint);padding:32px}
+.flow ol{list-style:none;padding:0;margin:20px 0 0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.flow li{display:flex;flex-direction:column;gap:10px;background:#fff;border-radius:18px;padding:18px}
+.flow li>b{width:32px;height:32px;border-radius:50%;display:grid;place-items:center;background:var(--blue);color:#fff}
+.flow li strong{font-size:16px;line-height:1.3}.flow li p{font-size:14px;color:var(--ink-soft);margin-top:6px}
+.flow-g{margin-top:16px;font-size:16px}
+@media (max-width:1000px){.calc{grid-template-columns:minmax(0,1fr)}.calc-r{position:static}.flow ol{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:640px){.two-things,.addons,.flow ol{grid-template-columns:minmax(0,1fr)}.calc-l,.flow{padding:20px}.calc-total{font-size:40px}}
+.after-plans{display:flex;flex-wrap:wrap;gap:20px;margin-top:28px}
+.after-plans p{flex:1 1 300px;padding:20px 24px;border-radius:var(--r-card);background:var(--blue-tint);font-size:17px}
+@media (max-width:900px){.plans{grid-template-columns:minmax(0,1fr)}.plan.reco{order:-1}}
+
+/* beheer */
+.care{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px;margin-top:32px}
+.care-col{background:#fff;border-radius:var(--r-card);padding:28px}
+.care-col h3{display:flex;justify-content:space-between;align-items:baseline;gap:12px;font-size:20px}
+.care-col h3 span{font-family:var(--body);text-transform:none;font-size:15px;color:var(--ink-soft);font-weight:600}
+.care-row{display:grid;grid-template-columns:56px minmax(0,1fr);gap:14px;align-items:center;padding:12px 0;border-top:1px solid var(--line)}
+.care-row img{width:56px;height:56px;border-radius:50%;object-fit:cover}
+.care-row p{font-size:16px}
+@media (max-width:900px){.care{grid-template-columns:minmax(0,1fr)}}
+
+/* faq */
+.faq{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,6fr);gap:56px}
+.faq details{border-bottom:2px solid var(--line);padding:20px 0}
+.faq summary{cursor:pointer;font-weight:700;font-size:19px;list-style:none;display:flex;justify-content:space-between;gap:16px}
+.faq summary::after{content:"+";font-family:var(--display);color:var(--blue);font-size:22px;line-height:1}
+.faq details[open] summary::after{content:"−"}
+.faq details p{margin-top:12px;color:var(--ink-soft)}
+@media (max-width:900px){.faq{grid-template-columns:minmax(0,1fr);gap:24px}}
+
+/* slot */
+.call{position:relative;width:min(340px,100%);margin:48px auto -40px;background:#fff;color:var(--ink);border-radius:32px 32px 0 0;padding:22px 24px 64px;display:flex;flex-direction:column;align-items:center;gap:6px;box-shadow:0 -20px 50px -20px rgba(0,0,0,.35)}
+.call-top{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:700;color:var(--ink-soft);margin-bottom:14px}
+.call-dot{width:8px;height:8px;border-radius:50%;background:#22C55E;box-shadow:0 0 0 4px #DCFCE7}
+.call-me{position:relative;width:96px;height:96px;margin-bottom:8px}
+.call-me img{position:relative;width:96px;height:96px;border-radius:50%;background:var(--blue-tint);object-fit:cover}
+.ring{position:absolute;inset:0;border-radius:50%;border:2px solid var(--blue);animation:ring 2s cubic-bezier(.16,1,.3,1) infinite}
+@keyframes ring{from{transform:scale(1);opacity:.7}to{transform:scale(1.6);opacity:0}}
+.call strong{font-family:var(--display);font-size:20px;text-transform:uppercase}
+.call-sub{font-size:14px;color:var(--ink-soft)}
+.call-team{display:flex;align-items:center;margin-top:14px;font-size:12px;font-weight:600;color:var(--ink-soft)}
+.call-team img{width:30px;height:30px;border-radius:50%;border:2px solid #fff;background:var(--blue-tint);object-fit:cover;margin-left:-8px}
+.call-team img:first-child{margin-left:0}.call-team span{margin-left:8px}
+.call-btns{display:flex;gap:28px;margin-top:20px}
+.cb{width:56px;height:56px;border-radius:50%;display:grid;place-items:center}
+.cb svg{width:24px;height:24px;fill:none;stroke:#fff;stroke-width:2;stroke-linejoin:round}
+.cb.video{background:var(--blue)}.cb.phone{background:#22C55E}
+@media (prefers-reduced-motion:reduce){.ring{animation:none}}
+.final{background:var(--blue);color:#fff;border-radius:var(--r-panel);padding:64px 56px 0;text-align:center;overflow:hidden}
+.final h2{font-size:clamp(32px,4.6vw,60px);max-width:18ch;margin:0 auto}
+.final p{margin:20px auto 0;max-width:46ch;font-size:19px;color:#E4EAFF}
+.final .cta-row{justify-content:center;margin-top:32px}
+.book{display:flex;flex-direction:column;align-items:center;gap:14px;margin-top:24px}
+.book-alt{font-size:16px}.book-alt a{color:inherit;font-weight:700;text-decoration:underline;text-underline-offset:3px}
+.foot-contact a{font-weight:700;color:inherit}
+.final .todo{background:#fff;display:inline-block;margin-top:16px}
+
+.book{margin-top:28px;display:grid;gap:12px;max-width:640px;margin-left:auto;margin-right:auto}
+
+footer{padding:56px 0;font-size:15px;color:var(--ink-soft)}
+.foot{display:flex;flex-wrap:wrap;gap:24px;justify-content:space-between;align-items:flex-start}
+
+
+.toon{position:relative;display:block;aspect-ratio:1/1}
+.toon img,.toon canvas{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
+.toon canvas{opacity:0;transition:opacity var(--t-pop) var(--ease-out)}.toon.live canvas{opacity:1}
+.member.human .toon{width:100%;max-width:300px;margin:0 auto 6px}
+.step .toon{width:132px;height:132px;margin:0 0 4px -10px}
+.care-chars .toon{width:150px;height:150px}
+@media (max-width:1000px){.member.human .toon{width:150px;flex:none;margin:0}}
+@media (max-width:900px){.care-chars .toon{width:104px;height:104px}}
+.side-char{width:min(260px,70%);margin-top:24px}
+.step{padding-top:0}
+.step img{width:120px;height:120px;object-fit:contain;margin:0 0 8px -8px}
+.step::before{top:0;left:auto;right:0;width:40px;height:40px;font-size:17px}
+.step h3{margin-top:4px}
+.crew{display:flex;align-items:center;gap:12px;font-size:14px;font-weight:700;color:var(--ink-soft)}
+.avatars{display:flex}
+.avatars img{width:40px;height:40px;border-radius:50%;object-fit:cover;background:var(--blue-tint);border:2px solid #fff;margin-left:-10px}
+.avatars img:first-child{margin-left:0}
+.care-head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap}.care-head h2{flex:1 1 420px}
+.care-chars{display:flex}
+.care-chars img{width:130px;height:130px;object-fit:contain}
+@media (max-width:900px){.side-char{width:180px}.care-chars img{width:96px;height:96px}}
+
+.cv{margin-top:32px}
+.cv-bar{display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;margin-bottom:16px}
+.seg{display:inline-flex;background:var(--blue-tint);border-radius:var(--r-pill);padding:4px;gap:4px}
+.seg button{font:inherit;font-weight:700;font-size:15px;border:0;background:transparent;color:var(--blue-deep);padding:10px 18px;border-radius:var(--r-pill);cursor:pointer}
+.seg button[aria-selected=true],.seg button[aria-pressed=true]{background:#fff;box-shadow:0 3px 0 #d5def7;color:var(--ink)}
+.cv-stage{background:var(--blue-tint);border-radius:var(--r-card);padding:24px;display:flex;justify-content:center}
+.cv-frame{width:100%;max-width:1040px;background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 6px 0 #d5def7;transition:max-width .35s cubic-bezier(.16,1,.3,1)}
+.cv-frame.gsm{max-width:360px;border-radius:36px;border:10px solid #1d2233}
+.cv-size{font-size:13px;color:var(--ink-soft);text-align:center;margin-top:10px}
+.cv-chrome{display:flex;align-items:center;gap:6px;padding:10px 14px;border-bottom:1px solid #e6ebf7;font-size:13px}
+.cv-chrome i{width:10px;height:10px;border-radius:50%;background:#dfe5f3}
+.cv-chrome span{flex:1;min-width:0;margin:0 8px;padding:4px 12px;border-radius:var(--r-pill);background:var(--blue-tint);color:var(--ink-soft);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.cv-chrome a{font-weight:700;color:var(--blue);text-decoration:none;white-space:nowrap}
+.cv-frame.gsm .cv-chrome i{display:none}
+.cv-screen{position:relative;overflow:hidden;overscroll-behavior:contain;height:calc(var(--vh,900px)*var(--k,.75))}
+.cv-screen iframe{position:absolute;top:0;left:0;border:0;display:block;transform-origin:0 0;transform:scale(var(--k,.75));width:var(--vw,1440px);height:var(--vh,900px)}
+.cv-screen iframe[hidden]{display:none}
+.cv-toast{position:absolute;left:50%;top:16px;transform:translate(-50%,-8px);background:var(--red);color:#fff;font-size:13px;font-weight:700;padding:8px 14px;border-radius:var(--r-pill);opacity:0;pointer-events:none;transition:opacity .25s,transform .25s;white-space:nowrap}
+.cv-toast.on{opacity:1;transform:translate(-50%,0)}
+.cv-hint{position:absolute;left:50%;bottom:16px;transform:translateX(-50%);background:var(--ink);color:#fff;font-size:13px;font-weight:700;padding:8px 14px;border-radius:var(--r-pill);pointer-events:none;transition:opacity .4s;white-space:nowrap}
+.cv-hint.off{opacity:0}
+@media (max-width:640px){.cv-stage{padding:10px}.seg button{padding:8px 12px;font-size:14px}.cv-frame.gsm{border-width:6px}}
+/* reveal */
+.reveal{opacity:0;transform:translateY(16px);transition:opacity var(--t-enter) var(--ease-out),transform var(--t-enter) var(--ease-out);transition-delay:var(--rd,0ms)}
+.reveal.now{transition:none}
+.reveal.in{opacity:1;transform:none}
+
+/* hover-beweging alleen met een echte muis */
+@media (hover:hover) and (pointer:fine){
+  .btn-red:hover{transform:translateY(-2px);box-shadow:0 7px 0 var(--red-deep)}
+  .btn-ghost:hover{transform:translateY(-2px)}
+  .member:hover,.tt:hover,.town-link:hover{transform:translateY(-3px)}
+}
+.town-link{transition:transform var(--t-pop) var(--ease-out)}
+/* grotere klikzone voor kleine knoppen */
+.step-n button{position:relative}
+.step-n button::after{content:"";position:absolute;top:50%;left:50%;width:40px;height:40px;translate:-50% -50%}
+/* cijfers schuiven niet */
+.calc-total,.calc-pay b,.calc-lines,.price,.step-n output{font-variant-numeric:tabular-nums}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}.marquee-track{animation:none}.btn,.member,.plan,.tt,.town-link,.sticky-cta{transition:none}html{scroll-behavior:auto}}
+
+/* mobiele vaste knop */
+.sticky-cta{display:none}
+@media (max-width:700px){.sticky-cta{display:block;position:fixed;left:16px;right:16px;bottom:16px;z-index:30;transform:translateY(120%);transition:transform var(--t-exit) var(--ease-in)}.sticky-cta.show{transform:none;transition:transform var(--t-panel) var(--ease-out)}.sticky-cta .btn{width:100%}}
+</style>
+</head>
+<body>
+
+<header id="top">
+  <div class="wrap nav">
+    <a href="#top" class="logo" aria-label="Dobbo, retour en haut">dobbo</a>
+    <nav class="nav-links" aria-label="Menu principal">
+      <a href="#hoe">Comment ça marche</a>
+      <a href="team.html">L'équipe</a>
+      <a href="#pakketten">Formules</a>
+      <a href="#vragen">Questions</a>
+      
+    </nav>
+    <a href="https://cal.com/dobbo/gratis-gesprek" target="_blank" rel="noopener" class="btn btn-red">Réserver mon appel gratuit</a>
+  </div>
+</header>
+
+<main>
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <h1>Vos clients vous cherchent sur Google. <span>Que voient-ils ?</span></h1>
+      <p class="lead">Nous créons votre site web et le gardons visible, sûr et à jour. Prix fixe dès 500 €.</p>
+      <div class="cta-row">
+        <a href="https://cal.com/dobbo/gratis-gesprek" target="_blank" rel="noopener" class="btn btn-red">Réserver mon appel gratuit</a>
+        <a href="#pakketten" class="btn btn-ghost">Voir les formules</a>
+      </div>
+    </div>
+    <div class="hero-art">
+      <img src="../assets/hf_20261112_161103_55e21a9f-a4fb-44fc-8346-ca19505193c6.webp" alt="Alec et son équipe, un hibou, un renard, un hérisson et un castor, sur de grandes lettres bleues dobbo" width="1344" height="752" fetchpriority="high">
+    </div>
+  </div>
+</section>
+
+<section aria-labelledby="anders">
+  <div class="wrap">
+    <div class="panel split reveal">
+      <img src="../assets/hf_20261112_161103_b23e9b3a-dc49-4304-9e32-089c7c790617.webp" alt="Un commerçant donne un flyer, la cliente cherche aussitôt le commerce sur son téléphone" loading="lazy" width="1168" height="880">
+      <div>
+        <h2 id="anders">Vos clients vous cherchent d'abord en ligne</h2>
+        <p class="lead" style="margin-top:20px">Un flyer, une recommandation ou un post Instagram : quand on entend parler de votre commerce, on vous cherche ensuite en ligne. C'est sur votre site qu'on décide d'appeler, de passer ou de réserver.</p>
+        <p class="muted" style="margin-top:16px">Seulement 8 % des gens ne regardent jamais le site d'un commerce local. S'ils ne trouvent rien, ou un site dépassé, ils abandonnent et votre publicité est perdue. Un bon site renforce toute votre autre publicité.</p>
+        <p class="source">Source : BrightLocal, étude sur les sites web des commerces locaux.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section aria-labelledby="herken">
+  <div class="wrap check-grid">
+    <div class="reveal">
+      <h2 id="herken">Ça vous parle ?</h2>
+      <p class="lead" style="margin-top:20px">Cochez ce qui est vrai pour vous. Chaque point vous donne un conseil honnête.</p>
+      <span class="toon side-char" data-fallback="../assets/hf_20261112_224332_4d7c5e20-de3c-429a-ada3-081d701633cc.webp" data-video="../assets/hf_20261112_224435_f091d5df-9d63-4c13-8fc0-cff5748b2925.mp4" role="img" aria-label="Le hibou regarde une tablette pleine de graphiques"></span>
+    </div>
+    <div class="reveal">
+      <div class="checks" id="checks">
+        <h3 class="chk-h">Votre site</h3>
+        <div class="chk-list"><button type="button" class="chk" aria-pressed="false"><span class="box"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg></span><span class="chk-t"><span>Votre site s'affiche mal sur téléphone.</span><span class="tip"><span>La plupart des gens cherchent un commerce local sur leur téléphone. S'ils doivent zoomer pour trouver votre numéro, ils appellent souvent le suivant dans la liste. Essayez vous-même : trouvez-vous votre adresse en 10 secondes sur votre téléphone ?</span></span></span></button><button type="button" class="chk" aria-pressed="false"><span class="box"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg></span><span class="chk-t"><span>Vos horaires, prix ou services ne sont plus à jour.</span><span class="tip"><span>Un mauvais horaire coûte plus qu'un client : qui trouve porte close revient rarement. Conseil : mettez vos horaires à un seul endroit et renvoyez-y partout ailleurs, vous ne les modifiez qu'une fois.</span></span></span></button><button type="button" class="chk" aria-pressed="false"><span class="box"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg></span><span class="chk-t"><span>Des clients appellent pour des infos qui devraient être sur votre site.</span><span class="tip"><span>Ces appels sont en fait une bonne nouvelle : les gens veulent venir chez vous. Mais pour chaque appel, quelqu'un n'a pas trouvé l'info et a abandonné. Notez les cinq questions qu'on vous pose le plus : c'est le début de votre meilleure page.</span></span></span></button><button type="button" class="chk" aria-pressed="false"><span class="box"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg></span><span class="chk-t"><span>Votre concurrent apparaît avant vous sur Google.</span><span class="tip"><span>C'est rarement une question de budget. Souvent, ce concurrent a simplement un profil Google complet, des avis récents et un site qui dit clairement ce qu'il fait et où. Commencez par votre profil Google : des photos, des horaires corrects et des réponses aux avis font déjà beaucoup.</span></span></span></button><button type="button" class="chk" aria-pressed="false"><span class="box"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg></span><span class="chk-t"><span>Vous ne savez plus qui gère vos accès ou votre nom de domaine.</span><span class="tip"><span>C'est plus fréquent qu'on ne le pense, surtout si quelqu'un d'autre a créé votre site. Assurez-vous au moins que votre nom de domaine est à votre nom : c'est la seule chose que vous ne voulez vraiment pas perdre.</span></span></span></button><button type="button" class="chk" aria-pressed="false"><span class="box"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg></span><span class="chk-t"><span>Une connaissance a fait votre site, et il n'a plus bougé depuis.</span><span class="tip"><span>Rien de mal à ça, presque tout le monde commence ainsi. Mais un site vieillit en silence : votre commerce évolue, votre site reste figé. Relisez-le comme un inconnu : dit-il encore ce que vous faites aujourd'hui ?</span></span></span></button><button type="button" class="chk" aria-pressed="false"><span class="box"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg></span><span class="chk-t"><span>Vos clients ne peuvent pas réserver ou commander en ligne.</span><span class="tip"><span>Beaucoup de gens regardent le soir ou le week-end, justement quand vous ne répondez pas. Qui peut réserver tout de suite, réserve. Connecter un agenda gratuit est souvent plus simple que vous ne le pensez.</span></span></span></button><button type="button" class="chk" aria-pressed="false"><span class="box"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg></span><span class="chk-t"><span>Vous n'avez pas encore de site.</span><span class="tip"><span>Vous partez alors avec un avantage : rien à démolir. Un site simple qui dit qui vous êtes, ce que vous faites, où vous êtes et comment vous joindre fait déjà l'essentiel.</span></span></span></button></div>
+        <h3 class="chk-h">Ce que vous pensez peut-être</h3>
+        <div class="chk-list"><button type="button" class="chk" aria-pressed="false"><span class="box"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg></span><span class="chk-t"><span>« Facebook et Instagram suffisent, non ? »</span><span class="tip"><span>Ils sont parfaits pour rester visible. Mais votre portée dépend d'un algorithme, et tout le monde n'a pas de compte. Votre site est le seul endroit qui vous appartient vraiment, et vos posts peuvent parfaitement y renvoyer.</span></span></span></button><button type="button" class="chk" aria-pressed="false"><span class="box"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg></span><span class="chk-t"><span>« Mes clients me connaissent déjà. »</span><span class="tip"><span>Vos habitués, oui, et ils vous recommandent. Mais qui reçoit cette recommandation vous cherche d'abord en ligne avant de passer. Ce qu'il trouve décide s'il vient.</span></span></span></button><button type="button" class="chk" aria-pressed="false"><span class="box"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg></span><span class="chk-t"><span>« Un site web, c'est pour les grandes entreprises. »</span><span class="tip"><span>C'est plutôt l'inverse : une grande chaîne est trouvée de toute façon. Pour un petit commerce, un site fait souvent la différence entre être trouvé ou non.</span></span></span></button><button type="button" class="chk" aria-pressed="false"><span class="box"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg></span><span class="chk-t"><span>« Un bon site, c'est trop cher pour mon commerce. »</span><span class="tip"><span>Une question légitime. Calculez ce que vous rapporte un nouveau client par mois, et comparez avec le coût mensuel d'un site. Et un site simple et à jour fait plus qu'un site coûteux que personne n'entretient.</span></span></span></button><button type="button" class="chk" aria-pressed="false"><span class="box"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg></span><span class="chk-t"><span>« J'ai déjà un site, ça suffit. »</span><span class="tip"><span>Vous avez donc la base. La question est de savoir s'il fonctionne : recevez-vous des appels, des e-mails ou des réservations via votre site ? Sinon, ce n'est généralement pas votre commerce le problème, mais ce que les gens y voient.</span></span></span></button><button type="button" class="chk" aria-pressed="false"><span class="box"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg></span><span class="chk-t"><span>« Je n'ai pas le temps de m'en occuper. »</span><span class="tip"><span>C'est compréhensible, vous gérez un commerce. C'est justement pour ça qu'un site doit vous décharger au lieu de vous ajouter du travail : moins d'appels pour des infos, des rendez-vous qui arrivent tout seuls.</span></span></span></button></div>
+      </div>
+      <div class="verdict" id="verdict" aria-live="polite"></div>
+    </div>
+  </div>
+</section>
+
+
+<section id="team" aria-labelledby="teamtitel">
+  <div class="wrap">
+    <div class="team-intro reveal">
+      <h2 id="teamtitel">Rencontrez l'équipe</h2>
+      <p class="muted">Alec conçoit et crée votre site. Nos propres agents et automatisations s'occupent du travail répétitif, et de vraies personnes testent tout avant la mise en ligne. Vous avez un seul interlocuteur : Alec.</p>
+    </div>
+    <div class="team">
+      <article class="member human reveal">
+        <span class="toon " data-fallback="../assets/hf_20261112_161107_0021a0dd-293c-4356-97e7-19e411884c6c.webp" data-video="../assets/hf_20261112_215800_6aec818c-1736-4d6e-b811-cdb5ae35da49.mp4" role="img" aria-label="Alec avec son ordinateur portable"></span>
+        <div>        <h3>Alec</h3>
+        <span class="role">Crée votre site, votre seul interlocuteur</span>
+        <ul><li>Design et textes sur mesure</li><li>A créé et entraîné lui-même ses assistants</li><li>Joignable par téléphone et WhatsApp</li></ul></div>
+      </article>
+      <div class="team-side">
+      <div class="squad" aria-label="Les assistants">
+        <article class="member reveal">
+          <img src="../assets/hf_20261112_164840_c42116e9-1ce1-4ba5-9470-69e869200250.webp" alt="Le hibou" loading="lazy" width="512" height="512">
+          <div><h3>Le hibou</h3><span class="role">Analyste de données</span><p>Suit vos chiffres.</p></div>
+        </article>
+        <article class="member reveal">
+          <img src="../assets/hf_20261112_164839_d6db8316-9e51-44f8-a094-bd001710c6f1.webp" alt="Le renard" loading="lazy" width="512" height="512">
+          <div><h3>Le renard</h3><span class="role">SEO</span><p>Fait en sorte que Google vous trouve.</p></div>
+        </article>
+        <article class="member reveal">
+          <img src="../assets/hf_20261112_164840_d3d147b2-dd2a-4933-920a-64355605a0e4.webp" alt="Le hérisson" loading="lazy" width="512" height="512">
+          <div><h3>Le hérisson</h3><span class="role">Sécurité</span><p>Mises à jour, sauvegardes et surveillance.</p></div>
+        </article>
+        <article class="member reveal">
+          <img src="../assets/hf_20261112_164838_b0be1a50-a450-4253-b21b-beffa1777a94.webp" alt="Le castor" loading="lazy" width="512" height="512">
+          <div><h3>Le castor</h3><span class="role">Entretien</span><p>Modifie et corrige les erreurs.</p></div>
+        </article>
+      </div>
+        <div class="test-strip reveal">
+          <div class="pt-faces" aria-hidden="true"><span><svg viewBox="0 0 24 24"><circle cx="12" cy="9" r="4"/><path d="M4 21c1-4.5 4.5-6.5 8-6.5s7 2 8 6.5"/></svg></span><span><svg viewBox="0 0 24 24"><circle cx="12" cy="9" r="4"/><path d="M4 21c1-4.5 4.5-6.5 8-6.5s7 2 8 6.5"/></svg></span><span><svg viewBox="0 0 24 24"><circle cx="12" cy="9" r="4"/><path d="M4 21c1-4.5 4.5-6.5 8-6.5s7 2 8 6.5"/></svg></span><span><svg viewBox="0 0 24 24"><circle cx="12" cy="9" r="4"/><path d="M4 21c1-4.5 4.5-6.5 8-6.5s7 2 8 6.5"/></svg></span><span>+</span></div>
+          <p><b>Le panel de testeurs.</b> De vraies personnes testent chaque site sur leur propre téléphone et ordinateur avant la mise en ligne.</p>
+        </div>
+        <!-- todo Alec: aantal testers en wie ze zijn (bv. "8 mensen tussen 18 en 70 jaar") -->
+      </div>
+      <a href="team.html" class="town-link reveal"><span>Encore 4 spécialistes pour les langues, les automatisations, les paiements et l'e-mail. Rencontrez tout le monde à <b>Dobbo-ville</b>.</span><span class="tl-go">Voir l'équipe →</span></a>
+    </div>
+  </div>
+</section>
+
+<section aria-labelledby="hub">
+  <div class="wrap center reveal">
+    <h2 id="hub">Votre site devient l'endroit où tout se rejoint</h2>
+    <p class="lead">Google, réseaux sociaux, publicités et rendez-vous : tout mène à un seul endroit. Et chaque élément a son responsable attitré.</p>
+    <div class="hub" id="hubmap">
+      <svg class="hub-lines" aria-hidden="true"></svg>
+      <div class="hub-node n1">
+        <div class="hub-ui" aria-hidden="true"><span class="pill"><b>★ 4,9</b> · 38 avis</span><span class="pill soft">Ouvert jusqu'à 19 h · Itinéraire</span></div>
+        <h3>Google</h3><p>Votre profil complet et cohérent avec votre site.</p>
+        <div class="hub-who"><img src="../assets/hf_20261112_164839_d6db8316-9e51-44f8-a094-bd001710c6f1.webp" alt="" width="64" height="64" loading="lazy"><span>Le renard</span></div>
+      </div>
+      <div class="hub-node n2">
+        <div class="hub-ui" aria-hidden="true"><span class="pill">Lien en bio <b>→ votre site</b></span><span class="pill soft">Nouveau post · 12 commentaires</span></div>
+        <h3>Réseaux sociaux</h3><p>Chaque post renvoie au même bon endroit.</p>
+        <div class="hub-who"><img src="../assets/hf_20261112_164839_4413505a-9a69-44e8-835a-a7b57f4b3f22.webp" alt="" width="64" height="64" loading="lazy"><span>Alec</span></div>
+      </div>
+      <div class="hub-core">
+        <div class="core-bar"><i></i><i></i><i></i><span>votrecommerce.be</span></div>
+        <div class="core-body">
+          <div class="core-h"></div><div class="core-l"></div><div class="core-l s"></div>
+          <div class="core-cta">Prendre rendez-vous</div>
+          <div class="core-stat"><span>Visiteurs cette semaine</span><b>128</b><svg viewBox="0 0 80 24"><polyline points="0,20 13,16 26,18 40,10 53,12 66,5 80,3"/></svg></div>
+        </div>
+        <div class="core-badge"><img src="../assets/hf_20261112_164840_d3d147b2-dd2a-4933-920a-64355605a0e4.webp" alt="" width="40" height="40" loading="lazy">Protégé par le hérisson</div>
+      </div>
+      <div class="hub-node n3">
+        <div class="hub-ui" aria-hidden="true"><span class="pill">Publicité · <b>214 clics</b></span><span class="pill soft">17 demandes · 3,10 € pièce</span></div>
+        <h3>Publicités</h3><p>Vous voyez ce que chaque publicité a rapporté.</p>
+        <div class="hub-who"><img src="../assets/hf_20261112_164840_c42116e9-1ce1-4ba5-9470-69e869200250.webp" alt="" width="64" height="64" loading="lazy"><span>Le hibou</span></div>
+      </div>
+      <div class="hub-node n4">
+        <div class="hub-ui" aria-hidden="true"><span class="pill"><b>Jeu. 14 h</b> · réservé ✓</span><span class="pill soft">Appeler en un clic</span></div>
+        <h3>Rendez-vous</h3><p>Réserver ou appeler en un clic.</p>
+        <div class="hub-who"><img src="../assets/hf_20261112_164838_b0be1a50-a450-4253-b21b-beffa1777a94.webp" alt="" width="64" height="64" loading="lazy"><span>Le castor</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    <span>Créer</span><span>Être trouvé</span><span>Sécuriser</span><span>Entretenir</span><span>Mesurer</span>
+    <span>Créer</span><span>Être trouvé</span><span>Sécuriser</span><span>Entretenir</span><span>Mesurer</span>
+    <span>Créer</span><span>Être trouvé</span><span>Sécuriser</span><span>Entretenir</span><span>Mesurer</span>
+    <span>Créer</span><span>Être trouvé</span><span>Sécuriser</span><span>Entretenir</span><span>Mesurer</span>
+  </div>
+</div>
+
+
+<section aria-labelledby="bewijs">
+  <div class="wrap">
+    <div class="reveal">
+      <h2 id="bewijs">Praktijk E.S., kiné à Hoeilaart</h2>
+      <p class="lead" style="margin-top:16px;max-width:52ch">D'un site où les tarifs occupaient un tiers de la page à un site où les patients voient d'un coup d'œil ce qu'ils doivent savoir.</p>
+    </div>
+    <div class="cv reveal" id="cv">
+      <div class="cv-bar">
+        <div class="seg" role="tablist" aria-label="Choisissez une version">
+          <button role="tab" aria-selected="true" data-v="na">Nouveau site</button>
+          <button role="tab" aria-selected="false" data-v="voor">Ancien site</button>
+        </div>
+        <div class="seg" aria-label="Choisissez un écran">
+          <button aria-pressed="true" data-d="desk">Ordinateur</button>
+          <button aria-pressed="false" data-d="gsm">Téléphone</button>
+        </div>
+      </div>
+      <div class="cv-stage">
+        <div class="cv-frame" id="cvframe">
+          <div class="cv-chrome"><i></i><i></i><i></i><span id="cvurl">praktijkes.be (nouvelle version)</span><a id="cvopen" href="https://cwcrnspzs2-cmyk.github.io/praktijk-es/" target="_blank" rel="noopener">Open ↗</a></div>
+          <div class="cv-screen">
+            <iframe id="cvnew" title="Le nouveau site de Praktijk E.S., en direct" data-src="../cases/praktijk-es-nieuw/"></iframe>
+            <iframe id="cvold" hidden title="L'ancien site de Praktijk E.S." data-src="../cases/praktijk-es-oud/"></iframe>
+            <div class="cv-toast" id="cvtoast" role="status">Démo : appels et e-mails désactivés</div>
+            <div class="cv-hint" id="cvhint">Faites défiler et cliquez, c'est le vrai site</div>
+          </div>
+        </div>
+      </div>
+      <p class="cv-size" id="cvsize">Comme sur un ordinateur de 1440 pixels de large, en taille réduite</p>
+      <p class="small" id="cvnote" style="margin-top:10px">Le nouveau site tourne ici en direct : faites défiler, cliquez et changez de langue. Les appels et e-mails sont désactivés dans cette démo.</p>
+    </div>
+    <div class="facts reveal">
+      <div class="fact"><strong>99/100</strong><span>vitesse sur téléphone, mesurée par Google</span></div>
+      <div class="fact"><strong>100/100</strong><span>référencement, mesuré par Google</span></div>
+      <div class="fact"><strong>3 langues</strong><span>néerlandais, français et anglais</span></div>
+    </div>
+    <div class="todo reveal" style="margin-top:28px">Citaat van Eli (max 3 regels) met zijn toestemming, plus zijn naam en functie. Daarna de case TRGB.</div>
+  </div>
+</section>
+
+<section id="hoe" aria-labelledby="hoetitel" style="background:var(--blue-tint);border-radius:var(--r-panel);margin:0 16px">
+  <div class="wrap">
+    <h2 id="hoetitel" class="reveal">Comment ça marche</h2>
+    <div class="steps">
+      <div class="step reveal"><span class="toon " data-fallback="../assets/hf_20261112_161106_0d0ec564-ffd0-4bfb-ae72-b5d13400b7f6.webp" data-video="../assets/hf_20261112_214558_210d24b1-2496-4521-9635-0314d708607a.mp4" role="img" aria-label="Le hibou"></span><h3>Appel gratuit de 20 minutes</h3><p>Nous voyons ce qui peut être amélioré, ce dont vous avez besoin et quelle formule vous convient. Le hibou examine votre site à l'avance.</p></div>
+      <div class="step reveal"><span class="toon " data-fallback="../assets/hf_20261112_224333_0fe5dd9c-cb60-4fd6-a205-246a19e1b1c6.webp" data-video="../assets/hf_20261112_224435_2a7b8ba3-75a8-40e0-b87d-38619076e943.mp4" role="img" aria-label="Alec"></span><h3>Nous rassemblons vos infos</h3><p>Nous partons de votre site actuel. Si nécessaire, vous recevez un court questionnaire : textes, photos, logo et ce que nous pouvons utiliser.</p></div>
+      <div class="step reveal"><span class="toon " data-fallback="../assets/hf_20261112_161105_42b132e7-652d-4506-8d6d-2405a74f3f5b.webp" data-video="../assets/hf_20261112_214559_28185fe0-08be-4d73-a8b7-e9b6051452a3.mp4" role="img" aria-label="Le renard"></span><h3>Vous voyez une version presque terminée</h3><p>Par un lien, une courte vidéo ou ensemble lors d'un appel. Vous dites ce qui doit changer, ou vous donnez le feu vert.</p></div>
+      <div class="step reveal"><span class="toon " data-fallback="../assets/hf_20261112_224332_b7899755-3e99-4f72-8a99-f38a49afd4a1.webp" data-video="../assets/hf_20261112_224435_fb792d2b-7840-4bd8-a6ea-e141a54bc34a.mp4" role="img" aria-label="Le castor"></span><h3>Terminé et en ligne</h3><p>Vous recevez le site terminé, généralement en 1 à 3 semaines. Nous vous aidons à le mettre en ligne. Si vous choisissez notre <a href="#beheer">formule mensuelle</a>, nous veillons à ce qu'il reste en ligne, nous l'entretenons et l'améliorons en continu.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="pakketten" aria-labelledby="paktitel">
+  <div class="wrap">
+    <div class="reveal">
+      <h2 id="paktitel">Ce que nous faisons pour vous</h2>
+      <p class="lead" style="margin-top:16px;max-width:52ch">Deux choses : nous créons votre site et, si vous le souhaitez, nous le gardons ensuite à jour.</p>
+    </div>
+    <div class="two-things reveal">
+      <a href="#bouwen" class="tt"><span class="tt-n">1</span><span><b>Créer</b><small>Paiement unique · 3 formules, à compléter avec des modules</small></span></a>
+      <a href="#beheer" class="tt"><span class="tt-n red">2</span><span><b>Gérer</b><small>Mensuel et résiliable · 2 formules</small></span></a>
+    </div>
+
+    <h3 id="bouwen" class="sub-h reveal">1. Créer</h3>
+    <div class="helper reveal" id="helper">
+      <div class="helper-q"><span>Avez-vous déjà un site ?</span>
+        <button type="button" class="choice" data-q="site" data-v="ja" aria-pressed="false">Oui</button>
+        <button type="button" class="choice" data-q="site" data-v="nee" aria-pressed="false">Non</button>
+      </div>
+      <div class="helper-q"><span>Que voulez-vous surtout ?</span>
+        <button type="button" class="choice" data-q="doel" data-v="online" aria-pressed="false">Un site propre, rapidement</button>
+        <button type="button" class="choice" data-q="doel" data-v="gevonden" aria-pressed="false">Être trouvé</button>
+        <button type="button" class="choice" data-q="doel" data-v="systeem" aria-pressed="false">Paiements ou automatisation</button>
+      </div>
+      <p class="small" id="helper-out" aria-live="polite">Choisissez ci-dessus et la formule qui vous convient s'allume.</p>
+    </div>
+    <div class="plans">
+      <article class="plan reveal" data-plan="start">
+        <h3>Start</h3>
+        <p class="price">€500</p>
+        <p class="per">≈ 14 € par mois sur 3 ans · environ 1 semaine</p>
+        <p class="who">Vous voulez rapidement un site propre et moderne.</p>
+        <ul><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2B5CFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>Jusqu'à 3 pages</li><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2B5CFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>Appel, WhatsApp et itinéraire en un clic</li><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2B5CFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>Une courte vidéo : comment modifier vous-même votre site</li></ul>
+        <div class="crew"><div class="avatars"><img src="../assets/hf_20261112_164839_4413505a-9a69-44e8-835a-a7b57f4b3f22.webp" alt="" width="64" height="64" loading="lazy"></div><span>Alec</span></div>
+        <details class="more"><summary>Qu'est-ce qui est inclus ?</summary><p>Vous fournissez les textes, nous les améliorons. Vous voulez plus ? Ajoutez des modules ci-dessous.</p></details>
+        <a href="https://cal.com/dobbo/gratis-gesprek" target="_blank" rel="noopener" class="btn btn-ghost">Réserver mon appel gratuit</a>
+      </article>
+      <article class="plan reco reveal" data-plan="groei">
+        <span class="badge">Recommandé</span>
+        <h3>Croissance</h3>
+        <p class="price" style="color:var(--blue)">€900</p>
+        <p class="per">≈ 25 € par mois sur 3 ans · 3 semaines</p>
+        <p class="who">Vous voulez être trouvé et recevoir plus de demandes.</p>
+        <ul><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2B5CFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>Jusqu'à 5 pages, nous écrivons les textes</li><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2B5CFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>3 langues incluses</li><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2B5CFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>Design prêt à réserver : conçu pour transformer les visiteurs en clients</li><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2B5CFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>Profil Google et SEO local par le renard</li></ul>
+        <div class="crew"><div class="avatars"><img src="../assets/hf_20261112_164839_4413505a-9a69-44e8-835a-a7b57f4b3f22.webp" alt="" width="64" height="64" loading="lazy"><img src="../assets/hf_20261112_164839_d6db8316-9e51-44f8-a094-bd001710c6f1.webp" alt="" width="64" height="64" loading="lazy"><img src="../assets/hf_20261112_205513_6334aedd-f516-48f3-873c-66448e2dc3cb.webp" alt="" width="64" height="64" loading="lazy"></div><span>Alec, renard, perroquet</span></div>
+        <details class="more"><summary>Qu'est-ce qui est inclus ?</summary><p>Tout ce qu'inclut Start, plus un point intermédiaire : vous voyez votre site presque terminé et pouvez encore ajuster.</p></details>
+        <a href="https://cal.com/dobbo/gratis-gesprek" target="_blank" rel="noopener" class="btn btn-red">Réserver mon appel gratuit</a>
+      </article>
+      <article class="plan reveal" data-plan="systeem">
+        <h3>Système</h3>
+        <p class="price"><small>dès</small> €2.000</p>
+        <p class="per">Prix fixe après le premier appel · 4 à 6 semaines</p>
+        <p class="who">Vous voulez que votre site travaille pour vous.</p>
+        <ul><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2B5CFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>Jusqu'à 8 pages ou plus, toutes les langues incluses</li><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2B5CFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>Paiements, automatisations, liste e-mail : sur mesure</li><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2B5CFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>Tableau de bord en direct du hibou</li></ul>
+        <div class="crew"><div class="avatars"><img src="../assets/hf_20261112_164840_c42116e9-1ce1-4ba5-9470-69e869200250.webp" alt="" width="64" height="64" loading="lazy"><img src="../assets/hf_20261112_205514_6403f457-e86c-48ab-a30e-5ac272af3722.webp" alt="" width="64" height="64" loading="lazy"><img src="../assets/hf_20261112_205721_a11aca2b-550d-4c02-ada7-24f8d065e8b9.webp" alt="" width="64" height="64" loading="lazy"><img src="../assets/hf_20261112_205514_eafdb035-294e-4bc3-a13b-eac6e97c7082.webp" alt="" width="64" height="64" loading="lazy"></div><span>Alec et toute l'équipe</span></div>
+        <details class="more"><summary>Qu'est-ce qui est inclus ?</summary><p>Tout ce qu'inclut Croissance, les modules dont vous avez besoin, finis sur mesure, et des points intermédiaires jusqu'à ce que votre site soit terminé.</p></details>
+        <a href="https://cal.com/dobbo/gratis-gesprek" target="_blank" rel="noopener" class="btn btn-ghost">Réserver mon appel gratuit</a>
+      </article>
+    </div>
+    <ul class="always reveal" aria-label="Inclus dans chaque formule">
+      <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2B5CFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>Version mobile</li><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2B5CFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>Modifiable par vous</li><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2B5CFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>À votre nom</li><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2B5CFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>Testé par le panel de testeurs</li>
+    </ul>
+
+    <div class="calc reveal" id="calc">
+      <div class="calc-l">
+        <h3>Composez votre site</h3>
+        <p class="muted" style="margin-top:6px">Choisissez une formule et ajoutez ce dont vous avez besoin. Vous ne payez que ce que vous utilisez.</p>
+        <div class="seg calc-seg" role="radiogroup" aria-label="Formule">
+          <button type="button" role="radio" aria-checked="true" data-base="start" data-price="500">Start · 500 €</button>
+          <button type="button" role="radio" aria-checked="false" data-base="groei" data-price="900">Croissance · 900 €</button>
+        </div>
+        <div class="addons">
+          <div class="addon" data-k="pagina" data-price="100" data-type="n">
+            <span class="addon-av"><img src="../assets/hf_20261112_164839_4413505a-9a69-44e8-835a-a7b57f4b3f22.webp" alt="" width="64" height="64" loading="lazy"></span>
+            <span class="addon-t"><b>Page supplémentaire</b><small>100 € pièce<em class="inc-note"> · inclus dans Croissance</em></small></span>
+            <div class="step-n"><button type="button" data-dec aria-label="Moins">−</button><output>0</output><button type="button" data-inc aria-label="Plus">+</button></div>
+          </div>
+          <div class="addon" data-k="taal" data-price="40" data-type="n">
+            <span class="addon-av"><img src="../assets/hf_20261112_205513_6334aedd-f516-48f3-873c-66448e2dc3cb.webp" alt="" width="64" height="64" loading="lazy"></span>
+            <span class="addon-t"><b>Langue supplémentaire</b><small>40 € pièce<em class="inc-note"> · inclus dans Croissance</em></small></span>
+            <div class="step-n"><button type="button" data-dec aria-label="Moins">−</button><output>0</output><button type="button" data-inc aria-label="Plus">+</button></div>
+          </div>
+          <label class="addon" data-k="boek" data-price="150" data-type="1" data-incl="groei">
+            <input type="checkbox"><span class="addon-av"><img src="../assets/hf_20261112_164839_4413505a-9a69-44e8-835a-a7b57f4b3f22.webp" alt="" width="64" height="64" loading="lazy"></span>
+            <span class="addon-t"><b>Design prêt à réserver</b><small>€150<em class="inc-note"> · inclus dans Croissance</em></small></span>
+            <span class="tog" aria-hidden="true"></span>
+          </label>
+          <label class="addon" data-k="seo" data-price="150" data-type="1" data-incl="groei">
+            <input type="checkbox"><span class="addon-av"><img src="../assets/hf_20261112_164839_d6db8316-9e51-44f8-a094-bd001710c6f1.webp" alt="" width="64" height="64" loading="lazy"></span>
+            <span class="addon-t"><b>Profil Google et SEO local</b><small>€150<em class="inc-note"> · inclus dans Croissance</em></small></span>
+            <span class="tog" aria-hidden="true"></span>
+          </label>
+          <label class="addon" data-k="mail" data-price="100" data-type="1">
+            <input type="checkbox"><span class="addon-av"><img src="../assets/hf_20261112_205514_eafdb035-294e-4bc3-a13b-eac6e97c7082.webp" alt="" width="64" height="64" loading="lazy"></span>
+            <span class="addon-t"><b>Liste e-mail et formulaire d'inscription</b><small>€100<em class="inc-note"> · inclus dans Croissance</em></small></span>
+            <span class="tog" aria-hidden="true"></span>
+          </label>
+          <label class="addon" data-k="afspraak" data-price="100" data-type="1">
+            <input type="checkbox"><span class="addon-av"><img src="../assets/hf_20261112_164838_b0be1a50-a450-4253-b21b-beffa1777a94.webp" alt="" width="64" height="64" loading="lazy"></span>
+            <span class="addon-t"><b>Prise de rendez-vous en ligne</b><small>€100<em class="inc-note"> · inclus dans Croissance</em></small></span>
+            <span class="tog" aria-hidden="true"></span>
+          </label>
+          <div class="addon" data-k="auto" data-price="150" data-type="n">
+            <span class="addon-av"><img src="../assets/hf_20261112_205514_6403f457-e86c-48ab-a30e-5ac272af3722.webp" alt="" width="64" height="64" loading="lazy"></span>
+            <span class="addon-t"><b>Automatisation, p. ex. e-mail de suivi après une demande</b><small>150 € pièce<em class="inc-note"> · inclus dans Croissance</em></small></span>
+            <div class="step-n"><button type="button" data-dec aria-label="Moins">−</button><output>0</output><button type="button" data-inc aria-label="Plus">+</button></div>
+          </div>
+          <label class="addon" data-k="dash" data-price="200" data-type="1">
+            <input type="checkbox"><span class="addon-av"><img src="../assets/hf_20261112_164840_c42116e9-1ce1-4ba5-9470-69e869200250.webp" alt="" width="64" height="64" loading="lazy"></span>
+            <span class="addon-t"><b>Tableau de bord en direct avec vos chiffres</b><small>€200<em class="inc-note"> · inclus dans Croissance</em></small></span>
+            <span class="tog" aria-hidden="true"></span>
+          </label>
+          <label class="addon" data-k="shop" data-price="350" data-type="1">
+            <input type="checkbox"><span class="addon-av"><img src="../assets/hf_20261112_205721_a11aca2b-550d-4c02-ada7-24f8d065e8b9.webp" alt="" width="64" height="64" loading="lazy"></span>
+            <span class="addon-t"><b>Paiements ou petite boutique en ligne (jusqu'à 10 produits)</b><small>€350<em class="inc-note"> · inclus dans Croissance</em></small></span>
+            <span class="tog" aria-hidden="true"></span>
+          </label>
+        </div>
+      </div>
+      <aside class="calc-r" aria-live="polite">
+        <span class="calc-lab">Votre site</span>
+        <strong class="calc-total" id="calcTotal">€500</strong>
+        <ul class="calc-lines" id="calcLines"></ul>
+        <div class="calc-pay"><span>Comment vous payez</span>
+          <div><b id="p1">€150</b><small>au démarrage</small></div>
+          <div><b id="p2">€200</b><small>après la version presque terminée</small></div>
+          <div><b id="p3">€150</b><small>à la livraison</small></div>
+        </div>
+        <p class="calc-hint" id="calcHint" hidden>Au-delà de 2 000 €, Système est souvent plus avantageux : tout est fini sur mesure.</p>
+        <a href="https://cal.com/dobbo/gratis-gesprek" target="_blank" rel="noopener" class="btn btn-red">Parlons-en lors de votre appel gratuit</a>
+        <small class="calc-foot">Prix indicatif, hors TVA. Nous confirmons le prix fixe lors de l'appel.</small>
+      </aside>
+    </div>
+
+    <div class="flow reveal">
+      <h3>Notre façon de travailler</h3>
+      <ol>
+        <li><b>1</b><div><strong>Acompte de 30 %, et nous commençons</strong><p>Pas de longs devis. Nous partons de ce dont nous avons parlé et envoyons si nécessaire un court questionnaire.</p></div></li>
+        <li><b>2</b><div><strong>Version presque terminée, puis 40 %</strong><p>Vous la découvrez par un lien, une vidéo ou un appel et demandez des ajustements. Vous donnez le feu vert, vous payez 40 % et nous la finalisons.</p></div></li>
+        <li><b>3</b><div><strong>Site terminé, les derniers 30 %</strong><p>Vous recevez le lien du site terminé. Après le dernier paiement, nous le mettons en ligne chez votre hébergeur et il vous appartient. Avec Gestion, nous nous occupons de tout.</p></div></li>
+      </ol>
+      <p class="flow-g"><strong>Pas satisfait ?</strong> Nous cherchons alors une solution, par exemple un nouveau design. Si cela ne fonctionne pas, vous êtes remboursé, à l'exception de l'acompte.</p>
+    </div>
+  </div>
+</section>
+
+<section aria-labelledby="beheer">
+  <div class="wrap">
+    <div class="panel reveal" style="display:block">
+      <div class="care-head"><h2 id="beheer">2. Gérer : votre site reste à jour</h2><div class="care-chars"><span class="toon " data-fallback="../assets/hf_20261112_224333_16e5a292-bd48-4c2d-a8dc-f136d2ad7504.webp" data-video="../assets/hf_20261112_224435_3dbc112c-5a9f-45c1-ad78-ab9f890b6d93.mp4" role="img" aria-label="Le hérisson avec son bouclier"></span><span class="toon " data-fallback="../assets/hf_20261112_161104_99ba2a50-69f9-4b9e-a27f-35bed0ab693d.webp" data-video="../assets/hf_20261112_225027_bbc01777-e038-485b-8f98-36832703ec8b.mp4" role="img" aria-label="Le castor avec sa clé"></span></div></div>
+      <p class="lead" style="margin-top:16px;max-width:52ch">Votre site reste rapide, sûr et visible. Une modification ? Envoyez un WhatsApp, nous nous en occupons. Résiliable chaque mois. Si nous hébergeons votre site, c'est inclus dans votre Gestion.</p>
+      <div class="care">
+        <div class="care-col">
+          <h3>Gestion <span>50 € par mois</span></h3>
+          <div class="care-row"><img src="../assets/hf_20261112_164840_c42116e9-1ce1-4ba5-9470-69e869200250.webp" alt="" loading="lazy"><p>Rapport mensuel et tableau de bord</p></div>
+          <div class="care-row"><img src="../assets/hf_20261112_164839_d6db8316-9e51-44f8-a094-bd001710c6f1.webp" alt="" loading="lazy"><p>Suivi du profil Google</p></div>
+          <div class="care-row"><img src="../assets/hf_20261112_164840_d3d147b2-dd2a-4933-920a-64355605a0e4.webp" alt="" loading="lazy"><p>Mises à jour, sauvegardes et sécurité</p></div>
+          <div class="care-row"><img src="../assets/hf_20261112_164838_b0be1a50-a450-4253-b21b-beffa1777a94.webp" alt="" loading="lazy"><p>30 minutes de modifications, réponse sous 2 jours ouvrables</p></div>
+        </div>
+        <div class="care-col" style="box-shadow:inset 0 0 0 2px var(--blue)">
+          <h3>Gestion Plus <span>100 € par mois</span></h3>
+          <div class="care-row"><img src="../assets/hf_20261112_164840_c42116e9-1ce1-4ba5-9470-69e869200250.webp" alt="" loading="lazy"><p>Rapport hebdomadaire et tableau de bord</p></div>
+          <div class="care-row"><img src="../assets/hf_20261112_164839_d6db8316-9e51-44f8-a094-bd001710c6f1.webp" alt="" loading="lazy"><p>Profil Google plus une amélioration SEO chaque mois</p></div>
+          <div class="care-row"><img src="../assets/hf_20261112_164840_d3d147b2-dd2a-4933-920a-64355605a0e4.webp" alt="" loading="lazy"><p>Mises à jour, sauvegardes et sécurité</p></div>
+          <div class="care-row"><img src="../assets/hf_20261112_164838_b0be1a50-a450-4253-b21b-beffa1777a94.webp" alt="" loading="lazy"><p>2 heures de modifications, réponse le jour ouvrable même</p></div>
+        </div>
+      </div>
+      <p class="source">Moins de 2 € par jour. Une nouvelle section ou page reçoit un prix fixe à l'avance, avec 15 % de réduction pour les clients Gestion.</p>
+    </div>
+  </div>
+</section>
+
+<section id="vragen" aria-labelledby="vraagtitel">
+  <div class="wrap faq">
+    <div class="reveal">
+      <h2 id="vraagtitel">Encore des doutes ?</h2>
+      <p class="lead" style="margin-top:16px">C'est normal. Voici les questions qu'on nous pose le plus souvent.</p>
+      <span class="toon side-char" data-fallback="../assets/hf_20261112_224333_6eba69d4-fdce-4ab1-b1bd-ff400efe5e8a.webp" data-video="../assets/hf_20261112_224435_3108b026-15f9-4a3d-9bcd-0633deddf7af.mp4" role="img" aria-label="Le renard cherche avec sa loupe"></span>
+    </div>
+    <div class="reveal">
+      <details><summary>Un site web n'est-il pas trop cher pour mon commerce ?</summary><p>Un site de 900 € utilisé pendant 3 ans revient à environ 25 € par mois. Un client ou membre de plus par mois suffit à le rentabiliser. Le prix est fixe : vous savez à l'avance ce que vous payez.</p></details>
+      <details><summary>J'ai Facebook et Instagram. Ça ne suffit pas ?</summary><p>Vos réseaux sociaux ne vous appartiennent pas : l'algorithme décide qui voit vos posts. Votre site est votre propre espace. Nous y relions vos réseaux sociaux, pour que chaque post envoie les gens au même endroit.</p></details>
+      <details><summary>Mon profil Google suffit, non ?</summary><p>Votre profil et votre site fonctionnent ensemble. Les gens choisissent d'abord sur des infos claires et complètes, puis sur les avis et des prix clairs. Tout ça ne tient pas dans un profil. Nous configurons aussi votre profil.</p></details>
+      <details><summary>Vous travaillez avec des automatisations ? Ce n'est pas impersonnel ?</summary><p>Nos assistants numériques s'occupent du travail répétitif : chiffres, mises à jour, contrôles. Alec les a créés et entraînés lui-même. Il conçoit votre site et vérifie tout, et un groupe de vraies personnes teste chaque site avant sa mise en ligne. Vous avez toujours Alec au bout du fil.</p></details>
+      <details><summary>Et si Dobbo s'arrête un jour ?</summary><p>Votre site et votre domaine sont à votre nom et tout est documenté. Si nous arrêtons un jour, tout reste à vous et quelqu'un d'autre peut reprendre.</p></details>
+      <details><summary>Comment savoir si ça rapporte ?</summary><p>Vous le voyez vous-même : un tableau de bord avec vos visiteurs et le nombre de clics sur appeler ou itinéraire, plus un rapport du hibou.</p></details>
+      <details><summary>Dois-je prendre la gestion mensuelle ?</summary><p>Non. C'est résiliable chaque mois et votre site reste à vous, même sans gestion.</p></details>
+      <details><summary>Je n'ai pas encore de site. C'est possible aussi ?</summary><p>Oui, nous partons alors de zéro.</p></details>
+    </div>
+  </div>
+</section>
+
+<section id="boek" aria-labelledby="slot">
+  <div class="wrap">
+    <div class="final reveal">
+      <h2 id="slot">Vous ne pouvez pas descendre plus bas. Place à un appel.</h2>
+      <p>20 minutes, par téléphone ou en vidéo. Vous recevez dans tous les cas 3 pistes d'amélioration, même si vous ne continuez pas avec nous.</p>
+      <p style="font-size:16px">Nous acceptons au maximum 3 nouveaux projets par mois. Prochaine place libre : <span class="todo-inline" style="background:#fff">[datum]</span></p>
+      <div class="book">
+        <a href="https://cal.com/dobbo/gratis-gesprek" target="_blank" rel="noopener" class="btn btn-red btn-lg">Choisir un moment</a>
+        <p class="book-alt">Une question d'abord ? Écrivez à <a href="mailto:hallo@dobbo.be">hallo@dobbo.be</a>.</p>
+        <div class="todo" style="text-align:left">Je WhatsApp-link en gsm-nummer voor "liever eerst een vraag?".</div>
+      </div>
+      <div class="call" aria-hidden="true">
+        <div class="call-top"><span class="call-dot"></span>Check-up gratuit du site · 20 min</div>
+        <div class="call-me"><span class="ring"></span><img src="../assets/hf_20261112_164839_4413505a-9a69-44e8-835a-a7b57f4b3f22.webp" alt="" width="96" height="96" loading="lazy"></div>
+        <strong>Alec de Dobbo</strong>
+        <span class="call-sub">Téléphone ou vidéo, vous choisissez</span>
+        <div class="call-team"><img src="../assets/hf_20261112_164840_c42116e9-1ce1-4ba5-9470-69e869200250.webp" alt="" loading="lazy"><img src="../assets/hf_20261112_164839_d6db8316-9e51-44f8-a094-bd001710c6f1.webp" alt="" loading="lazy"><img src="../assets/hf_20261112_164840_d3d147b2-dd2a-4933-920a-64355605a0e4.webp" alt="" loading="lazy"><img src="../assets/hf_20261112_164838_b0be1a50-a450-4253-b21b-beffa1777a94.webp" alt="" loading="lazy"><span>L'équipe examine votre site à l'avance</span></div>
+        <div class="call-btns"><span class="cb video"><svg viewBox="0 0 24 24"><path d="M3 7h12v10H3zM15 10l6-3v10l-6-3"/></svg></span><span class="cb phone"><svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a1 1 0 01-1 1A16 16 0 014 5a1 1 0 011-1"/></svg></span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <div><a href="#top" class="logo" style="font-size:24px">dobbo</a><p style="margin-top:8px">Des sites web pour les commerces à Bruxelles et alentours.</p></div>
+    <div class="foot-contact"><a href="mailto:hallo@dobbo.be">hallo@dobbo.be</a><div class="todo" style="max-width:360px;margin-top:12px">Gsm, ondernemingsnummer, link naar privacy- en cookieverklaring.</div></div>
+  </div>
+</footer>
+
+<div class="sticky-cta" id="stickycta"><a href="https://cal.com/dobbo/gratis-gesprek" target="_blank" rel="noopener" class="btn btn-red">Réserver mon appel gratuit</a></div>
+
+<script>
+(function(){
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var els = document.querySelectorAll('.reveal');
+  if (reduce || !('IntersectionObserver' in window)) { els.forEach(function(e){e.classList.add('in')}); }
+  else {
+    /* wat al in beeld staat bij het laden, speelt geen entree */
+    els.forEach(function(e){var r=e.getBoundingClientRect();if(r.top<innerHeight&&r.bottom>0){e.classList.add('now','in');requestAnimationFrame(function(){requestAnimationFrame(function(){e.classList.remove('now')})})}});
+    var COPY='.member,.plan,.step,.xc,.addon,.flow li,.hub-node';
+    var io = new IntersectionObserver(function(entries){
+      var vis=entries.filter(function(en){return en.isIntersecting}).map(function(en){return en.target});
+      vis.sort(function(a,b){return a.compareDocumentPosition(b)&2?1:-1});
+      vis.forEach(function(t,i){var gap=t.matches(COPY)?45:90;t.style.setProperty('--rd',Math.min(i,5)*gap+'ms');t.classList.add('in');io.unobserve(t)});
+    }, {threshold:0.15});
+    els.forEach(function(e){if(!e.classList.contains('in'))io.observe(e)});
+  }
+
+  var header = document.querySelector('header');
+  var sticky = document.getElementById('stickycta');
+  var hero = document.querySelector('.hero');
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(function(en){
+      var out = !en[0].isIntersecting;
+      header.classList.toggle('scrolled', out);
+      sticky.classList.toggle('show', out);
+    }).observe(hero);
+  }
+
+  var mq=document.querySelector('.marquee-track');
+  if(mq&&'IntersectionObserver' in window){new IntersectionObserver(function(e){mq.style.animationPlayState=e[0].isIntersecting?'running':'paused'}).observe(mq)}
+
+  var checks = document.querySelectorAll('.chk');
+  var verdict = document.getElementById('verdict');
+  checks.forEach(function(c){
+    c.addEventListener('click', function(){
+      c.setAttribute('aria-pressed', c.getAttribute('aria-pressed') === 'true' ? 'false' : 'true');
+      var n = document.querySelectorAll('.chk[aria-pressed="true"]').length;
+      if (n >= 2) {
+        verdict.innerHTML = '<span>' + n + ' reconnus. Il y a de quoi gagner : en 20 minutes, nous vous disons par quoi commencer.</span><a href="https://cal.com/dobbo/gratis-gesprek" target="_blank" rel="noopener" class="btn btn-red">Réserver mon appel gratuit</a>';
+      } else if (n === 1) {
+        verdict.textContent = 'Un point reconnu. Cochez tout ce qui s\'applique.';
+      } else { verdict.textContent = ''; }
+    });
+  });
+
+
+
+  var hub=document.getElementById('hubmap');
+  if(hub){var svg=hub.querySelector('.hub-lines'),core=hub.querySelector('.hub-core'),NS='http://www.w3.org/2000/svg',
+    rm=matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var draw=function(){svg.innerHTML='';if(getComputedStyle(svg).display==='none')return;
+      var hb=hub.getBoundingClientRect(),cb=core.getBoundingClientRect();
+      hub.querySelectorAll('.hub-node').forEach(function(n,i){var r=n.getBoundingClientRect(),left=r.left<cb.left;
+        var x1=(left?r.right:r.left)-hb.left,y1=r.top+r.height/2-hb.top,x2=(left?cb.left:cb.right)-hb.left,y2=cb.top+cb.height*(i<2?.38:.62)-hb.top,mx=(x1+x2)/2;
+        var d='M'+x1+','+y1+' C'+mx+','+y1+' '+mx+','+y2+' '+x2+','+y2;
+        var p=document.createElementNS(NS,'path');p.setAttribute('d',d);svg.appendChild(p);
+        if(!rm){var c=document.createElementNS(NS,'circle');c.setAttribute('r','4');
+          var m=document.createElementNS(NS,'animateMotion');m.setAttribute('dur','2.6s');m.setAttribute('begin',(i*.6)+'s');m.setAttribute('repeatCount','indefinite');m.setAttribute('path',d);
+          c.appendChild(m);svg.appendChild(c)}});};
+    new ResizeObserver(draw).observe(hub);addEventListener('load',draw);}
+  var cv=document.getElementById('cv');
+  if(cv){
+    var f=document.getElementById('cvframe'),nw=document.getElementById('cvnew'),od=document.getElementById('cvold'),
+        url=document.getElementById('cvurl'),op=document.getElementById('cvopen'),hint=document.getElementById('cvhint'),
+        note=document.getElementById('cvnote'),toast=document.getElementById('cvtoast'),tt;
+    var say=function(){toast.classList.add('on');clearTimeout(tt);tt=setTimeout(function(){toast.classList.remove('on')},2200)};
+    /* demo: geen echte telefoon, mail, WhatsApp of formulieren vanuit de voorbeeldsites */
+    var guard=function(fr){try{var d=fr.contentDocument;if(!d||d._g)return;d._g=1;
+      /* niet voorbij het einde doorschieten (elastisch scrollen in Safari) en niet doorrollen naar de pagina eronder */
+      d.documentElement.style.overscrollBehavior='none';if(d.body)d.body.style.overscrollBehavior='none';
+      d.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href]');if(!a)return;
+        var h=a.getAttribute('href')||'';
+        if(/^(tel:|mailto:|sms:)|wa\.me|whatsapp|maps\.app|goo\.gl/i.test(h)){e.preventDefault();e.stopPropagation();say()}
+        else if(a.target==='_blank'||/^https?:/i.test(h)&&a.host!==location.host){e.preventDefault();e.stopPropagation();say()}
+      },true);
+      d.addEventListener('submit',function(e){e.preventDefault();say()},true);
+      d.addEventListener('scroll',hideHint,{passive:true});
+    }catch(err){}};
+    [nw,od].forEach(function(fr){fr.addEventListener('load',function(){guard(fr)})});
+    var load=function(el){if(el&&el.dataset.src&&!el.getAttribute('src')){el.src=el.dataset.src}};
+    var hideHint=function(){hint.classList.add('off')};
+    new IntersectionObserver(function(e,o){if(e[0].isIntersecting){load(nw);o.disconnect()}},{rootMargin:'400px'}).observe(cv);
+    cv.querySelector('.cv-screen').addEventListener('pointerenter',function(){setTimeout(hideHint,1800)});
+    cv.querySelectorAll('[data-v]').forEach(function(b){b.addEventListener('click',function(){
+      var v=b.dataset.v;cv.querySelectorAll('[data-v]').forEach(function(x){x.setAttribute('aria-selected',x===b)});
+      var old=v==='voor';od.hidden=!old;nw.hidden=old;
+      if(old){load(od)}
+      url.textContent=old?'praktijkes.be (ancienne version)':'praktijkes.be (nouvelle version)';
+      op.href=old?'../cases/praktijk-es-oud/':'https://cwcrnspzs2-cmyk.github.io/praktijk-es/';
+      hint.textContent=old?'Faites défiler, voici à quoi ressemblait le site avant':'Faites défiler et cliquez, c\'est le vrai site';hint.classList.remove('off');
+      note.textContent=old?'L\u2019ancien site tel qu\u2019il était vraiment en ligne : mêmes textes, photos et mise en page. Les appels et e-mails sont désactivés dans cette démo.':'Le nouveau site tourne ici en direct : faites défiler, cliquez et changez de langue. Les appels et e-mails sont désactivés dans cette démo.';
+    })});
+
+    /* toon de site op echte schermgrootte en schaal ze, zodat gsm en computer exact kloppen */
+    var dev={desk:[1440,900],gsm:[390,844]},cur=innerWidth<700?'gsm':'desk',scr=cv.querySelector('.cv-screen'),size=document.getElementById('cvsize');
+    var fit=function(){var d=dev[cur];scr.style.setProperty('--vw',d[0]+'px');scr.style.setProperty('--vh',d[1]+'px');scr.style.setProperty('--k',(scr.clientWidth/d[0]).toFixed(4))};
+    var setDev=function(d,reload){cur=d;f.classList.toggle('gsm',d==='gsm');
+      cv.querySelectorAll('[data-d]').forEach(function(x){x.setAttribute('aria-pressed',x.dataset.d===d)});
+      size.textContent=d==='gsm'?'Comme sur un téléphone (390 pixels de large)':'Comme sur un ordinateur de 1440 pixels de large, en taille réduite';
+      requestAnimationFrame(fit);setTimeout(fit,400);
+      if(reload){[nw,od].forEach(function(fr){if(fr.getAttribute('src')){try{fr.contentWindow.location.reload()}catch(e){fr.src=fr.getAttribute('src')}}})}};
+    new ResizeObserver(fit).observe(scr);setDev(cur,false);
+    cv.querySelectorAll('[data-d]').forEach(function(b){b.addEventListener('click',function(){if(b.dataset.d!==cur)setDev(b.dataset.d,true)})});
+  }
+
+
+
+  /* personages: echte animatie, witte achtergrond live weggefilterd naar transparant.
+     Geen wissel meer tussen een los beeld en de video: wat je ziet is altijd een frame uit dezelfde video. */
+  (function(){var boxes=document.querySelectorAll('.toon[data-video]');if(!boxes.length)return;
+    var still=matchMedia('(prefers-reduced-motion: reduce)').matches;
+    function key(ctx,w,h){var d=ctx.getImageData(0,0,w,h),p=d.data,n=w*h,bg=new Uint8Array(n),q=new Int32Array(n),qh=0,qt=0;
+      function light(i){var o=i*4,r=p[o],g=p[o+1],b=p[o+2],mn=Math.min(r,g,b),mx=Math.max(r,g,b);return mn>=228&&mx-mn<=18}
+      function push(i){if(!bg[i]&&light(i)){bg[i]=1;q[qt++]=i}}
+      for(var x=0;x<w;x++){push(x);push((h-1)*w+x)}for(var y=0;y<h;y++){push(y*w);push(y*w+w-1)}
+      while(qh<qt){var i=q[qh++],x=i%w;if(x>0)push(i-1);if(x<w-1)push(i+1);if(i>=w)push(i-w);if(i<n-w)push(i+w)}
+      for(var i=0;i<n;i++){if(bg[i]){p[i*4+3]=0;continue}
+        var x=i%w,edge=(x>0&&bg[i-1])||(x<w-1&&bg[i+1])||(i>=w&&bg[i-w])||(i<n-w&&bg[i+w]);
+        if(edge){var o=i*4,mn=Math.min(p[o],p[o+1],p[o+2]);p[o+3]=Math.max(0,Math.min(255,(255-mn)*4))}}
+      ctx.putImageData(d,0,0)}
+    boxes.forEach(function(box){
+      var v=document.createElement('video');v.crossOrigin='anonymous';v.muted=true;v.playsInline=true;v.preload='none';
+      v.setAttribute('muted','');v.setAttribute('playsinline','');v.style.cssText='position:absolute;width:1px;height:1px;opacity:0;pointer-events:none';
+      var c=document.createElement('canvas'),ctx=c.getContext('2d',{willReadFrequently:true});box.appendChild(c);box.appendChild(v);
+      var loaded=false;
+      function size(){var s=Math.min(480,Math.round(box.clientWidth*(window.devicePixelRatio||1)));if(s&&(c.width!==s||c.height!==s)){c.width=s;c.height=s}}
+      function draw(){if(!v.videoWidth)return;size();ctx.clearRect(0,0,c.width,c.height);ctx.drawImage(v,0,0,c.width,c.height);try{key(ctx,c.width,c.height)}catch(e){fail();return}box.classList.add('live')}
+      function fail(){if(box.querySelector('img'))return;var im=new Image();im.src=box.dataset.fallback;im.alt='';box.appendChild(im);c.remove()}
+      function loop(){draw();if(!v.paused&&!v.ended){v.requestVideoFrameCallback?v.requestVideoFrameCallback(loop):requestAnimationFrame(loop)}}
+      v.addEventListener('play',loop);v.addEventListener('seeked',draw);v.addEventListener('loadeddata',draw);
+      v.addEventListener('ended',function(){v.currentTime=0});v.addEventListener('error',fail);
+      function load(){if(loaded)return;loaded=true;v.src=box.dataset.video;v.preload='auto';v.load()}
+      function go(){if(still)return;load();var p=v.play();if(p&&p.catch)p.catch(function(){})}
+      if(!still)box.addEventListener('mouseenter',function(){if(v.paused)go()});
+      box._go=go;box._v=v;box._load=load;});
+    /* ruim op voorhand laden, zodat het eerste frame er al staat als je ernaartoe scrolt */
+    var pre=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target._load();pre.unobserve(e.target)}})},{rootMargin:'900px 0px'});
+    boxes.forEach(function(b){pre.observe(b)});
+    if(still)return;
+    /* staging: nooit twee personages tegelijk, de volgende start als de vorige klaar is */
+    var queue=[],busy=false;
+    var cur=null;
+    function finish(){if(!cur)return;cur._v.removeEventListener('ended',finish);cur=null;busy=false;setTimeout(next,150)}
+    function next(){if(busy)return;
+      while(queue.length&&!queue[0]._in){queue.shift()._played=0}   /* uit beeld gescrold: later opnieuw */
+      if(!queue.length)return;cur=queue.shift();busy=true;cur._go();cur._v.addEventListener('ended',finish)}
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){var b=e.target;b._in=e.isIntersecting;
+      if(e.isIntersecting){if(!b._played){b._played=1;queue.push(b);setTimeout(next,300)}}
+      else{if(b._v&&!b._v.paused){b._v.pause()}if(cur===b){b._played=0;finish()}}})},{threshold:.55});
+    boxes.forEach(function(b){io.observe(b)});})();
+
+  /* logo: altijd vlot terug naar boven */
+  document.querySelectorAll('a.logo').forEach(function(a){a.addEventListener('click',function(e){e.preventDefault();
+    window.scrollTo({top:0,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});
+    if(history.replaceState)history.replaceState(null,'',location.pathname+location.search)})});
+  var calc=document.getElementById('calc');
+  if(calc){var base='start',bp=500,eur=function(n){return '€'+n.toLocaleString('fr-BE')};
+    var items=calc.querySelectorAll('.addon');
+    var upd=function(){var tot=bp,lines='<li><span>'+(base==='start'?'Start':'Croissance')+'</span><span>'+eur(bp)+'</span></li>';
+      items.forEach(function(a){var inc=a.dataset.incl===base;a.classList.toggle('inc',inc);
+        var cb=a.querySelector('input');if(cb){cb.disabled=inc;if(inc){cb.checked=false}}
+        var n=a.dataset.type==='n'?+a.querySelector('output').value:(cb&&cb.checked?1:0);
+        a.classList.toggle('on',n>0);
+        if(n>0){var c=n*a.dataset.price;tot+=c;lines+='<li><span>'+a.querySelector('b').textContent+(n>1?' ×'+n:'')+'</span><span>'+eur(c)+'</span></li>'}});
+      document.getElementById('calcTotal').textContent=eur(tot);document.getElementById('calcLines').innerHTML=lines;
+      var a1=Math.round(tot*.3),a2=Math.round(tot*.4);
+      document.getElementById('p1').textContent=eur(a1);document.getElementById('p2').textContent=eur(a2);document.getElementById('p3').textContent=eur(tot-a1-a2);
+      document.getElementById('calcHint').hidden=tot<2000;};
+    calc.querySelectorAll('[data-base]').forEach(function(b){b.addEventListener('click',function(){base=b.dataset.base;bp=+b.dataset.price;
+      calc.querySelectorAll('[data-base]').forEach(function(x){x.setAttribute('aria-checked',x===b)});upd()})});
+    items.forEach(function(a){var cb=a.querySelector('input');if(cb)cb.addEventListener('change',upd);
+      a.querySelectorAll('[data-inc],[data-dec]').forEach(function(btn){btn.addEventListener('click',function(){var o=a.querySelector('output');
+        o.value=Math.max(0,Math.min(9,+o.value+(btn.hasAttribute('data-inc')?1:-1)));upd()})})});
+    upd();}
+  var answers = {};
+  var out = document.getElementById('helper-out');
+  document.querySelectorAll('.choice').forEach(function(b){
+    b.addEventListener('click', function(){
+      var q = b.dataset.q;
+      document.querySelectorAll('.choice[data-q="'+q+'"]').forEach(function(x){x.setAttribute('aria-pressed','false')});
+      b.setAttribute('aria-pressed','true');
+      answers[q] = b.dataset.v;
+      if (!answers.doel) return;
+      var pick = answers.doel === 'online' ? 'start' : answers.doel === 'gevonden' ? 'groei' : 'systeem';
+      document.querySelectorAll('.plan').forEach(function(p){ p.classList.toggle('match', p.dataset.plan === pick); });
+      var names = {start:'Start', groei:'Croissance', systeem:'Système'};
+      out.textContent = 'Ce qui vous convient le mieux : ' + names[pick] + '' + (answers.site === 'ja' ? ', et nous partons de votre site actuel.' : '.');
+    });
+  });
+})();
+</script>
+</body>
+</html>

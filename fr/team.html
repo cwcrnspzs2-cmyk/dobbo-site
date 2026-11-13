@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>L'équipe · Dobbo-ville</title>
+<!-- Nog niet indexeren zolang de site niet gelanceerd is (in te vullen vakken staan er nog op). Weghalen bij lancering. -->
+<meta name="robots" content="noindex">
+<meta name="description" content="Rencontrez Alec, le panel de testeurs et les assistants numériques de Dobbo. Cliquez sur quelqu'un pour voir ce qu'il fait pour votre site.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;800&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --blue:#2B5CFF;--blue-deep:#1B3FC4;--blue-tint:#EEF3FF;--blue-line:#D6E1FF;
+  --red:#DA2C25;--red-deep:#A91F1A;--red-tint:#FFF1F0;
+  --ink:#141A33;--ink-soft:#4A5170;--line:#E6E8F0;
+  --display:'Unbounded',system-ui,sans-serif;--body:'Figtree',system-ui,sans-serif;
+  --r-panel:32px;--r-card:20px;--r-pill:999px;--ease:cubic-bezier(.32,.72,0,1);
+  --ease-out:cubic-bezier(.32,.72,0,1);--ease-in:cubic-bezier(.55,0,1,.45);--ease-io:cubic-bezier(.77,0,.175,1);--t-press:150ms;--t-pop:200ms;--t-panel:280ms;--t-exit:200ms;
+}
+*{box-sizing:border-box}
+html{overflow-x:clip}
+body{margin:0;overflow-x:clip;font-family:var(--body);color:var(--ink);background:#fff;font-size:18px;line-height:1.55;-webkit-font-smoothing:antialiased}
+img{max-width:100%;height:auto;display:block}
+.wrap{max-width:1240px;margin:0 auto;padding:0 24px}
+h1,h2,h3,h4{font-family:var(--display);text-transform:uppercase;letter-spacing:-0.01em;margin:0}
+h1{font-size:clamp(32px,4.4vw,58px);line-height:1.02;font-weight:800}
+h2{font-size:clamp(26px,3vw,38px);line-height:1.05;font-weight:800}
+p{margin:0}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:0 26px;border-radius:var(--r-pill);font-weight:700;font-size:16px;text-decoration:none;border:0;cursor:pointer;white-space:nowrap;font-family:var(--body);transition:transform .15s var(--ease),box-shadow .15s var(--ease)}
+.btn-red{background:var(--red);color:#fff;box-shadow:0 5px 0 var(--red-deep)}
+
+.btn-red:active{transform:translateY(5px);box-shadow:0 0 0 var(--red-deep)}
+:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
+header{position:sticky;top:0;z-index:30;background:rgba(255,255,255,.96);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:24px;height:72px}
+.logo{font-family:var(--display);font-weight:800;font-size:28px;color:var(--blue);text-decoration:none;letter-spacing:-0.02em}
+.nav-links{display:flex;gap:28px;align-items:center;font-weight:600;font-size:16px}
+.nav-links a{color:var(--ink);text-decoration:none}.nav-links a:hover,.nav-links a[aria-current]{color:var(--blue)}
+.nav .btn{min-height:46px;padding:0 20px;font-size:15px}
+@media (max-width:900px){.nav-links{display:none}}
+@media (max-width:480px){.nav .btn{display:none}}
+
+/* intro */
+.intro{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:40px;align-items:end;padding:56px 0 28px}
+.intro .lead{font-size:19px;color:var(--ink-soft)}
+.intro .lead b{color:var(--ink)}
+.kicker{display:inline-block;font-size:13px;font-weight:700;padding:6px 12px;border-radius:var(--r-pill);background:var(--blue-tint);color:var(--blue-deep);margin-bottom:16px}
+@media (max-width:900px){.intro{grid-template-columns:minmax(0,1fr);gap:16px;padding-top:36px}}
+
+/* filters */
+.filters{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:16px}
+.filters span{font-size:14px;font-weight:700;color:var(--ink-soft);margin-right:6px}
+.chip{font:inherit;font-size:15px;font-weight:700;border:0;cursor:pointer;padding:9px 16px;border-radius:var(--r-pill);background:#F2F4FA;color:var(--ink-soft);transition:background .2s,color .2s}
+.chip[aria-pressed=true]{background:var(--ink);color:#fff}
+
+/* town */
+.town{position:relative;aspect-ratio:16/12;border-radius:var(--r-panel);overflow:hidden;
+  background:
+    radial-gradient(circle at 50% 48%,#F7EFDF 0 17%,#EADFC8 17.2% 17.8%,transparent 18%),
+    radial-gradient(ellipse at 20% 10%,rgba(255,255,255,.7) 0,transparent 40%),
+    linear-gradient(170deg,#EAF6E3 0%,#E1F1DA 55%,#D6EBCF 100%)}
+.town::before{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(94,150,84,.22) 1.4px,transparent 1.6px),radial-gradient(rgba(94,150,84,.14) 1.2px,transparent 1.4px);background-size:26px 26px,19px 19px;background-position:0 0,9px 11px;pointer-events:none}
+.roads{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.roads path{fill:none;stroke:#F3E7CF;stroke-width:18;stroke-linecap:round}
+.roads path.edge{stroke:#E4D3B2;stroke-width:22}
+.roads path.dash{stroke:#fff;stroke-width:2;stroke-dasharray:6 10;opacity:.9}
+.roads circle{stroke:#fff;stroke-width:2}
+.plaza{position:absolute;left:50%;top:48%;transform:translate(-50%,-50%);width:23%;min-width:200px;z-index:2;background:#fff;border-radius:20px;border:1px solid #E3E9FA;box-shadow:0 24px 50px -24px rgba(27,63,196,.45)}
+.plaza .bar{display:flex;gap:5px;align-items:center;padding:9px 12px;border-bottom:1px solid #EEF1F8}
+.plaza .bar i{width:8px;height:8px;border-radius:50%;background:#E1E6F2}
+.plaza .bar span{margin-left:6px;flex:1;font-size:11px;color:var(--ink-soft);background:#F5F7FC;border-radius:999px;padding:3px 8px}
+.plaza .body{padding:14px;display:flex;flex-direction:column;gap:7px}
+.plaza .l1{height:14px;width:70%;border-radius:4px;background:var(--ink)}
+.plaza .l2{height:7px;width:90%;border-radius:4px;background:#E6EBF5}.plaza .l2.s{width:60%}
+.plaza .cta{align-self:flex-start;margin-top:4px;background:var(--red);color:#fff;font-size:11px;font-weight:700;padding:6px 12px;border-radius:999px}
+.plaza-lab{position:absolute;left:50%;bottom:-14px;transform:translateX(-50%);white-space:nowrap;background:var(--ink);color:#fff;font-size:12px;font-weight:700;padding:5px 12px;border-radius:999px}
+
+.plot{position:absolute;left:var(--x);top:var(--y);transform:translate(-50%,-50%);z-index:3;width:12.5%;min-width:120px;border:0;background:none;padding:0;cursor:pointer;font:inherit;color:inherit;display:flex;flex-direction:column;align-items:center;transition:opacity .3s,filter .3s}
+.plot.dim{opacity:.28;filter:grayscale(.7)}
+.bld{position:relative;width:100%;aspect-ratio:5/3;border-radius:6px 6px 12px 12px;background:#FFFCF6;box-shadow:0 1px 0 #E3E9FA,0 16px 28px -18px rgba(27,63,196,.45);transition:transform .35s var(--ease),box-shadow .35s var(--ease)}
+.bld::before{content:"";position:absolute;left:-8%;right:-8%;top:-44%;height:48%;background:var(--c);clip-path:polygon(50% 0,100% 100%,0 100%);border-radius:4px}
+.bld::after{content:"";position:absolute;left:14%;right:46%;top:34%;bottom:18%;border-radius:6px;background:
+  linear-gradient(90deg,#FFE3A3 0 44%,transparent 44% 56%,#FFE3A3 56%) top/100% 40% no-repeat,
+  linear-gradient(90deg,#FFE3A3 0 44%,transparent 44% 56%,#FFE3A3 56%) bottom/100% 40% no-repeat;box-shadow:0 0 14px rgba(255,200,90,.35)}
+.door{position:absolute;left:44%;bottom:0;width:12%;height:42%;border-radius:999px 999px 0 0;background:var(--c);opacity:.85}
+.chim{position:absolute;right:16%;top:-34%;width:8%;height:22%;background:var(--c);filter:brightness(.8);border-radius:2px 2px 0 0}
+.deco{position:absolute;pointer-events:none;z-index:1}
+.tree{width:2.6%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 35% 30%,#8ED07A,#4E9A45);box-shadow:0 6px 0 -2px rgba(60,110,50,.25)}
+.tree.s{width:1.8%}
+.flower{width:.7%;aspect-ratio:1;border-radius:50%;background:#FFB3C1;box-shadow:6px 3px 0 #FFE08A,-5px 5px 0 #fff}
+.fountain{left:50%;top:48%;width:31%;aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;border:2px dashed rgba(200,180,140,.5)}
+.together{position:absolute;left:50%;top:calc(48% + 17.5%);transform:translateX(-50%);z-index:2;white-space:nowrap;font-size:13px;font-weight:700;color:#7A6A4E;background:#FFF8EA;border-radius:999px;padding:5px 12px;box-shadow:0 1px 0 #E4D3B2}
+.bld .ico{position:absolute;right:10%;top:30%;width:30%;aspect-ratio:1;border-radius:10px;background:var(--t);display:grid;place-items:center}
+.bld .ico svg{width:60%;height:60%;fill:none;stroke:var(--c);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.who{position:absolute;left:-30%;bottom:-6%;width:62%;z-index:2;pointer-events:none}
+.who{aspect-ratio:1/1}.who img,.who canvas{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 8px 10px rgba(20,26,51,.16))}
+.toon canvas{opacity:0;transition:opacity var(--t-pop) var(--ease-out)}.toon.live canvas{opacity:1}.toon.live img{opacity:0}
+.sign{margin-top:12px;display:flex;flex-direction:column;align-items:center;gap:1px;background:#fff;border-radius:12px;padding:6px 12px;box-shadow:0 1px 0 #E3E9FA,0 8px 18px -12px rgba(27,63,196,.4);transition:transform .35s var(--ease)}
+.sign b{font-family:var(--display);text-transform:uppercase;font-size:13px;letter-spacing:-0.01em}
+.sign small{font-size:12px;color:var(--ink-soft);white-space:nowrap}
+.plot:focus-visible .bld,.plot[aria-expanded=true] .bld{transform:translateY(-6px);box-shadow:0 1px 0 #E3E9FA,0 26px 34px -18px rgba(27,63,196,.55)}
+.plot:focus-visible .sign{transform:translateY(-3px)}
+@media (hover:hover) and (pointer:fine){
+  .btn-red:hover{transform:translateY(-2px);box-shadow:0 7px 0 var(--red-deep)}
+  .plot:hover .bld{transform:translateY(-6px);box-shadow:0 1px 0 #E3E9FA,0 26px 34px -18px rgba(27,63,196,.55)}
+  .plot:hover .sign{transform:translateY(-3px)}
+  .iconbtn:hover{background:var(--blue-tint)}}
+.bld,.sign{transition:transform var(--t-pop) var(--ease-out),box-shadow var(--t-pop) var(--ease-out)}
+.plot{transition:opacity 260ms var(--ease-io),filter 260ms var(--ease-io)}
+.chip{transition:background-color var(--t-press) ease,color var(--t-press) ease}
+.iconbtn{transition:background-color var(--t-press) ease,transform var(--t-press) var(--ease-out)}.iconbtn:active{transform:scale(.96)}
+.btn:active{transform:translateY(5px)}
+.plot:focus-visible{outline:none}.plot:focus-visible .sign{outline:3px solid var(--blue);outline-offset:2px}
+.plot .new{position:absolute;right:-6%;top:-26%;z-index:3;font-size:11px;font-weight:800;padding:3px 8px;border-radius:999px;background:#FFF1C9;color:var(--ink)}
+.plot .human{position:absolute;right:-6%;top:-26%;z-index:3;font-size:11px;font-weight:800;padding:3px 8px;border-radius:999px;background:var(--red);color:#fff}
+.faces{position:absolute;left:-18%;bottom:2%;z-index:2;display:flex}
+.faces span{width:34px;height:34px;border-radius:50%;border:3px solid #fff;margin-left:-10px;display:grid;place-items:center}
+.faces span:first-child{margin-left:0}
+.faces span:nth-child(1){background:#FFE4D6}.faces span:nth-child(2){background:#E2F5EA}.faces span:nth-child(3){background:#FFF1C9}.faces span:nth-child(4){background:var(--red-tint)}
+.faces svg{width:18px;height:18px;fill:none;stroke:var(--ink);stroke-width:1.8;stroke-linecap:round}
+.hint{position:absolute;left:50%;bottom:10px;transform:translateX(-50%);z-index:4;background:#fff;border-radius:999px;padding:8px 14px;font-size:14px;font-weight:700;color:var(--ink-soft);box-shadow:0 8px 20px -12px rgba(27,63,196,.5);transition:opacity .4s}
+.hint.off{opacity:0}
+
+@keyframes idle{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+@keyframes hi{0%{transform:translateY(0) rotate(0)}20%{transform:translateY(-14px) rotate(-7deg)}40%{transform:translateY(-14px) rotate(7deg)}60%{transform:translateY(-8px) rotate(-5deg)}80%{transform:translateY(-2px) rotate(3deg)}100%{transform:translateY(0) rotate(0)}}
+@keyframes wave{0%{transform:scale(.85) rotate(0);opacity:0}40%{transform:scale(1.04) rotate(-6deg);opacity:1}60%{transform:rotate(6deg)}80%{transform:rotate(-3deg)}100%{transform:scale(1) rotate(0)}}
+
+
+/* elk teamlid een eigen gebouwtje */
+.bld{aspect-ratio:1/1!important;background:none!important;box-shadow:none!important;border-radius:0!important}
+.bld::before,.bld::after{display:none!important}
+.bld .house{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 14px 14px rgba(60,90,50,.22))}
+.bld::marker{content:none}
+.plot .who{left:-24%;bottom:-4%;width:58%}
+.plot .new,.plot .human{top:4%;right:2%}
+.faces{left:-14%;bottom:6%}
+@media (hover:hover) and (pointer:fine){.plot:hover .bld{box-shadow:none!important}}
+/* town on small screens: a tidy grid */
+@media (max-width:860px){
+  .town{aspect-ratio:auto;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:52px 14px;padding:120px 14px 70px 34px;background:linear-gradient(170deg,#EAF6E3,#D6EBCF)}
+  .roads,.hint,.deco,.together{display:none}
+  .plaza{position:absolute;top:24px;left:50%;width:calc(100% - 28px);min-width:0;transform:translateX(-50%)}
+  .plaza .body{display:none}
+  .plot{position:relative;left:auto;top:auto;transform:none;width:100%;min-width:0}
+  .sign{width:100%;text-align:center}.sign small{white-space:normal;line-height:1.3}
+  .who{left:-16%;width:52%}.faces{left:-10%}.faces span{width:28px;height:28px}
+}
+
+/* drawer */
+.scrim{position:fixed;inset:0;z-index:40;background:rgba(20,26,51,.4);opacity:0;pointer-events:none;transition:opacity var(--t-exit) var(--ease-in)}
+.scrim.on{transition:opacity var(--t-panel) var(--ease-out)}
+.scrim.on{opacity:1;pointer-events:auto}
+.drawer{position:fixed;z-index:41;top:0;right:0;height:100%;width:min(460px,100%);background:#fff;box-shadow:-30px 0 60px -30px rgba(20,26,51,.4);transform:translateX(104%);transition:transform var(--t-exit) var(--ease-in);display:flex;flex-direction:column;outline:none}
+.drawer.on{transform:none;transition:transform var(--t-panel) var(--ease-out)}
+.d-top{display:flex;justify-content:space-between;align-items:center;padding:14px 16px;border-bottom:1px solid var(--line)}
+.d-nav{display:flex;gap:6px}
+.iconbtn{width:40px;height:40px;border-radius:50%;border:0;background:#F2F4FA;cursor:pointer;display:grid;place-items:center;font-size:18px;font-weight:800;color:var(--ink)}
+.d-body{overflow-y:auto;padding:0 24px 28px}
+.d-hero{position:relative;margin:0 -24px;padding:24px 24px 0;background:var(--tint,var(--blue-tint));display:flex;align-items:flex-end;gap:16px;min-height:220px}
+.d-hero .toon{position:relative;width:46%;aspect-ratio:1/1;margin-bottom:-6px;flex:none}.d-hero .toon img,.d-hero .toon canvas{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
+.d-hero .meta{flex:1;padding-bottom:20px}
+.d-tag{display:inline-block;font-size:12px;font-weight:800;padding:4px 10px;border-radius:999px;background:#fff;color:var(--blue-deep)}
+.d-tag.h{color:var(--red-deep)}
+.d-hero h2{font-size:28px;margin:8px 0 4px}
+.d-role{font-weight:700;color:var(--blue-deep);font-size:16px}
+.d-place{font-size:14px;color:var(--ink-soft);margin-top:2px}
+.d-sec{margin-top:22px}
+.d-sec h3{font-size:13px;letter-spacing:.04em;color:var(--ink-soft);margin-bottom:8px;font-family:var(--body);font-weight:800}
+.d-sec ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:8px}
+.d-sec li{display:flex;gap:10px;font-size:16px}
+.d-sec li::before{content:"";flex:none;width:8px;height:8px;margin-top:9px;border-radius:50%;background:var(--blue)}
+.vs{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.vs div{border-radius:16px;padding:14px;font-size:15px;line-height:1.45}
+.vs .no{background:#F5F6FA;color:var(--ink-soft)}
+.vs .yes{background:var(--blue-tint)}
+.vs b{display:block;font-size:12px;letter-spacing:.04em;text-transform:uppercase;margin-bottom:4px}
+.vs .no b{color:#8A90A8}.vs .yes b{color:var(--blue-deep)}
+.pills{display:flex;flex-wrap:wrap;gap:6px}
+.pills span{font-size:14px;font-weight:700;padding:6px 12px;border-radius:999px;background:#F2F4FA}
+.pills span.p{background:#FFF1C9}
+.d-cta{margin-top:26px;display:flex;flex-direction:column;gap:8px}
+.d-cta .btn{width:100%}
+.d-cta small{font-size:13px;color:var(--ink-soft);text-align:center}
+@media (max-width:640px){.drawer{top:auto;bottom:0;height:88vh;width:100%;border-radius:24px 24px 0 0;transform:translateY(104%)}.drawer.on{transform:none}}
+
+/* overview */
+.overview{margin:72px 0}
+.ov{margin-top:20px;border-top:1px solid var(--line)}
+.ov-row{display:grid;grid-template-columns:56px minmax(0,1.1fr) minmax(0,2fr) minmax(0,1.3fr);gap:18px;align-items:center;padding:14px 4px;border-bottom:1px solid var(--line);cursor:pointer;transition:background .2s}
+.ov-row:hover{background:#F8FAFF}
+.ov-row img,.ov-row .fc{width:52px;height:52px;border-radius:50%;object-fit:cover;background:var(--blue-tint)}
+.ov-row .fc{display:grid;place-items:center;background:var(--red-tint)}
+.ov-row .fc svg{width:24px;height:24px;fill:none;stroke:var(--red-deep);stroke-width:1.8}
+.ov-row h4{font-size:15px}.ov-row .r{font-size:14px;font-weight:700;color:var(--blue-deep)}
+.ov-row p{font-size:15px;color:var(--ink-soft)}
+.ov-row .in{font-size:14px;font-weight:600}
+@media (max-width:800px){.ov-row{grid-template-columns:52px minmax(0,1fr)}.ov-row p,.ov-row .in{grid-column:2}}
+.end{margin:0 0 72px;background:var(--blue);color:#fff;border-radius:var(--r-panel);padding:48px 40px;display:flex;flex-wrap:wrap;gap:24px;align-items:center;justify-content:space-between}
+.end h2{max-width:20ch}.end p{color:#DCE4FF;margin-top:10px;max-width:44ch}
+footer{padding:40px 0 56px;font-size:15px;color:var(--ink-soft);border-top:1px solid var(--line)}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap nav">
+    <a href="index.html" class="logo" aria-label="Dobbo, retour à l'accueil">dobbo</a>
+    <nav class="nav-links" aria-label="Menu principal">
+      <a href="index.html#hoe">Comment ça marche</a>
+      <a href="team.html" aria-current="page">L'équipe</a>
+      <a href="index.html#pakketten">Formules</a>
+      <a href="index.html#vragen">Questions</a>
+    </nav>
+    <a href="https://cal.com/dobbo/gratis-gesprek" target="_blank" rel="noopener" class="btn btn-red">Réserver mon appel gratuit</a>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="intro">
+    <div>
+      <span class="kicker">L'équipe</span>
+      <h1>Bienvenue à Dobbo-ville</h1>
+    </div>
+    <p class="lead">Au centre se trouve <b>votre site web</b>. Autour travaille une équipe où chacun a une seule mission. <b>Alec est votre seul interlocuteur.</b> Il a créé et entraîné lui-même les agents et automatisations, et un groupe de vraies personnes teste chaque site. Cliquez sur quelqu'un pour voir ce qu'il fait pour vous.</p>
+  </section>
+
+  <div class="filters" role="group" aria-label="Afficher">
+    <span>Afficher :</span>
+    <button class="chip" type="button" data-f="alle" aria-pressed="true">Tout le monde</button>
+    <button class="chip" type="button" data-f="bouwen" aria-pressed="false">Créer</button>
+    <button class="chip" type="button" data-f="beheren" aria-pressed="false">Gérer</button>
+    <button class="chip" type="button" data-f="bouwsteen" aria-pressed="false">Modules</button>
+  </div>
+
+  <div class="town" id="town">
+    <svg class="roads" id="roads" aria-hidden="true"></svg>
+    <div class="plaza" aria-hidden="true">
+      <div class="bar"><i></i><i></i><i></i><span>votrecommerce.be</span></div>
+      <div class="body"><div class="l1"></div><div class="l2"></div><div class="l2 s"></div><div class="cta">Prendre rendez-vous</div></div>
+      <span class="plaza-lab">Votre site web</span>
+    </div>
+    <span class="together">Tout le monde travaille ensemble sur votre site</span>
+    <!-- plots worden hieronder door het script toegevoegd -->
+    <div class="hint" id="hint">Cliquez sur un bâtiment</div>
+  </div>
+
+  <section class="overview" aria-labelledby="ovt">
+    <h2 id="ovt">Tout le monde en un coup d'œil</h2>
+    <div class="ov" id="ov"></div>
+  </section>
+
+  <section class="end">
+    <div>
+      <h2>De qui votre commerce a-t-il besoin ?</h2>
+      <p>Lors d'un appel gratuit de 20 minutes, nous vous disons honnêtement de quels membres de l'équipe vous avez besoin, et desquels non.</p>
+    </div>
+    <a href="https://cal.com/dobbo/gratis-gesprek" target="_blank" rel="noopener" class="btn btn-red">Réserver mon appel gratuit</a>
+  </section>
+</main>
+
+<footer><div class="wrap"><a href="index.html" class="logo" style="font-size:22px">dobbo</a><p style="margin-top:6px">Des sites web pour les commerces à Bruxelles et alentours.</p></div></footer>
+
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="dName" tabindex="-1" hidden>
+  <div class="d-top">
+    <div class="d-nav"><button class="iconbtn" type="button" id="dPrev" aria-label="Précédent">‹</button><button class="iconbtn" type="button" id="dNext" aria-label="Suivant">›</button></div>
+    <button class="iconbtn" type="button" id="dClose" aria-label="Fermer">✕</button>
+  </div>
+  <div class="d-body" id="dBody"></div>
+</aside>
+
+<script>
+(function(){
+  var C='../assets/';
+  var I={
+    house:'<path d="M4 11l8-7 8 7v9H4z"/><path d="M10 20v-5h4v5"/>',
+    scope:'<circle cx="11" cy="11" r="6"/><path d="M20 20l-4.5-4.5"/>',
+    chart:'<path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/>',
+    shield:'<path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/>',
+    tool:'<path d="M14 6a4 4 0 0 0 5 5l-9 9a2 2 0 0 1-3-3l9-9a4 4 0 0 0-2-2z"/>',
+    chat:'<path d="M4 5h16v11H9l-5 4z"/><path d="M8 10h8"/>',
+    gear:'<circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M5 19l2-2M17 7l2-2"/>',
+    card:'<rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18M7 15h4"/>',
+    mail:'<rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/>',
+    lab:'<path d="M9 3h6M10 3v6l-5 9a2 2 0 0 0 2 3h10a2 2 0 0 0 2-3l-5-9V3"/>'
+  };
+  var person='<svg viewBox="0 0 24 24"><circle cx="12" cy="9" r="4"/><path d="M4 21c1-4.5 4.5-6.5 8-6.5s7 2 8 6.5"/></svg>';
+  var RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function keyFrame(ctx,w,h){var d=ctx.getImageData(0,0,w,h),p=d.data,n=w*h,bg=new Uint8Array(n),q=new Int32Array(n),qh=0,qt=0;
+    function light(i){var o=i*4,mn=Math.min(p[o],p[o+1],p[o+2]),mx=Math.max(p[o],p[o+1],p[o+2]);return mn>=228&&mx-mn<=18}
+    function push(i){if(!bg[i]&&light(i)){bg[i]=1;q[qt++]=i}}
+    for(var x=0;x<w;x++){push(x);push((h-1)*w+x)}for(var y=0;y<h;y++){push(y*w);push(y*w+w-1)}
+    while(qh<qt){var i=q[qh++],x=i%w;if(x>0)push(i-1);if(x<w-1)push(i+1);if(i>=w)push(i-w);if(i<n-w)push(i+w)}
+    for(var i=0;i<n;i++){if(bg[i]){p[i*4+3]=0;continue}var x=i%w;
+      if((x>0&&bg[i-1])||(x<w-1&&bg[i+1])||(i>=w&&bg[i-w])||(i<n-w&&bg[i+w])){var o=i*4,mn=Math.min(p[o],p[o+1],p[o+2]);p[o+3]=Math.max(0,Math.min(255,(255-mn)*4))}}
+    ctx.putImageData(d,0,0)}
+  function makeToon(box,url){var api={play:function(){}};if(RM)return api;
+    var v=document.createElement('video');v.crossOrigin='anonymous';v.muted=true;v.playsInline=true;v.preload='none';v.setAttribute('muted','');v.setAttribute('playsinline','');
+    v.style.cssText='position:absolute;width:1px;height:1px;opacity:0;pointer-events:none';
+    var c=document.createElement('canvas'),ctx=c.getContext('2d',{willReadFrequently:true});box.appendChild(c);box.appendChild(v);var loaded=false;
+    function draw(){if(!v.videoWidth)return;var s=Math.min(480,Math.round(box.clientWidth*(window.devicePixelRatio||1)));if(s&&(c.width!==s||c.height!==s)){c.width=s;c.height=s}
+      ctx.clearRect(0,0,c.width,c.height);ctx.drawImage(v,0,0,c.width,c.height);try{keyFrame(ctx,c.width,c.height)}catch(e){return}box.classList.add('live')}
+    function loop(){draw();if(!v.paused&&!v.ended){v.requestVideoFrameCallback?v.requestVideoFrameCallback(loop):requestAnimationFrame(loop)}}
+    v.addEventListener('play',loop);v.addEventListener('seeked',draw);v.addEventListener('loadeddata',draw);v.addEventListener('ended',function(){v.currentTime=0});
+    api.load=function(){if(!loaded){loaded=true;v.src=url;v.preload='auto';v.load()}};
+    api.play=function(){api.load();if(v.paused){var p=v.play();if(p&&p.catch)p.catch(function(){})}};
+    api.video=v;return api}
+  var T=[
+    {id:'alec',house:'hf_20261112_232200_6414ac96-1391-42ac-8d86-a51adb9b60b1',vid:'hf_20261112_215800_6aec818c-1736-4d6e-b811-cdb5ae35da49',name:'Alec',tag:'Humain',human:1,role:'Crée votre site',place:'Le studio',ico:'house',x:15,y:21,c:'#DA2C25',t:'#FFE3E1',tint:'#FFF1F0',f:['bouwen','beheren'],
+     img:'hf_20261112_161107_0021a0dd-293c-4356-97e7-19e411884c6c',head:'hf_20261112_164839_4413505a-9a69-44e8-835a-a7b57f4b3f22',
+     does:['Conçoit votre site et écrit les textes','A créé et entraîné lui-même ses assistants','Vérifie tout ce que fait l\'équipe','Est votre seul interlocuteur, par téléphone et WhatsApp'],
+     no:'Vous tombez sur une agence où vous parlez chaque fois à quelqu\'un d\'autre, ou vous cherchez tout vous-même.',
+     yes:'Une personne qui connaît votre commerce, et à qui vous envoyez simplement un message.',
+     inn:['Start','Croissance','Système','Gestion']},
+    {id:'test',house:'hf_20261112_232159_492974f8-d395-4bc6-b779-67b33fcccd7a',name:'Le panel de testeurs',tag:'Humains',human:1,role:'Teste chaque site',place:'Le labo de test',ico:'lab',x:11,y:52,c:'#DA2C25',t:'#FFE3E1',tint:'#FFF1F0',f:['bouwen'],
+     does:['Un groupe fixe de vraies personnes de différents âges','Teste votre site sur leur propre téléphone et ordinateur','Signale ce qu\'ils ne trouvent pas ou ce qui bloque'],
+     no:'Vous découvrez seulement après le lancement qu\'un bouton ne fonctionne pas sur téléphone, via un client qui abandonne.',
+     yes:'Les erreurs sont trouvées avant la mise en ligne, par des gens comme vos clients.',
+     inn:['Start','Croissance','Système']},
+    {id:'uil',house:'hf_20261112_232200_1a4fdc58-3df7-4429-8e44-393614cdd52a',vid:'hf_20261112_214558_210d24b1-2496-4521-9635-0314d708607a',name:'Le hibou',tag:'Assistant',role:'Analyste de données',place:'L\'observatoire',ico:'chart',x:36,y:18,c:'#2B5CFF',t:'#E4ECFF',f:['beheren','bouwsteen'],
+     img:'hf_20261112_161106_0d0ec564-ffd0-4bfb-ae72-b5d13400b7f6',head:'hf_20261112_164840_c42116e9-1ce1-4ba5-9470-69e869200250',
+     does:['Mesure combien de personnes visitent votre site et d\'où elles viennent','Compte combien de fois on clique sur appeler, WhatsApp ou itinéraire','Traduit les chiffres en langage simple, avec ce que vous pouvez améliorer'],
+     no:'Vous avez un site, mais vous ne savez pas s\'il rapporte quelque chose.',
+     yes:'Vous voyez noir sur blanc combien de clients sont venus via votre site, et quelle est la prochaine étape.',
+     inn:['Gestion : rapport mensuel','Gestion Plus : rapport hebdomadaire'],extra:['Tableau de bord +200 €']},
+    {id:'vos',house:'hf_20261112_232159_5646ff25-b8a1-49e7-a6e4-d2a037d0dff4',vid:'hf_20261112_214559_28185fe0-08be-4d73-a8b7-e9b6051452a3',name:'Le renard',tag:'Assistant',role:'SEO : être trouvé',place:'La tour de guet',ico:'scope',x:64,y:18,c:'#F07A1A',t:'#FFEBD9',f:['bouwen','beheren'],
+     img:'hf_20261112_161105_42b132e7-652d-4506-8d6d-2405a74f3f5b',head:'hf_20261112_164839_d6db8316-9e51-44f8-a094-bd001710c6f1',
+     does:['Complète votre profil Google en cohérence avec votre site','Fait en sorte qu\'on vous trouve sur "votre service + votre commune"','Suit et améliore votre visibilité'],
+     no:'Vous êtes en page 2. Un client de votre commune trouve votre concurrent.',
+     yes:'Qui cherche ce que vous faites dans votre quartier tombe sur vous.',
+     inn:['Croissance','Système','Gestion'],extra:['Avec Start +150 €']},
+    {id:'papegaai',house:'hf_20261112_232200_03ce96f3-cee9-4449-bd9d-0ed218905518',vid:'hf_20261112_220747_69bdbf64-6284-498a-a4bd-582a039b294a',name:'Le perroquet',tag:'Assistant',role:'Langues',place:'Le bureau des traducteurs',ico:'chat',x:86,y:21,c:'#1FA35B',t:'#DDF5E7',f:['bouwsteen'],nw:1,
+     img:'hf_20261112_205403_c86bec10-f718-4aab-b199-02eb8792c1df',head:'hf_20261112_205513_6334aedd-f516-48f3-873c-66448e2dc3cb',
+     does:['Met votre site en néerlandais, français et anglais, ou d\'autres langues','Garde toutes les langues identiques quand vous modifiez quelque chose','Alec vérifie chaque traduction'],
+     no:'Un client francophone à Bruxelles ne comprend pas votre site et abandonne.',
+     yes:'Chaque client lit votre site dans sa propre langue.',
+     inn:['Croissance : 3 langues','Système : toutes les langues'],extra:['+40 € par langue']},
+    {id:'egel',house:'hf_20261112_232159_77a16fcf-e62b-4ecc-a70e-4ef7acb96da2',vid:'hf_20261112_224435_3dbc112c-5a9f-45c1-ad78-ab9f890b6d93',name:'Le hérisson',tag:'Assistant',role:'Sécurité',place:'La porte de la ville',ico:'shield',x:89,y:52,c:'#1B3FC4',t:'#E4ECFF',f:['beheren'],
+     img:'hf_20261112_161105_0944018d-100d-4a88-acfd-7f31610b445e',head:'hf_20261112_164840_d3d147b2-dd2a-4933-920a-64355605a0e4',
+     does:['Garde votre site à jour','Fait des sauvegardes','Surveille votre site et votre connexion sécurisée (https)'],
+     no:'Votre navigateur affiche "non sécurisé" à côté de votre nom, ou votre site est hors ligne sans que personne ne le remarque.',
+     yes:'Votre site est sûr, et si quelque chose tourne mal, il est vite rétabli.',
+     inn:['Gestion','Gestion Plus']},
+    {id:'bever',house:'hf_20261112_232200_0cef18ee-b7cf-456a-bfc0-0c3c80220b5c',vid:'hf_20261112_225027_bbc01777-e038-485b-8f98-36832703ec8b',name:'Le castor',tag:'Assistant',role:'Entretien',place:'L\'atelier',ico:'tool',x:15,y:83,c:'#9A5B2E',t:'#F5E6DA',f:['beheren','bouwsteen'],
+     img:'hf_20261112_161104_99ba2a50-69f9-4b9e-a27f-35bed0ab693d',head:'hf_20261112_164838_b0be1a50-a450-4253-b21b-beffa1777a94',
+     does:['Modifie textes, photos, horaires et prix','Corrige les erreurs','Ajoute la prise de rendez-vous en ligne à votre site, si vous le souhaitez'],
+     no:'Vos horaires sont faux depuis des mois, car la mise à jour, c\'est "pour plus tard".',
+     yes:'Vous envoyez un WhatsApp, et c\'est modifié.',
+     inn:['Gestion : 30 min par mois','Gestion Plus : 2 heures par mois'],extra:['Rendez-vous en ligne +100 €']},
+    {id:'mier',house:'hf_20261112_232159_22a3731c-31d8-4e17-a34f-2de30bb21bfb',vid:'hf_20261112_220747_07725673-6049-4543-b45f-a6ce52a030b2',name:'La fourmi',tag:'Assistant',role:'Automatisations',place:'L\'usine',ico:'gear',x:37,y:85,c:'#C2410C',t:'#FFE7D6',f:['bouwsteen'],nw:1,
+     img:'hf_20261112_205404_d0449a84-524c-4682-9164-28101e216450',head:'hf_20261112_205514_6403f457-e86c-48ab-a30e-5ac272af3722',
+     does:['Envoie automatiquement une confirmation quand quelqu\'un fait une demande','Envoie des rappels de rendez-vous','Relance les clients qui n\'ont pas encore répondu'],
+     no:'Vous répondez vous-même à chaque demande, le soir, et en oubliez parfois une.',
+     yes:'Chaque client reçoit une réponse immédiate, même quand vous travaillez.',
+     inn:['Système'],extra:['+150 € par automatisation']},
+    {id:'eekhoorn',house:'hf_20261112_232159_dedeb705-9fdd-493e-9be0-87641ad4211a',vid:'hf_20261112_220747_0159d631-3dda-4733-b6b6-06e246910a79',name:'L\'écureuil',tag:'Assistant',role:'Paiements et boutique en ligne',place:'La banque',ico:'card',x:63,y:85,c:'#6B7280',t:'#EEF0F3',f:['bouwsteen'],nw:1,
+     img:'hf_20261112_205609_bb0cf45c-5f3f-47b9-97a3-e24173197039',head:'hf_20261112_205721_a11aca2b-550d-4c02-ada7-24f8d065e8b9',
+     does:['Permet aux clients de payer directement en ligne','Ajoute une petite boutique en ligne à votre site','Sécurise les paiements'],
+     no:'Un client doit faire un virement, le remet à plus tard et l\'oublie.',
+     yes:'Votre client paie tout de suite, sur son téléphone, en quelques clics.',
+     inn:['Système'],extra:['+€350']},
+    {id:'postduif',house:'hf_20261112_232159_c1a9b685-3831-4d6b-bbbe-ca6a8ad2f6b1',vid:'hf_20261112_220747_9cbc75f2-8f16-4fb7-8d90-fe7d2643ffb4',name:'Le pigeon voyageur',tag:'Assistant',role:'E-maillijst',place:'La poste',ico:'mail',x:86,y:83,c:'#5B6FD6',t:'#E6E9FB',f:['bouwsteen'],nw:1,
+     img:'hf_20261112_205404_92031d2d-5642-4b74-8fe0-492b7bb95d13',head:'hf_20261112_205514_eafdb035-294e-4bc3-a13b-eac6e97c7082',
+     does:['Ajoute un formulaire d\'inscription à votre site','Constitue une liste de clients à qui vous pouvez écrire','Vous aide à envoyer une newsletter ou une promotion'],
+     no:'Un client passe une fois et vous n\'avez plus jamais de nouvelles.',
+     yes:'Vous touchez à nouveau vos clients, quand vous avez quelque chose à dire.',
+     inn:['Système'],extra:['+€100']}
+  ];
+  var town=document.getElementById('town'),hint=document.getElementById('hint');
+  T.forEach(function(m,i){
+    var b=document.createElement('button');b.type='button';b.className='plot';b.dataset.id=m.id;b.dataset.f=m.f.join(' ');
+    b.style.cssText='--x:'+m.x+'%;--y:'+m.y+'%;--c:'+m.c+';--t:'+m.t+';--d:'+(i*.35).toFixed(2)+'s';
+    b.setAttribute('aria-haspopup','dialog');b.setAttribute('aria-expanded','false');
+    b.setAttribute('aria-label',m.name+', '+m.role+'. En savoir plus');
+    var fig=m.img?'<span class="who toon"><img src="'+C+m.img+'.webp" alt="" width="1024" height="1024" loading="lazy"></span>'
+      :'<span class="faces" aria-hidden="true">'+person.repeat(0)+'<span>'+person+'</span><span>'+person+'</span><span>'+person+'</span><span>'+person+'</span></span>';
+    b.innerHTML='<span class="bld"><img class="house" src="'+C+m.house+'.webp" alt="" width="1024" height="1024" loading="lazy">'+fig+(m.nw?'<span class="new">Module</span>':'')+(m.human?'<span class="human">Humain</span>':'')+'</span>'+
+      '<span class="sign"><b>'+m.name+'</b><small>'+m.place+' · '+m.role+'</small></span>';
+    b.addEventListener('click',function(){open(i,b)});
+    if(m.vid){var tb=b.querySelector('.toon');m._t=makeToon(tb,C+m.vid+'.mp4');b.addEventListener('mouseenter',function(){m._t.play()});b.addEventListener('focus',function(){m._t.play()})}
+    town.insertBefore(b,hint);
+  });
+  /* wegen naar het plein */
+  var roads=document.getElementById('roads'),NS='http://www.w3.org/2000/svg',rm=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function draw(){roads.innerHTML='';if(getComputedStyle(roads).display==='none')return;
+    var W=town.clientWidth,H=town.clientHeight,cx=W*.5,cy=H*.48;
+    roads.setAttribute('viewBox','0 0 '+W+' '+H);
+    T.forEach(function(m,i){var x=W*m.x/100,y=H*m.y/100,mx=(x+cx)/2;
+      var d='M'+x+','+y+' C'+mx+','+y+' '+mx+','+cy+' '+cx+','+cy;
+      var e=document.createElementNS(NS,'path');e.setAttribute('d',d);e.setAttribute('class','edge');roads.insertBefore(e,roads.firstChild);
+      var p=document.createElementNS(NS,'path');p.setAttribute('d',d);roads.appendChild(p);
+      var q=document.createElementNS(NS,'path');q.setAttribute('d',d);q.setAttribute('class','dash');roads.appendChild(q);
+      if(!rm){var c=document.createElementNS(NS,'circle');c.setAttribute('r','5');c.setAttribute('fill',m.c);var a=document.createElementNS(NS,'animateMotion');
+        a.setAttribute('dur','3.2s');a.setAttribute('begin',(i*.45)+'s');a.setAttribute('repeatCount','indefinite');a.setAttribute('path',d);c.appendChild(a);roads.appendChild(c)}});}
+  /* gezellig: bomen en bloemen langs de wegen */
+  [[27,8,''],[46,6,'s'],[55,7,''],[75,8,'s'],[96,12,''],[4,10,'s'],[26,38,'s'],[74,36,''],[30,62,''],[70,64,'s'],[4,76,''],[25,96,'s'],[50,95,''],[76,96,'s'],[97,74,''],[96,34,'s'],[3,33,''],[49,29,'s']].forEach(function(t){
+    var d=document.createElement('span');d.className='deco tree '+t[2];d.style.left=t[0]+'%';d.style.top=t[1]+'%';town.insertBefore(d,town.firstChild)});
+  [[22,30],[80,28],[38,72],[61,74],[8,92],[92,92],[42,40],[58,58]].forEach(function(t){
+    var d=document.createElement('span');d.className='deco flower';d.style.left=t[0]+'%';d.style.top=t[1]+'%';town.insertBefore(d,town.firstChild)});
+  new ResizeObserver(draw).observe(town);
+  /* staging: de personages groeten een voor een, nooit tegelijk; stopt als het stadje uit beeld is */
+  var chain=T.filter(function(m){return m._t}),ci=0,running=false,inView=false;
+  function step(){if(!inView||ci>=chain.length){running=false;return}running=true;var t=chain[ci++]._t;t.play();
+    var v=t.video;if(!v){step();return}var fin=function(){v.removeEventListener('ended',fin);setTimeout(step,150)};v.addEventListener('ended',fin)}
+  new IntersectionObserver(function(es,o){if(es[0].isIntersecting){o.disconnect();chain.forEach(function(m){if(m._t.load)m._t.load()})}},{rootMargin:'900px 0px'}).observe(town);
+  new IntersectionObserver(function(es){inView=es[0].isIntersecting;if(inView&&!running)setTimeout(step,400)},{threshold:.35}).observe(town);
+  /* filters */
+  document.querySelectorAll('.chip').forEach(function(c){c.addEventListener('click',function(){
+    document.querySelectorAll('.chip').forEach(function(x){x.setAttribute('aria-pressed',x===c)});
+    var f=c.dataset.f;document.querySelectorAll('.plot').forEach(function(p){p.classList.toggle('dim',f!=='alle'&&p.dataset.f.split(' ').indexOf(f)<0)});
+  })});
+  /* overzicht */
+  var ov=document.getElementById('ov');
+  T.forEach(function(m,i){var r=document.createElement('div');r.className='ov-row';r.tabIndex=0;r.setAttribute('role','button');r.setAttribute('aria-label',m.name+' : en savoir plus');
+    r.innerHTML=(m.head?'<img src="'+C+m.head+'.webp" alt="" width="64" height="64" loading="lazy">':'<span class="fc">'+person+'</span>')+
+      '<div><h4>'+m.name+'</h4><span class="r">'+m.role+'</span></div><p>'+m.yes+'</p><span class="in">'+m.inn.concat(m.extra||[]).join(' · ')+'</span>';
+    r.addEventListener('click',function(){open(i,r)});r.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();open(i,r)}});
+    ov.appendChild(r)});
+  /* drawer */
+  var dr=document.getElementById('drawer'),sc=document.getElementById('scrim'),body=document.getElementById('dBody'),cur=0,opener=null;
+  function fill(i){var m=T[i];cur=i;
+    body.innerHTML='<div class="d-hero" style="--tint:'+(m.tint||m.t)+'">'+(m.img?'<span class="toon" role="img" aria-label="'+m.name+'">'+(RM||!m.vid?'<img src="'+C+m.img+'.webp" alt="" width="1024" height="1024">':'')+'</span>':'<span class="faces" style="position:static;margin:0 0 24px 12px">'+'<span>'+person+'</span>'.repeat(4)+'</span>')+
+      '<div class="meta"><span class="d-tag'+(m.human?' h':'')+'">'+m.tag+'</span><h2 id="dName">'+m.name+'</h2><div class="d-role">'+m.role+'</div><div class="d-place">'+m.place+'</div></div></div>'+
+      '<div class="d-sec"><h3>SON RÔLE</h3><ul>'+m.does.map(function(x){return '<li>'+x+'</li>'}).join('')+'</ul></div>'+
+      '<div class="d-sec"><h3>POURQUOI C\'EST UTILE</h3><div class="vs"><div class="no"><b>Sans</b>'+m.no+'</div><div class="yes"><b>Avec</b>'+m.yes+'</div></div></div>'+
+      '<div class="d-sec"><h3>INCLUS DANS</h3><div class="pills">'+m.inn.map(function(x){return '<span>'+x+'</span>'}).join('')+(m.extra||[]).map(function(x){return '<span class="p">'+x+'</span>'}).join('')+'</div></div>'+
+      '<div class="d-cta"><a class="btn btn-red" href="https://cal.com/dobbo/gratis-gesprek" target="_blank" rel="noopener">Réserver mon appel gratuit</a><small>Nous vous disons honnêtement de qui vous avez besoin, et de qui non.</small></div>';
+    body.scrollTop=0;
+    var hb=body.querySelector('.d-hero .toon');if(hb&&m.vid&&!RM){var t=makeToon(hb,C+m.vid+'.mp4');t.load();setTimeout(t.play,300)}
+    document.querySelectorAll('.plot').forEach(function(p){p.setAttribute('aria-expanded',p.dataset.id===m.id)});}
+  function open(i,from){opener=from;fill(i);dr.hidden=false;requestAnimationFrame(function(){dr.classList.add('on');sc.classList.add('on')});dr.focus();hint.classList.add('off');document.body.style.overflow='hidden'}
+  function close(){dr.classList.remove('on');sc.classList.remove('on');document.body.style.overflow='';
+    document.querySelectorAll('.plot').forEach(function(p){p.setAttribute('aria-expanded','false')});
+    setTimeout(function(){dr.hidden=true},220);if(opener)opener.focus()}
+  document.getElementById('dClose').addEventListener('click',close);sc.addEventListener('click',close);
+  document.getElementById('dPrev').addEventListener('click',function(){fill((cur-1+T.length)%T.length)});
+  document.getElementById('dNext').addEventListener('click',function(){fill((cur+1)%T.length)});
+  document.addEventListener('keydown',function(e){if(dr.hidden)return;if(e.key==='Escape')close();if(e.key==='ArrowRight')fill((cur+1)%T.length);if(e.key==='ArrowLeft')fill((cur-1+T.length)%T.length)});
+  if(location.hash){var k=T.findIndex(function(m){return '#'+m.id===location.hash});if(k>=0)setTimeout(function(){open(k,null)},400)}
+})();
+</script>
+</body>
+</html>
