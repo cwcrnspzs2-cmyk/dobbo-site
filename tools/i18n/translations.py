@@ -418,6 +418,20 @@ ROWS = [
 ('Citaat van Eli (max 3 regels) met zijn toestemming, plus zijn naam en functie. Daarna de case TRGB.', 'Citaat van Eli (max 3 regels) met zijn toestemming, plus zijn naam en functie. Daarna de case TRGB.', 'Citaat van Eli (max 3 regels) met zijn toestemming, plus zijn naam en functie. Daarna de case TRGB.'),
 ('Gsm, ondernemingsnummer, link naar privacy- en cookieverklaring.', 'Gsm, ondernemingsnummer, link naar privacy- en cookieverklaring.', 'Gsm, ondernemingsnummer, link naar privacy- en cookieverklaring.'),
 ('Je WhatsApp-link en gsm-nummer voor "liever eerst een vraag?".', 'Je WhatsApp-link en gsm-nummer voor "liever eerst een vraag?".', 'Je WhatsApp-link en gsm-nummer voor "liever eerst een vraag?".'),
+# --- boekingspagina (boek.html) ---
+("Plan je gratis gesprek · Dobbo", "Réservez votre appel gratuit · Dobbo", "Book your free call · Dobbo"),
+("Plan je gratis gesprek", "Réservez votre appel gratuit", "Book your free call"),
+("Plan een gratis gesprek van 20 minuten met Dobbo, telefonisch of via video.", "Réservez un appel gratuit de 20 minutes avec Dobbo, par téléphone ou en vidéo.", "Book a free 20-minute call with Dobbo, by phone or video."),
+("20 minuten, telefonisch of via video. Kies een moment, en je krijgt meteen een bevestiging per mail.", "20 minutes, par téléphone ou en vidéo. Choisissez un moment et vous recevez aussitôt une confirmation par e-mail.", "20 minutes, by phone or video. Pick a time and you'll get a confirmation by email straight away."),
+("Je spreekt met Alec", "Vous parlez avec Alec", "You'll talk to Alec"),
+("De uil bekijkt je site al op voorhand.", "Le hibou examine votre site à l'avance.", "The owl looks at your site beforehand."),
+("3 concrete verbeterpunten voor je site, ook als je niet verdergaat", "3 pistes d'amélioration concrètes pour votre site, même si vous ne continuez pas", "3 concrete improvements for your site, even if you don't continue"),
+("Een eerlijk advies over wat je nodig hebt, en wat niet", "Un avis honnête sur ce dont vous avez besoin, et ce dont vous n'avez pas besoin", "Honest advice on what you need, and what you don't"),
+("Een vaste prijs als je met ons verder wil", "Un prix fixe si vous voulez continuer avec nous", "A fixed price if you want to work with us"),
+("Agenda laden…", "Chargement de l'agenda…", "Loading calendar…"),
+("Laadt de agenda niet?", "L'agenda ne se charge pas ?", "Calendar not loading?"),
+("Open ze in een nieuw venster", "Ouvrez-le dans une nouvelle fenêtre", "Open it in a new window"),
+("← Terug naar de site", "← Retour au site", "← Back to the site"),
 ]
 
 # Stukken tekst binnen JavaScript-code (geen volledige strings).

@@ -13,7 +13,7 @@ import os, re, sys
 
 LIVE = False
 SITE = 'https://dobbo.be'
-PAGES = ['index.html', 'team.html']
+PAGES = ['index.html', 'team.html', 'boek.html']
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(ROOT, 'tools', 'i18n'))
 from translations import ROWS, FRAGMENTS  # noqa: E402
