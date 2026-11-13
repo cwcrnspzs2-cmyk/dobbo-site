@@ -179,6 +179,10 @@ section[id]{scroll-margin-top:72px}
 .panel-test .todo{grid-column:1/-1}
 @media (max-width:900px){.panel-test{grid-template-columns:minmax(0,1fr)}.pt-flow{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:520px){.pt-flow{grid-template-columns:minmax(0,1fr)}}
+.team-side{display:flex;flex-direction:column;gap:16px}
+.test-strip{display:flex;align-items:center;gap:16px;padding:16px 20px;border-radius:var(--r-card);border:2px solid var(--red-tint);background:#fff}
+.test-strip p{font-size:15px;color:var(--ink-soft);margin:0}.test-strip b{color:var(--ink)}
+@media (max-width:640px){.squad{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:12px}.squad .member{flex-direction:column!important;align-items:flex-start!important;gap:10px;padding:14px}.squad .member img{width:64px!important;height:64px!important}.squad .member p{font-size:14px}.test-strip{flex-direction:column;align-items:flex-start}}
 .squad{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
 .squad .member{flex-direction:row;align-items:center;gap:16px}
 .squad .member img{width:96px;height:96px;flex:none;border-radius:50%;background:#fff;object-fit:cover}
@@ -465,7 +469,7 @@ footer{padding:56px 0;font-size:15px;color:var(--ink-soft)}
   <div class="wrap">
     <div class="team-intro reveal">
       <h2 id="teamtitel">Ontmoet het team</h2>
-      <p class="muted">Ik ben Alec en ik bouw je site. Mijn AI-team heb ik zelf gebouwd en getraind voor het werk dat herhaling vraagt. Voor elke site live gaat, testen echte mensen ze. Ik controleer alles en ben je enige aanspreekpunt: je praat altijd met een mens.</p>
+      <p class="muted">Ik bouw je site, mijn zelfgetrainde AI-team doet het herhalende werk en echte mensen testen alles voor het live gaat. Je praat altijd met mij.</p>
     </div>
     <div class="team">
       <article class="member human reveal">
@@ -473,50 +477,34 @@ footer{padding:56px 0;font-size:15px;color:var(--ink-soft)}
         <div><span class="tag">Mens</span>
         <h3>Alec</h3>
         <span class="role">Bouwt je website, jouw enige aanspreekpunt</span>
-        <ul><li>Ontwerp en teksten op maat</li><li>Bouwde en trainde het AI-team zelf</li><li>Controleert alles wat het team doet</li><li>Bereikbaar via telefoon en WhatsApp</li></ul></div>
+        <ul><li>Ontwerp en teksten op maat</li><li>Bouwde en trainde het AI-team zelf</li><li>Bereikbaar via telefoon en WhatsApp</li></ul></div>
       </article>
-      <div class="squad">
+      <div class="team-side">
+      <div class="squad" aria-label="Het AI-team">
         <article class="member reveal">
           <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3H2FAjydQqLsAIRD9wpl2Hgvsnz/hf_20261112_164840_c42116e9-1ce1-4ba5-9470-69e869200250.png" alt="De uil" loading="lazy" width="512" height="512">
-          <div><span class="tag">AI-assistent</span><h3>De uil</h3><span class="role">Data-analist</span><p>Houdt je cijfers bij.</p><span class="does">Jij krijgt: een maandrapport in gewone taal</span></div>
+          <div><h3>De uil</h3><span class="role">Data-analist</span><p>Houdt je cijfers bij.</p></div>
         </article>
         <article class="member reveal">
           <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3H2FAjydQqLsAIRD9wpl2Hgvsnz/hf_20261112_164839_d6db8316-9e51-44f8-a094-bd001710c6f1.png" alt="De vos" loading="lazy" width="512" height="512">
-          <div><span class="tag">AI-assistent</span><h3>De vos</h3><span class="role">SEO</span><p>Zorgt dat Google je vindt.</p><span class="does">Jij krijgt: meer bezoekers uit je regio</span></div>
+          <div><h3>De vos</h3><span class="role">SEO</span><p>Zorgt dat Google je vindt.</p></div>
         </article>
         <article class="member reveal">
           <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3H2FAjydQqLsAIRD9wpl2Hgvsnz/hf_20261112_164840_d3d147b2-dd2a-4933-920a-64355605a0e4.png" alt="De egel" loading="lazy" width="512" height="512">
-          <div><span class="tag">AI-assistent</span><h3>De egel</h3><span class="role">Beveiliging</span><p>Updates, back-ups en bewaking.</p><span class="does">Jij krijgt: een site die niet plat gaat</span></div>
+          <div><h3>De egel</h3><span class="role">Beveiliging</span><p>Updates, back-ups en bewaking.</p></div>
         </article>
         <article class="member reveal">
           <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3H2FAjydQqLsAIRD9wpl2Hgvsnz/hf_20261112_164838_b0be1a50-a450-4253-b21b-beffa1777a94.png" alt="De bever" loading="lazy" width="512" height="512">
-          <div><span class="tag">AI-assistent</span><h3>De bever</h3><span class="role">Onderhoud</span><p>Past aan en lost fouten op.</p><span class="does">Jij krijgt: wijzigingen binnen de week</span></div>
+          <div><h3>De bever</h3><span class="role">Onderhoud</span><p>Past aan en lost fouten op.</p></div>
         </article>
       </div>
-      <div class="extra-crew reveal">
-        <div class="xc-head"><span class="tag">Bouwstenen</span><h3>Voor wie meer nodig heeft</h3><p>Deze vier komen erbij wanneer jij ze nodig hebt, los of in Systeem.</p></div>
-        <div class="xc-grid">
-          <div class="xc"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3H2FAjydQqLsAIRD9wpl2Hgvsnz/hf_20261112_205513_6334aedd-f516-48f3-873c-66448e2dc3cb.png" alt="De papegaai" width="64" height="64" loading="lazy"><div><h4>De papegaai</h4><span class="role">Talen</span><p>Je site in elke taal van je klanten</p><span class="xc-price">+€40 per taal</span></div></div>
-          <div class="xc"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3H2FAjydQqLsAIRD9wpl2Hgvsnz/hf_20261112_205514_6403f457-e86c-48ab-a30e-5ac272af3722.png" alt="De mier" width="64" height="64" loading="lazy"><div><h4>De mier</h4><span class="role">Automatiseringen</span><p>Herinneringen en opvolgmails, vanzelf</p><span class="xc-price">+€150 per flow</span></div></div>
-          <div class="xc"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3H2FAjydQqLsAIRD9wpl2Hgvsnz/hf_20261112_205721_a11aca2b-550d-4c02-ada7-24f8d065e8b9.png" alt="De eekhoorn" width="64" height="64" loading="lazy"><div><h4>De eekhoorn</h4><span class="role">Betalingen en webshop</span><p>Klanten betalen meteen online</p><span class="xc-price">+€350</span></div></div>
-          <div class="xc"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3H2FAjydQqLsAIRD9wpl2Hgvsnz/hf_20261112_205514_eafdb035-294e-4bc3-a13b-eac6e97c7082.png" alt="De postduif" width="64" height="64" loading="lazy"><div><h4>De postduif</h4><span class="role">E-maillijst</span><p>Bouwt een lijst klanten die je kan mailen</p><span class="xc-price">+€100</span></div></div>
-        </div>
-      </div>
-      <a href="team.html" class="town-link reveal"><span>Ontmoet iedereen in <b>Dobbo-stad</b>: klik op elk teamlid en zie wat het voor je doet.</span><span class="tl-go">Bekijk het team →</span></a>
-      <article class="panel-test reveal">
-        <div class="pt-head">
+        <div class="test-strip reveal">
           <div class="pt-faces" aria-hidden="true"><span><svg viewBox="0 0 24 24"><circle cx="12" cy="9" r="4"/><path d="M4 21c1-4.5 4.5-6.5 8-6.5s7 2 8 6.5"/></svg></span><span><svg viewBox="0 0 24 24"><circle cx="12" cy="9" r="4"/><path d="M4 21c1-4.5 4.5-6.5 8-6.5s7 2 8 6.5"/></svg></span><span><svg viewBox="0 0 24 24"><circle cx="12" cy="9" r="4"/><path d="M4 21c1-4.5 4.5-6.5 8-6.5s7 2 8 6.5"/></svg></span><span><svg viewBox="0 0 24 24"><circle cx="12" cy="9" r="4"/><path d="M4 21c1-4.5 4.5-6.5 8-6.5s7 2 8 6.5"/></svg></span><span>+</span></div>
-          <div><span class="tag">Mensen</span><h3>Het testpanel</h3><span class="role">Echte mensen, echte toestellen</span></div>
+          <p><b>Het testpanel.</b> Echte mensen testen elke site op hun eigen gsm en computer voor ze live gaat.</p>
         </div>
-        <p>Een vaste groep mensen van verschillende leeftijden test elke site op hun eigen gsm en computer, zoals je klanten dat straks doen. Vinden ze iets niet of loopt iets vast, dan pas ik het aan voor de site live gaat.</p>
-        <ol class="pt-flow" aria-label="Zo komt je site tot stand">
-          <li><b>1</b>Het AI-team doet het herhalende werk</li>
-          <li><b>2</b>Ik controleer alles</li>
-          <li><b>3</b>Het testpanel test op gsm en computer</li>
-          <li><b>4</b>Pas dan gaat je site live</li>
-        </ol>
-        <div class="todo">Aantal testers en wie ze zijn (bv. "8 mensen tussen 18 en 70 jaar"), zodat dit concreet wordt.</div>
-      </article>
+        <!-- todo Alec: aantal testers en wie ze zijn (bv. "8 mensen tussen 18 en 70 jaar") -->
+      </div>
+      <a href="team.html" class="town-link reveal"><span>Nog 4 specialisten voor talen, automatisaties, betalingen en e-mail. Ontmoet iedereen in <b>Dobbo-stad</b>.</span><span class="tl-go">Bekijk het team →</span></a>
     </div>
   </div>
 </section>
