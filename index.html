@@ -84,6 +84,11 @@ section[id]{scroll-margin-top:72px}
 /* herken je dit */
 .check-grid{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,6fr);gap:56px;align-items:start}
 .checks{display:flex;flex-direction:column;gap:12px}
+.chk-h{font-size:14px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);margin:8px 0 0}
+.chk-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.chk-list .chk{font-size:16px;padding:14px 16px;gap:12px}
+.chk-list .chk .box{width:26px;height:26px}
+@media (max-width:700px){.chk-list{grid-template-columns:minmax(0,1fr)}}
 .chk{display:flex;align-items:center;gap:16px;padding:18px 20px;border-radius:var(--r-card);border:2px solid var(--line);background:#fff;font:inherit;font-size:19px;font-weight:600;color:var(--ink);text-align:left;cursor:pointer;transition:border-color .2s,background .2s}
 .chk .box{flex:none;width:30px;height:30px;border-radius:10px;border:2.5px solid var(--blue-line);display:grid;place-items:center;transition:background-color var(--t-press) ease,border-color var(--t-press) ease}
 .chk .box svg{opacity:0;transition:opacity .15s}
@@ -436,9 +441,9 @@ footer{padding:56px 0;font-size:15px;color:var(--ink-soft)}
     <div class="panel split reveal">
       <img src="assets/hf_20261112_161103_b23e9b3a-dc49-4304-9e32-089c7c790617.webp" alt="Een winkelier geeft een flyer, de klant zoekt de zaak meteen op haar gsm op" loading="lazy" width="1168" height="880">
       <div>
-        <h2 id="anders">Je doet het al anders? Goed zo.</h2>
-        <p class="lead" style="margin-top:20px">Flyers, mensen aanspreken, posten op Instagram: blijf dat doen. Maar wie je flyer ziet, zoekt je daarna op.</p>
-        <p class="muted" style="margin-top:16px">Slechts 8% van de mensen kijkt nooit naar de website van een lokale zaak. Vinden ze dan niets, of iets ouds, dan lekt je werk weg. Een goede site maakt elke flyer en elke post sterker.</p>
+        <h2 id="anders">Je klanten zoeken je eerst online op</h2>
+        <p class="lead" style="margin-top:20px">Een flyer, een aanbeveling of een post op Instagram: wie over je zaak hoort, zoekt je daarna op. Op je website beslissen mensen of ze bellen, langskomen of boeken.</p>
+        <p class="muted" style="margin-top:16px">Slechts 8% van de mensen kijkt nooit naar de website van een lokale zaak. Vinden ze niets, of een verouderde site, dan haken ze af en gaat je reclame verloren. Een goede website maakt al je andere reclame sterker.</p>
         <p class="source">Bron: BrightLocal, onderzoek naar websites van lokale zaken.</p>
       </div>
     </div>
@@ -454,11 +459,10 @@ footer{padding:56px 0;font-size:15px;color:var(--ink-soft)}
     </div>
     <div class="reveal">
       <div class="checks" id="checks">
-        <button type="button" class="chk" aria-pressed="false"><span class="box"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg></span>Je site ziet er op je gsm niet uit.</button>
-        <button type="button" class="chk" aria-pressed="false"><span class="box"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg></span>Je geeft liever je Facebook door dan je site.</button>
-        <button type="button" class="chk" aria-pressed="false"><span class="box"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg></span>Je uren of prijzen kloppen niet meer.</button>
-        <button type="button" class="chk" aria-pressed="false"><span class="box"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg></span>Je weet niet meer wie je login heeft.</button>
-        <button type="button" class="chk" aria-pressed="false"><span class="box"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg></span>Je concurrent staat boven jou in Google.</button>
+        <h3 class="chk-h">Over je site</h3>
+        <div class="chk-list"><button type="button" class="chk" aria-pressed="false"><span class="box"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg></span>Je site ziet er op je gsm niet goed uit.</button><button type="button" class="chk" aria-pressed="false"><span class="box"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg></span>Je uren, prijzen of aanbod kloppen niet meer.</button><button type="button" class="chk" aria-pressed="false"><span class="box"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg></span>Klanten bellen voor info die op je site zou moeten staan.</button><button type="button" class="chk" aria-pressed="false"><span class="box"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg></span>Je concurrent staat boven jou in Google.</button><button type="button" class="chk" aria-pressed="false"><span class="box"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg></span>Je weet niet meer wie je login of je domein beheert.</button><button type="button" class="chk" aria-pressed="false"><span class="box"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg></span>Je site is ooit door een kennis gemaakt en sindsdien niet meer aangeraakt.</button><button type="button" class="chk" aria-pressed="false"><span class="box"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg></span>Klanten kunnen niet online boeken of bestellen.</button><button type="button" class="chk" aria-pressed="false"><span class="box"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg></span>Je hebt nog geen website.</button></div>
+        <h3 class="chk-h">Wat je misschien denkt</h3>
+        <div class="chk-list"><button type="button" class="chk" aria-pressed="false"><span class="box"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg></span>“Facebook en Instagram volstaan toch?”</button><button type="button" class="chk" aria-pressed="false"><span class="box"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg></span>“Mijn klanten kennen me al.”</button><button type="button" class="chk" aria-pressed="false"><span class="box"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg></span>“Een website is iets voor grote bedrijven.”</button><button type="button" class="chk" aria-pressed="false"><span class="box"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg></span>“Een goede site is te duur voor mijn zaak.”</button><button type="button" class="chk" aria-pressed="false"><span class="box"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg></span>“Ik heb al een site, dat is genoeg.”</button><button type="button" class="chk" aria-pressed="false"><span class="box"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg></span>“Ik heb geen tijd om me daarmee bezig te houden.”</button></div>
       </div>
       <div class="verdict" id="verdict" aria-live="polite"></div>
     </div>
@@ -871,9 +875,9 @@ footer{padding:56px 0;font-size:15px;color:var(--ink-soft)}
       c.setAttribute('aria-pressed', c.getAttribute('aria-pressed') === 'true' ? 'false' : 'true');
       var n = document.querySelectorAll('.chk[aria-pressed="true"]').length;
       if (n >= 2) {
-        verdict.innerHTML = '<span>' + n + ' herkend. Dan verlies je nu klanten.</span><a href="#boek" class="btn btn-red">Plan mijn gratis gesprek</a>';
+        verdict.innerHTML = '<span>' + n + ' herkend. Daar valt winst te halen: in 20 minuten zeggen we je wat eerst moet.</span><a href="#boek" class="btn btn-red">Plan mijn gratis gesprek</a>';
       } else if (n === 1) {
-        verdict.textContent = 'Eén herkend. Nog eentje en het kost je klanten.';
+        verdict.textContent = 'Eén herkend. Duid gerust alles aan wat klopt.';
       } else { verdict.textContent = ''; }
     });
   });
