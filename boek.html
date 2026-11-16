@@ -480,6 +480,25 @@ Cal("init", "gesprek", { origin: "https://cal.com" });
 Cal.ns.gesprek("inline", { elementOrSelector: "#cal-inline", calLink: "dobbo/gratis-gesprek", config: { layout: "month_view", theme: "light" } });
 Cal.ns.gesprek("ui", { theme: "light", hideEventTypeDetails: false, layout: "month_view",
   cssVarsPerTheme: { light: { "cal-brand": "#2B5CFF", "cal-brand-emphasis": "#1B3FC4", "cal-brand-text": "#ffffff" } } });
+// Na een geslaagde boeking: door naar de vragenlijst, met naam, e-mail en zaak al ingevuld.
+(function(){
+  var done=false;
+  function go(d){
+    if(done) return; done=true;
+    d=d||{};
+    var b=d.booking||d, r=b.responses||{}, a=(b.attendees&&b.attendees[0])||{};
+    var name=(typeof r.name==='object'&&r.name?[r.name.firstName,r.name.lastName].join(' ').trim():r.name)||a.name||'';
+    var q=new URLSearchParams();
+    if(name) q.set('naam',name);
+    if(r.email||a.email) q.set('email',r.email||a.email);
+    var zaak=r['Naam-van-je-zaak']||r['naam-van-je-zaak']; if(zaak) q.set('zaak',zaak);
+    var site=r['Je-huidige-website--als-je-er-een-hebt']; if(site) q.set('site',site);
+    q.set('geboekt','1');
+    setTimeout(function(){ location.href='vragenlijst.html?'+q.toString(); }, 2500);
+  }
+  Cal.ns.gesprek("on", { action: "bookingSuccessful", callback: function(e){ go(e.detail && e.detail.data); } });
+  Cal.ns.gesprek("on", { action: "bookingSuccessfulV2", callback: function(e){ go(e.detail && e.detail.data); } });
+})();
 </script>
 </body>
 </html>

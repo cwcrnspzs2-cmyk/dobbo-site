@@ -432,6 +432,9 @@ ROWS = [
 ("Laadt de agenda niet?", "L'agenda ne se charge pas ?", "Calendar not loading?"),
 ("Open ze in een nieuw venster", "Ouvrez-le dans une nouvelle fenêtre", "Open it in a new window"),
 ("← Terug naar de site", "← Retour au site", "← Back to the site"),
+# --- vragenlijst.html (JS-teksten) ---
+("Geboekt! Nog één stap", "Réservé ! Encore une étape", "Booked! One more step"),
+("Je krijgt zo een bevestiging per mail. Heb je 5 minuten? Beantwoord deze korte vragen, dan weet Alec al wat je verwacht en hoe je huidige site eruitziet. Alleen je naam en e-mail zijn verplicht.", "Vous recevrez bientôt une confirmation par e-mail. Vous avez 5 minutes ? Répondez à ces quelques questions, Alec saura déjà ce que vous attendez et à quoi ressemble votre site actuel. Seuls votre nom et votre e-mail sont obligatoires.", "You'll get a confirmation email shortly. Got 5 minutes? Answer these short questions so Alec already knows what you expect and what your current site looks like. Only your name and email are required."),
 ]
 
 # Stukken tekst binnen JavaScript-code (geen volledige strings).

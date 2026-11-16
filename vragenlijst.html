@@ -524,6 +524,7 @@ fieldset.vl-f{border:0;padding:0;margin:0}
 <script>
 (function(){
   var q=new URLSearchParams(location.search);
+  if(q.get('geboekt')){var h=document.querySelector('#vl-title');h.textContent='Geboekt! Nog één stap';var l=document.querySelector('.vl-wrap .lead');l.textContent='Je krijgt zo een bevestiging per mail. Heb je 5 minuten? Beantwoord deze korte vragen, dan weet Alec al wat je verwacht en hoe je huidige site eruitziet. Alleen je naam en e-mail zijn verplicht.'}
   if(q.get('verzonden')){document.getElementById('vl-form').style.display='none';document.getElementById('vl-done').classList.add('show');return}
   var map={naam:'naam',email:'email',zaak:'zaak',site:'site'};
   for(var k in map){var v=q.get(k);if(v&&!/^\{.*\}$/.test(v))document.getElementById(map[k]).value=v}
