@@ -1,5 +1,5 @@
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
-import { SUPABASE_URL, SUPABASE_ANON_KEY, OWNER_EMAIL } from './config.js?v=9';
+import { SUPABASE_URL, SUPABASE_ANON_KEY, OWNER_EMAIL } from './config.js?v=10';
 
 const sb = createClient(SUPABASE_URL, SUPABASE_ANON_KEY, { auth: { persistSession: true, autoRefreshToken: true } });
 const $ = (s, el = document) => el.querySelector(s);
@@ -107,21 +107,35 @@ async function boot() {
 function showLogin() {
   $('#login').classList.remove('hidden');
   $('#app').classList.add('hidden');
-  const form = $('#login-form'), email = $('#login-email'), code = $('#login-code'), btn = $('#login-btn'), msg = $('#login-msg');
-  let sent = false;
+  const form = $('#login-form'), email = $('#login-email'), pass = $('#login-pass'), code = $('#login-code'), btn = $('#login-btn'), msg = $('#login-msg'), sw = $('#login-switch'), lead = $('#login-lead');
+  let mode = 'pass', sent = false; // pass = wachtwoord, code = code per mail
+  const setMode = (m) => {
+    mode = m; sent = false; msg.textContent = ''; msg.className = 'msg';
+    pass.classList.toggle('hidden', m !== 'pass'); pass.required = m === 'pass';
+    code.classList.add('hidden');
+    btn.textContent = m === 'pass' ? 'Inloggen' : 'Stuur mijn code';
+    lead.textContent = m === 'pass' ? 'Log in met je e-mailadres en wachtwoord.' : 'Nieuw, of wachtwoord vergeten? Je krijgt een code per mail. Daarna stel je een wachtwoord in.';
+    sw.textContent = m === 'pass' ? 'Eerste keer, of wachtwoord vergeten? Log in met een code per mail' : 'Ik heb een wachtwoord';
+  };
+  sw.onclick = () => setMode(mode === 'pass' ? 'code' : 'pass');
   form.onsubmit = async (e) => {
     e.preventDefault();
     msg.className = 'msg';
     btn.disabled = true;
     try {
+      if (mode === 'pass') {
+        const { data, error } = await sb.auth.signInWithPassword({ email: email.value.trim(), password: pass.value });
+        if (error) throw new Error(/invalid/i.test(error.message) ? 'E-mail of wachtwoord klopt niet. Nog geen wachtwoord? Log in met een code per mail.' : error.message);
+        return start(data.session);
+      }
       if (!sent) {
         const { error } = await sb.auth.signInWithOtp({ email: email.value.trim(), options: { shouldCreateUser: true, emailRedirectTo: location.origin + location.pathname } });
         if (error) throw error;
         sent = true;
         code.classList.remove('hidden');
         code.focus();
-        btn.textContent = 'Inloggen';
-        msg.textContent = 'Check je mail. Vul de code in, of klik op de link.';
+        btn.textContent = 'Inloggen met code';
+        msg.textContent = 'Check je mail en vul de code in.';
       } else {
         const { data, error } = await sb.auth.verifyOtp({ email: email.value.trim(), token: code.value.trim(), type: 'email' });
         if (error) throw error;
@@ -131,6 +145,36 @@ function showLogin() {
       msg.className = 'msg err';
       msg.textContent = /rate|limit/i.test(err.message) ? 'Even wachten, er zijn net te veel mails verstuurd.' : err.message;
     } finally { btn.disabled = false; }
+  };
+}
+
+/** Wachtwoord instellen of wijzigen, zodat je zonder mail inlogt. */
+function passwordPanel(first = false) {
+  showPanel(head(first ? 'Stel een wachtwoord in' : 'Wachtwoord wijzigen') + `
+  <form class="p-body" id="pw-form">
+    <div class="card"><p class="date" style="margin-bottom:12px">${first ? 'Dan log je volgende keer in met je e-mail en wachtwoord, zonder op een mail te wachten.' : 'Minstens 8 tekens.'}</p>
+      <div class="fields">
+        <input type="text" name="username" value="${esc($("#who").textContent)}" autocomplete="username" hidden>
+        <label class="f full">Nieuw wachtwoord<input type="password" name="p1" minlength="8" required autocomplete="new-password"></label>
+        <label class="f full">Nog eens<input type="password" name="p2" minlength="8" required autocomplete="new-password"></label>
+      </div>
+      <p class="msg" id="pw-msg" role="status" style="margin-top:8px"></p>
+    </div>
+    <button class="btn btn-blue" type="submit" style="justify-self:start">Bewaar wachtwoord</button>
+  </form>`, 'pw');
+  const f = $('#pw-form');
+  setTimeout(() => f.p1.focus(), 300);
+  f.onsubmit = async (e) => {
+    e.preventDefault();
+    const m = $('#pw-msg'); m.className = 'msg';
+    if (f.p1.value !== f.p2.value) { m.className = 'msg err'; m.textContent = 'De twee wachtwoorden zijn niet hetzelfde.'; return; }
+    const b = $('button[type=submit]', f); b.disabled = true;
+    const { error } = await sb.auth.updateUser({ password: f.p1.value, data: { has_password: true } });
+    b.disabled = false;
+    if (error) { m.className = 'msg err'; m.textContent = /weak|short|least/i.test(error.message) ? 'Kies een langer of sterker wachtwoord.' : error.message; return; }
+    $('#set-pass').textContent = 'Wachtwoord wijzigen';
+    closePanel(true);
+    toast('Wachtwoord bewaard. Volgende keer log je ermee in.');
   };
 }
 
@@ -159,6 +203,10 @@ async function start(session) {
   $('#app').classList.remove('hidden');
   $('#who').textContent = email;
   $('#logout').onclick = async () => { await sb.auth.signOut(); location.reload(); };
+  const hasPw = !!session.user.user_metadata?.has_password;
+  $('#set-pass').textContent = hasPw ? 'Wachtwoord wijzigen' : 'Wachtwoord instellen';
+  $('#set-pass').onclick = () => passwordPanel(!hasPw);
+  if (!hasPw) setTimeout(() => passwordPanel(true), 600);
   const routes = ROLE === 'owner' ? OWNER_ROUTES : CLIENT_ROUTES;
   const links = routes.map(([id, label, ic]) => `<a href="#${id}" data-r="${id}">${icon(ic)}<span>${label}</span></a>`).join('');
   $('#nav').innerHTML = links;
