@@ -77,9 +77,9 @@ main{padding:32px 32px 96px;min-width:0;max-width:1200px}
 .btn-sm{min-height:32px;padding:4px 12px;font-size:14px;border-radius:var(--r-sm)}
 .btn-sm svg{width:16px;height:16px}
 .btn:disabled{opacity:.45;cursor:default;transform:none}
-input[type=text],input[type=email],input[type=number],input[type=date],input[type=url],input[type=tel],select,textarea{
+input[type=text],input[type=password],input[type=email],input[type=number],input[type=date],input[type=url],input[type=tel],select,textarea{
   width:100%;min-height:40px;padding:8px 12px;border:1.5px solid var(--line);border-radius:var(--r-in);background:var(--surface);transition:border-color var(--t-press) ease;font-size:16px}
-@media (min-width:861px){input[type=text],input[type=email],input[type=number],input[type=date],input[type=url],input[type=tel],select,textarea{font-size:15px}}
+@media (min-width:861px){input[type=text],input[type=password],input[type=email],input[type=number],input[type=date],input[type=url],input[type=tel],select,textarea{font-size:15px}}
 input:focus,select:focus,textarea:focus{outline:none;border-color:var(--blue)}
 select{appearance:none;background:var(--surface) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%237C859F' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") right 12px center/16px no-repeat;padding-right:36px}
 label.f{display:grid;gap:4px;font-size:13px;font-weight:500;color:var(--ink-mute)}
@@ -308,6 +308,6 @@ tfoot td{font-weight:600;border-top:1.5px solid var(--line)}
 <section class="panel" id="panel" inert role="dialog" aria-modal="true" aria-label="Klant"></section>
 <div class="toast" id="toast" role="status"></div>
 
-<script type="module" src="app.js?v=11"></script>
+<script type="module" src="app.js?v=12"></script>
 </body>
 </html>
