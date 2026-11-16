@@ -89,7 +89,7 @@ function showLogin() {
     try {
       if (!sent) {
         if (email.value.trim().toLowerCase() !== OWNER_EMAIL) throw new Error('Alleen ' + OWNER_EMAIL + ' heeft toegang.');
-        const { error } = await sb.auth.signInWithOtp({ email: email.value.trim(), options: { shouldCreateUser: true, emailRedirectTo: location.origin + location.pathname } });
+        const { error } = await sb.auth.signInWithOtp({ email: email.value.trim(), options: { shouldCreateUser: false, emailRedirectTo: location.origin + location.pathname } });
         if (error) throw error;
         sent = true;
         code.classList.remove('hidden');
