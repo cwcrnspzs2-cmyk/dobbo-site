@@ -536,7 +536,8 @@ fieldset.vl-f{border:0;padding:0;margin:0}
   form.addEventListener('submit',function(e){
     e.preventDefault();
     btn.disabled=true;var label=btn.textContent;var t=setTimeout(function(){btn.textContent='Versturen…'},300);
-    fetch('https://formsubmit.co/ajax/alec@dobbo.be',{method:'POST',headers:{'Accept':'application/json'},body:new FormData(form)})
+    var ac=window.AbortController?new AbortController():null;if(ac)setTimeout(function(){ac.abort()},20000);
+    fetch('https://formsubmit.co/ajax/alec@dobbo.be',{method:'POST',headers:{'Accept':'application/json'},body:new FormData(form),signal:ac?ac.signal:undefined})
       .then(function(r){return r.json().then(function(j){return {ok:r.ok,j:j}})})
       .then(function(res){clearTimeout(t);if(res.ok&&String(res.j.success)!=='false'){showDone()}else{throw new Error(res.j&&res.j.message)}})
       .catch(function(){clearTimeout(t);btn.disabled=false;btn.textContent=label;var err=document.getElementById('vl-err');err.hidden=false})
