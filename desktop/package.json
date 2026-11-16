@@ -1,0 +1,40 @@
+{
+  "name": "dobbo",
+  "productName": "Dobbo",
+  "version": "1.0.0",
+  "description": "Dobbo: je site, je bezoekers en je project op één plek.",
+  "author": "Dobbo <alec@dobbo.be>",
+  "homepage": "https://dobbo.be/software.html",
+  "main": "main.js",
+  "private": true,
+  "scripts": {
+    "start": "electron .",
+    "dist:mac": "electron-builder --mac --publish never",
+    "dist:win": "electron-builder --win --publish never"
+  },
+  "devDependencies": {
+    "electron": "^33.2.0",
+    "electron-builder": "^25.1.8"
+  },
+  "build": {
+    "appId": "be.dobbo.app",
+    "productName": "Dobbo",
+    "copyright": "© Dobbo",
+    "directories": { "output": "dist", "buildResources": "build" },
+    "files": ["main.js", "package.json", "build/icon.png", "build/icon-win.png"],
+    "mac": {
+      "category": "public.app-category.business",
+      "icon": "build/icon.png",
+      "target": [{ "target": "dmg", "arch": ["universal"] }],
+      "identity": null,
+      "artifactName": "Dobbo-mac.${ext}"
+    },
+    "dmg": { "title": "Dobbo", "backgroundColor": "#F5F7FC" },
+    "win": {
+      "icon": "build/icon-win.png",
+      "target": [{ "target": "nsis", "arch": ["x64"] }],
+      "artifactName": "Dobbo-windows.${ext}"
+    },
+    "nsis": { "oneClick": true, "perMachine": false, "shortcutName": "Dobbo", "createDesktopShortcut": true }
+  }
+}

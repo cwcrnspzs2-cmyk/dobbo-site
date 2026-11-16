@@ -476,7 +476,7 @@ footer{padding:56px 0;font-size:15px;color:var(--ink-soft)}
       <a href="index.html#vragen">Vragen</a>
       <span class="lang">NL · FR · EN</span>
     </nav>
-    <a href="app/" class="btn btn-red">Open het dashboard</a>
+    <a href="https://github.com/cwcrnspzs2-cmyk/dobbo-site/releases/download/desktop/Dobbo-mac.dmg" class="btn btn-red" id="dl-head" data-track="Download Mac">Download Dobbo</a>
   </div>
 </header>
 
@@ -487,10 +487,10 @@ footer{padding:56px 0;font-size:15px;color:var(--ink-soft)}
       <h1 id="sw-title">Je site, op je eigen scherm</h1>
       <p class="lead">Als klant van Dobbo krijg je een eigen dashboard. Je ziet wie je site bezoekt, wie belt of mailt, hoe ver je project staat en wat we elke maand voor je deden.</p>
       <div class="sw-cta">
-        <a href="app/" class="btn btn-red">Open het dashboard</a>
-        <a href="#installeren" class="btn btn-ghost">Zo installeer je het</a>
+        <a href="https://github.com/cwcrnspzs2-cmyk/dobbo-site/releases/download/desktop/Dobbo-mac.dmg" class="btn btn-red" id="dl-main" data-track="Download Mac">Download voor Mac</a>
+        <a href="https://github.com/cwcrnspzs2-cmyk/dobbo-site/releases/download/desktop/Dobbo-windows.exe" class="btn btn-ghost" id="dl-alt" data-track="Download Windows">Download voor Windows</a>
       </div>
-      <p class="sw-note">Gratis voor elke klant. Nog geen klant? <a href="boek.html">Plan een gratis gesprek</a>.</p>
+      <p class="sw-note">Gratis voor elke klant. Liever zonder downloaden? <a href="app/">Open het in je browser</a>. Nog geen klant? <a href="boek.html">Plan een gratis gesprek</a>.</p>
     </div>
     <div class="demo" aria-label="Voorbeeld van het dashboard" role="img">
       <div class="demo-top"><b>Bezoekers</b><span class="demo-live"><i></i>2 bezoekers nu</span></div>
@@ -525,11 +525,11 @@ footer{padding:56px 0;font-size:15px;color:var(--ink-soft)}
 <section class="sw-sec" id="installeren" aria-labelledby="sw-install">
   <div class="wrap">
     <h2 id="sw-install">Zo installeer je het</h2>
-    <p class="lead" style="margin-top:16px;max-width:52ch">Het dashboard werkt als een gewone app, met een eigen icoon. Geen app store nodig.</p>
+    <p class="lead" style="margin-top:16px;max-width:52ch">Dobbo is een gewone app met een eigen icoon. Nieuwe functies komen vanzelf binnen, je hoeft nooit te updaten.</p>
     <div class="sw-install">
-      <article><h3>Op je computer</h3><ol><li>Open <a href="app/">dobbo.be/app</a> in Chrome of Edge.</li><li>Klik op het installatie-icoon rechts in de adresbalk.</li><li>Kies Installeren. Dobbo staat nu tussen je programma’s.</li></ol></article>
-      <article><h3>Op een iPhone of iPad</h3><ol><li>Open <a href="app/">dobbo.be/app</a> in Safari.</li><li>Tik op Deel, het vierkantje met de pijl.</li><li>Kies Zet op beginscherm.</li></ol></article>
-      <article><h3>Op Android</h3><ol><li>Open <a href="app/">dobbo.be/app</a> in Chrome.</li><li>Tik op de drie puntjes rechtsboven.</li><li>Kies App installeren.</li></ol></article>
+      <article><h3>Mac</h3><ol><li><a href="https://github.com/cwcrnspzs2-cmyk/dobbo-site/releases/download/desktop/Dobbo-mac.dmg" data-track="Download Mac">Download Dobbo voor Mac</a>.</li><li>Open het bestand en sleep Dobbo naar Programma’s.</li><li>De eerste keer: open Systeeminstellingen → Privacy en beveiliging en kies <i>Open toch</i> bij Dobbo.</li></ol></article>
+      <article><h3>Windows</h3><ol><li><a href="https://github.com/cwcrnspzs2-cmyk/dobbo-site/releases/download/desktop/Dobbo-windows.exe" data-track="Download Windows">Download Dobbo voor Windows</a>.</li><li>Open het bestand. Dobbo installeert zich en zet een snelkoppeling op je bureaublad.</li><li>Toont Windows een blauwe waarschuwing? Klik <i>Meer info</i> en dan <i>Toch uitvoeren</i>.</li></ol></article>
+      <article><h3>iPhone, iPad of Android</h3><ol><li>Open <a href="app/">dobbo.be/app</a> in Safari of Chrome.</li><li>iPhone: tik op Deel en kies <i>Zet op beginscherm</i>.</li><li>Android: tik op de drie puntjes en kies <i>App installeren</i>.</li></ol></article>
     </div>
   </div>
 </section>
@@ -554,6 +554,12 @@ footer{padding:56px 0;font-size:15px;color:var(--ink-soft)}
     <div class="foot-contact"><a href="mailto:alec@dobbo.be">alec@dobbo.be</a><div class="todo" style="max-width:360px;margin-top:12px">Gsm, ondernemingsnummer, link naar privacy- en cookieverklaring.</div></div>
   </div>
 </footer>
+<script>
+(function(){var w=/Windows/i.test(navigator.userAgent);if(!w)return;var D='https://github.com/cwcrnspzs2-cmyk/dobbo-site/releases/download/desktop/';
+var m=document.getElementById('dl-main'),a=document.getElementById('dl-alt'),h=document.getElementById('dl-head');
+m.href=D+'Dobbo-windows.exe';m.textContent='Download voor Windows';m.dataset.track='Download Windows';
+a.href=D+'Dobbo-mac.dmg';a.textContent='Download voor Mac';a.dataset.track='Download Mac';h.href=D+'Dobbo-windows.exe';h.dataset.track='Download Windows';})();
+</script>
 <script src="/t.js" data-site="00000000-0000-4000-8000-00000000d0b0" defer></script>
 </body>
 </html>

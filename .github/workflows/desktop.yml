@@ -1,0 +1,44 @@
+name: Desktop-app bouwen
+# Bouwt Dobbo voor Mac (.dmg) en Windows (.exe) en zet ze als download in de release "desktop".
+# Starten: handmatig (Actions → Desktop-app bouwen → Run workflow) of bij een wijziging in desktop/.
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['desktop/**', '.github/workflows/desktop.yml']
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: macos-latest
+            script: dist:mac
+            file: desktop/dist/Dobbo-mac.dmg
+          - os: windows-latest
+            script: dist:win
+            file: desktop/dist/Dobbo-windows.exe
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        working-directory: desktop
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm install --no-audit --no-fund
+      - run: npm run ${{ matrix.script }}
+        env:
+          CSC_IDENTITY_AUTO_DISCOVERY: 'false'
+      - uses: softprops/action-gh-release@v2
+        with:
+          tag_name: desktop
+          name: Dobbo desktop-app
+          body: Download Dobbo voor Mac of Windows. Meer uitleg op https://dobbo.be/software.html
+          make_latest: true
+          files: ${{ matrix.file }}
