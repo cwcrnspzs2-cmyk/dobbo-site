@@ -411,7 +411,7 @@ ROWS = [
 ('Google', 'Google', 'Google'),
 ('SEO', 'SEO', 'SEO'),
 ('dobbo', 'dobbo', 'dobbo'),
-('hallo@dobbo.be', 'hallo@dobbo.be', 'hallo@dobbo.be'),
+('alec@dobbo.be', 'alec@dobbo.be', 'alec@dobbo.be'),
 ('Open ↗', 'Open ↗', 'Open ↗'),
 ('[datum]', '[datum]', '[datum]'),
 ('NL · FR · EN', 'NL · FR · EN', 'NL · FR · EN'),
