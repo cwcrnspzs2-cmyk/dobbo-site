@@ -1,5 +1,5 @@
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
-import { SUPABASE_URL, SUPABASE_ANON_KEY, OWNER_EMAIL } from './config.js?v=8';
+import { SUPABASE_URL, SUPABASE_ANON_KEY, OWNER_EMAIL } from './config.js?v=9';
 
 const sb = createClient(SUPABASE_URL, SUPABASE_ANON_KEY, { auth: { persistSession: true, autoRefreshToken: true } });
 const $ = (s, el = document) => el.querySelector(s);
@@ -84,6 +84,17 @@ let ROLE = 'owner';      // 'owner' = Alec, 'client' = klant
 let ME = null;           // client_users-rij van een klant
 const OWNER_ROUTES = [['overzicht', 'Overzicht', 'home'], ['klanten', 'Klanten', 'users'], ['beheer', 'Beheer', 'shield'], ['site', 'Statistieken', 'chart']];
 const CLIENT_ROUTES = [['bezoekers', 'Bezoekers', 'chart'], ['project', 'Mijn site', 'home'], ['rapporten', 'Rapporten', 'doc']];
+
+/* Installeren als app: Chrome en Edge geven een installatievraag die we via een eigen knop tonen. */
+let installEvt = null;
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  installEvt = e;
+  ['#install', '#install-login'].forEach((s) => $(s)?.classList.remove('hidden'));
+});
+window.addEventListener('appinstalled', () => { installEvt = null; ['#install', '#install-login'].forEach((s) => $(s)?.classList.add('hidden')); toast('Geïnstalleerd. Je vindt Dobbo nu tussen je programma’s.'); });
+async function install() { if (!installEvt) return; installEvt.prompt(); await installEvt.userChoice; installEvt = null; }
+document.addEventListener('click', (e) => { if (e.target.closest('#install, #install-login')) install(); });
 
 async function boot() {
   if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(() => {});
