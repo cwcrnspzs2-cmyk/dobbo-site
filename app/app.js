@@ -1,5 +1,5 @@
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
-import { SUPABASE_URL, SUPABASE_ANON_KEY, OWNER_EMAIL } from './config.js?v=5';
+import { SUPABASE_URL, SUPABASE_ANON_KEY, OWNER_EMAIL } from './config.js?v=6';
 
 const sb = createClient(SUPABASE_URL, SUPABASE_ANON_KEY, { auth: { persistSession: true, autoRefreshToken: true } });
 const $ = (s, el = document) => el.querySelector(s);
@@ -176,7 +176,7 @@ async function overzicht() {
     ${stat(clients.filter((c) => BUILDING.includes(c.stage)).length, 'Sites in opbouw')}
     ${stat(clients.filter((c) => c.created_at > daysAgo(7)).length, 'Nieuwe leads, 7 d')}
     ${stat(visitors, 'Bezoekers, 7 d')}
-    ${stat(events.filter((e) => e.type === 'click').length, 'Klikken op boeken, 7 d')}
+    ${stat(events.filter((e) => e.type === 'click').length, 'Klikken, 7 d')}
   </div>
   <div class="overview">
     <section class="card"><h2>Te doen</h2>${todo.length ? `<div class="rows">${todo.map((c) => `
@@ -217,7 +217,7 @@ async function klanten() {
   let body;
   if (!shown.length) body = `<div class="card"><p class="empty">${f ? 'Niets gevonden.' : view === 'lopend' ? 'Geen lopende werven.' : view === 'online' ? 'Nog geen sites online.' : 'Niemand afgehaakt.'}</p></div>`;
   else if (view === 'lopend') {
-    body = STAGES.slice(0, 6).map(([k]) => { const list = shown.filter((c) => c.stage === k); return list.length ? `<section class="card group"><h2>${LONG[k]}<small>${list.length}</small></h2><div class="rows">${list.map(row).join('')}</div></section>` : ''; }).join('');
+    body = `<section class="card">${STAGES.slice(0, 6).map(([k]) => { const list = shown.filter((c) => c.stage === k); return list.length ? `<div class="group"><h3>${LONG[k]}<small>${list.length}</small></h3><div class="rows">${list.map(row).join('')}</div></div>` : ''; }).join('')}</section>`;
   } else body = `<section class="card"><div class="rows">${shown.map(row).join('')}</div></section>`;
 
   v.innerHTML = header('Klanten', '', newBtn) + `

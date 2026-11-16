@@ -123,6 +123,7 @@ label.f{display:grid;gap:4px;font-size:13px;font-weight:500;color:var(--ink-mute
 .r .t{font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .r .s{font-size:14px;color:var(--ink-mute);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .r .end{display:flex;align-items:center;gap:12px;justify-content:flex-end}
+.r .end .date{min-width:104px;text-align:right}
 .r.static{cursor:default}
 .r.static:active,.r.static:hover{background:none}
 .log{display:grid;gap:12px}
@@ -136,7 +137,9 @@ label.f{display:grid;gap:4px;font-size:13px;font-weight:500;color:var(--ink-mute
 .seg button{border:0;background:none;padding:4px 12px;min-height:32px;border-radius:var(--r-sm);font-weight:500;font-size:14px;color:var(--ink-soft);cursor:pointer;transition:background-color var(--t-press) ease,color var(--t-press) ease}
 .seg button[aria-pressed=true]{background:var(--surface);color:var(--ink);font-weight:600;box-shadow:0 1px 2px rgba(20,26,51,.08)}
 .seg em{font-style:normal;color:var(--ink-mute);font-weight:500;margin-left:4px}
-.group + .group{margin-top:16px}
+.group + .group{margin-top:20px}
+.group h3{font-size:13px;font-weight:500;color:var(--ink-mute);margin-bottom:4px;display:flex;gap:8px}
+.group h3 small{font-size:13px;color:var(--ink-mute);opacity:.7}
 .client{grid-template-columns:minmax(0,1.4fr) minmax(0,1.6fr) auto}
 .client .next{font-size:14px;color:var(--ink-soft);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 
@@ -256,6 +259,6 @@ tfoot td{font-weight:600;border-top:1.5px solid var(--line)}
 <section class="panel" id="panel" inert role="dialog" aria-modal="true" aria-label="Klant"></section>
 <div class="toast" id="toast" role="status"></div>
 
-<script type="module" src="app.js?v=5"></script>
+<script type="module" src="app.js?v=6"></script>
 </body>
 </html>
