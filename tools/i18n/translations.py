@@ -435,6 +435,9 @@ ROWS = [
 # --- vragenlijst.html (JS-teksten) ---
 ("Geboekt! Nog één stap", "Réservé ! Encore une étape", "Booked! One more step"),
 ("Je bevestiging komt zo in je mailbox. Heb je nog 5 minuten? Met deze korte vragen bereiden we je gesprek voor: wat je verwacht en hoe je huidige site eruitziet. Alleen je naam en e-mail zijn verplicht.", "Votre confirmation arrive dans votre boîte mail. Vous avez encore 5 minutes ? Ces quelques questions nous aident à préparer votre appel : vos attentes et votre site actuel. Seuls votre nom et votre e-mail sont obligatoires.", "Your confirmation is on its way to your inbox. Got 5 more minutes? These short questions help us prepare your call: what you expect and what your current site looks like. Only your name and email are required."),
+("Je gaat zo terug naar de startpagina.", "Vous allez être redirigé vers la page d'accueil.", "You'll be taken back to the home page shortly."),
+("Nu teruggaan", "Revenir maintenant", "Go back now"),
+("Versturen lukte niet. Probeer het opnieuw, of mail je antwoorden naar", "L'envoi a échoué. Réessayez, ou envoyez vos réponses à", "Sending failed. Try again, or email your answers to"),
 ]
 
 # Stukken tekst binnen JavaScript-code (geen volledige strings).

@@ -436,6 +436,8 @@ fieldset.vl-f{border:0;padding:0;margin:0}
 .vl-hp{position:absolute;left:-9999px}
 .vl-send{display:flex;flex-wrap:wrap;align-items:center;gap:16px;margin-top:8px}
 .vl-send p{font-size:14px;color:var(--ink-soft)}
+.vl-err{color:var(--red-deep);font-weight:600;font-size:15px}.vl-err a{color:inherit}
+.vl-back{font-size:15px;color:var(--ink-soft)}
 .vl-done{display:none;margin-top:36px;padding:28px;border-radius:var(--r-card);background:var(--tint)}
 .vl-done.show{display:block}
 .vl-done h2{font-family:var(--display);font-size:28px;text-transform:uppercase}
@@ -469,8 +471,7 @@ fieldset.vl-f{border:0;padding:0;margin:0}
       <input type="hidden" name="_subject" value="Vragenlijst: nieuw gesprek">
       <input type="hidden" name="_template" value="table">
       <input type="hidden" name="_captcha" value="false">
-      <input type="hidden" name="_next" value="https://dobbo.be/vragenlijst.html?verzonden=1">
-      <input type="text" name="_honey" class="vl-hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+            <input type="text" name="_honey" class="vl-hp" tabindex="-1" autocomplete="off" aria-hidden="true">
 
       <p class="vl-sec">Over jou</p>
       <div class="vl-two">
@@ -505,12 +506,14 @@ fieldset.vl-f{border:0;padding:0;margin:0}
         <button type="submit" class="btn btn-red">Verstuur</button>
         <p>Je antwoorden blijven bij ons.</p>
       </div>
+      <p class="vl-err" id="vl-err" role="alert" hidden>Versturen lukte niet. Probeer het opnieuw, of mail je antwoorden naar <a href="mailto:alec@dobbo.be">alec@dobbo.be</a>.</p>
     </form>
 
     <div class="vl-done" id="vl-done" role="status">
       <h2>Bedankt, ontvangen</h2>
       <p>We bekijken je antwoorden en je site voor ons gesprek. Tot dan!</p>
-      <p><a href="index.html" class="btn btn-ghost" style="margin-top:12px">Terug naar de site</a></p>
+      <p class="vl-back">Je gaat zo terug naar de startpagina.</p>
+      <p><a href="index.html" class="btn btn-ghost" style="margin-top:12px">Nu teruggaan</a></p>
     </div>
   </div>
 </section>
@@ -527,7 +530,18 @@ fieldset.vl-f{border:0;padding:0;margin:0}
 (function(){
   var q=new URLSearchParams(location.search);
   if(q.get('geboekt')){var h=document.querySelector('#vl-title');h.textContent='Geboekt! Nog één stap';var l=document.querySelector('.vl-wrap .lead');l.textContent='Je bevestiging komt zo in je mailbox. Heb je nog 5 minuten? Met deze korte vragen bereiden we je gesprek voor: wat je verwacht en hoe je huidige site eruitziet. Alleen je naam en e-mail zijn verplicht.'}
-  if(q.get('verzonden')){document.getElementById('vl-form').style.display='none';document.getElementById('vl-done').classList.add('show');return}
+  var form=document.getElementById('vl-form'), done=document.getElementById('vl-done'), btn=form.querySelector('button[type=submit]');
+  function showDone(){form.style.display='none';done.classList.add('show');window.scrollTo({top:0,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});setTimeout(function(){location.href='index.html'},6000)}
+  if(q.get('verzonden')){showDone();return}
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    if(form._honey&&form._honey.value) return;
+    btn.disabled=true;var label=btn.textContent;var t=setTimeout(function(){btn.textContent='Versturen…'},300);
+    fetch('https://formsubmit.co/ajax/alec@dobbo.be',{method:'POST',headers:{'Accept':'application/json'},body:new FormData(form)})
+      .then(function(r){return r.json().then(function(j){return {ok:r.ok,j:j}})})
+      .then(function(res){clearTimeout(t);if(res.ok&&String(res.j.success)!=='false'){showDone()}else{throw new Error(res.j&&res.j.message)}})
+      .catch(function(){clearTimeout(t);btn.disabled=false;btn.textContent=label;var err=document.getElementById('vl-err');err.hidden=false})
+  });
   var map={naam:'naam',email:'email',zaak:'zaak',site:'site'};
   for(var k in map){var v=q.get(k);if(v&&!/^\{.*\}$/.test(v))document.getElementById(map[k]).value=v}
 })();
