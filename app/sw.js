@@ -1,6 +1,6 @@
 // Dobbo HQ service worker: app-schil offline, data altijd live van Supabase.
-const CACHE = 'dobbo-hq-v12';
-const SHELL = ['./', 'index.html', 'app.js?v=12', 'config.js?v=12', 'manifest.webmanifest', 'icons/icon-192.png', 'icons/icon-512.png'];
+const CACHE = 'dobbo-hq-v13';
+const SHELL = ['./', 'index.html', 'app.js?v=13', 'config.js?v=13', 'manifest.webmanifest', 'icons/icon-192.png', 'icons/icon-512.png'];
 self.addEventListener('install', (e) => { e.waitUntil(caches.open(CACHE).then((c) => c.addAll(SHELL))); self.skipWaiting(); });
 self.addEventListener('activate', (e) => {
   e.waitUntil(caches.keys().then((ks) => Promise.all(ks.filter((k) => k !== CACHE).map((k) => caches.delete(k)))));
@@ -9,8 +9,11 @@ self.addEventListener('activate', (e) => {
 self.addEventListener('fetch', (e) => {
   const url = new URL(e.request.url);
   if (e.request.method !== 'GET' || url.origin !== location.origin) return; // Supabase en fonts: netwerk
+  const fallback = () => caches.match(e.request, { ignoreSearch: true }).then((r) => r || caches.match('index.html'));
   e.respondWith(
-    fetch(e.request, { cache: 'no-cache' }).then((r) => { const copy = r.clone(); caches.open(CACHE).then((c) => c.put(e.request, copy)); return r; })
-      .catch(() => caches.match(e.request).then((r) => r || caches.match('index.html')))
+    fetch(e.request, { cache: 'no-cache' }).then((r) => {
+      if (!r.ok) return fallback().then((c) => c || r); // bv. 503 tijdens publiceren: laatst bewaarde versie
+      const copy = r.clone(); caches.open(CACHE).then((c) => c.put(e.request, copy)); return r;
+    }).catch(fallback)
   );
 });

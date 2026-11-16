@@ -308,6 +308,14 @@ tfoot td{font-weight:600;border-top:1.5px solid var(--line)}
 <section class="panel" id="panel" inert role="dialog" aria-modal="true" aria-label="Klant"></section>
 <div class="toast" id="toast" role="status"></div>
 
-<script type="module" src="app.js?v=12"></script>
+<script type="module" src="app.js?v=13"></script>
+<script>
+// Laadt de app niet (geen internet, storing), dan geen leeg scherm maar een melding.
+setTimeout(function(){
+  if(!document.getElementById('login').classList.contains('hidden')||!document.getElementById('app').classList.contains('hidden'))return;
+  var l=document.getElementById('login');l.classList.remove('hidden');
+  l.querySelector('.login-card').innerHTML='<img src="icons/icon-192.png" alt=""><h1>Even geen verbinding</h1><p>Dobbo kon niet laden. Controleer je internet en probeer opnieuw.</p><button class="btn btn-blue" style="margin-top:24px" onclick="location.reload()">Opnieuw proberen</button>';
+},8000);
+</script>
 </body>
 </html>
