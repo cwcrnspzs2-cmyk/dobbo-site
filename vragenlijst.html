@@ -535,7 +535,6 @@ fieldset.vl-f{border:0;padding:0;margin:0}
   if(q.get('verzonden')){showDone();return}
   form.addEventListener('submit',function(e){
     e.preventDefault();
-    if(form._honey&&form._honey.value) return;
     btn.disabled=true;var label=btn.textContent;var t=setTimeout(function(){btn.textContent='Versturen…'},300);
     fetch('https://formsubmit.co/ajax/alec@dobbo.be',{method:'POST',headers:{'Accept':'application/json'},body:new FormData(form)})
       .then(function(r){return r.json().then(function(j){return {ok:r.ok,j:j}})})
