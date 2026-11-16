@@ -29,7 +29,7 @@
       "identity": null,
       "artifactName": "Dobbo-mac.${ext}"
     },
-    "dmg": { "title": "Dobbo", "backgroundColor": "#F5F7FC" },
+    "dmg": { "title": "Dobbo" },
     "win": {
       "icon": "build/icon-win.png",
       "target": [{ "target": "nsis", "arch": ["x64"] }],
