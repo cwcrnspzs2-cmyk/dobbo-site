@@ -1,5 +1,5 @@
 // Dobbo HQ service worker: app-schil offline, data altijd live van Supabase.
-const CACHE = 'dobbo-hq-v1';
+const CACHE = 'dobbo-hq-v2';
 const SHELL = ['./', 'index.html', 'app.js', 'config.js', 'manifest.webmanifest', 'icons/icon-192.png', 'icons/icon-512.png'];
 self.addEventListener('install', (e) => { e.waitUntil(caches.open(CACHE).then((c) => c.addAll(SHELL))); self.skipWaiting(); });
 self.addEventListener('activate', (e) => {

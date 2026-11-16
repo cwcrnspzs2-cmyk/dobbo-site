@@ -19,6 +19,7 @@ const STAGES = [
 const ST = Object.fromEntries(STAGES.map(([k, l, p, c]) => [k, { label: l, progress: p, color: c }]));
 const PACKAGES = { start: 'Start', groei: 'Groei', systeem: 'Systeem' };
 const CARE = { geen: { label: 'Geen', price: 0, minutes: 0 }, beheer: { label: 'Beheer', price: 50, minutes: 30 }, beheer_plus: { label: 'Beheer+', price: 100, minutes: 120 } };
+const payOrder = (p) => { const i = ['Voorschot', 'Na akkoord', 'Oplevering'].findIndex((w) => p.label.startsWith(w)); return i < 0 ? 9 : i; };
 const BUILDING = ['voorschot', 'info', 'versie', 'afwerken'];
 
 const ICONS = {
@@ -236,7 +237,7 @@ async function openClient(id) {
   const [c] = await q(sb.from('clients').select('*').eq('id', id));
   if (!c) return toast('Klant niet gevonden');
   const [payments, act, bookings, quest] = await Promise.all([
-    q(sb.from('payments').select('*').eq('client_id', id).order('created_at')),
+    q(sb.from('payments').select('*').eq('client_id', id).order('created_at')).then((ps) => ps.sort((a, b) => payOrder(a) - payOrder(b) || a.created_at.localeCompare(b.created_at))),
     q(sb.from('activity').select('*').eq('client_id', id).order('created_at', { ascending: false }).limit(40)),
     q(sb.from('bookings').select('*').eq('client_id', id).order('start_time', { ascending: false })),
     q(sb.from('questionnaires').select('*').eq('client_id', id).order('created_at', { ascending: false })),
@@ -284,7 +285,7 @@ async function openClient(id) {
       ${c.care_plan !== 'geen' ? `
       <label class="f">Minuten deze maand: <span>${c.care_minutes_used} / ${care.minutes}</span>
         <div class="bar"><i style="width:${Math.min(100, (c.care_minutes_used / care.minutes) * 100)}%;${c.care_minutes_used > care.minutes ? 'background:var(--red)' : ''}"></i></div></label>
-      <div style="display:flex;gap:8px;align-items:end"><button class="btn btn-ghost btn-sm" data-min="15">+15 min</button><button class="btn btn-ghost btn-sm" data-min="30">+30 min</button><button class="btn btn-ghost btn-sm" data-min="reset">Nieuwe maand</button></div>
+      <div style="display:flex;gap:8px;align-items:end;flex-wrap:wrap"><button class="btn btn-ghost btn-sm" data-min="15">+15 min</button><button class="btn btn-ghost btn-sm" data-min="30">+30 min</button><button class="btn btn-ghost btn-sm" data-min="reset">Nieuwe maand</button></div>
       ${field('care_last_report', 'Laatste rapport', 'date')}` : ''}
     </div></div>
     ${quest.length ? `<div class="card"><h2>Vragenlijst</h2><dl class="qa">${Object.entries(quest[0].answers || {}).filter(([k, val]) => val && !k.startsWith('_')).map(([k, val]) => `<dt>${esc(k)}</dt><dd>${esc(Array.isArray(val) ? val.join(', ') : val)}</dd>`).join('')}</dl></div>` : ''}
