@@ -1,5 +1,5 @@
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
-import { SUPABASE_URL, SUPABASE_ANON_KEY, OWNER_EMAIL } from './config.js?v=7';
+import { SUPABASE_URL, SUPABASE_ANON_KEY, OWNER_EMAIL } from './config.js?v=8';
 
 const sb = createClient(SUPABASE_URL, SUPABASE_ANON_KEY, { auth: { persistSession: true, autoRefreshToken: true } });
 const $ = (s, el = document) => el.querySelector(s);
@@ -182,10 +182,11 @@ function requestForm(session) {
   };
 }
 
-let current = '';
+let current = '', gen = 0; // gen: elk nieuw scherm krijgt een nummer, trage oude antwoorden worden genegeerd
 const OWNER_VIEWS = () => ({ overzicht, klanten, beheer, site });
 const CLIENT_VIEWS = () => ({ bezoekers: () => clientBezoekers(ME.client_id), project: () => clientProject(ME.client_id), rapporten: () => clientRapporten(ME.client_id) });
 function route() {
+  gen++;
   const parts = (location.hash.slice(1) || (ROLE === 'owner' ? 'overzicht' : 'bezoekers')).split('/');
   const [r, id] = parts;
   delete $('#view').dataset.ready;
@@ -203,7 +204,7 @@ function route() {
   if (ROLE === 'owner' && r === 'klanten' && id) id === 'nieuw' ? openNew() : openClient(id);
   else closePanel(true);
 }
-const refresh = () => { delete $('#view').dataset.ready; return ((ROLE === 'owner' ? OWNER_VIEWS() : CLIENT_VIEWS())[current] || (() => Promise.resolve()))().catch(() => {}); };
+const refresh = () => { gen++; delete $('#view').dataset.ready; return ((ROLE === 'owner' ? OWNER_VIEWS() : CLIENT_VIEWS())[current] || (() => Promise.resolve()))().catch(() => {}); };
 
 function header(h, p, actions = '') {
   return `<div class="top"><div><h1>${h}</h1>${p ? `<p>${p}</p>` : ''}</div>${actions}</div>`;
@@ -216,6 +217,7 @@ const bindRows = (v) => $$('[data-open]', v).forEach((r) => {
 
 /* ---------------- Overzicht ---------------- */
 async function overzicht() {
+  const g = gen;
   const v = $('#view'), done = loading(v);
   const [clients, payments, act, events, bookings, requests] = await Promise.all([
     q(sb.from('clients').select('*')),
@@ -225,6 +227,7 @@ async function overzicht() {
     q(sb.from('bookings').select('*').eq('status', 'gepland').gte('start_time', new Date().toISOString()).order('start_time').limit(5)),
     q(sb.from('client_users').select('*').eq('status', 'aanvraag').order('created_at')),
   ]);
+  if (g !== gen) return;
   done();
   const open = payments.filter((p) => !p.paid_at).reduce((s, p) => s + Number(p.amount), 0);
   const mrr = clients.filter((c) => c.stage !== 'verloren').reduce((s, c) => s + CARE[c.care_plan].price, 0);
@@ -296,8 +299,10 @@ async function overzicht() {
 /* ---------------- Klanten ---------------- */
 let filter = '', view = 'lopend';
 async function klanten() {
+  const g = gen;
   const v = $('#view'), done = loading(v);
   const clients = await q(sb.from('clients').select('*').order('next_date', { ascending: true, nullsFirst: false }));
+  if (g !== gen) return;
   done();
   const groups = { lopend: clients.filter((c) => !['online', 'verloren'].includes(c.stage)), online: clients.filter((c) => c.stage === 'online'), gestopt: clients.filter((c) => c.stage === 'verloren') };
   const f = filter.toLowerCase();
@@ -596,8 +601,10 @@ async function openClient(id) {
 
 /* ---------------- Beheer ---------------- */
 async function beheer() {
+  const g = gen;
   const v = $('#view'), done = loading(v);
   const clients = await q(sb.from('clients').select('*').neq('care_plan', 'geen').order('business'));
+  if (g !== gen) return;
   done();
   const mrr = clients.reduce((s, c) => s + CARE[c.care_plan].price, 0);
   v.innerHTML = header('Beheer', clients.length ? `${clients.length} ${clients.length === 1 ? 'klant' : 'klanten'} · ${eur(mrr * 12)} per jaar` : '') + `
@@ -620,8 +627,8 @@ let range = 30;
 const pct = (a, b) => (b ? Math.round(((a - b) / b) * 100) : null);
 function delta(cur, prev) {
   const d = pct(cur, prev);
-  if (d === null) return cur ? '<span class="delta">nieuw t.o.v. vorige periode</span>' : '<span class="delta">&nbsp;</span>';
-  return `<span class="delta ${d > 0 ? 'up' : d < 0 ? 'down' : ''}">${d > 0 ? '+' : ''}${d}% t.o.v. vorige ${range} dagen</span>`;
+  if (d === null) return '<span class="delta">&nbsp;</span>';
+  return `<span class="delta ${d > 0 ? 'up' : d < 0 ? 'down' : ''}">${d > 0 ? '+' : ''}${d}% t.o.v. vorige ${range} d</span>`;
 }
 const toplist = (rows, emptyText = 'Nog geen gegevens.') => {
   const max = rows[0]?.[1] || 1;
@@ -629,14 +636,16 @@ const toplist = (rows, emptyText = 'Nog geen gegevens.') => {
 };
 
 async function analytics(v, siteId, { title: h, sub: p, before = '', empty = '' }) {
+  const g = gen;
   const done = loading(v);
   const st = await q(sb.rpc('site_stats', { p_site: siteId, p_days: range }));
+  if (g !== gen) return;
   done();
   const W = 720, H = 200, n = st.daily.length, bw = W / Math.max(1, n), max = Math.max(1, ...st.daily.map((d) => d.v));
   const bars = st.daily.map((d, i) => {
     const h = (d.v / max) * (H - 28), ha = Math.min(h, (d.a / max) * (H - 28));
     return `<g><rect x="${i * bw + 1.5}" y="${H - 20 - h}" width="${Math.max(1, bw - 3)}" height="${h}" rx="2"/>${ha ? `<rect class="cta" x="${i * bw + 1.5}" y="${H - 20 - ha}" width="${Math.max(1, bw - 3)}" height="${ha}" rx="2"/>` : ''}<title>${fmtDate(d.d)}: ${d.v} bezoekers, ${d.a} acties</title></g>
-      ${i % Math.ceil(n / 6) === 0 ? `<text x="${i * bw + bw / 2}" y="${H - 4}" text-anchor="middle">${fmtDate(d.d)}</text>` : ''}`;
+      ${i % Math.ceil(n / 6) === 0 ? `<text x="${i === 0 ? 0 : i * bw + bw / 2}" y="${H - 4}" text-anchor="${i === 0 ? 'start' : 'middle'}">${fmtDate(d.d)}</text>` : ''}`;
   }).join('');
   const conv = st.visitors ? Math.round((st.funnel[2] / st.visitors) * 100) : 0;
   const f0 = st.funnel[0] || 0;
@@ -692,11 +701,13 @@ const STAGE_TEXT = {
 };
 
 async function clientBezoekers(cid, preview = false) {
+  const g = gen;
   const v = $('#view');
   refreshAnalytics = () => clientBezoekers(cid, preview);
   const [[c], sites] = await Promise.all([q(sb.from('clients').select('*').eq('id', cid)), q(sb.from('sites').select('*').eq('client_id', cid).order('created_at'))]);
   if (!c) return (v.innerHTML = '<p class="empty">Niet gevonden.</p>');
   const before = preview ? previewBar(cid, c, 'bezoekers') : '';
+  if (g !== gen) return;
   if (!sites.length) {
     v.innerHTML = before + header('Bezoekers', title(c)) + `<section class="card"><p class="empty">${preview ? 'Nog geen site gekoppeld. Voeg er een toe in de fiche van deze klant.' : 'We meten het bezoek zodra je site online staat. Je ziet het hier dan vanzelf verschijnen.'}</p></section>`;
     return;
@@ -709,8 +720,10 @@ async function clientBezoekers(cid, preview = false) {
 }
 
 async function clientProject(cid, preview = false) {
+  const g = gen;
   const v = $('#view'), done = loading(v);
   const [[c], payments] = await Promise.all([q(sb.from('clients').select('*').eq('id', cid)), q(sb.from('payments').select('*').eq('client_id', cid))]);
+  if (g !== gen) return;
   done();
   if (!c) return (v.innerHTML = '<p class="empty">Niet gevonden.</p>');
   payments.sort((a, b) => payOrder(a) - payOrder(b) || a.created_at.localeCompare(b.created_at));
@@ -741,8 +754,10 @@ async function clientProject(cid, preview = false) {
 }
 
 async function clientRapporten(cid, preview = false) {
+  const g = gen;
   const v = $('#view'), done = loading(v);
   const [[c], reps] = await Promise.all([q(sb.from('clients').select('*').eq('id', cid)), q(sb.from('reports').select('*').eq('client_id', cid).order('created_at', { ascending: false }))]);
+  if (g !== gen) return;
   done();
   if (!c) return (v.innerHTML = '<p class="empty">Niet gevonden.</p>');
   v.innerHTML = (preview ? previewBar(cid, c, 'rapporten') : '') + header('Rapporten', title(c)) + (reps.length ? `<div class="stack">${reps.map((r) => `
