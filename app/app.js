@@ -1,5 +1,5 @@
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
-import { SUPABASE_URL, SUPABASE_ANON_KEY, OWNER_EMAIL } from './config.js?v=13';
+import { SUPABASE_URL, SUPABASE_ANON_KEY, OWNER_EMAIL } from './config.js?v=14';
 
 const sb = createClient(SUPABASE_URL, SUPABASE_ANON_KEY, { auth: { persistSession: true, autoRefreshToken: true } });
 const $ = (s, el = document) => el.querySelector(s);
@@ -115,7 +115,7 @@ function showLogin() {
     code.classList.add('hidden');
     btn.textContent = m === 'pass' ? 'Inloggen' : 'Stuur mijn code';
     lead.textContent = m === 'pass' ? 'Log in met je e-mailadres en wachtwoord.' : 'Nieuw, of wachtwoord vergeten? Je krijgt een code per mail. Daarna stel je een wachtwoord in.';
-    sw.textContent = m === 'pass' ? 'Eerste keer, of wachtwoord vergeten? Log in met een code per mail' : 'Ik heb een wachtwoord';
+    sw.textContent = m === 'pass' ? 'Eerste keer of wachtwoord vergeten?' : 'Ik heb al een wachtwoord';
   };
   sw.onclick = () => setMode(mode === 'pass' ? 'code' : 'pass');
   form.onsubmit = async (e) => {
