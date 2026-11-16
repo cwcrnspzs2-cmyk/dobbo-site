@@ -459,7 +459,7 @@ fieldset.vl-f{border:0;padding:0;margin:0}
 <section class="vl-page" aria-labelledby="vl-title">
   <div class="wrap vl-wrap">
     <h1 id="vl-title">Bereid je gesprek voor</h1>
-    <p class="lead">Een paar korte vragen, ongeveer 5 minuten. Zo weet Alec al wat je verwacht en hoe je huidige site eruitziet, en halen we meer uit je 20 minuten. Alleen je naam en e-mail zijn verplicht.</p>
+    <p class="lead">Een paar korte vragen, ongeveer 5 minuten. Zo weten we al wat je verwacht en hoe je huidige site eruitziet, en halen we meer uit je 20 minuten. Alleen je naam en e-mail zijn verplicht.</p>
 
     <form class="vl-form" id="vl-form" action="https://formsubmit.co/alec@dobbo.be" method="POST">
       <input type="hidden" name="_subject" value="Vragenlijst: nieuw gesprek">
@@ -497,17 +497,17 @@ fieldset.vl-f{border:0;padding:0;margin:0}
         <div class="vl-f"><label for="wanneer">Wanneer wil je online?</label><select id="wanneer" name="Wanneer online"><option>Geen haast</option><option>Binnen de maand</option><option>Binnen 3 maanden</option><option>Zo snel mogelijk</option></select></div>
       </div>
       <fieldset class="vl-f"><legend>Wil je dat we je site daarna onderhouden?</legend><div class="vl-opts"><label><input type="radio" name="Beheer" value="Ja"> Ja</label><label><input type="radio" name="Beheer" value="Misschien"> Misschien</label><label><input type="radio" name="Beheer" value="Nee, ik doe het zelf"> Nee, ik doe het zelf</label></div></fieldset>
-      <div class="vl-f"><label for="nog">Nog iets dat Alec moet weten?</label><textarea id="nog" name="Nog iets"></textarea></div>
+      <div class="vl-f"><label for="nog">Nog iets dat we moeten weten?</label><textarea id="nog" name="Nog iets"></textarea></div>
 
       <div class="vl-send">
         <button type="submit" class="btn btn-red">Verstuur</button>
-        <p>Je antwoorden gaan alleen naar Alec.</p>
+        <p>Je antwoorden blijven bij ons.</p>
       </div>
     </form>
 
     <div class="vl-done" id="vl-done" role="status">
       <h2>Bedankt, ontvangen</h2>
-      <p>Alec bekijkt je antwoorden en je site voor jullie gesprek. Tot dan!</p>
+      <p>We bekijken je antwoorden en je site voor ons gesprek. Tot dan!</p>
       <p><a href="index.html" class="btn btn-ghost" style="margin-top:12px">Terug naar de site</a></p>
     </div>
   </div>
@@ -524,7 +524,7 @@ fieldset.vl-f{border:0;padding:0;margin:0}
 <script>
 (function(){
   var q=new URLSearchParams(location.search);
-  if(q.get('geboekt')){var h=document.querySelector('#vl-title');h.textContent='Geboekt! Nog één stap';var l=document.querySelector('.vl-wrap .lead');l.textContent='Je krijgt zo een bevestiging per mail. Heb je 5 minuten? Beantwoord deze korte vragen, dan weet Alec al wat je verwacht en hoe je huidige site eruitziet. Alleen je naam en e-mail zijn verplicht.'}
+  if(q.get('geboekt')){var h=document.querySelector('#vl-title');h.textContent='Geboekt! Nog één stap';var l=document.querySelector('.vl-wrap .lead');l.textContent='Je bevestiging komt zo in je mailbox. Heb je nog 5 minuten? Met deze korte vragen bereiden we je gesprek voor: wat je verwacht en hoe je huidige site eruitziet. Alleen je naam en e-mail zijn verplicht.'}
   if(q.get('verzonden')){document.getElementById('vl-form').style.display='none';document.getElementById('vl-done').classList.add('show');return}
   var map={naam:'naam',email:'email',zaak:'zaak',site:'site'};
   for(var k in map){var v=q.get(k);if(v&&!/^\{.*\}$/.test(v))document.getElementById(map[k]).value=v}
