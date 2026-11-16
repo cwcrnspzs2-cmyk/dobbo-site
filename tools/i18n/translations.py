@@ -8,6 +8,7 @@ ROWS = [
 ("Hoe het werkt", "Comment ça marche", "How it works"),
 ("Het team", "L'équipe", "The team"),
 ("Pakketten", "Formules", "Packages"),
+("Software", "Logiciel", "Software"),
 ("Vragen", "Questions", "Questions"),
 ("Plan mijn gratis gesprek", "Réserver mon appel gratuit", "Book my free call"),
 ("Dobbo, naar boven", "Dobbo, retour en haut", "Dobbo, back to top"),
