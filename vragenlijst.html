@@ -428,6 +428,10 @@ fieldset.vl-f{border:0;padding:0;margin:0}
 .vl-opts label{display:flex;align-items:center;gap:8px;padding:10px 14px;border:2px solid #CDD7F2;border-radius:999px;cursor:pointer;font-size:15px;transition:border-color var(--t-press) ease,background-color var(--t-press) ease}
 .vl-opts input{accent-color:var(--blue)}
 .vl-opts label:has(input:checked){border-color:var(--blue);background:var(--tint)}
+.vl-opts label:active{transform:scale(.97)}
+.vl-opts label{transition:border-color 150ms ease,background-color 150ms ease,transform 150ms var(--ease-out)}
+@media (hover:hover) and (pointer:fine){.vl-opts label:hover{border-color:#9FB3EC}}
+.vl-opts label:has(input:focus-visible){outline:2px solid var(--blue);outline-offset:2px}
 .vl-two{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 .vl-hp{position:absolute;left:-9999px}
 .vl-send{display:flex;flex-wrap:wrap;align-items:center;gap:16px;margin-top:8px}
@@ -492,10 +496,8 @@ fieldset.vl-f{border:0;padding:0;margin:0}
       <div class="vl-f"><label for="conc">Concurrenten of gelijkaardige zaken in je buurt</label><input type="text" id="conc" name="Concurrenten"></div>
 
       <p class="vl-sec">Praktisch</p>
-      <div class="vl-two">
-        <div class="vl-f"><label for="pakket">Welk pakket spreekt je aan?</label><select id="pakket" name="Pakket"><option>Weet ik nog niet</option><option>Start (€500)</option><option>Groei (€900)</option><option>Systeem (vanaf €2.000)</option></select></div>
-        <div class="vl-f"><label for="wanneer">Wanneer wil je online?</label><select id="wanneer" name="Wanneer online"><option>Geen haast</option><option>Binnen de maand</option><option>Binnen 3 maanden</option><option>Zo snel mogelijk</option></select></div>
-      </div>
+      <fieldset class="vl-f"><legend>Welk pakket spreekt je aan?</legend><div class="vl-opts"><label><input type="radio" name="Pakket" value="Weet ik nog niet" checked> Weet ik nog niet</label><label><input type="radio" name="Pakket" value="Start (€500)"> Start (€500)</label><label><input type="radio" name="Pakket" value="Groei (€900)"> Groei (€900)</label><label><input type="radio" name="Pakket" value="Systeem (vanaf €2.000)"> Systeem (vanaf €2.000)</label></div></fieldset>
+      <fieldset class="vl-f"><legend>Wanneer wil je online?</legend><div class="vl-opts"><label><input type="radio" name="Wanneer online" value="Geen haast" checked> Geen haast</label><label><input type="radio" name="Wanneer online" value="Binnen 3 maanden"> Binnen 3 maanden</label><label><input type="radio" name="Wanneer online" value="Binnen de maand"> Binnen de maand</label><label><input type="radio" name="Wanneer online" value="Zo snel mogelijk"> Zo snel mogelijk</label></div></fieldset>
       <fieldset class="vl-f"><legend>Wil je dat we je site daarna onderhouden?</legend><div class="vl-opts"><label><input type="radio" name="Beheer" value="Ja"> Ja</label><label><input type="radio" name="Beheer" value="Misschien"> Misschien</label><label><input type="radio" name="Beheer" value="Nee, ik doe het zelf"> Nee, ik doe het zelf</label></div></fieldset>
       <div class="vl-f"><label for="nog">Nog iets dat we moeten weten?</label><textarea id="nog" name="Nog iets"></textarea></div>
 
