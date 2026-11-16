@@ -537,6 +537,17 @@ fieldset.vl-f{border:0;padding:0;margin:0}
     e.preventDefault();
     btn.disabled=true;var label=btn.textContent;var t=setTimeout(function(){btn.textContent='Versturen…'},300);
     var ac=window.AbortController?new AbortController():null;if(ac)setTimeout(function(){ac.abort()},20000);
+    // Kopie naar het Dobbo-dashboard (Supabase). Fouten hier blokkeren het versturen niet.
+    try{
+      var fd=new FormData(form);
+      if(!fd.get('_honey')){
+        var ans={};fd.forEach(function(v,k){if(k.charAt(0)==='_'||v==='')return;if(ans[k]!==undefined){ans[k]=[].concat(ans[k],v)}else{ans[k]=v}});
+        ['Doel','Materiaal','Talen'].forEach(function(k){if(ans[k]!==undefined&&!Array.isArray(ans[k]))ans[k]=[ans[k]]});
+        fetch('https://ytlytwepgtbqdqdspxla.supabase.co/rest/v1/questionnaires',{method:'POST',keepalive:true,
+          headers:{apikey:'sb_publishable_cC0zm4jeVJAP8N9TH_BoCA_obiyCRCq','Content-Type':'application/json',Prefer:'return=minimal'},
+          body:JSON.stringify({name:fd.get('Naam')||'',email:(fd.get('email')||'').trim(),business:fd.get('Zaak')||'',website:fd.get('Huidige website')||'',answers:ans})}).catch(function(){});
+      }
+    }catch(_){}
     fetch('https://formsubmit.co/ajax/alec@dobbo.be',{method:'POST',headers:{'Accept':'application/json'},body:new FormData(form),signal:ac?ac.signal:undefined})
       .then(function(r){return r.json().then(function(j){return {ok:r.ok,j:j}})})
       .then(function(res){clearTimeout(t);if(res.ok&&String(res.j.success)!=='false'){showDone()}else{throw new Error(res.j&&res.j.message)}})
@@ -546,5 +557,6 @@ fieldset.vl-f{border:0;padding:0;margin:0}
   for(var k in map){var v=q.get(k);if(v&&!/^\{.*\}$/.test(v))document.getElementById(map[k]).value=v}
 })();
 </script>
+<script src="/track.js" defer></script>
 </body>
 </html>
