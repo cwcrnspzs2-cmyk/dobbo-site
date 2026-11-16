@@ -1,5 +1,5 @@
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
-import { SUPABASE_URL, SUPABASE_ANON_KEY, OWNER_EMAIL } from './config.js?v=10';
+import { SUPABASE_URL, SUPABASE_ANON_KEY, OWNER_EMAIL } from './config.js?v=11';
 
 const sb = createClient(SUPABASE_URL, SUPABASE_ANON_KEY, { auth: { persistSession: true, autoRefreshToken: true } });
 const $ = (s, el = document) => el.querySelector(s);
@@ -152,7 +152,7 @@ function showLogin() {
 function passwordPanel(first = false) {
   showPanel(head(first ? 'Stel een wachtwoord in' : 'Wachtwoord wijzigen') + `
   <form class="p-body" id="pw-form">
-    <div class="card"><p class="date" style="margin-bottom:12px">${first ? 'Dan log je volgende keer in met je e-mail en wachtwoord, zonder op een mail te wachten.' : 'Minstens 8 tekens.'}</p>
+    <div class="card"><p style="margin-bottom:12px;font-size:14px;color:var(--ink-mute)">${first ? 'Dan log je volgende keer in met je e-mail en wachtwoord, zonder op een mail te wachten.' : 'Minstens 8 tekens.'}</p>
       <div class="fields">
         <input type="text" name="username" value="${esc($("#who").textContent)}" autocomplete="username" hidden>
         <label class="f full">Nieuw wachtwoord<input type="password" name="p1" minlength="8" required autocomplete="new-password"></label>
