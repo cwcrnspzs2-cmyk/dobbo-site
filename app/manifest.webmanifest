@@ -1,9 +1,9 @@
 {
-  "name": "Dobbo HQ",
-  "short_name": "Dobbo HQ",
-  "description": "Klanten, projecten, beheer en siteverkeer van Dobbo op één plek.",
+  "name": "Dobbo",
+  "short_name": "Dobbo",
+  "description": "Je site, je bezoekers en je project bij Dobbo op één plek.",
   "lang": "nl",
-  "start_url": "./#overzicht",
+  "start_url": "./",
   "scope": "./",
   "display": "standalone",
   "background_color": "#F6F8FD",
@@ -13,8 +13,5 @@
     { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
     { "src": "icons/maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
   ],
-  "shortcuts": [
-    { "name": "Klanten", "url": "./#klanten" },
-    { "name": "Site", "url": "./#site" }
-  ]
+  "shortcuts": []
 }

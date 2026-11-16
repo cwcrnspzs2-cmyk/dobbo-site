@@ -3,14 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Dobbo HQ</title>
+<title>Dobbo</title>
 <meta name="robots" content="noindex, nofollow">
 <meta name="theme-color" content="#2B5CFF">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="icons/favicon-32.png">
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-title" content="Dobbo HQ">
+<meta name="apple-mobile-web-app-title" content="Dobbo">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -198,6 +198,50 @@ tfoot td{font-weight:600;border-top:1.5px solid var(--line)}
 .toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,8px);background:var(--ink);color:#fff;padding:8px 16px;border-radius:var(--r-in);font-weight:500;font-size:14px;opacity:0;transition:opacity var(--t-close) var(--ease-in),transform var(--t-close) var(--ease-in);z-index:60;pointer-events:none}
 .toast.show{opacity:1;transform:translate(-50%,0);transition:opacity var(--t-open) var(--ease-out),transform var(--t-open) var(--ease-out)}
 
+
+/* ---------- Statistieken ---------- */
+.top-actions{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.live{display:inline-flex;align-items:center;gap:8px;font-size:14px;color:var(--ink-mute)}
+.live i{width:8px;height:8px;border-radius:50%;background:var(--line)}
+.live.on{color:var(--ink)}
+.live.on i{background:var(--green);box-shadow:0 0 0 3px var(--green-tint)}
+.delta{display:block;font-size:12px;color:var(--ink-mute);margin-top:4px}
+.delta.up{color:var(--green)}
+.delta.down{color:var(--red-deep)}
+.card > h2 .key{display:inline-block;width:8px;height:8px;border-radius:2px;margin:0 6px 0 12px;vertical-align:0}
+.key.blue{background:var(--blue)}.key.red{background:var(--red)}
+.funnel{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;align-items:end}
+.fstep{display:grid;gap:4px}
+.fbar{height:120px;background:var(--line-soft);border-radius:var(--r-sm);display:flex;align-items:flex-end;overflow:hidden}
+.fbar i{display:block;width:100%;height:100%;background:var(--blue);border-radius:var(--r-sm);transform-origin:bottom;transition:transform var(--t-open) var(--ease-move)}
+.fstep:nth-child(2) .fbar i{background:#5B80FF}.fstep:nth-child(3) .fbar i{background:var(--red)}
+.fstep b{font-size:20px;font-weight:600;margin-top:4px}
+.fstep span{font-size:13px;color:var(--ink-mute);line-height:1.3}
+.fstep small{font-size:12px;color:var(--ink-soft);font-weight:600}
+
+/* ---------- Klantweergave ---------- */
+.preview-bar{display:flex;align-items:center;gap:12px;flex-wrap:wrap;background:var(--tint);border-radius:var(--r);padding:8px 8px 8px 16px;margin-bottom:24px;font-size:14px;color:var(--ink-soft)}
+.preview-bar > span{display:inline-flex;align-items:center;gap:8px;flex:1;min-width:200px}
+.preview-bar > span svg{width:18px;height:18px;color:var(--blue)}
+.preview-bar .seg{background:rgba(255,255,255,.6)}
+.preview-bar .seg a{padding:4px 12px;border-radius:var(--r-sm);font-size:14px;font-weight:500;color:var(--ink-soft);text-decoration:none;display:inline-flex;align-items:center;min-height:32px}
+.preview-bar .seg a[aria-pressed=true]{background:var(--surface);color:var(--ink);font-weight:600}
+.track-labels span{font-size:12px;line-height:1.3;color:var(--ink-mute);padding:4px 0}
+.track-labels span.cur{color:var(--ink);font-weight:600}
+.report-body{white-space:pre-wrap;color:var(--ink-soft);max-width:68ch}
+
+/* ---------- Aanvragen en sites (HQ) ---------- */
+.requests{box-shadow:inset 0 0 0 1.5px var(--blue),0 1px 2px rgba(20,26,51,.05)}
+.req{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px 24px;align-items:center;padding:12px 0}
+.req + .req{border-top:1px solid var(--line-soft)}
+.req .t{font-weight:600}.req .s{font-size:14px;color:var(--ink-mute)}
+.req-actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.req-actions select{width:auto;min-width:200px;min-height:32px;font-size:14px;padding:4px 32px 4px 12px}
+.sub-h{font-size:13px;font-weight:500;color:var(--ink-mute);margin-bottom:4px}
+.snippet{display:flex;gap:8px;align-items:center;background:var(--bg);border-radius:var(--r-sm);padding:8px 8px 8px 12px;margin-bottom:8px}
+.snippet code{flex:1;min-width:0;font:12px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--ink-soft);overflow-x:auto;white-space:nowrap}
+@media (max-width:860px){.req{grid-template-columns:1fr}.funnel .fbar{height:88px}}
+
 /* ---------- Gsm ---------- */
 .tabbar{display:none}
 @media (max-width:1100px){.stats{grid-template-columns:repeat(3,minmax(0,1fr))}.overview{grid-template-columns:1fr}}
@@ -231,12 +275,12 @@ tfoot td{font-weight:600;border-top:1.5px solid var(--line)}
 <div class="login hidden" id="login">
   <div class="login-card">
     <img src="icons/icon-192.png" alt="">
-    <h1>Dobbo HQ</h1>
-    <p>Log in met je Dobbo-adres. Je krijgt een inloglink per mail.</p>
+    <h1>Dobbo</h1>
+    <p>Log in of vraag toegang aan met je e-mailadres. Je krijgt een code per mail.</p>
     <form id="login-form">
-      <input type="email" id="login-email" value="alec@dobbo.be" autocomplete="email" required>
-      <input type="text" id="login-code" class="hidden" inputmode="numeric" autocomplete="one-time-code" placeholder="Code uit je mail" maxlength="8">
-      <button class="btn btn-blue" id="login-btn" type="submit">Stuur mijn inloglink</button>
+      <input type="email" id="login-email" placeholder="jij@jouwzaak.be" autocomplete="email" required aria-label="E-mailadres">
+      <input type="text" id="login-code" class="hidden" inputmode="numeric" autocomplete="one-time-code" placeholder="Code uit je mail" maxlength="8" aria-label="Code">
+      <button class="btn btn-blue" id="login-btn" type="submit">Stuur mijn code</button>
       <p class="msg" id="login-msg" role="status"></p>
     </form>
   </div>
@@ -259,6 +303,6 @@ tfoot td{font-weight:600;border-top:1.5px solid var(--line)}
 <section class="panel" id="panel" inert role="dialog" aria-modal="true" aria-label="Klant"></section>
 <div class="toast" id="toast" role="status"></div>
 
-<script type="module" src="app.js?v=6"></script>
+<script type="module" src="app.js?v=7"></script>
 </body>
 </html>
