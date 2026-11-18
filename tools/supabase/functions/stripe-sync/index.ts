@@ -32,7 +32,8 @@ Deno.serve(async (req) => {
     // 2. Betalingen ophalen: alles de eerste keer, daarna vanaf 3 dagen voor de laatste
     const { data: last } = await admin.from('stripe_charges').select('created').order('created', { ascending: false }).limit(1);
     const since = last?.[0] ? Math.floor(new Date(last[0].created).getTime() / 1000) - 3 * 86400 : 0;
-    let after: string | undefined, n = 0, livemode = true;
+    let after: string | undefined, n = 0;
+    const livemode = !/^(rk|sk)_test_/.test(key);
     do {
       const p = new URLSearchParams({ limit: '100' });
       if (since) p.set('created[gte]', String(since));
@@ -52,7 +53,7 @@ Deno.serve(async (req) => {
         livemode: !!c.livemode,
         synced_at: new Date().toISOString(),
       }));
-      if (rows.length) { livemode = rows[0].livemode; const { error } = await admin.from('stripe_charges').upsert(rows, { onConflict: 'id', ignoreDuplicates: false }); if (error) throw error; }
+      if (rows.length) { const { error } = await admin.from('stripe_charges').upsert(rows, { onConflict: 'id', ignoreDuplicates: false }); if (error) throw error; }
       n += rows.length;
       after = page.has_more ? page.data[page.data.length - 1].id : undefined;
     } while (after && n < 5000);

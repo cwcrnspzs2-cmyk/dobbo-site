@@ -1,5 +1,5 @@
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
-import { SUPABASE_URL, SUPABASE_ANON_KEY, OWNER_EMAIL } from './config.js?v=16';
+import { SUPABASE_URL, SUPABASE_ANON_KEY, OWNER_EMAIL } from './config.js?v=17';
 
 const sb = createClient(SUPABASE_URL, SUPABASE_ANON_KEY, { auth: { persistSession: true, autoRefreshToken: true } });
 const $ = (s, el = document) => el.querySelector(s);
@@ -778,7 +778,7 @@ async function inkomsten() {
   if (g !== gen) return;
   done();
   // Stripe-betalingen die niet aan een schijf gekoppeld zijn, tellen ook als inkomsten (min terugbetalingen)
-  const loose = charges.filter((c) => c.paid && !c.payment_id && c.currency === 'eur');
+  const loose = charges.filter((c) => c.paid && !c.payment_id && c.currency === 'eur' && c.livemode); // testbetalingen tellen nooit mee
   const looseIn = (yy, m) => loose.filter((c) => { const d = new Date(c.created); return d.getFullYear() === yy && d.getMonth() === m; }).reduce((a, c) => a + Number(c.amount) - Number(c.amount_refunded), 0);
   const now = new Date(), y = incYear, curM = y === now.getFullYear() ? now.getMonth() : 11;
   const paid = payments.filter((p) => p.paid_at);
