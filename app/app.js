@@ -1,5 +1,5 @@
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
-import { SUPABASE_URL, SUPABASE_ANON_KEY, OWNER_EMAIL } from './config.js?v=15';
+import { SUPABASE_URL, SUPABASE_ANON_KEY, OWNER_EMAIL } from './config.js?v=16';
 
 const sb = createClient(SUPABASE_URL, SUPABASE_ANON_KEY, { auth: { persistSession: true, autoRefreshToken: true } });
 const $ = (s, el = document) => el.querySelector(s);
@@ -767,15 +767,19 @@ async function inkomsten() {
   const g = gen;
   const v = $('#view'), done = loading(v);
   await sb.rpc('ensure_care_payments');
-  const [payments, costs, clients, bookings, st] = await Promise.all([
+  const [payments, costs, clients, bookings, st, charges] = await Promise.all([
     q(sb.from('payments').select('*, clients(name,business)')),
     q(sb.from('costs').select('*').order('day', { ascending: false })),
     q(sb.from('clients').select('id,stage,care_plan,created_at')),
     q(sb.from('bookings').select('created_at,client_id').gte('created_at', daysAgo(90))),
     q(sb.rpc('site_stats', { p_site: DOBBO_SITE, p_days: 90 })),
+    q(sb.from('stripe_charges').select('*').order('created', { ascending: false }).limit(500)),
   ]);
   if (g !== gen) return;
   done();
+  // Stripe-betalingen die niet aan een schijf gekoppeld zijn, tellen ook als inkomsten (min terugbetalingen)
+  const loose = charges.filter((c) => c.paid && !c.payment_id && c.currency === 'eur');
+  const looseIn = (yy, m) => loose.filter((c) => { const d = new Date(c.created); return d.getFullYear() === yy && d.getMonth() === m; }).reduce((a, c) => a + Number(c.amount) - Number(c.amount_refunded), 0);
   const now = new Date(), y = incYear, curM = y === now.getFullYear() ? now.getMonth() : 11;
   const paid = payments.filter((p) => p.paid_at);
   const inMonth = (d, yy, m) => { const x = new Date(d); return x.getFullYear() === yy && x.getMonth() === m; };
@@ -788,7 +792,7 @@ async function inkomsten() {
   }, 0);
   const months = MONTHS.map((l, m) => {
     const ps = paid.filter((p) => inMonth(p.paid_at, y, m));
-    return { l, m, project: ps.filter((p) => p.kind !== 'beheer').reduce((a, p) => a + Number(p.amount), 0), beheer: ps.filter((p) => p.kind === 'beheer').reduce((a, p) => a + Number(p.amount), 0), cost: costIn(y, m) };
+    return { l, m, project: ps.filter((p) => p.kind !== 'beheer').reduce((a, p) => a + Number(p.amount), 0) + looseIn(y, m), beheer: ps.filter((p) => p.kind === 'beheer').reduce((a, p) => a + Number(p.amount), 0), cost: costIn(y, m) };
   });
   const yearIn = months.reduce((a, x) => a + x.project + x.beheer, 0), yearCost = months.reduce((a, x) => a + x.cost, 0);
   const thisMonth = months[curM].project + months[curM].beheer;
@@ -838,6 +842,11 @@ async function inkomsten() {
       <p class="date" style="margin-top:16px;white-space:normal">Gemiddeld per klant: <b class="num">${eur(avg)}</b> aan projecten${st.visitors && avg ? ` · een bezoeker is je ongeveer <b class="num">${eur((avg * payers) / st.visitors)}</b> waard` : ''}</p>
     </section>
   </div>
+  <section class="card" style="margin-top:16px" id="stripe-card"><h2>Stripe<small id="stripe-state">${charges.length ? 'laatst bijgewerkt ' + fmtShort(charges.reduce((a, c) => (c.synced_at > a ? c.synced_at : a), charges[0].synced_at)) : 'nog niet gekoppeld'}</small></h2>
+    <div id="stripe-body">${charges.length ? `<div class="rows">${charges.slice(0, 8).map((c) => `<div class="r static"><div><div class="t">${esc(c.name || c.email || c.description || 'Betaling')}</div><div class="s">${fmtShort(c.created)}${c.description && (c.name || c.email) ? ' · ' + esc(c.description) : ''}${c.livemode ? '' : ' · test'}</div></div>
+      <div class="end">${c.status !== 'succeeded' ? `<span class="tag red">${c.status === 'failed' ? 'Mislukt' : 'Bezig'}</span>` : c.amount_refunded > 0 ? '<span class="tag">Terugbetaald</span>' : c.payment_id ? '<span class="tag green">Gekoppeld</span>' : '<span class="tag">Los</span>'}<b class="num">${eur(c.amount)}</b></div></div>`).join('')}</div>` : '<p class="empty">Na het koppelen zie je hier je Stripe-betalingen. Betaalt een klant een schijf via Stripe met hetzelfde e-mailadres en bedrag, dan wordt die automatisch afgevinkt.</p>'}</div>
+    <button class="btn btn-ghost btn-sm" type="button" id="stripe-sync" style="margin-top:12px">Vernieuw uit Stripe</button>
+  </section>
   <section class="card" style="margin-top:16px"><h2>Kosten</h2>
     <form id="cost-form" class="fields" style="grid-template-columns:2fr 1fr 1fr 1fr auto;align-items:end">
       <label class="f">Wat<input type="text" name="label" required placeholder="Brevo, domein, advertentie…"></label>
@@ -851,6 +860,19 @@ async function inkomsten() {
   </section>`;
   bindRows(v);
   $$('[data-year]', v).forEach((b) => (b.onclick = () => { incYear = Number(b.dataset.year); gen++; inkomsten(); }));
+  const syncStripe = async (silent) => {
+    const b = $('#stripe-sync'); if (!b) return; b.disabled = true; b.textContent = 'Bezig…';
+    const { data, error } = await sb.functions.invoke('stripe-sync', { body: {} });
+    if (g !== gen && silent) return;
+    b.disabled = false; b.textContent = 'Vernieuw uit Stripe';
+    if (error) { if (!silent) toast('Stripe niet bereikbaar'); return; }
+    if (data?.error === 'not_connected') { $('#stripe-state').textContent = 'nog niet gekoppeld'; if (!silent) toast(data.message); return; }
+    if (data?.error) { $('#stripe-state').textContent = 'fout'; toast('Stripe: ' + data.message); return; }
+    $('#stripe-state').textContent = `${data.livemode ? '' : 'testmodus · '}saldo ${eur(data.balance.available)} beschikbaar, ${eur(data.balance.pending)} onderweg`;
+    if (data.synced || data.matched) { if (data.matched) toast(data.matched + (data.matched === 1 ? ' schijf' : ' schijven') + ' automatisch afgevinkt'); gen++; inkomsten(); }
+  };
+  $('#stripe-sync').onclick = () => syncStripe(false);
+  if (!inkomsten.synced) { inkomsten.synced = true; syncStripe(true); } // één keer per sessie automatisch
   $('#cost-form').onsubmit = async (e) => {
     e.preventDefault();
     const d = Object.fromEntries(new FormData(e.target));
