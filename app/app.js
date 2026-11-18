@@ -1,5 +1,5 @@
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
-import { SUPABASE_URL, SUPABASE_ANON_KEY, OWNER_EMAIL } from './config.js?v=17';
+import { SUPABASE_URL, SUPABASE_ANON_KEY, OWNER_EMAIL } from './config.js?v=18';
 
 const sb = createClient(SUPABASE_URL, SUPABASE_ANON_KEY, { auth: { persistSession: true, autoRefreshToken: true } });
 const $ = (s, el = document) => el.querySelector(s);
@@ -844,7 +844,7 @@ async function inkomsten() {
   </div>
   <section class="card" style="margin-top:16px" id="stripe-card"><h2>Stripe<small id="stripe-state">${charges.length ? 'laatst bijgewerkt ' + fmtShort(charges.reduce((a, c) => (c.synced_at > a ? c.synced_at : a), charges[0].synced_at)) : 'nog niet gekoppeld'}</small></h2>
     <div id="stripe-body">${charges.length ? `<div class="rows">${charges.slice(0, 8).map((c) => `<div class="r static"><div><div class="t">${esc(c.name || c.email || c.description || 'Betaling')}</div><div class="s">${fmtShort(c.created)}${c.description && (c.name || c.email) ? ' · ' + esc(c.description) : ''}${c.livemode ? '' : ' · test'}</div></div>
-      <div class="end">${c.status !== 'succeeded' ? `<span class="tag red">${c.status === 'failed' ? 'Mislukt' : 'Bezig'}</span>` : c.amount_refunded > 0 ? '<span class="tag">Terugbetaald</span>' : c.payment_id ? '<span class="tag green">Gekoppeld</span>' : '<span class="tag">Los</span>'}<b class="num">${eur(c.amount)}</b></div></div>`).join('')}</div>` : '<p class="empty">Na het koppelen zie je hier je Stripe-betalingen. Betaalt een klant een schijf via Stripe met hetzelfde e-mailadres en bedrag, dan wordt die automatisch afgevinkt.</p>'}</div>
+      <div class="end">${c.status !== 'succeeded' ? `<span class="tag red">${c.status === 'failed' ? 'Mislukt' : 'Bezig'}</span>` : c.amount_refunded > 0 ? '<span class="tag">Terugbetaald</span>' : c.payment_id ? '<span class="tag green">Gekoppeld</span>' : '<span class="tag">Los</span>'}<b class="num">${eur(c.amount)}</b></div></div>`).join('')}</div>` : '<p class="empty">Nog geen betalingen in Stripe. Betaalt een klant een schijf via Stripe met hetzelfde e-mailadres en bedrag als in zijn fiche, dan wordt die schijf hier automatisch afgevinkt.</p>'}</div>
     <button class="btn btn-ghost btn-sm" type="button" id="stripe-sync" style="margin-top:12px">Vernieuw uit Stripe</button>
   </section>
   <section class="card" style="margin-top:16px"><h2>Kosten</h2>
