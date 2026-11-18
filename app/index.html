@@ -230,6 +230,18 @@ tfoot td{font-weight:600;border-top:1.5px solid var(--line)}
 .track-labels span.cur{color:var(--ink);font-weight:600}
 .report-body{white-space:pre-wrap;color:var(--ink-soft);max-width:68ch}
 
+/* ---------- Aanpassingen, bestanden ---------- */
+.req-row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px;align-items:start;padding:12px 0}
+.req-row + .req-row{border-top:1px solid var(--line-soft)}
+.req-row .t{font-weight:600}.req-row .s{font-size:14px;color:var(--ink-soft);margin-top:4px}
+.req-row select{width:auto;min-height:32px;font-size:14px;padding:4px 32px 4px 12px}
+.tag.blue{background:var(--tint);color:var(--blue)}
+.drop{display:grid;place-items:center;gap:4px;text-align:center;padding:40px 20px;border:2px dashed var(--line);box-shadow:none;cursor:pointer;transition:border-color var(--t-press) ease,background-color var(--t-press) ease}
+.drop span{font-size:14px;color:var(--ink-mute)}
+.drop.over{border-color:var(--blue);background:var(--tint)}
+@media (hover:hover) and (pointer:fine){.drop:hover{border-color:var(--blue)}}
+.card > h2 small a{color:var(--ink-mute)}
+
 /* ---------- Aanvragen en sites (HQ) ---------- */
 .requests{box-shadow:inset 0 0 0 1.5px var(--blue),0 1px 2px rgba(20,26,51,.05)}
 .req{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px 24px;align-items:center;padding:12px 0}
@@ -240,7 +252,7 @@ tfoot td{font-weight:600;border-top:1.5px solid var(--line)}
 .sub-h{font-size:13px;font-weight:500;color:var(--ink-mute);margin-bottom:4px}
 .snippet{display:flex;gap:8px;align-items:center;background:var(--bg);border-radius:var(--r-sm);padding:8px 8px 8px 12px;margin-bottom:8px}
 .snippet code{flex:1;min-width:0;font:12px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--ink-soft);overflow-x:auto;white-space:nowrap}
-@media (max-width:860px){.req{grid-template-columns:1fr}.funnel .fbar{height:88px}}
+@media (max-width:860px){#cost-form{grid-template-columns:1fr 1fr!important}#cost-form label:first-child{grid-column:1/-1}.req{grid-template-columns:1fr}.funnel .fbar{height:88px}}
 
 /* ---------- Gsm ---------- */
 .tabbar{display:none}
@@ -256,7 +268,7 @@ tfoot td{font-weight:600;border-top:1.5px solid var(--line)}
   .client .next{display:none}
   .p-body{padding:4px 16px 48px}
   .p-head{padding-left:16px}
-  .tabbar{display:grid;grid-template-columns:repeat(4,1fr);position:fixed;left:0;right:0;bottom:0;background:rgba(255,255,255,.82);backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%);box-shadow:0 -1px 0 var(--line);padding:4px 4px calc(4px + env(safe-area-inset-bottom));z-index:30}
+  .tabbar{display:grid;grid-template-columns:repeat(5,1fr);position:fixed;left:0;right:0;bottom:0;background:rgba(255,255,255,.82);backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%);box-shadow:0 -1px 0 var(--line);padding:4px 4px calc(4px + env(safe-area-inset-bottom));z-index:30}
   .tabbar a{display:grid;justify-items:center;gap:2px;font-size:11px;font-weight:500;color:var(--ink-mute);text-decoration:none;padding:8px 0;-webkit-user-select:none;user-select:none}
   .tabbar a svg{width:24px;height:24px}
   .tabbar a[aria-current=page]{color:var(--blue);font-weight:600}
@@ -308,7 +320,7 @@ tfoot td{font-weight:600;border-top:1.5px solid var(--line)}
 <section class="panel" id="panel" inert role="dialog" aria-modal="true" aria-label="Klant"></section>
 <div class="toast" id="toast" role="status"></div>
 
-<script type="module" src="app.js?v=14"></script>
+<script type="module" src="app.js?v=15"></script>
 <script>
 // Laadt de app niet (geen internet, storing), dan geen leeg scherm maar een melding.
 setTimeout(function(){

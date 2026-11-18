@@ -1,5 +1,5 @@
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
-import { SUPABASE_URL, SUPABASE_ANON_KEY, OWNER_EMAIL } from './config.js?v=14';
+import { SUPABASE_URL, SUPABASE_ANON_KEY, OWNER_EMAIL } from './config.js?v=15';
 
 const sb = createClient(SUPABASE_URL, SUPABASE_ANON_KEY, { auth: { persistSession: true, autoRefreshToken: true } });
 const $ = (s, el = document) => el.querySelector(s);
@@ -33,6 +33,9 @@ const ICONS = {
   doc: '<path d="M7 3h7l5 5v12a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z"/><path d="M14 3v5h5M9 13h6M9 17h6"/>',
   eye: '<path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/>',
   copy: '<rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/>',
+  euro: '<path d="M18 7a7 7 0 1 0 0 10"/><path d="M4 10h10M4 14h10"/>',
+  edit: '<path d="M4 20h4L19 9l-4-4L4 16v4z"/><path d="M14 6l4 4"/>',
+  folder: '<path d="M3 6a1 1 0 0 1 1-1h5l2 2h9a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z"/>',
   ext: '<path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/>',
 };
 const icon = (n) => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICONS[n]}</svg>`;
@@ -82,8 +85,8 @@ function loading(v) { const t = setTimeout(() => { if (!v.dataset.ready) v.inner
 const DOBBO_SITE = '00000000-0000-4000-8000-00000000d0b0';
 let ROLE = 'owner';      // 'owner' = Alec, 'client' = klant
 let ME = null;           // client_users-rij van een klant
-const OWNER_ROUTES = [['overzicht', 'Overzicht', 'home'], ['klanten', 'Klanten', 'users'], ['beheer', 'Beheer', 'shield'], ['site', 'Statistieken', 'chart']];
-const CLIENT_ROUTES = [['bezoekers', 'Bezoekers', 'chart'], ['project', 'Mijn site', 'home'], ['rapporten', 'Rapporten', 'doc']];
+const OWNER_ROUTES = [['overzicht', 'Overzicht', 'home'], ['klanten', 'Klanten', 'users'], ['beheer', 'Beheer', 'shield'], ['inkomsten', 'Inkomsten', 'euro'], ['site', 'Statistieken', 'chart']];
+const CLIENT_ROUTES = [['bezoekers', 'Bezoekers', 'chart'], ['project', 'Mijn site', 'home'], ['aanpassingen', 'Aanpassingen', 'edit'], ['bestanden', 'Bestanden', 'folder'], ['rapporten', 'Rapporten', 'doc']];
 
 /* Installeren als app: Chrome en Edge geven een installatievraag die we via een eigen knop tonen. */
 let installEvt = null;
@@ -191,7 +194,7 @@ async function start(session) {
   start.busy = true;
   const email = session.user.email.toLowerCase();
   ROLE = email === OWNER_EMAIL ? 'owner' : 'client';
-  if (ROLE === 'owner') { try { localStorage.setItem('dobbo_notrack', '1'); } catch (e) {} } // eigen bezoek niet meetellen
+  if (ROLE === 'owner') { try { localStorage.setItem('dobbo_notrack', '1'); } catch (e) {} sb.rpc('ensure_care_payments').then(() => {}); } // eigen bezoek niet meetellen; beheerrijen van deze maand klaarzetten
   if (ROLE === 'client') {
     const { data } = await sb.from('client_users').select('*').eq('user_id', session.user.id).maybeSingle();
     ME = data;
@@ -242,8 +245,9 @@ function requestForm(session) {
 }
 
 let current = '', gen = 0; // gen: elk nieuw scherm krijgt een nummer, trage oude antwoorden worden genegeerd
-const OWNER_VIEWS = () => ({ overzicht, klanten, beheer, site });
-const CLIENT_VIEWS = () => ({ bezoekers: () => clientBezoekers(ME.client_id), project: () => clientProject(ME.client_id), rapporten: () => clientRapporten(ME.client_id) });
+const OWNER_VIEWS = () => ({ overzicht, klanten, beheer, inkomsten, site });
+const CLIENT_TABS = { bezoekers: clientBezoekers, project: clientProject, aanpassingen: clientAanpassingen, bestanden: clientBestanden, rapporten: clientRapporten };
+const CLIENT_VIEWS = () => Object.fromEntries(Object.entries(CLIENT_TABS).map(([k, f]) => [k, () => f(ME.client_id)]));
 function route() {
   gen++;
   const parts = (location.hash.slice(1) || (ROLE === 'owner' ? 'overzicht' : 'bezoekers')).split('/');
@@ -254,7 +258,7 @@ function route() {
     $$('[data-r]').forEach((a) => (a.dataset.r === 'klanten' ? a.setAttribute('aria-current', 'page') : a.removeAttribute('aria-current')));
     closePanel(true); current = 'als';
     const tab = parts[2] || 'bezoekers';
-    return ({ bezoekers: clientBezoekers, project: clientProject, rapporten: clientRapporten }[tab] || clientBezoekers)(id, true).catch(() => {});
+    return (CLIENT_TABS[tab] || clientBezoekers)(id, true).catch(() => {});
   }
   $$('[data-r]').forEach((a) => (a.dataset.r === r ? a.setAttribute('aria-current', 'page') : a.removeAttribute('aria-current')));
   const views = ROLE === 'owner' ? OWNER_VIEWS() : CLIENT_VIEWS();
@@ -286,8 +290,15 @@ async function overzicht() {
     q(sb.from('bookings').select('*').eq('status', 'gepland').gte('start_time', new Date().toISOString()).order('start_time').limit(5)),
     q(sb.from('client_users').select('*').eq('status', 'aanvraag').order('created_at')),
   ]);
+  const [st, reqs, sites] = await Promise.all([
+    q(sb.rpc('site_stats', { p_site: DOBBO_SITE, p_days: 30 })),
+    q(sb.from('requests').select('*, clients(name,business)').neq('status', 'klaar').order('created_at')),
+    q(sb.from('sites').select('id,domain,client_id')),
+  ]);
+  const checks = await latestChecks(sites.map((x) => x.id));
   if (g !== gen) return;
   done();
+  const down = sites.filter((x) => checks[x.id] && !checks[x.id].ok);
   const open = payments.filter((p) => !p.paid_at).reduce((s, p) => s + Number(p.amount), 0);
   const mrr = clients.filter((c) => c.stage !== 'verloren').reduce((s, c) => s + CARE[c.care_plan].price, 0);
   const visitors = new Set(events.filter((e) => e.type === 'view').map((e) => e.sid)).size;
@@ -314,6 +325,9 @@ async function overzicht() {
     ${stat(visitors, 'Bezoekers, 7 d')}
     ${stat(events.filter((e) => e.type === 'click').length, 'Klikken, 7 d')}
   </div>
+  ${down.length ? `<section class="card requests" style="margin-bottom:16px"><h2>Sites met een probleem<small>${down.length}</small></h2><div class="rows">${down.map((x) => `
+    <div class="r${x.client_id ? '' : ' static'}" ${x.client_id ? `data-open="${x.client_id}" tabindex="0"` : ''}><div><div class="t">${esc(x.domain)}</div><div class="s">${esc(checks[x.id].error || 'Status ' + (checks[x.id].status ?? 'onbekend'))} · ${fmtShort(checks[x.id].created_at)}</div></div><span class="tag red">Onbereikbaar</span></div>`).join('')}</div></section>` : ''}
+  <section class="card" style="margin-bottom:16px"><h2>Bezoekers dobbo.be<small><a href="#site">${st.visitors} in 30 dagen · details</a></small></h2>${bars(st.daily, { h: 96, label: (d) => `${fmtDate(d.d)}: ${d.v} bezoekers, ${d.a} acties` })}</section>
   <div class="overview">
     <section class="card"><h2>Te doen</h2>${todo.length ? `<div class="rows">${todo.map((c) => `
       <div class="r" data-open="${c.id}" tabindex="0">
@@ -324,6 +338,8 @@ async function overzicht() {
       : `<p class="empty">Nog geen klanten. Boekingen via dobbo.be komen hier vanzelf binnen.</p>${newBtn.replace('btn-blue', 'btn-ghost btn-sm')}`}
     </section>
     <div class="stack">
+      ${reqs.length ? `<section class="card"><h2>Aanpassingen<small>${reqs.length} open</small></h2><div class="rows">${reqs.map((r) => `
+        <div class="r" data-open="${r.client_id}" tabindex="0"><div><div class="t">${esc(r.title)}</div><div class="s">${esc(r.clients?.business || r.clients?.name || '')}</div></div><span class="tag ${r.status === 'nieuw' ? 'red' : ''}">${r.status === 'nieuw' ? 'Nieuw' : 'Bezig'}</span></div>`).join('')}</div></section>` : ''}
       <section class="card"><h2>Gesprekken</h2>${bookings.length ? `<div class="rows">${bookings.map((b) => `
         <div class="r${b.client_id ? '' : ' static'}" ${b.client_id ? `data-open="${b.client_id}" tabindex="0"` : ''}>
           <div><div class="t">${esc(b.business || b.name)}</div><div class="s">${esc(b.name)}</div></div>
@@ -459,6 +475,16 @@ async function openClient(id) {
     q(sb.from('client_users').select('*').eq('client_id', id)),
     q(sb.from('reports').select('*').eq('client_id', id).order('created_at', { ascending: false })),
   ]);
+  const [reqs, times, files] = await Promise.all([
+    q(sb.from('requests').select('*').eq('client_id', id).order('created_at', { ascending: false })),
+    q(sb.from('time_entries').select('*').eq('client_id', id).order('day', { ascending: false }).order('created_at', { ascending: false })),
+    sb.storage.from('client-files').list(id, { limit: 100, sortBy: { column: 'created_at', order: 'desc' } }).then((r) => r.data || []),
+  ]);
+  const checks = await latestChecks(sites.map((x) => x.id));
+  const projMin = times.filter((t) => !t.care).reduce((a, t) => a + t.minutes, 0);
+  const projPaid = payments.filter((x) => x.kind !== 'beheer' && x.paid_at).reduce((a, x) => a + Number(x.amount), 0);
+  const projPayments = payments.filter((x) => x.kind !== 'beheer');
+  const hhmm = (m) => `${Math.floor(m / 60)} u ${String(m % 60).padStart(2, '0')}`;
   const field = (k, label, type = 'text', cls = '') => `<label class="f ${cls}">${label}<input type="${type}" data-k="${k}" value="${esc(c[k] ?? '')}"></label>`;
   const sel = (k, label, opts, cls = '') => `<label class="f ${cls}">${label}<select data-k="${k}">${opts.map(([val, l]) => `<option value="${val}" ${String(c[k] ?? '') === val ? 'selected' : ''}>${l}</option>`).join('')}</select></label>`;
   const link = (u) => u ? `<a href="${esc(/^https?:/.test(u) ? u : 'https://' + u)}" target="_blank" rel="noopener" class="btn btn-ghost btn-sm">${icon('ext')}${esc(u.replace(/^https?:\/\//, '').replace(/\/$/, ''))}</a>` : '';
@@ -498,12 +524,12 @@ async function openClient(id) {
         ${field('price', 'Prijs in euro', 'number')}
         ${field('addons', 'Extra’s', 'text', 'full')}
       </div>
-      <div style="margin-top:12px">${payments.length ? payments.map((x) => `
+      <div style="margin-top:12px">${payments.map((x) => `
         <div class="pay${x.paid_at ? ' paid' : ''}"><input type="checkbox" data-pay="${x.id}" ${x.paid_at ? 'checked' : ''} aria-label="${esc(x.label)} betaald">
           <span class="lbl">${esc(x.label)}${x.paid_at ? ` <span class="date">· ${fmtDate(x.paid_at)}</span>` : ''}</span>
           <span class="amt">${eur(x.amount)}</span>
-          <button class="btn btn-text btn-sm" type="button" data-delpay="${x.id}" aria-label="Schijf verwijderen">${icon('x')}</button></div>`).join('')
-        : c.price ? `<button class="btn btn-ghost btn-sm" type="button" id="mk-pay">Schijven 30/40/30 aanmaken</button>` : '<p class="empty">Vul een prijs in om de schijven aan te maken.</p>'}
+          <button class="btn btn-text btn-sm" type="button" data-delpay="${x.id}" aria-label="Schijf verwijderen">${icon('x')}</button></div>`).join('')}
+        ${projPayments.length ? '' : c.price ? `<button class="btn btn-ghost btn-sm" type="button" id="mk-pay">Schijven 30/40/30 aanmaken</button>` : '<p class="empty">Vul een prijs in om de schijven aan te maken.</p>'}
       </div>
     </section>
 
@@ -513,7 +539,8 @@ async function openClient(id) {
     </div>${c.care_plan !== 'geen' ? `
       <div style="margin-top:16px"><div class="date">Deze maand: <b class="num ${c.care_minutes_used > care.minutes ? 'late' : ''}">${c.care_minutes_used} van ${care.minutes} min</b></div>
       <div class="meter${c.care_minutes_used > care.minutes ? ' over' : ''}"><i style="transform:scaleX(${Math.min(1, c.care_minutes_used / care.minutes)})"></i></div>
-      <div class="minutes"><button class="btn btn-ghost btn-sm" type="button" data-min="15">+15 min</button><button class="btn btn-ghost btn-sm" type="button" data-min="30">+30 min</button><button class="btn btn-text btn-sm" type="button" data-min="reset">Nieuwe maand</button></div></div>` : ''}
+      <div class="minutes"><button class="btn btn-text btn-sm" type="button" data-min="reset">Teller op nul (nieuwe maand)</button></div>
+      <p class="date" style="white-space:normal">Werktijd voor beheer log je hieronder bij Tijd, met "telt voor beheer" aangevinkt.</p></div>` : ''}
     </section>
 
     ${quest.length ? `<section class="card"><h2>Vragenlijst<small>${fmtDate(quest[0].created_at)}</small></h2><dl class="qa">${Object.entries(quest[0].answers || {}).filter(([k, x]) => x && !/^(Naam|email|Zaak|Huidige website)$/.test(k)).map(([k, x]) => `<dt>${esc(k)}</dt><dd>${esc(Array.isArray(x) ? x.join(', ') : x)}</dd>`).join('')}</dl></section>` : ''}
@@ -525,7 +552,7 @@ async function openClient(id) {
         <button class="btn btn-text btn-sm" type="button" data-revoke="${u.user_id}">${u.status === 'actief' ? 'Toegang intrekken' : 'Activeer'}</button></div>`).join('')
         : '<p class="empty">Nog geen account. De klant installeert de app via dobbo.be/software en vraagt daar toegang aan. Die aanvraag verschijnt op je overzicht.</p>'}
       <div class="sub-h" style="margin-top:16px">Gemeten sites</div>
-      ${sites.map((x) => `<div class="site-row"><div class="pay" style="grid-template-columns:1fr auto"><span class="lbl">${esc(x.domain)}</span><button class="btn btn-text btn-sm" type="button" data-delsite="${x.id}" aria-label="Site verwijderen">${icon('x')}</button></div>
+      ${sites.map((x) => `<div class="site-row"><div class="pay" style="grid-template-columns:1fr auto auto"><span class="lbl">${esc(x.domain)}${checks[x.id] ? ` <span class="date">· gecontroleerd ${fmtShort(checks[x.id].created_at)}</span>` : ''}</span><span class="tag ${health(checks[x.id]).cls}">${health(checks[x.id]).t}</span><button class="btn btn-text btn-sm" type="button" data-delsite="${x.id}" aria-label="Site verwijderen">${icon('x')}</button></div>
         <div class="snippet"><code>&lt;script src="https://dobbo.be/t.js" data-site="${x.id}" defer&gt;&lt;/script&gt;</code><button class="btn btn-ghost btn-sm" type="button" data-copy='<script src="https://dobbo.be/t.js" data-site="${x.id}" defer></script>'>${icon('copy')}Kopieer</button></div></div>`).join('')}
       <form class="note-form" id="site-form" style="margin:12px 0 0"><input type="text" name="domain" placeholder="domein.be" value="${sites.length ? '' : esc((c.site_url || c.website || '').replace(/^https?:\/\//, '').replace(/\/.*$/, ''))}" aria-label="Domein"><button class="btn btn-ghost btn-sm" type="submit">Site toevoegen</button></form>
       <p class="date" style="margin-top:8px">Plak het script net voor &lt;/body&gt; op elke pagina van de klantensite.</p>
@@ -538,6 +565,29 @@ async function openClient(id) {
         <button class="btn btn-blue btn-sm" type="submit" style="justify-self:start">Publiceer voor de klant</button>
       </form>
       ${reps.length ? `<div class="rows" style="margin-top:12px">${reps.map((r) => `<div class="r static"><div><div class="t">${esc(r.title)}</div><div class="s">${esc(r.period || fmtDate(r.created_at))}</div></div><button class="btn btn-text btn-sm" type="button" data-delrep="${r.id}">Verwijder</button></div>`).join('')}</div>` : ''}
+    </section>
+
+    <section class="card"><h2>Aanpassingen${reqs.filter((r) => r.status !== 'klaar').length ? `<small>${reqs.filter((r) => r.status !== 'klaar').length} open</small>` : ''}</h2>
+      ${reqs.length ? reqs.map((r) => `<div class="req-row">
+        <div><div class="t">${esc(r.title)}</div>${r.body ? `<p class="s" style="white-space:pre-wrap">${esc(r.body)}</p>` : ''}<div class="date">${fmtShort(r.created_at)}${r.minutes ? ` · ${r.minutes} min` : ''}</div></div>
+        <select data-reqstatus="${r.id}" aria-label="Status">${[['nieuw', 'Nieuw'], ['bezig', 'Bezig'], ['klaar', 'Klaar']].map(([k, l]) => `<option value="${k}" ${r.status === k ? 'selected' : ''}>${l}</option>`).join('')}</select></div>`).join('')
+        : '<p class="empty">De klant vraagt aanpassingen aan in zijn dashboard. Ze verschijnen hier en op je overzicht.</p>'}
+    </section>
+
+    <section class="card"><h2>Tijd<small class="num">${hhmm(projMin)} aan het project${projMin && projPaid ? ` · ${eur(projPaid / (projMin / 60))} per uur` : ''}</small></h2>
+      <form id="time-form" class="fields" style="grid-template-columns:1fr 2fr;align-items:end">
+        <label class="f">Minuten<input type="number" name="minutes" min="5" step="5" required placeholder="30"></label>
+        <label class="f">Wat deed je<input type="text" name="note" placeholder="Teksten ingevoegd, mail beantwoord…"></label>
+        ${reqs.some((r) => r.status !== 'klaar') ? `<label class="f full">Voor aanpassing<select name="request_id"><option value="">Geen</option>${reqs.filter((r) => r.status !== 'klaar').map((r) => `<option value="${r.id}">${esc(r.title)}</option>`).join('')}</select></label>` : ''}
+        <label class="f full" style="display:flex;gap:8px;align-items:center;flex-direction:row"><input type="checkbox" name="care" style="width:18px;height:18px" ${c.stage === 'online' && c.care_plan !== 'geen' ? 'checked' : ''}>Telt voor beheer deze maand</label>
+        <button class="btn btn-blue btn-sm" type="submit" style="justify-self:start">Log tijd</button>
+      </form>
+      ${times.length ? `<div class="rows" style="margin-top:12px">${times.slice(0, 12).map((t) => `<div class="r static"><div><div class="t">${esc(t.note || 'Werk')}</div><div class="s">${fmtDate(t.day)}${t.care ? ' · beheer' : ''}</div></div><div class="end"><span class="num">${t.minutes} min</span><button class="btn btn-text btn-sm" type="button" data-deltime="${t.id}" aria-label="Verwijder">${icon('x')}</button></div></div>`).join('')}</div>` : ''}
+    </section>
+
+    <section class="card"><h2>Bestanden<small>${files.length || ''}</small></h2>
+      ${files.length ? `<div class="rows">${files.map((f) => `<div class="r static"><div><div class="t">${esc(f.name.replace(/^\d+-/, ''))}</div><div class="s">${fmtShort(f.created_at)} · ${Math.max(1, Math.round((f.metadata?.size || 0) / 1024))} kB</div></div><button class="btn btn-ghost btn-sm" type="button" data-file="${esc(id + '/' + f.name)}">Openen</button></div>`).join('')}</div>` : '<p class="empty">De klant kan logo, foto’s en teksten uploaden in zijn dashboard.</p>'}
+      <label class="btn btn-ghost btn-sm" style="margin-top:12px">Bestand toevoegen<input type="file" id="file-in" multiple hidden></label>
     </section>
 
     <section class="card"><h2>Notities</h2>
@@ -607,10 +657,33 @@ async function openClient(id) {
     openClient(id);
   }));
   $$('[data-min]', p).forEach((b) => (b.onclick = async () => {
-    const m = b.dataset.min;
-    await save({ care_minutes_used: m === 'reset' ? 0 : c.care_minutes_used + Number(m) }, m === 'reset' ? 'Beheer: nieuwe maand' : `Beheer: ${m} min gewerkt`);
+    await save({ care_minutes_used: 0 }, 'Beheer: teller op nul');
     openClient(id);
   }));
+  $('#time-form').onsubmit = async (e) => {
+    e.preventDefault();
+    const d = Object.fromEntries(new FormData(e.target)), m = Number(d.minutes);
+    if (!m) return;
+    await q(sb.from('time_entries').insert({ client_id: id, minutes: m, note: d.note || null, care: !!d.care, request_id: d.request_id || null }));
+    if (d.care) await save({ care_minutes_used: c.care_minutes_used + m });
+    if (d.request_id) { const r = reqs.find((x) => x.id === d.request_id); await q(sb.from('requests').update({ minutes: (r?.minutes || 0) + m }).eq('id', d.request_id)); }
+    toast(m + ' min gelogd');
+    openClient(id);
+  };
+  $$('[data-deltime]', p).forEach((b) => (b.onclick = async () => {
+    const t = times.find((x) => x.id === b.dataset.deltime);
+    await q(sb.from('time_entries').delete().eq('id', t.id));
+    if (t.care) await save({ care_minutes_used: Math.max(0, c.care_minutes_used - t.minutes) });
+    openClient(id);
+  }));
+  $$('[data-reqstatus]', p).forEach((sel) => (sel.onchange = async () => {
+    const r = reqs.find((x) => x.id === sel.dataset.reqstatus);
+    await q(sb.from('requests').update({ status: sel.value, done_at: sel.value === 'klaar' ? new Date().toISOString() : null }).eq('id', r.id));
+    await q(sb.from('activity').insert({ client_id: id, kind: 'aanvraag', text: `Aanpassing "${r.title}": ${sel.value}` }));
+    flash();
+  }));
+  $$('[data-file]', p).forEach((b) => (b.onclick = () => openFile(b.dataset.file)));
+  $('#file-in').onchange = async (e) => { await uploadFiles(id, e.target.files); openClient(id); };
   $('#note-form').onsubmit = async (e) => {
     e.preventDefault();
     const t = $('#note').value.trim();
@@ -662,12 +735,17 @@ async function openClient(id) {
 async function beheer() {
   const g = gen;
   const v = $('#view'), done = loading(v);
-  const clients = await q(sb.from('clients').select('*').neq('care_plan', 'geen').order('business'));
+  const month = new Date(new Date().getFullYear(), new Date().getMonth(), 1).toLocaleDateString('sv-SE');
+  const [clients, carePays] = await Promise.all([
+    q(sb.from('clients').select('*').neq('care_plan', 'geen').order('business')),
+    q(sb.from('payments').select('client_id,paid_at').eq('kind', 'beheer').eq('period', month)),
+  ]);
   if (g !== gen) return;
   done();
+  const payOf = (id) => carePays.find((x) => x.client_id === id);
   const mrr = clients.reduce((s, c) => s + CARE[c.care_plan].price, 0);
   v.innerHTML = header('Beheer', clients.length ? `${clients.length} ${clients.length === 1 ? 'klant' : 'klanten'} · ${eur(mrr * 12)} per jaar` : '') + `
-  <section class="card">${clients.length ? `<table><thead><tr><th>Klant</th><th>Plan</th><th class="num">Minuten</th><th class="hide-sm">Maandrapport</th><th class="num">Per maand</th></tr></thead><tbody>
+  <section class="card">${clients.length ? `<table><thead><tr><th>Klant</th><th>Plan</th><th class="num">Minuten</th><th class="hide-sm">Maandrapport</th><th>Deze maand</th><th class="num">Per maand</th></tr></thead><tbody>
   ${clients.map((c) => {
     const care = CARE[c.care_plan], over = c.care_minutes_used > care.minutes;
     const reportLate = !c.care_last_report || new Date(c.care_last_report) < new Date(Date.now() - 35 * 864e5);
@@ -675,10 +753,126 @@ async function beheer() {
     <td>${care.label}</td>
     <td class="num ${over ? 'late' : ''}">${c.care_minutes_used} / ${care.minutes}</td>
     <td class="hide-sm date ${reportLate ? 'late' : ''}">${c.care_last_report ? fmtDate(c.care_last_report) : 'Nog geen'}</td>
+    <td>${payOf(c.id)?.paid_at ? '<span class="tag green">Betaald</span>' : payOf(c.id) ? '<span class="tag">Open</span>' : '<span class="date">–</span>'}</td>
     <td class="num">${eur(care.price)}</td></tr>`;
-  }).join('')}</tbody><tfoot><tr><td colspan="4" class="hide-sm">Totaal</td><td class="num">${eur(mrr)}</td></tr></tfoot></table>`
+  }).join('')}</tbody><tfoot><tr><td colspan="5" class="hide-sm">Totaal</td><td class="num">${eur(mrr)}</td></tr></tfoot></table>`
     : '<p class="empty">Nog geen beheerklanten. Kies een plan in de fiche van een klant.</p>'}</section>`;
   bindRows(v);
+}
+
+/* ---------------- Inkomsten ---------------- */
+let incYear = new Date().getFullYear();
+const MONTHS = ['jan', 'feb', 'mrt', 'apr', 'mei', 'jun', 'jul', 'aug', 'sep', 'okt', 'nov', 'dec'];
+async function inkomsten() {
+  const g = gen;
+  const v = $('#view'), done = loading(v);
+  await sb.rpc('ensure_care_payments');
+  const [payments, costs, clients, bookings, st] = await Promise.all([
+    q(sb.from('payments').select('*, clients(name,business)')),
+    q(sb.from('costs').select('*').order('day', { ascending: false })),
+    q(sb.from('clients').select('id,stage,care_plan,created_at')),
+    q(sb.from('bookings').select('created_at,client_id').gte('created_at', daysAgo(90))),
+    q(sb.rpc('site_stats', { p_site: DOBBO_SITE, p_days: 90 })),
+  ]);
+  if (g !== gen) return;
+  done();
+  const now = new Date(), y = incYear, curM = y === now.getFullYear() ? now.getMonth() : 11;
+  const paid = payments.filter((p) => p.paid_at);
+  const inMonth = (d, yy, m) => { const x = new Date(d); return x.getFullYear() === yy && x.getMonth() === m; };
+  // kosten per maand: eenmalig in hun maand, maandelijks vanaf hun startmaand tot nu
+  const costIn = (yy, m) => costs.reduce((sum, c) => {
+    const d = new Date(c.day);
+    if (!c.monthly) return sum + (inMonth(c.day, yy, m) ? Number(c.amount) : 0);
+    const start = d.getFullYear() * 12 + d.getMonth(), at = yy * 12 + m, until = now.getFullYear() * 12 + now.getMonth();
+    return sum + (at >= start && at <= until ? Number(c.amount) : 0);
+  }, 0);
+  const months = MONTHS.map((l, m) => {
+    const ps = paid.filter((p) => inMonth(p.paid_at, y, m));
+    return { l, m, project: ps.filter((p) => p.kind !== 'beheer').reduce((a, p) => a + Number(p.amount), 0), beheer: ps.filter((p) => p.kind === 'beheer').reduce((a, p) => a + Number(p.amount), 0), cost: costIn(y, m) };
+  });
+  const yearIn = months.reduce((a, x) => a + x.project + x.beheer, 0), yearCost = months.reduce((a, x) => a + x.cost, 0);
+  const thisMonth = months[curM].project + months[curM].beheer;
+  const mrr = clients.filter((c) => c.stage !== 'verloren').reduce((a, c) => a + CARE[c.care_plan].price, 0);
+  const openPays = payments.filter((p) => !p.paid_at).sort((a, b) => (a.due || a.created_at).localeCompare(b.due || b.created_at));
+  const openSum = openPays.reduce((a, p) => a + Number(p.amount), 0);
+
+  // grafiek per maand: project (blauw) + beheer (groen) gestapeld, kosten als rode streep
+  const W = 720, H = 200, bw = W / 12, max = Math.max(1, ...months.map((x) => Math.max(x.project + x.beheer, x.cost)));
+  const sc = (n) => (n / max) * (H - 28);
+  const chart = `<svg class="chart" viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" role="img" aria-label="Inkomsten per maand">${months.map((x, i) => {
+    const hp = sc(x.project), hb = sc(x.beheer), hc = sc(x.cost), bx = i * bw + bw * 0.18, w = bw * 0.64;
+    return `<g><rect x="${bx}" y="${H - 20 - hp - hb}" width="${w}" height="${hb}" rx="2" style="fill:var(--green)"/><rect x="${bx}" y="${H - 20 - hp}" width="${w}" height="${hp}" rx="2"/>
+      ${x.cost ? `<rect x="${bx - 2}" y="${H - 20 - hc - 1.5}" width="${w + 4}" height="3" rx="1.5" style="fill:var(--red)"/>` : ''}
+      <title>${x.l}: ${eur(x.project)} projecten, ${eur(x.beheer)} beheer, ${eur(x.cost)} kosten</title>
+      <text x="${i * bw + bw / 2}" y="${H - 4}" text-anchor="middle" ${i === curM && y === now.getFullYear() ? 'style="fill:var(--ink);font-weight:600"' : ''}>${x.l}</text></g>`;
+  }).join('')}</svg>`;
+
+  // verkooptrechter, laatste 90 dagen
+  const booked = new Set(bookings.map((b) => b.client_id).filter(Boolean)).size || bookings.length;
+  const won = clients.filter((c) => c.created_at > daysAgo(90) && ['voorschot', 'info', 'versie', 'afwerken', 'online'].includes(c.stage)).length;
+  const payers = new Set(paid.filter((p) => p.kind !== 'beheer' && p.paid_at >= daysAgo(90).slice(0, 10)).map((p) => p.client_id)).size;
+  const projByClient = {}; paid.filter((p) => p.kind !== 'beheer').forEach((p) => (projByClient[p.client_id] = (projByClient[p.client_id] || 0) + Number(p.amount)));
+  const avg = Object.keys(projByClient).length ? Object.values(projByClient).reduce((a, b) => a + b, 0) / Object.keys(projByClient).length : 0;
+  const fun = [['Bezoekers dobbo.be', st.visitors], ['Gesprek geboekt', booked], ['Klant geworden', won], ['Betaald', payers]];
+  const f0 = Math.max(1, fun[0][1]);
+  const stat = (val, label, extra = '') => `<div class="stat"><b>${val}</b><span>${label}</span>${extra}</div>`;
+  const years = [...new Set([now.getFullYear(), ...paid.map((p) => new Date(p.paid_at).getFullYear())])].sort((a, b) => b - a);
+
+  v.innerHTML = header('Inkomsten', y === now.getFullYear() ? 'Wat je dit jaar ontving' : 'Wat je in ' + y + ' ontving',
+    years.length > 1 ? `<div class="seg">${years.map((x) => `<button type="button" data-year="${x}" aria-pressed="${x === y}">${x}</button>`).join('')}</div>` : '') + `
+  <div class="card stats">
+    ${stat(eur(yearIn), 'Ontvangen in ' + y)}
+    ${stat(eur(thisMonth), y === now.getFullYear() ? 'Deze maand' : 'December')}
+    ${stat(eur(mrr), 'Vast per maand (beheer)', `<span class="delta">${eur(mrr * 12)} per jaar</span>`)}
+    ${stat(eur(openSum), 'Nog te ontvangen')}
+    ${stat(eur(yearCost), 'Kosten in ' + y)}
+    ${stat(eur(yearIn - yearCost), 'Winst in ' + y, '<span class="delta">voor belastingen</span>')}
+  </div>
+  <section class="card" style="margin-bottom:16px"><h2>Per maand<small><span class="key blue"></span>Projecten <span class="key" style="background:var(--green)"></span>Beheer <span class="key red"></span>Kosten</small></h2>${chart}</section>
+  <div class="overview">
+    <section class="card"><h2>Nog te ontvangen<small class="num">${eur(openSum)}</small></h2>${openPays.length ? `<div class="rows">${openPays.map((p) => `
+      <div class="r" data-open="${p.client_id}" tabindex="0"><div><div class="t">${esc(p.clients?.business || p.clients?.name || '')}</div><div class="s">${esc(p.label)}</div></div>
+      <div class="end">${p.due ? `<span class="date ${isLate(p.due) ? 'late' : ''}">${isLate(p.due) ? when(p.due) : 'tegen ' + fmtDate(p.due)}</span>` : ''}<b class="num">${eur(p.amount)}</b></div></div>`).join('')}</div>` : '<p class="empty">Alles is betaald.</p>'}</section>
+    <section class="card"><h2>Van bezoek tot betaling<small>90 dagen</small></h2>
+      <div class="funnel" style="grid-template-columns:repeat(4,1fr)">${fun.map(([l, n], i) => `<div class="fstep"><div class="fbar"><i style="transform:scaleY(${n / f0})"></i></div><b class="num">${n}</b><span>${l}</span><small>${i ? Math.round((n / f0) * 100) + '%' : '&nbsp;'}</small></div>`).join('')}</div>
+      <p class="date" style="margin-top:16px;white-space:normal">Gemiddeld per klant: <b class="num">${eur(avg)}</b> aan projecten${st.visitors && avg ? ` · een bezoeker is je ongeveer <b class="num">${eur((avg * payers) / st.visitors)}</b> waard` : ''}</p>
+    </section>
+  </div>
+  <section class="card" style="margin-top:16px"><h2>Kosten</h2>
+    <form id="cost-form" class="fields" style="grid-template-columns:2fr 1fr 1fr 1fr auto;align-items:end">
+      <label class="f">Wat<input type="text" name="label" required placeholder="Brevo, domein, advertentie…"></label>
+      <label class="f">Bedrag<input type="number" name="amount" step="0.01" min="0" required></label>
+      <label class="f">Datum<input type="date" name="day" value="${new Date().toLocaleDateString('sv-SE')}"></label>
+      <label class="f">Soort<select name="category"><option value="tools">Tools</option><option value="domein">Domein</option><option value="advertenties">Advertenties</option><option value="materiaal">Materiaal</option><option value="andere">Andere</option></select></label>
+      <label class="f" style="grid-column:1/-2;flex-direction:row;display:flex;gap:8px;align-items:center"><input type="checkbox" name="monthly" style="width:18px;height:18px">Elke maand terugkerend</label>
+      <button class="btn btn-blue btn-sm" type="submit">Toevoegen</button>
+    </form>
+    ${costs.length ? `<div class="rows" style="margin-top:12px">${costs.map((c) => `<div class="r static"><div><div class="t">${esc(c.label)}</div><div class="s">${fmtDate(c.day)} · ${esc(c.category)}${c.monthly ? ' · elke maand' : ''}</div></div><div class="end"><b class="num">${eur(c.amount)}</b><button class="btn btn-text btn-sm" type="button" data-delcost="${c.id}" aria-label="Kost verwijderen">${icon('x')}</button></div></div>`).join('')}</div>` : ''}
+  </section>`;
+  bindRows(v);
+  $$('[data-year]', v).forEach((b) => (b.onclick = () => { incYear = Number(b.dataset.year); gen++; inkomsten(); }));
+  $('#cost-form').onsubmit = async (e) => {
+    e.preventDefault();
+    const d = Object.fromEntries(new FormData(e.target));
+    await q(sb.from('costs').insert({ label: d.label, amount: Number(d.amount), day: d.day || undefined, category: d.category, monthly: !!d.monthly }));
+    gen++; inkomsten();
+  };
+  $$('[data-delcost]', v).forEach((b) => (b.onclick = async () => { if (!confirm('Deze kost verwijderen?')) return; await q(sb.from('costs').delete().eq('id', b.dataset.delcost)); gen++; inkomsten(); }));
+}
+
+/* ---------------- Kleine staafgrafiek ---------------- */
+function bars(daily, { h = 120, key = 'v', alt = 'a', label = (d) => `${fmtDate(d.d)}: ${d[key]}` } = {}) {
+  const W = 720, n = daily.length, bw = W / Math.max(1, n), max = Math.max(1, ...daily.map((d) => d[key]));
+  return `<svg class="chart" style="height:${h}px" viewBox="0 0 ${W} ${h}" preserveAspectRatio="none" role="img" aria-label="Grafiek">${daily.map((d, i) => {
+    const y = (d[key] / max) * (h - 4), ya = alt ? Math.min(y, ((d[alt] || 0) / max) * (h - 4)) : 0;
+    return `<g><rect x="${i * bw + 1.5}" y="${h - y}" width="${Math.max(1, bw - 3)}" height="${y}" rx="2"/>${ya ? `<rect class="cta" x="${i * bw + 1.5}" y="${h - ya}" width="${Math.max(1, bw - 3)}" height="${ya}" rx="2"/>` : ''}<title>${label(d)}</title></g>`;
+  }).join('')}</svg>`;
+}
+const health = (chk) => !chk ? { cls: '', t: 'Nog niet gecontroleerd' } : chk.ok ? { cls: 'green', t: 'Online' } : { cls: 'red', t: 'Onbereikbaar' };
+async function latestChecks(siteIds) {
+  if (!siteIds.length) return {};
+  const rows = await q(sb.from('site_checks').select('site_id,ok,status,error,created_at').in('site_id', siteIds).order('created_at', { ascending: false }).limit(siteIds.length * 4 + 20));
+  const out = {}; rows.forEach((r) => { if (!out[r.site_id]) out[r.site_id] = r; }); return out;
 }
 
 /* ---------------- Statistieken (gedeeld: dobbo.be en klantensites) ---------------- */
@@ -745,7 +939,7 @@ async function site() {
 /* ---------------- Klantweergave (klant zelf, of Alec via "Bekijk als klant") ---------------- */
 function previewBar(cid, c, tab) {
   return `<div class="preview-bar"><span>${icon('eye')}Je bekijkt het dashboard van <b>${title(c)}</b></span>
-    <div class="seg">${[['bezoekers', 'Bezoekers'], ['project', 'Mijn site'], ['rapporten', 'Rapporten']].map(([k, l]) => `<a href="#als/${cid}/${k}" aria-pressed="${tab === k}">${l}</a>`).join('')}</div>
+    <div class="seg">${[['bezoekers', 'Bezoekers'], ['project', 'Mijn site'], ['aanpassingen', 'Aanpassingen'], ['bestanden', 'Bestanden'], ['rapporten', 'Rapporten']].map(([k, l]) => `<a href="#als/${cid}/${k}" aria-pressed="${tab === k}">${l}</a>`).join('')}</div>
     <a class="btn btn-ghost btn-sm" href="#klanten/${cid}">Terug naar fiche</a></div>`;
 }
 const STAGE_TEXT = {
@@ -781,11 +975,12 @@ async function clientBezoekers(cid, preview = false) {
 async function clientProject(cid, preview = false) {
   const g = gen;
   const v = $('#view'), done = loading(v);
-  const [[c], payments] = await Promise.all([q(sb.from('clients').select('*').eq('id', cid)), q(sb.from('payments').select('*').eq('client_id', cid))]);
+  const [[c], payments, sites] = await Promise.all([q(sb.from('clients').select('*').eq('id', cid)), q(sb.from('payments').select('*').eq('client_id', cid)), q(sb.from('sites').select('*').eq('client_id', cid))]);
+  const checks = await latestChecks(sites.map((x) => x.id));
   if (g !== gen) return;
   done();
   if (!c) return (v.innerHTML = '<p class="empty">Niet gevonden.</p>');
-  payments.sort((a, b) => payOrder(a) - payOrder(b) || a.created_at.localeCompare(b.created_at));
+  payments.sort((a, b) => (a.kind === 'beheer') - (b.kind === 'beheer') || payOrder(a) - payOrder(b) || (b.period || '').localeCompare(a.period || '') || a.created_at.localeCompare(b.created_at));
   const paid = payments.filter((x) => x.paid_at).reduce((s, x) => s + Number(x.amount), 0), total = payments.reduce((s, x) => s + Number(x.amount), 0);
   const care = CARE[c.care_plan];
   const link = (u, l) => u ? `<a class="btn btn-ghost btn-sm" target="_blank" rel="noopener" href="${esc(/^https?:/.test(u) ? u : 'https://' + u)}">${icon('ext')}${l}</a>` : '';
@@ -802,6 +997,10 @@ async function clientProject(cid, preview = false) {
         ${payments.length ? payments.map((x) => `<div class="pay${x.paid_at ? ' paid' : ''}" style="grid-template-columns:1fr auto auto"><span class="lbl">${esc(x.label)}</span><span class="tag ${x.paid_at ? 'green' : ''}">${x.paid_at ? 'Betaald ' + fmtDate(x.paid_at) : 'Open'}</span><span class="amt">${eur(x.amount)}</span></div>`).join('') : '<p class="empty">Nog geen betalingen.</p>'}
       </section>
     </div>
+    <div class="stack">
+    ${sites.length ? `<section class="card"><h2>Gezondheid van je site</h2>${sites.map((x) => { const h = health(checks[x.id]); return `
+      <div class="pay" style="grid-template-columns:1fr auto"><span class="lbl">${esc(x.domain)}${checks[x.id] ? `<span class="date" style="display:block">gecontroleerd ${fmtShort(checks[x.id].created_at)}</span>` : ''}</span><span class="tag ${h.cls}">${h.t}</span></div>`; }).join('')}
+      <p class="date" style="white-space:normal;margin-top:8px">We controleren elke 15 minuten of je site bereikbaar is en veilig laadt (https). Gaat er iets mis, dan krijgen wij een melding.</p></section>` : ''}
     <section class="card"><h2>Abonnement</h2>
       ${c.care_plan === 'geen' ? `<p class="empty">Je hebt geen beheerabonnement. Met een abonnement houden wij je site veilig, up-to-date en vindbaar, en krijg je elke maand een rapport. Vraag ernaar via <a href="mailto:${OWNER_EMAIL}">${OWNER_EMAIL}</a>.</p>` : `
         <div class="stat"><b>${care.label}</b><span>${eur(care.price)} per maand${c.care_since ? ` · sinds ${fmtDate(c.care_since)}` : ''}</span></div>
@@ -809,6 +1008,7 @@ async function clientProject(cid, preview = false) {
         <div class="meter${c.care_minutes_used > care.minutes ? ' over' : ''}"><i style="transform:scaleX(${Math.min(1, c.care_minutes_used / care.minutes)})"></i></div></div>
         <p class="date">Laatste maandrapport: ${c.care_last_report ? fmtDate(c.care_last_report) : 'komt eraan'}</p>`}
     </section>
+    </div>
   </div>`;
 }
 
@@ -822,6 +1022,82 @@ async function clientRapporten(cid, preview = false) {
   v.innerHTML = (preview ? previewBar(cid, c, 'rapporten') : '') + header('Rapporten', title(c)) + (reps.length ? `<div class="stack">${reps.map((r) => `
     <article class="card report"><h2>${esc(r.title)}<small>${esc(r.period || fmtDate(r.created_at))}</small></h2><div class="report-body">${esc(r.body)}</div></article>`).join('')}</div>`
     : `<section class="card"><p class="empty">Hier verschijnen onze rapporten over je site: wat we deden, wat de cijfers zeggen en wat we voorstellen.</p></section>`);
+}
+
+/* ---------------- Bestanden ---------------- */
+async function openFile(path) {
+  const { data, error } = await sb.storage.from('client-files').createSignedUrl(path, 120);
+  if (error) return toast('Openen lukte niet');
+  window.open(data.signedUrl, '_blank', 'noopener');
+}
+async function uploadFiles(cid, list) {
+  const filesArr = [...(list || [])];
+  if (!filesArr.length) return;
+  let ok = 0;
+  for (const f of filesArr) {
+    if (f.size > 50 * 1024 * 1024) { toast(f.name + ' is groter dan 50 MB'); continue; }
+    const safe = f.name.normalize('NFKD').replace(/[^\w.\-]+/g, '-').slice(-80);
+    const { error } = await sb.storage.from('client-files').upload(`${cid}/${Date.now()}-${safe}`, f, { contentType: f.type || undefined });
+    if (error) toast('Uploaden lukte niet: ' + f.name); else ok++;
+  }
+  if (ok) toast(ok === 1 ? 'Bestand opgeladen' : ok + ' bestanden opgeladen');
+}
+
+async function clientAanpassingen(cid, preview = false) {
+  const g = gen;
+  const v = $('#view'), done = loading(v);
+  const [[c], reqs] = await Promise.all([q(sb.from('clients').select('*').eq('id', cid)), q(sb.from('requests').select('*').eq('client_id', cid).order('created_at', { ascending: false }))]);
+  if (g !== gen) return;
+  done();
+  if (!c) return (v.innerHTML = '<p class="empty">Niet gevonden.</p>');
+  const label = { nieuw: ['Ontvangen', ''], bezig: ['We zijn bezig', 'blue'], klaar: ['Klaar', 'green'] };
+  v.innerHTML = (preview ? previewBar(cid, c, 'aanpassingen') : '') + header('Aanpassingen', 'Vraag een wijziging aan je site') + `
+  <div class="overview">
+    <section class="card"><h2>Nieuwe aanpassing</h2>
+      <form id="req-new" style="display:grid;gap:12px">
+        <label class="f">Wat wil je aanpassen?<input type="text" name="title" required maxlength="150" placeholder="Bv. nieuwe openingsuren vanaf december"></label>
+        <label class="f">Uitleg<textarea name="body" rows="5" maxlength="3000" placeholder="Zo concreet mogelijk: welke pagina, welke tekst, wat moet erin."></textarea></label>
+        <p class="date" style="white-space:normal">Foto’s of documenten nodig? Zet ze bij Bestanden.</p>
+        <button class="btn btn-blue" type="submit" style="justify-self:start">Verstuur</button>
+      </form>
+    </section>
+    <section class="card"><h2>Je aanvragen</h2>${reqs.length ? `<div class="rows">${reqs.map((r) => `
+      <div class="r static"><div><div class="t">${esc(r.title)}</div><div class="s">${fmtShort(r.created_at)}${r.status === 'klaar' && r.done_at ? ' · klaar ' + fmtDate(r.done_at) : ''}</div></div><span class="tag ${label[r.status][1]}">${label[r.status][0]}</span></div>`).join('')}</div>`
+      : '<p class="empty">Nog geen aanvragen.</p>'}</section>
+  </div>`;
+  $('#req-new').onsubmit = async (e) => {
+    e.preventDefault();
+    const b = $('button[type=submit]', e.target); b.disabled = true;
+    const d = Object.fromEntries(new FormData(e.target));
+    try { await q(sb.from('requests').insert({ client_id: cid, title: d.title.trim(), body: d.body?.trim() || null })); toast('Verstuurd. We laten weten wanneer het klaar is.'); gen++; clientAanpassingen(cid, preview); }
+    catch { b.disabled = false; }
+  };
+}
+
+async function clientBestanden(cid, preview = false) {
+  const g = gen;
+  const v = $('#view'), done = loading(v);
+  const [[c], files] = await Promise.all([
+    q(sb.from('clients').select('*').eq('id', cid)),
+    sb.storage.from('client-files').list(cid, { limit: 200, sortBy: { column: 'created_at', order: 'desc' } }).then((r) => r.data || []),
+  ]);
+  if (g !== gen) return;
+  done();
+  if (!c) return (v.innerHTML = '<p class="empty">Niet gevonden.</p>');
+  v.innerHTML = (preview ? previewBar(cid, c, 'bestanden') : '') + header('Bestanden', 'Logo, foto’s en teksten voor je site') + `
+  <label class="drop card" id="drop">
+    <input type="file" id="up" multiple hidden>
+    <b>Sleep bestanden hierheen</b><span>of klik om te kiezen · max. 50 MB per bestand</span>
+  </label>
+  <section class="card" style="margin-top:16px"><h2>Opgeladen<small>${files.length || ''}</small></h2>${files.length ? `<div class="rows">${files.map((f) => `
+    <div class="r static"><div><div class="t">${esc(f.name.replace(/^\d+-/, ''))}</div><div class="s">${fmtShort(f.created_at)} · ${Math.max(1, Math.round((f.metadata?.size || 0) / 1024))} kB</div></div><button class="btn btn-ghost btn-sm" type="button" data-file="${esc(cid + '/' + f.name)}">Openen</button></div>`).join('')}</div>` : '<p class="empty">Nog niets opgeladen.</p>'}</section>`;
+  const after = () => { gen++; clientBestanden(cid, preview); };
+  $('#up').onchange = async (e) => { await uploadFiles(cid, e.target.files); after(); };
+  const drop = $('#drop');
+  ['dragenter', 'dragover'].forEach((t) => drop.addEventListener(t, (e) => { e.preventDefault(); drop.classList.add('over'); }));
+  ['dragleave', 'drop'].forEach((t) => drop.addEventListener(t, () => drop.classList.remove('over')));
+  drop.addEventListener('drop', async (e) => { e.preventDefault(); await uploadFiles(cid, e.dataTransfer.files); after(); });
+  $$('[data-file]', v).forEach((b) => (b.onclick = () => openFile(b.dataset.file)));
 }
 
 boot();
